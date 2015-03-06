@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">RSSReader</string>
+    <string name="rss_title">文章标题</string>
+    <string name="rss_time">发布时间</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">设置</string>
+
+</resources>
