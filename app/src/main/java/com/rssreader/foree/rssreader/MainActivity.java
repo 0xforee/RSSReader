@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.xmlparse.foree.rssreader.ParseTask;
 
@@ -14,6 +15,7 @@ public class MainActivity extends ActionBarActivity {
     // private RssFeedInfo rssFeedInfo = null;
     ListView itemlist;
     ProgressBar mProgressBar;
+    TextView mTextView;
     // private String pathXML= Environment.getExternalStorageDirectory().getAbsolutePath() + "/w3cschool.xml";
 
     private static final String TAG = "ManiActivity";
@@ -26,6 +28,10 @@ public class MainActivity extends ActionBarActivity {
         return mProgressBar;
     }
 
+    public TextView getmTextView() {
+        return mTextView;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,9 +39,12 @@ public class MainActivity extends ActionBarActivity {
 
         itemlist = new ListView(this);
         mProgressBar = new ProgressBar(this);
+        mTextView = new TextView(this);
 
         itemlist = (ListView) findViewById(R.id.listview);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        mTextView = (TextView) findViewById(R.id.nonetwork);
+
         //使用asyncTask完成url解析操作
         ParseTask parseTask = new ParseTask(this);
         parseTask.execute(this);

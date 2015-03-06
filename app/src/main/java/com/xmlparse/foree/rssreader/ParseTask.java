@@ -1,5 +1,6 @@
 package com.xmlparse.foree.rssreader;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -10,11 +11,14 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.rssinfo.foree.rssreader.RssFeedInfo;
 import com.rssreader.foree.rssreader.MainActivity;
 import com.rssreader.foree.rssreader.R;
 import com.rssreader.foree.rssreader.ShowDescription;
+import com.utils.foree.rssreader.NetworkUtils;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
@@ -34,6 +38,8 @@ public class ParseTask extends AsyncTask<Context,Integer,RssFeedInfo> {
     XmlParse xmlParse ;
     ListView listView;
     ProgressBar mProgressBar;
+    TextView mTextView;
+    int networkState;
     public final String RSS_URL = "http://blog.sina.com.cn/rss/1267454277.xml";
     public final String RSS_URL2 = "http://www.dogear.cn/feed/9768.xml";
     public final String RSS_URL3 = "http://www.dogear.cn/feed/10244.xml";
@@ -48,13 +54,25 @@ public class ParseTask extends AsyncTask<Context,Integer,RssFeedInfo> {
     private final String TAG = "ParseTask";
     @Override
     protected RssFeedInfo doInBackground(Context... contexts) {
+
+        mcontext = contexts[0];
+
+        //无网络模式下，直接返回,不解析数据
+        NetworkUtils networkUtils = new NetworkUtils();
+        networkState = networkUtils.getNetworkState(mcontext);
+        Log.v(TAG, "networkState = " + networkState);
+
+        if (networkState == -1) {
+            mProgressBar.setVisibility(View.GONE);
+            listView.setVisibility(View.GONE);
+            return null;
+        }
         Log.v(TAG, "doInBackground");
         try {
             //urlString[0]代表要接收的字符串
-            URL url = new URL(RSS_URL2);
+            URL url = new URL(RSS_URL4);
             InputSource is = new InputSource(url.openStream());
 
-            mcontext = contexts[0];
 
             if( is != null) {
                 //构建SAX解析工厂
@@ -92,7 +110,9 @@ public class ParseTask extends AsyncTask<Context,Integer,RssFeedInfo> {
         else {
             mProgressBar.setVisibility(View.GONE);
             //设置listview可见
-            listView.setVisibility(View.VISIBLE);
+            listView.setVisibility(View.GONE);
+            mTextView.setVisibility(View.VISIBLE);
+            mTextView.setText("无网络连接或链接不正确，请联网或者重新输入链接再试");
             return;
         }
 
@@ -132,9 +152,12 @@ public class ParseTask extends AsyncTask<Context,Integer,RssFeedInfo> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        //获取已经初始化的对象（在mainActivity启动时初始化）
         listView = mainActivity.getItemlist();
         mProgressBar = mainActivity.getmProgressBar();
+        mTextView = mainActivity.getmTextView();
         Log.v(TAG, "onPreExecute");
+
 
     }
 
