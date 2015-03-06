@@ -80,13 +80,25 @@ public class ParseTask extends AsyncTask<Context,Integer,RssFeedInfo> {
         return null;
     }
 
+    //进行更新listview操作
     @Override
     protected void onPostExecute(final RssFeedInfo rssFeedInfo) {
         super.onPostExecute(rssFeedInfo);
-        //进行更新listview操作
-        List<Map<String,Object>> list = rssFeedInfo.getAllItemForListView();
+        List<Map<String, Object>> list;
+
+        //数据对象为空时，置listview为空，然后返回
+        if (rssFeedInfo != null)
+            list = rssFeedInfo.getAllItemForListView();
+        else {
+            mProgressBar.setVisibility(View.GONE);
+            //设置listview可见
+            listView.setVisibility(View.VISIBLE);
+            return;
+        }
+
         Log.v(TAG, "onPostExecute");
         SimpleAdapter adapter;
+
         //将传来的数据显示到listview中，使用activity_main布局
         adapter = new SimpleAdapter(mcontext,
                 list,
