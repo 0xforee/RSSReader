@@ -15,11 +15,11 @@ import android.net.NetworkInfo;
  */
 public class NetworkUtils {
     //无网络
-    private static final int NETWORK_NONE = -1;
+    public static final int NETWORK_NONE = -1;
     //当前网络为wifi
-    private static final int NETWORK_WIFI = 0;
+    public static final int NETWORK_WIFI = 0;
     //当前网络为移动数据
-    private static final int NETWORK_MOBILE = 1;
+    public static final int NETWORK_MOBILE = 1;
 
     public int getNetworkState(Context context) {
         //获取网络服务
