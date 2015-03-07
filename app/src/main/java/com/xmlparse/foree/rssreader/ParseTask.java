@@ -15,6 +15,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baseapplication.foree.rssreader.MyApplication;
 import com.rssinfo.foree.rssreader.RssFeedInfo;
 import com.rssreader.foree.rssreader.MainActivity;
 import com.rssreader.foree.rssreader.R;
@@ -61,11 +62,7 @@ public class ParseTask extends AsyncTask<Context,Integer,RssFeedInfo> {
         mcontext = contexts[0];
 
         //无网络模式下，直接返回,不解析数据
-        NetworkUtils networkUtils = new NetworkUtils();
-        networkState = networkUtils.getNetworkState(mcontext);
-        Log.v(TAG, "networkState = " + networkState);
-
-        if (networkState == -1) {
+        if (MyApplication.mNetworkState == NetworkUtils.NETWORK_NONE) {
             mProgressBar.setVisibility(View.GONE);
             listView.setVisibility(View.GONE);
             return null;
