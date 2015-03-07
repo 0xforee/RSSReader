@@ -21,6 +21,9 @@ public class XmlParse extends DefaultHandler {
     private RssFeedInfo rssFeedInfo;
     private RssItemInfo rssItemInfo;
 
+    //多次调用characters时的多次解析的数据总和
+    private String sumString = "";
+
     //定义RSS的标签类型
     private final int RSS_NONE = 0;
     private final int RSS_CHANNEL = 1;
@@ -87,7 +90,6 @@ public class XmlParse extends DefaultHandler {
         }
         if (localName.equals("pubDate")) {
             currentTag = RSS_PUBDATA;
-
         }
 
     }
@@ -96,10 +98,18 @@ public class XmlParse extends DefaultHandler {
     //遇到结束某一个标签的时候，触发此方法
     public void endElement(String uri, String localName, String qName) throws SAXException {
         Log.v(TAG, "标签解析停止 ");
+        //等待地址全部解析完成，将其添加到地址链接中
+        if (localName.equals("link")) {
+            rssItemInfo.setLink(sumString);
+        }
         if( localName.equals("item")){
             Log.v(TAG, "添加item");
             rssFeedInfo.addItem(rssItemInfo);
         }
+        //标签解析结束，将tmp清理
+        sumString = "";
+        //并将标签标记清零
+        currentTag = 0;
     }
 
     //每一个标签截取的内容都可以从这里获取到
@@ -121,19 +131,19 @@ public class XmlParse extends DefaultHandler {
                 Log.v(TAG, "pubDate = " + mItemContent);
                 break;
             case RSS_LINK:
-                rssItemInfo.setLink(mItemContent);
-                Log.v(TAG, "link = " + mItemContent);
+                sumString = sumString + mItemContent;
+                //  rssItemInfo.setLink(sum_String);
+                Log.v(TAG, "link = " + sumString + '\n');
                 break;
             case RSS_DESCRIPTION:
                 rssItemInfo.setDescription(mItemContent);
                 Log.v(TAG, "description = " + mItemContent);
                 break;
             default:
+                //        Log.v(TAG, "有未解析的数据: " + sum_String);
                 break;
 
         }
-        currentTag = 0;
-
 
     }
 

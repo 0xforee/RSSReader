@@ -2,9 +2,11 @@
 <resources>
 
     <string name="app_name">RSSReader</string>
-    <string name="rss_title">rss标题</string>
-    <string name="rss_time">rss时间</string>
+    <string name="rss_title">rsstitle</string>
+    <string name="rss_time">rsstime</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="action_share">Share</string>
+    <string name="action_about">About</string>
 
 </resources>

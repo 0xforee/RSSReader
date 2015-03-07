@@ -55,6 +55,7 @@ public class MainActivity extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.about_main, menu);
         return true;
     }
 
@@ -66,14 +67,14 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.about) {
             item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
                     String message = "增加以下特性：" + "\n"
                             + "1.可以浏览新闻";
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                    builder.setTitle("版本v1.0");
+                    builder.setTitle("版本v0.1");
                     builder.setMessage(message);
                     builder.setNeutralButton("返回", null);
                     builder.show();

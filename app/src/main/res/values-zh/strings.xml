@@ -6,5 +6,7 @@
     <string name="rss_time">发布时间</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">设置</string>
+    <string name="action_share">分享</string>
+    <string name="action_about">关于</string>
 
 </resources>
