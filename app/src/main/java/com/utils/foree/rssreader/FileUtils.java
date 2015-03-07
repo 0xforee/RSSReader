@@ -13,7 +13,7 @@ import java.io.IOException;
  */
 public class FileUtils {
     //读取文件
-    public String readFile(File file) throws IOException {
+    public static String readFile(File file) throws IOException {
         FileReader in = null;
         BufferedReader bufferedReader = null;
         StringBuffer stringBuffer = new StringBuffer();
@@ -36,7 +36,7 @@ public class FileUtils {
     }
 
     //写入文件
-    public void writeFile(File file, String string) throws IOException {
+    public static void writeFile(File file, String string) throws IOException {
         FileWriter out = new FileWriter(file);
         BufferedWriter bufferedWriter = new BufferedWriter(out);
         bufferedWriter.write(string);
