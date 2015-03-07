@@ -55,12 +55,12 @@ public class MyApplication extends Application {
             File myDateDir = new File(SdcardPath + "/RSSReader/");
             if (!myDateDir.exists())
                 myDateDir.mkdir();
-            mySdcardDataDir = SdcardPath + "/RSSReader/";
+            mySdcardDataDir = SdcardPath + "/RSSReader";
             //缓存目录
-            File myCacheDir = new File(mySdcardDataDir + "cache/");
+            File myCacheDir = new File(mySdcardDataDir + "/" + "cache/");
             if (!myCacheDir.exists())
                 myCacheDir.mkdir();
-            mySdcardCacheDir = mySdcardDataDir + "cache/";
+            mySdcardCacheDir = mySdcardDataDir + "/" + "cache";
         }
         Log.v(TAG, "init success! ");
     }
