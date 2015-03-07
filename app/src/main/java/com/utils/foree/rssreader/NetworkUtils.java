@@ -21,7 +21,7 @@ public class NetworkUtils {
     //当前网络为移动数据
     public static final int NETWORK_MOBILE = 1;
 
-    public int getNetworkState(Context context) {
+    public static int getNetworkState(Context context) {
         //获取网络服务
         ConnectivityManager mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
