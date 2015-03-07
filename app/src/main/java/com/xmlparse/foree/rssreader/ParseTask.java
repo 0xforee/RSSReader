@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -44,6 +45,8 @@ public class ParseTask extends AsyncTask<Context,Integer,RssFeedInfo> {
     public final String RSS_URL2 = "http://www.dogear.cn/feed/9768.xml";
     public final String RSS_URL3 = "http://www.dogear.cn/feed/10244.xml";
     public final String RSS_URL4 = "http://home.meizu.cn/forum.php?mod=rss&fid=47&auth=75adh9VXN4w2LUlUU0Geo7K8IZfQN%2BCrljYieNxcSsqOKNcBDaFStvzrGsBM";
+    public final String filePath = Environment.getExternalStorageDirectory().getAbsolutePath();
+    public final String RSS_LOCAL = "file://" + filePath + "/ifengbook.xml";
 
     private MainActivity mainActivity;
     private Context mcontext;
@@ -70,7 +73,7 @@ public class ParseTask extends AsyncTask<Context,Integer,RssFeedInfo> {
         Log.v(TAG, "doInBackground");
         try {
             //urlString[0]代表要接收的字符串
-            URL url = new URL(RSS_URL4);
+            URL url = new URL(RSS_URL3);
             InputSource is = new InputSource(url.openStream());
 
 
