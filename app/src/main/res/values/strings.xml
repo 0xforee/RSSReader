@@ -22,7 +22,7 @@
     <string name="tv_clean_des">Clean your cache</string>
     <string name="tv_clean">Clean Cache</string>
     <string name="tv_version">Version</string>
-    <string name="tv_versionnumber">RssReader 0.1</string>
+    <string name="tv_versionnumber">RssReader 0.2</string>
     <string name="tv_enjoy">Thank you for downloading. Enjoy!</string>
 
 </resources>

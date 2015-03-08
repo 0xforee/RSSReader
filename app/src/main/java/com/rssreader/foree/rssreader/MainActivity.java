@@ -1,6 +1,7 @@
 package com.rssreader.foree.rssreader;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 
 import com.baseapplication.foree.rssreader.MyApplication;
 import com.xmlparse.foree.rssreader.ParseTask;
+
+import java.util.jar.Manifest;
 
 public class MainActivity extends ActionBarActivity {
     // private RssFeedInfo rssFeedInfo = null;
@@ -74,6 +77,16 @@ public class MainActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        if (id == R.id.action_settings) {
+            item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    Intent intent = new Intent(MainActivity.this, Settings.class);
+                    MainActivity.this.startActivity(intent);
+                    return false;
+                }
+            });
+        }
         //noinspection SimplifiableIfStatement
         if (id == R.id.about) {
             item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -82,17 +95,19 @@ public class MainActivity extends ActionBarActivity {
                     String message = "增加以下特性：" + "\n"
                             + "1.可以浏览新闻";
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                    builder.setTitle("版本v0.1");
+                    builder.setTitle("版本v0.2");
                     builder.setMessage(message);
                     builder.setNeutralButton("返回", null);
                     builder.show();
-                    return true;
+                    return false;
+
                 }
             });
-            return true;
+            // return true;
         }
 
         return super.onOptionsItemSelected(item);
+        //return true;
     }
 
 }

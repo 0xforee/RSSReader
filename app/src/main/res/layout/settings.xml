@@ -9,6 +9,7 @@
     android:layout_marginTop="@dimen/setting_margin_all"
     android:layout_marginLeft="@dimen/setting_margin_all"
     android:layout_marginStart="@dimen/setting_margin_all"
+    android:layout_marginBottom="@dimen/setting_margin_all"
     android:layout_marginEnd="@dimen/setting_margin_all">
     <TextView
         android:id="@+id/tv_account"
@@ -218,6 +219,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_versionnumber"
+        android:layout_marginBottom="@dimen/setting_margin_all"
         android:text="@string/tv_enjoy"
         android:textColor="@color/item_description_color"
         android:textSize="@dimen/item_description_size" />
