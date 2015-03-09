@@ -28,7 +28,7 @@ public class RssFeedInfo {
     private String title = null;
     //订阅号的链接
     private String link = null;
-    private String pubdata = null;
+    private String pubdata = "";
     //list中存放所有的保存新闻的对象
     private List<RssItemInfo> itemlist = new ArrayList<>();
 
@@ -42,21 +42,27 @@ public class RssFeedInfo {
         return itemlist.get(location);
     }
 
+    //获取所有对象的列表
+    public List<RssItemInfo> getItemlist() {
+        return itemlist;
+    }
+
     //返回符合listview的格式的list
-    public List<Map<String,Object>> getAllItemForListView(){
+    public List<Map<String, Object>> getAllItemForListView() {
         //循环将所有的item加入itemlist中，并返回一个list，供listAdapter使用
         int size = itemlist.size();
-        List<Map<String,Object>> datalist = new ArrayList<>();
+        List<Map<String, Object>> datalist = new ArrayList<>();
 
-        for(int i = 0;i < size; i++){
-            Map<String,Object> map = new HashMap<>();
-            map.put("title",itemlist.get(i).getTitle());
-            map.put("pubdate",itemlist.get(i).getpubData());
-           // map.put("image",itemlist.get(i).getimage());
+        for (int i = 0; i < size; i++) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("title", itemlist.get(i).getTitle());
+            map.put("pubdate", itemlist.get(i).getpubData());
+            // map.put("image",itemlist.get(i).getimage());
             datalist.add(map);
         }
         return datalist;
     }
+
     public String getTitle() {
         return title;
     }

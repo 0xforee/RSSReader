@@ -1,5 +1,9 @@
 package com.utils.foree.rssreader;
 
+import android.util.Log;
+
+import com.baseapplication.foree.rssreader.MyApplication;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -12,6 +16,8 @@ import java.io.IOException;
  * 文件工具类：给定一个用地址初始化的file对象，就可以写入或读取文件
  */
 public class FileUtils {
+    private static final String TAG = "FileUtils";
+
     //读取文件
     public static String readFile(File file) throws IOException {
         FileReader in = null;
@@ -42,5 +48,20 @@ public class FileUtils {
         bufferedWriter.write(string);
         bufferedWriter.close();
         out.close();
+    }
+
+    //判断缓存文件是否存在
+    public static boolean getCacheList() {
+        try {
+            File file = new File(MyApplication.mySdcardCacheDir + "/listcache");
+            if (file.exists()) {
+                Log.v(TAG, "CacheFileExit");
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return false;
     }
 }

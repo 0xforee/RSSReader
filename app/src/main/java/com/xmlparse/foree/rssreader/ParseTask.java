@@ -3,6 +3,7 @@ package com.xmlparse.foree.rssreader;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -20,11 +21,14 @@ import com.rssinfo.foree.rssreader.RssFeedInfo;
 import com.rssreader.foree.rssreader.MainActivity;
 import com.rssreader.foree.rssreader.R;
 import com.rssreader.foree.rssreader.ShowDescription;
+import com.utils.foree.rssreader.CacheUtils;
+import com.utils.foree.rssreader.FileUtils;
 import com.utils.foree.rssreader.NetworkUtils;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
+import java.io.FileInputStream;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
@@ -36,8 +40,8 @@ import javax.xml.parsers.SAXParserFactory;
  * Created by foree on 3/4/15.
  * 异步线程，用来处理连接网络等耗时的操作
  */
-public class ParseTask extends AsyncTask<Context,Integer,RssFeedInfo> {
-    XmlParse xmlParse ;
+public class ParseTask extends AsyncTask<Context, Integer, RssFeedInfo> {
+    XmlParse xmlParse;
     ListView listView;
     ProgressBar mProgressBar;
     TextView mTextView;
@@ -51,20 +55,21 @@ public class ParseTask extends AsyncTask<Context,Integer,RssFeedInfo> {
 
     private MainActivity mainActivity;
     private Context mcontext;
-    public ParseTask(MainActivity mainActivity){
+
+    public ParseTask(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
     }
 
     private final String TAG = "ParseTask";
+
     @Override
     protected RssFeedInfo doInBackground(Context... contexts) {
 
         mcontext = contexts[0];
 
-        //无网络模式下，直接返回,不解析数据
-        if (MyApplication.mNetworkState == NetworkUtils.NETWORK_NONE) {
-            mProgressBar.setVisibility(View.GONE);
-            listView.setVisibility(View.GONE);
+        //无网络模式下或者有缓存状态
+        if (FileUtils.getCacheList() || MyApplication.mNetworkState == NetworkUtils.NETWORK_NONE ||
+                FileUtils.getCacheList()) {
             return null;
         }
         Log.v(TAG, "doInBackground");
@@ -74,7 +79,7 @@ public class ParseTask extends AsyncTask<Context,Integer,RssFeedInfo> {
             InputSource is = new InputSource(url.openStream());
 
 
-            if( is != null) {
+            if (is != null) {
                 //构建SAX解析工厂
                 SAXParserFactory factory = SAXParserFactory.newInstance();
                 //使用SAX解析工厂构造SAX解析器
@@ -89,10 +94,9 @@ public class ParseTask extends AsyncTask<Context,Integer,RssFeedInfo> {
                 xmlReader.parse(is);
 
                 return xmlParse.getFeedInfo();
-            }else
-                Log.v(TAG,"cannot open site");
-        }
-        catch (Exception e){
+            } else
+                Log.v(TAG, "cannot open site");
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -105,17 +109,21 @@ public class ParseTask extends AsyncTask<Context,Integer,RssFeedInfo> {
         List<Map<String, Object>> list;
 
         //数据对象为空时，置listview为空，然后返回
-        if (rssFeedInfo != null)
+        if (rssFeedInfo != null) {
             list = rssFeedInfo.getAllItemForListView();
-        else {
-            mProgressBar.setVisibility(View.GONE);
-            //设置listview可见
-            listView.setVisibility(View.GONE);
-            mTextView.setVisibility(View.VISIBLE);
-            mTextView.setText("无网络连接或链接不正确，请联网或者重新输入链接再试");
-            return;
+            CacheUtils.writeCacheList(rssFeedInfo);
+        } else {
+            if (FileUtils.getCacheList()) {
+                list = CacheUtils.readCacheList().getAllItemForListView();
+            } else {
+                mProgressBar.setVisibility(View.GONE);
+                //设置listview可见
+                listView.setVisibility(View.GONE);
+                mTextView.setVisibility(View.VISIBLE);
+                mTextView.setText("无网络连接或链接不正确，请联网或者重新输入链接再试");
+                return;
+            }
         }
-
         Log.v(TAG, "onPostExecute");
         SimpleAdapter adapter;
 
@@ -123,8 +131,8 @@ public class ParseTask extends AsyncTask<Context,Integer,RssFeedInfo> {
         adapter = new SimpleAdapter(mcontext,
                 list,
                 R.layout.activity_main,
-                new String[] { "title", "pubdate" },
-                new int[] { R.id.title, R.id.time });
+                new String[]{"title", "pubdate"},
+                new int[]{R.id.title, R.id.time});
 
         //设置进度条不可见
         mProgressBar.setVisibility(View.GONE);
@@ -138,10 +146,10 @@ public class ParseTask extends AsyncTask<Context,Integer,RssFeedInfo> {
 
                 //绑定数据
                 Bundle bundle = new Bundle();
-                bundle.putString("title",rssFeedInfo.getItem(position).getTitle());
-                bundle.putString("description",rssFeedInfo.getItem(position).getDescription());
-                bundle.putString("link",rssFeedInfo.getItem(position).getLink());
-                bundle.putString("pubdate",rssFeedInfo.getItem(position).getpubData());
+                bundle.putString("title", rssFeedInfo.getItem(position).getTitle());
+                bundle.putString("description", rssFeedInfo.getItem(position).getDescription());
+                bundle.putString("link", rssFeedInfo.getItem(position).getLink());
+                bundle.putString("pubdate", rssFeedInfo.getItem(position).getpubData());
 
                 mintent.putExtra("com.rssinfo.foree.rssreader", bundle);
                 mcontext.startActivity(mintent);
