@@ -2,6 +2,7 @@ package com.baseapplication.foree.rssreader;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.nfc.Tag;
 import android.os.Environment;
 import android.util.Log;
@@ -62,6 +63,21 @@ public class MyApplication extends Application {
                 myCacheDir.mkdir();
             mySdcardCacheDir = mySdcardDataDir + "/" + "cache";
         }
-        Log.v(TAG, "init success! ");
+        Log.v(TAG, "初始化环境变量成功");
+    }
+
+    //初始化一些系统设置
+    public void initSettings(Context context) {
+        //获取系统设置文件
+        File file = new File(context.getFilesDir() + "/../shared_prefs" + "/settings.xml");
+        if (!file.exists()) {
+            SharedPreferences sp = context.getSharedPreferences("settings", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putBoolean("darktheme", false);
+            editor.putBoolean("wificache", false);
+            editor.putBoolean("cleancache", false);
+            editor.apply();
+        } else
+            Log.v(TAG, "设置文件存在，不进行初始化");
     }
 }

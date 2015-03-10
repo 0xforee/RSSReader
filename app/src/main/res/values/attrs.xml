@@ -3,5 +3,6 @@
     <declare-styleable name="Night">
         <attr name="myTextColor" format="color" />
         <attr name="myBackground" format="color|reference" />
+        <attr name="mylistdivider" format="color" />
     </declare-styleable>
 </resources>

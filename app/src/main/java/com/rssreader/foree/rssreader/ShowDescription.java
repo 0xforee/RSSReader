@@ -12,11 +12,13 @@ import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.baseapplication.foree.rssreader.BaseActivity;
+
 /**
  * Created by foree on 3/5/15.
  * 显示每条Item的具体的信息
  */
-public class ShowDescription extends ActionBarActivity {
+public class ShowDescription extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

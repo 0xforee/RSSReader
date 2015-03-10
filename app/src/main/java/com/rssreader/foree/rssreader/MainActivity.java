@@ -1,6 +1,9 @@
 package com.rssreader.foree.rssreader;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -11,12 +14,13 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.baseapplication.foree.rssreader.BaseActivity;
 import com.baseapplication.foree.rssreader.MyApplication;
 import com.xmlparse.foree.rssreader.ParseTask;
 
 import java.util.jar.Manifest;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends BaseActivity {
     // private RssFeedInfo rssFeedInfo = null;
     ListView itemlist;
     ProgressBar mProgressBar;
@@ -41,12 +45,13 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.NightTheme);
+        setTheme(R.style.DayTheme);
         setContentView(R.layout.main);
 
         //应用启动初始化环境变量
         myApplication = new MyApplication(this);
         myApplication.initEnv();
+        myApplication.initSettings(this);
 
 
         //搭建UI
