@@ -3,6 +3,16 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+
     </style>
 
+    <style name="DayTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="myTextColor">#000000</item>
+        <item name="myBackground">#ffffff</item>
+    </style>
+
+    <style name="NightTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="myTextColor">#ffffff</item>
+        <item name="myBackground">#000000</item>
+    </style>
 </resources>

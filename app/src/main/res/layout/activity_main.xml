@@ -3,6 +3,7 @@
         android:layout_width="fill_parent"
         android:layout_height="55sp"
     android:orientation="horizontal"
+    android:background="?attr/myBackground"
     >
 
     <LinearLayout
@@ -14,13 +15,16 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15sp"/>
+            android:textSize="15sp"
+            android:textColor="?attr/myTextColor" />
+
         <TextView
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"/>
-        </LinearLayout>
+            android:textSize="12sp"
+            android:textColor="?attr/myTextColor" />
+    </LinearLayout>
     <ImageView
         android:layout_weight="1"
         android:id="@+id/title_image"

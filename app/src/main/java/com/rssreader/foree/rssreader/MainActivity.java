@@ -41,11 +41,13 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.NightTheme);
         setContentView(R.layout.main);
 
         //应用启动初始化环境变量
         myApplication = new MyApplication(this);
         myApplication.initEnv();
+
 
         //搭建UI
         itemlist = new ListView(this);
