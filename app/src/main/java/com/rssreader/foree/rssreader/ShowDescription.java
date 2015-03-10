@@ -1,8 +1,10 @@
 package com.rssreader.foree.rssreader;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -14,7 +16,7 @@ import android.widget.TextView;
  * Created by foree on 3/5/15.
  * 显示每条Item的具体的信息
  */
-public class ShowDescription extends Activity {
+public class ShowDescription extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
