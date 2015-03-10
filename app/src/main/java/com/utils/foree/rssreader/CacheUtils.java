@@ -54,6 +54,10 @@ public class CacheUtils {
                 if (list.get(i).getpubData() == null)
                     xmlSerializer.text(" ");
                 xmlSerializer.endTag(null, "pubDate");
+                //将link放入到数据库中
+                xmlSerializer.startTag(null, "link");
+                xmlSerializer.text(list.get(i).getLink());
+                xmlSerializer.endTag(null, "link");
 
                 xmlSerializer.endTag(null, "item");
             }

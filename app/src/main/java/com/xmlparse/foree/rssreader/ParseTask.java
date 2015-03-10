@@ -45,11 +45,14 @@ public class ParseTask extends AsyncTask<Context, Integer, RssFeedInfo> {
     ListView listView;
     ProgressBar mProgressBar;
     TextView mTextView;
+    RssFeedInfo mRssFeedInfo;
     int networkState;
     public final String RSS_URL = "http://blog.sina.com.cn/rss/1267454277.xml";
     public final String RSS_URL2 = "http://www.dogear.cn/feed/9768.xml";
     public final String RSS_URL3 = "http://www.dogear.cn/feed/10244.xml";
     public final String RSS_URL4 = "http://home.meizu.cn/forum.php?mod=rss&fid=47&auth=75adh9VXN4w2LUlUU0Geo7K8IZfQN%2BCrljYieNxcSsqOKNcBDaFStvzrGsBM";
+    public final String RSS_URL5 = "https://diy-devz.rhcloud.com/weixin?openid=oIWsFt2GmdYbEi0kCF0K4yO5qAXo";
+    public final String RSS_URL6 = "http://www.dogear.cn/feed/9374.xml";
     public final String filePath = Environment.getExternalStorageDirectory().getAbsolutePath();
     public final String RSS_LOCAL = "file://" + filePath + "/ifengbook.xml";
 
@@ -75,7 +78,7 @@ public class ParseTask extends AsyncTask<Context, Integer, RssFeedInfo> {
         Log.v(TAG, "doInBackground");
         try {
             //urlString[0]代表要接收的字符串
-            URL url = new URL(RSS_URL3);
+            URL url = new URL(RSS_URL6);
             InputSource is = new InputSource(url.openStream());
 
 
@@ -108,13 +111,15 @@ public class ParseTask extends AsyncTask<Context, Integer, RssFeedInfo> {
         super.onPostExecute(rssFeedInfo);
         List<Map<String, Object>> list;
 
+        mRssFeedInfo = rssFeedInfo;
         //数据对象为空时，置listview为空，然后返回
-        if (rssFeedInfo != null) {
-            list = rssFeedInfo.getAllItemForListView();
+        if (mRssFeedInfo != null) {
+            list = mRssFeedInfo.getAllItemForListView();
             CacheUtils.writeCacheList(rssFeedInfo);
         } else {
             if (FileUtils.getCacheList()) {
-                list = CacheUtils.readCacheList().getAllItemForListView();
+                mRssFeedInfo = CacheUtils.readCacheList();
+                list = mRssFeedInfo.getAllItemForListView();
             } else {
                 mProgressBar.setVisibility(View.GONE);
                 //设置listview可见
@@ -146,10 +151,10 @@ public class ParseTask extends AsyncTask<Context, Integer, RssFeedInfo> {
 
                 //绑定数据
                 Bundle bundle = new Bundle();
-                bundle.putString("title", rssFeedInfo.getItem(position).getTitle());
-                bundle.putString("description", rssFeedInfo.getItem(position).getDescription());
-                bundle.putString("link", rssFeedInfo.getItem(position).getLink());
-                bundle.putString("pubdate", rssFeedInfo.getItem(position).getpubData());
+                bundle.putString("title", mRssFeedInfo.getItem(position).getTitle());
+                bundle.putString("description", mRssFeedInfo.getItem(position).getDescription());
+                bundle.putString("link", mRssFeedInfo.getItem(position).getLink());
+                bundle.putString("pubdate", mRssFeedInfo.getItem(position).getpubData());
 
                 mintent.putExtra("com.rssinfo.foree.rssreader", bundle);
                 mcontext.startActivity(mintent);
