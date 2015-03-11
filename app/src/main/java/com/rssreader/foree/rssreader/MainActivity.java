@@ -73,7 +73,6 @@ public class MainActivity extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        getMenuInflater().inflate(R.menu.about_main, menu);
         return true;
     }
 
@@ -84,37 +83,22 @@ public class MainActivity extends BaseActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
-            item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem item) {
-                    Intent intent = new Intent(MainActivity.this, Settings.class);
-                    MainActivity.this.startActivity(intent);
-                    return false;
-                }
-            });
+        switch (id) {
+            case R.id.action_settings:
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                MainActivity.this.startActivity(intent);
+                break;
+            case R.id.action_about:
+                String message = "增加以下特性：" + "\n"
+                        + "1.可以浏览新闻";
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("版本v0.2");
+                builder.setMessage(message);
+                builder.setNeutralButton("返回", null);
+                builder.show();
+                break;
         }
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.about) {
-            item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem item) {
-                    String message = "增加以下特性：" + "\n"
-                            + "1.可以浏览新闻";
-                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                    builder.setTitle("版本v0.2");
-                    builder.setMessage(message);
-                    builder.setNeutralButton("返回", null);
-                    builder.show();
-                    return false;
-
-                }
-            });
-            // return true;
-        }
-
         return super.onOptionsItemSelected(item);
-        //return true;
     }
 
 }
