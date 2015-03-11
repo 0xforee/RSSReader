@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -52,7 +53,6 @@ public class MainActivity extends BaseActivity {
         myApplication = new MyApplication(this);
         myApplication.initEnv();
         myApplication.initSettings(this);
-
 
         //搭建UI
         itemlist = new ListView(this);
