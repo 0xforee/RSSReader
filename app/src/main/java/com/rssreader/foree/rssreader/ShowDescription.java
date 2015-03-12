@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -19,6 +20,8 @@ import com.baseapplication.foree.rssreader.BaseActivity;
  * 显示每条Item的具体的信息
  */
 public class ShowDescription extends BaseActivity {
+    private static final String TAG = "ShowDescription";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +56,8 @@ public class ShowDescription extends BaseActivity {
         }); */
         WebView webView = (WebView) findViewById(R.id.webview);
         webView.setWebViewClient(new WebViewClient());
+        //加载webview中的js脚本
+        webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl(link);
     }
 
