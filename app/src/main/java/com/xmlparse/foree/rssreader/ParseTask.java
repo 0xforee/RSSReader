@@ -1,9 +1,7 @@
 package com.xmlparse.foree.rssreader;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -14,7 +12,6 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.baseapplication.foree.rssreader.MyApplication;
 import com.rssinfo.foree.rssreader.RssFeedInfo;
@@ -28,7 +25,6 @@ import com.utils.foree.rssreader.NetworkUtils;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
-import java.io.FileInputStream;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
@@ -135,7 +131,7 @@ public class ParseTask extends AsyncTask<Context, Integer, RssFeedInfo> {
         //将传来的数据显示到listview中，使用activity_main布局
         adapter = new SimpleAdapter(mcontext,
                 list,
-                R.layout.activity_main,
+                R.layout.title_list_layout,
                 new String[]{"title", "pubdate"},
                 new int[]{R.id.title, R.id.time});
 
