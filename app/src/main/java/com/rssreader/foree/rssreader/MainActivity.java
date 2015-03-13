@@ -214,8 +214,6 @@ public class MainActivity extends BaseActivity
         public void onStart() {
             super.onStart();
             Log.v(TAG, "onStart");
-            textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText("hhha");
         }
     }
 }

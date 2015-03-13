@@ -74,7 +74,7 @@ public class ParseTask extends AsyncTask<Context, Integer, RssFeedInfo> {
         Log.v(TAG, "doInBackground");
         try {
             //urlString[0]代表要接收的字符串
-            URL url = new URL(RSS_URL6);
+            URL url = new URL(RSS_URL2);
             InputSource is = new InputSource(url.openStream());
 
 
