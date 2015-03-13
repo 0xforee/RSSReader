@@ -41,5 +41,4 @@
             android:title="@string/versionnumber"
             android:summary="@string/enjoy" />
     </PreferenceCategory>
-
 </PreferenceScreen>
