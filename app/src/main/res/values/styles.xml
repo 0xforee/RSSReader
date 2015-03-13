@@ -10,11 +10,21 @@
         <item name="myTextColor">#000000</item>
         <item name="myBackground">#ffffff</item>
         <item name="mylistdivider">#ffffff</item>
+        <item name="android:actionBarStyle">@style/MyactionBar</item>
+
+        <!--support library compatibility -->
+        <item name="actionBarStyle">@style/MyactionBar</item>
     </style>
 
     <style name="NightTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="myTextColor">#424952</item>
         <item name="myBackground">#080c10</item>
         <item name="mylistdivider">#080c10</item>
+    </style>
+
+    <style name="MyactionBar" parent="Widget.AppCompat.Light.ActionMode.Inverse">
+        <item name="android:background">@color/my_actionbar_background</item>
+        <!--support library compatibility -->
+        <item name="background">@color/my_actionbar_background</item>
     </style>
 </resources>

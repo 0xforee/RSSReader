@@ -3,4 +3,5 @@
     <color name="item_title_color">#6611ff00</color>
     <color name="item_option_color">#000000</color>
     <color name="item_description_color">#66000000</color>
+    <color name="my_actionbar_background">#0088ff</color>
 </resources>
