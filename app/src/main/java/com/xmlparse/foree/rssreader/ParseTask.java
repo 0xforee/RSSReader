@@ -36,12 +36,13 @@ import javax.xml.parsers.SAXParserFactory;
  * Created by foree on 3/4/15.
  * 异步线程，用来处理连接网络等耗时的操作
  */
-public class ParseTask extends AsyncTask<Context, Integer, RssFeedInfo> {
+public class ParseTask extends AsyncTask<MainActivity.PlaceholderFragment, Integer, RssFeedInfo> {
     XmlParse xmlParse;
     ListView listView;
     ProgressBar mProgressBar;
     TextView mTextView;
     RssFeedInfo mRssFeedInfo;
+    MainActivity.PlaceholderFragment placeholderFragment;
     int networkState;
     public final String RSS_URL = "http://blog.sina.com.cn/rss/1267454277.xml";
     public final String RSS_URL2 = "http://www.dogear.cn/feed/9768.xml";
@@ -51,34 +52,41 @@ public class ParseTask extends AsyncTask<Context, Integer, RssFeedInfo> {
     public final String RSS_URL6 = "http://www.dogear.cn/feed/9374.xml";
     public final String filePath = Environment.getExternalStorageDirectory().getAbsolutePath();
     public final String RSS_LOCAL = "file://" + filePath + "/ifengbook.xml";
+    private String URLString = null;
 
+    //Activity继承的就是上下文，因此mcontext可以通过初始化activity来实现
     private MainActivity mainActivity;
-    private Context mcontext;
+    private Context mcontext, placehold;
 
     public ParseTask(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
+        this.mcontext = mainActivity;
     }
 
     private final String TAG = "ParseTask";
 
     @Override
-    protected RssFeedInfo doInBackground(Context... contexts) {
+    protected RssFeedInfo doInBackground(MainActivity.PlaceholderFragment... position) {
 
-        mcontext = contexts[0];
+        //  mcontext = contexts[0];
+        placeholderFragment = position[0];
+        mProgressBar = placeholderFragment.getmProgressBar();
+        mTextView = placeholderFragment.getmTextView();
+        listView = placeholderFragment.getItemlist();
+
+        //获取网络状态
         MyApplication.mNetworkState = NetworkUtils.getNetworkState(mcontext);
 
         //无网络模式下或者有缓存状态
-        if (FileUtils.getCacheList() || MyApplication.mNetworkState == NetworkUtils.NETWORK_NONE) {
+       /* if (FileUtils.getCacheList() || MyApplication.mNetworkState == NetworkUtils.NETWORK_NONE) {
             return null;
-        }
+        }*/
         Log.v(TAG, "doInBackground");
         try {
             //urlString[0]代表要接收的字符串
-            URL url = new URL(RSS_URL2);
+            URL url = new URL(placeholderFragment.getpostionString());
             InputSource is = new InputSource(url.openStream());
 
-
-            if (is != null) {
                 //构建SAX解析工厂
                 SAXParserFactory factory = SAXParserFactory.newInstance();
                 //使用SAX解析工厂构造SAX解析器
@@ -93,8 +101,6 @@ public class ParseTask extends AsyncTask<Context, Integer, RssFeedInfo> {
                 xmlReader.parse(is);
 
                 return xmlParse.getFeedInfo();
-            } else
-                Log.v(TAG, "cannot open site");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -162,10 +168,6 @@ public class ParseTask extends AsyncTask<Context, Integer, RssFeedInfo> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        //获取已经初始化的对象（在mainActivity启动时初始化）
-        listView = mainActivity.getItemlist();
-        mProgressBar = mainActivity.getmProgressBar();
-        mTextView = mainActivity.getmTextView();
         Log.v(TAG, "onPreExecute");
 
 

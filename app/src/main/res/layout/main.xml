@@ -11,29 +11,7 @@
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
-
-        <ListView
-            android:visibility="invisible"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:divider="?attr/mylistdivider"
-            android:id="@+id/listview" />
-
-        <TextView
-            android:id="@+id/nonetwork"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            android:layout_gravity="center" />
-
-    </FrameLayout>
+        android:layout_height="fill_parent"></FrameLayout>
 
     <fragment
         android:id="@+id/navigation_drawer"

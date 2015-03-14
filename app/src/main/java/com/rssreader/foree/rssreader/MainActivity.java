@@ -2,6 +2,7 @@ package com.rssreader.foree.rssreader;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -22,6 +23,9 @@ import com.baseapplication.foree.rssreader.BaseActivity;
 import com.baseapplication.foree.rssreader.MyApplication;
 import com.xmlparse.foree.rssreader.ParseTask;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MainActivity extends BaseActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -37,24 +41,7 @@ public class MainActivity extends BaseActivity
      * 通常用来存储最后一个屏幕的标题
      */
     private CharSequence mTitle;
-    // private RssFeedInfo rssFeedInfo = null;
-    ListView itemlist;
-    ProgressBar mProgressBar;
-    TextView mTextView;
     MyApplication myApplication;
-    // private String pathXML= Environment.getExternalStorageDirectory().getAbsolutePath() + "/w3cschool.xml";
-
-    public ListView getItemlist() {
-        return itemlist;
-    }
-
-    public ProgressBar getmProgressBar() {
-        return mProgressBar;
-    }
-
-    public TextView getmTextView() {
-        return mTextView;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,28 +55,7 @@ public class MainActivity extends BaseActivity
         myApplication.cleanListCache();
         //myApplication.initSettings(this);
 
-        //搭建UI
-        // itemlist = new ListView(this);
-        // mProgressBar = new ProgressBar(this);
-        //  mTextView = new TextView(this);
-
-        itemlist = (ListView) findViewById(R.id.listview);
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-        mTextView = (TextView) findViewById(R.id.nonetwork);
-
-        //设置点击事件，无网络模式时重新加载列表
-        mTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mProgressBar.setVisibility(View.VISIBLE);
-                mTextView.setVisibility(View.GONE);
-                ParseTask parseTask = new ParseTask(MainActivity.this);
-                parseTask.execute(MainActivity.this);
-            }
-        });
-
         //drawerlayout
-        Log.v(TAG, "onCreate");
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -99,9 +65,7 @@ public class MainActivity extends BaseActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
-        //使用asyncTask完成url解析操作
-        ParseTask parseTask = new ParseTask(this);
-        parseTask.execute(this);
+        Log.v(TAG, "onCreate");
 
     }
 
@@ -111,11 +75,8 @@ public class MainActivity extends BaseActivity
         // update the main content by replacing fragments
         // 同过替换fragment来更新主界面
         FragmentManager fragmentManager = getSupportFragmentManager();
-        //
-        PlaceholderFragment fragment = PlaceholderFragment.newInstance(position + 1);
-
         fragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
+                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
                 .commit();
         Log.v(TAG, "onNavigationDrawerItemSelected");
     }
@@ -135,6 +96,7 @@ public class MainActivity extends BaseActivity
         }
     }
 
+
     //重新设置actionBar的相关信息
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
@@ -142,7 +104,6 @@ public class MainActivity extends BaseActivity
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -191,7 +152,31 @@ public class MainActivity extends BaseActivity
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
         private View rootView;
-        private TextView textView;
+        private ListView articel_listview;
+        private MainActivity mainActivity;
+        ProgressBar mProgressBar;
+        TextView mTextView;
+        public final String RSS_URL = "http://blog.sina.com.cn/rss/1267454277.xml";
+        public final String RSS_URL2 = "http://www.dogear.cn/feed/9768.xml";
+        public final String RSS_URL3 = "http://www.dogear.cn/feed/10244.xml";
+        private String URLString = null;
+
+
+        public ListView getItemlist() {
+            return articel_listview;
+        }
+
+        public String getpostionString() {
+            return URLString;
+        }
+
+        public ProgressBar getmProgressBar() {
+            return mProgressBar;
+        }
+
+        public TextView getmTextView() {
+            return mTextView;
+        }
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -210,10 +195,15 @@ public class MainActivity extends BaseActivity
         }
 
         //在创建fragment之后，将要填充的布局文件转换为view控件
+        //在此生命周期后，布局中的控件才可以被找到
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            //初始化fragment中的控件
+            articel_listview = (ListView) rootView.findViewById(R.id.articel_listview);
+            mProgressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
+            mTextView = (TextView) rootView.findViewById(R.id.nonetwork);
             Log.v(TAG, "onCreateView");
             return rootView;
         }
@@ -223,11 +213,34 @@ public class MainActivity extends BaseActivity
             super.onAttach(activity);
             ((MainActivity) activity).onSectionAttached(
                     getArguments().getInt(ARG_SECTION_NUMBER));
+            //初始化mainactivity实例，用于与主界面通信
+            mainActivity = (MainActivity) activity;
+            Log.v(TAG, "OnAttach");
+
         }
 
+        //在onStart方法中对listview进行动态的数据添加
         @Override
         public void onStart() {
             super.onStart();
+            //获取当前所选中的fragment,并解析对应的url
+            int id = getArguments().getInt(ARG_SECTION_NUMBER);
+            switch (id) {
+                case 1:
+                    URLString = RSS_URL;
+                    ParseTask parseTask = new ParseTask(mainActivity);
+                    parseTask.execute(this);
+                    break;
+                case 2:
+                    URLString = RSS_URL2;
+                    ParseTask parseTask1 = new ParseTask(mainActivity);
+                    parseTask1.execute(this);
+                    break;
+                case 3:
+                    URLString = RSS_URL3;
+                    ParseTask parseTask2 = new ParseTask(mainActivity);
+                    parseTask2.execute(this);
+            }
             Log.v(TAG, "onStart");
         }
     }

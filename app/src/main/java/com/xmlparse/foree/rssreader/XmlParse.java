@@ -56,7 +56,6 @@ public class XmlParse extends DefaultHandler {
         Log.v(TAG, "XML文件解析开始");
     }
 
-
     //结束解析文档
     public void endDocument() throws SAXException {
         Log.v(TAG, "XML文件解析停止");
@@ -84,10 +83,10 @@ public class XmlParse extends DefaultHandler {
             currentTag = RSS_LINK;
             return;
         }
-        if (localName.equals("description")) {
+        /*if (localName.equals("description")) {
             currentTag = RSS_DESCRIPTION;
             return;
-        }
+        }*/
         if (localName.equals("pubDate")) {
             currentTag = RSS_PUBDATA;
         }
@@ -135,10 +134,10 @@ public class XmlParse extends DefaultHandler {
                 //  rssItemInfo.setLink(sum_String);
                 Log.v(TAG, "link = " + sumString + '\n');
                 break;
-            case RSS_DESCRIPTION:
+           /* case RSS_DESCRIPTION:
                 rssItemInfo.setDescription(mItemContent);
                 Log.v(TAG, "description = " + mItemContent);
-                break;
+                break;*/
             default:
                 //        Log.v(TAG, "有未解析的数据: " + sum_String);
                 break;
