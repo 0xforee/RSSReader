@@ -65,10 +65,10 @@ public class ParseTask extends AsyncTask<Context, Integer, RssFeedInfo> {
     protected RssFeedInfo doInBackground(Context... contexts) {
 
         mcontext = contexts[0];
+        MyApplication.mNetworkState = NetworkUtils.getNetworkState(mcontext);
 
         //无网络模式下或者有缓存状态
-        if (FileUtils.getCacheList() || MyApplication.mNetworkState == NetworkUtils.NETWORK_NONE ||
-                FileUtils.getCacheList()) {
+        if (FileUtils.getCacheList() || MyApplication.mNetworkState == NetworkUtils.NETWORK_NONE) {
             return null;
         }
         Log.v(TAG, "doInBackground");
@@ -121,7 +121,8 @@ public class ParseTask extends AsyncTask<Context, Integer, RssFeedInfo> {
                 //设置listview可见
                 listView.setVisibility(View.GONE);
                 mTextView.setVisibility(View.VISIBLE);
-                mTextView.setText("无网络连接或链接不正确，请联网或者重新输入链接再试");
+                mTextView.setTextSize(20);
+                mTextView.setText("无网络连接，请联网后点击重试");
                 return;
             }
         }

@@ -65,16 +65,28 @@ public class MainActivity extends BaseActivity
         //应用启动初始化环境变量
         myApplication = new MyApplication(this);
         myApplication.initEnv();
-        myApplication.initSettings(this);
+        myApplication.cleanListCache();
+        //myApplication.initSettings(this);
 
         //搭建UI
-        itemlist = new ListView(this);
-        mProgressBar = new ProgressBar(this);
-        mTextView = new TextView(this);
+        // itemlist = new ListView(this);
+        // mProgressBar = new ProgressBar(this);
+        //  mTextView = new TextView(this);
 
         itemlist = (ListView) findViewById(R.id.listview);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         mTextView = (TextView) findViewById(R.id.nonetwork);
+
+        //设置点击事件，无网络模式时重新加载列表
+        mTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mProgressBar.setVisibility(View.VISIBLE);
+                mTextView.setVisibility(View.GONE);
+                ParseTask parseTask = new ParseTask(MainActivity.this);
+                parseTask.execute(MainActivity.this);
+            }
+        });
 
         //drawerlayout
         Log.v(TAG, "onCreate");
@@ -134,8 +146,11 @@ public class MainActivity extends BaseActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        if (!mNavigationDrawerFragment.isDrawerOpen()) {
+            getMenuInflater().inflate(R.menu.menu_main, menu);
+            restoreActionBar();
+            return true;
+        }
         return true;
     }
 
