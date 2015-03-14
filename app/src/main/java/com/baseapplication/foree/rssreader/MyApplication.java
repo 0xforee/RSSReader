@@ -66,7 +66,7 @@ public class MyApplication extends Application {
         Log.v(TAG, "初始化环境变量成功");
     }
 
-    //初始化一些系统设置
+   /* //初始化一些系统设置
     public void initSettings(Context context) {
         //获取系统设置文件
         File file = new File(context.getFilesDir() + "/../shared_prefs" + "/settings.xml");
@@ -79,5 +79,15 @@ public class MyApplication extends Application {
             editor.apply();
         } else
             Log.v(TAG, "设置文件存在，不进行初始化");
+    }*/
+
+    //清除列表缓存文件
+    public void cleanListCache() {
+        File file = new File(MyApplication.mySdcardCacheDir + "/listcache");
+
+        if (file.exists()) {
+            if (file.delete())
+                Log.v(TAG, "cache cleand");
+        }
     }
 }
