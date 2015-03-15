@@ -14,35 +14,45 @@ import org.xml.sax.helpers.DefaultHandler;
  * 对xml文件进行解析，并将解析出来的文件放入RSSFeedInfo,RssItemInfo中，
  * 方便后边对内容的复用
  */
-public class XmlParse extends DefaultHandler {
+public class XmlParseHandler extends DefaultHandler {
     private static final String TAG = "XmlParse";
     //标记当前标签
-    private int currentTag = 0;
+    private RSS_TYPE currentTag;
     private RssFeedInfo rssFeedInfo;
     private RssItemInfo rssItemInfo;
-
     //多次调用characters时的多次解析的数据总和
     private String sumString = "";
+    private StringBuilder mBuff;
 
-    //定义RSS的标签类型
-    private final int RSS_NONE = 0;
-    private final int RSS_CHANNEL = 1;
-    private final int RSS_TITLE = 2;
-    private final int RSS_ITEM = 3;
-    private final int RSS_LINK = 4;
-    private final int RSS_DESCRIPTION = 5;
-    private final int RSS_IMAGE = 6;
-    private final int RSS_PUBDATA = 7;
-    private final int RSS_URL = 8;
-    private final int RSS_LANGUAGE = 9;
-    private final int RSS_GENERATOR = 10;
-    private final int RSS_COPYRIGHT = 11;
-    private final int RSS_AUTHOR = 12;
-    private final int RSS_CATEGORY = 13;
-    private final int RSS_COMMENT = 14;
-    private final int RSS_GUID = 15;
+    //定义RSS的标签枚举类型
+    private static enum RSS_TYPE {
+        RSS_NONE,
+        RSS_CHANNEL,
+        RSS_ITEM,
+        RSS_TITLE,
+        RSS_PUBDATE,
+        RSS_LINK,
+        RSS_DESCRIPTION,
+        RSS_CATEGORY,
+        RSS_AUTHOR,
+        RSS_IMAGE,
+        RSS_URL,
+        RSS_LANGUAGE,
+        RSS_GENERATOR,
+        RSS_COPYRIGHT,
+        RSS_COMMENT,
+        RSS_GUID
+    }
 
-    public XmlParse() {
+    public void setCurrTag(RSS_TYPE currentTag) {
+        this.currentTag = currentTag;
+    }
+
+    public RSS_TYPE getCurrTag() {
+        return currentTag;
+    }
+
+    public XmlParseHandler() {
         rssItemInfo = new RssItemInfo();
         rssFeedInfo = new RssFeedInfo();
     }
@@ -62,12 +72,11 @@ public class XmlParse extends DefaultHandler {
 
     }
 
-
     //遇到某一个便签的时候，触发此方法
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         Log.v(TAG, "标签解析开始");
         if (localName.equals("channel")) {
-            currentTag = RSS_CHANNEL;
+            setCurrTag(RSS_TYPE.RSS_CHANNEL);
             return;
         }
         if (localName.equals("item")) {
@@ -76,11 +85,11 @@ public class XmlParse extends DefaultHandler {
             return;
         }
         if (localName.equals("title")) {
-            currentTag = RSS_TITLE;
+            setCurrTag(RSS_TYPE.RSS_TITLE);
             return;
         }
         if (localName.equals("link")) {
-            currentTag = RSS_LINK;
+            setCurrTag(RSS_TYPE.RSS_LINK);
             return;
         }
         /*if (localName.equals("description")) {
@@ -88,7 +97,7 @@ public class XmlParse extends DefaultHandler {
             return;
         }*/
         if (localName.equals("pubDate")) {
-            currentTag = RSS_PUBDATA;
+            setCurrTag(RSS_TYPE.RSS_PUBDATE);
         }
 
     }
@@ -108,7 +117,7 @@ public class XmlParse extends DefaultHandler {
         //标签解析结束，将tmp清理
         sumString = "";
         //并将标签标记清零
-        currentTag = 0;
+        setCurrTag(RSS_TYPE.RSS_NONE);
     }
 
     //每一个标签截取的内容都可以从这里获取到
@@ -116,7 +125,7 @@ public class XmlParse extends DefaultHandler {
         //存储解析出来的数据
         String mItemContent = new String(ch, start, length);
 
-        switch (currentTag) {
+        switch (getCurrTag()) {
             case RSS_CHANNEL:
                 // rssItemInfo.s(mItemContent);
                 Log.v(TAG, "channel = " + mItemContent);
@@ -125,7 +134,7 @@ public class XmlParse extends DefaultHandler {
                 rssItemInfo.setTitle(mItemContent);
                 Log.v(TAG, "title = " + mItemContent);
                 break;
-            case RSS_PUBDATA:
+            case RSS_PUBDATE:
                 rssItemInfo.setPubdata(mItemContent);
                 Log.v(TAG, "pubDate = " + mItemContent);
                 break;
