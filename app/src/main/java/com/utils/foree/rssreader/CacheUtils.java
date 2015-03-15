@@ -27,7 +27,6 @@ import javax.xml.parsers.SAXParserFactory;
 public class CacheUtils {
     private static final String TAG = "CacheUtils";
 
-
     public static void writeCacheList(RssFeedInfo rssFeedInfo) {
         XmlSerializer xmlSerializer = Xml.newSerializer();
         //获取所有的数据对象

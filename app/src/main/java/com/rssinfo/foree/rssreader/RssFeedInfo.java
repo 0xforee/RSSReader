@@ -15,7 +15,7 @@ public class RssFeedInfo {
     private String title = null;
     //订阅号的链接
     private String link = null;
-    private String pubdata = "";
+    private String pubdate = "";
     //list中存放所有的保存新闻的对象
     private List<RssItemInfo> itemlist = new ArrayList<>();
 
@@ -66,12 +66,12 @@ public class RssFeedInfo {
         this.link = link;
     }
 
-    public String pubData() {
-        return pubdata;
+    public String pubDate() {
+        return pubdate;
     }
 
-    public void setPubdata(String pubdata) {
-        this.pubdata = pubdata;
+    public void setPubdate(String pubdate) {
+        this.pubdate = pubdate;
     }
 
 

@@ -25,7 +25,7 @@ public class XmlParseHandler extends DefaultHandler {
     String mLink;
     String mDescription;
 
-    //当前是否位于Item内
+    //当前是否位于Item内,可用于判断解析头数据
     boolean mInItem;
 
     public XmlParseHandler() {
@@ -42,8 +42,8 @@ public class XmlParseHandler extends DefaultHandler {
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         Log.v(TAG, "标签解析开始");
         //标签解析开始，将缓存清理
-        if (mInItem)
-            mBuff.delete(0, mBuff.length());
+        mBuff.delete(0, mBuff.length());
+
 
         //如果一个item开始的时候，将子元素内容清除
         if (localName.equals("item")) {
@@ -57,21 +57,29 @@ public class XmlParseHandler extends DefaultHandler {
     public void endElement(String uri, String localName, String qName) throws SAXException {
         Log.v(TAG, "标签解析停止 ");
         //等待地址全部解析完成，将内容添加
-        if (localName.equals("title")) mTitle = mBuff.toString();
-        if (localName.equals("link")) mLink = mBuff.toString();
-        if (localName.equals("pubDate")) mPubDate = mBuff.toString();
-        if (localName.equals("description")) mDescription = mBuff.toString();
-        if( localName.equals("item")){
-            Log.v(TAG, "添加item");
-            mInItem = false;
-            rssFeedInfo.addItem(new RssItemInfo(mTitle, mLink, mPubDate, mDescription));
+        if (mInItem) {
+            if (localName.equals("title")) mTitle = mBuff.toString();
+            if (localName.equals("link")) mLink = mBuff.toString();
+            if (localName.equals("pubDate")) mPubDate = mBuff.toString();
+            if (localName.equals("description")) mDescription = mBuff.toString();
+            if (localName.equals("item")) {
+                Log.v(TAG, "添加item");
+                mInItem = false;
+                rssFeedInfo.addItem(new RssItemInfo(mTitle, mLink, mPubDate, mDescription));
+            }
+        }
+        //解析RSS的头部的信息
+        else {
+            if (localName.equals("title")) rssFeedInfo.setTitle(mBuff.toString());
+            if (localName.equals("link")) rssFeedInfo.setLink(mBuff.toString());
+            if (localName.equals("pubDate")) rssFeedInfo.setPubdate(mBuff.toString());
         }
     }
 
     //每一个标签截取的内容都可以从这里获取到
     public void characters(char[] ch, int start, int length) throws SAXException {
         //存储解析出来的数据
-        if (mInItem) mBuff.append(ch, start, length);
+        mBuff.append(ch, start, length);
         }
 
 }
