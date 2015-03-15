@@ -32,9 +32,13 @@ public class CacheUtils {
         //获取所有的数据对象
         List<RssItemInfo> list = rssFeedInfo.getItemlist();
 
+        //获取缓存文件
+        String cacheName = urlToName(rssFeedInfo.getLink());
+
+
         try {
             //建立一个cache文件
-            File file = new File(MyApplication.mySdcardCacheDir + "/listcache");
+            File file = new File(MyApplication.mySdcardCacheDir + "/" + cacheName);
             FileOutputStream os = new FileOutputStream(file);
             //设置输出流和编码类型
             xmlSerializer.setOutput(os, "utf-8");
@@ -70,11 +74,13 @@ public class CacheUtils {
         }
     }
 
-    public static RssFeedInfo readCacheList() {
+    public static RssFeedInfo readCacheList(String urlName) {
         XmlParseHandler xmlParseHandler;
 
+//获取缓存文件
+        String cacheName = urlToName(urlName);
         try {
-            FileInputStream input = new FileInputStream(new File(MyApplication.mySdcardCacheDir + "/listcache"));
+            FileInputStream input = new FileInputStream(new File(MyApplication.mySdcardCacheDir + "/" + cacheName));
             InputSource inputSource = new InputSource(input);
             SAXParserFactory factory = SAXParserFactory.newInstance();
             //使用SAX解析工厂构造SAX解析器
@@ -93,5 +99,18 @@ public class CacheUtils {
             e.printStackTrace();
             return null;
         }
+    }
+
+    //将URL中不合适的字符去掉(用URL来标识对应的缓存文件)
+    public static String urlToName(String url) {
+        String name = url.replaceAll(":", "");
+        name = name.replaceAll("\\.", "");
+        name = name.replaceAll("//", "");
+        name = name.replaceAll("/", "");
+        name = name.replaceAll("=", "");
+        name = name.replaceAll("-", "");
+        name = name.replaceAll(",", "");
+        name = name.replaceAll("&", "");
+        return name;
     }
 }

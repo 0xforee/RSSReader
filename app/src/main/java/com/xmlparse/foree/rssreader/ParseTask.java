@@ -43,7 +43,6 @@ public class ParseTask extends AsyncTask<MainActivity.PlaceholderFragment, Integ
     TextView mTextView;
     RssFeedInfo mRssFeedInfo;
     MainActivity.PlaceholderFragment placeholderFragment;
-    int networkState;
     public final String RSS_URL = "http://blog.sina.com.cn/rss/1267454277.xml";
     public final String RSS_URL2 = "http://www.dogear.cn/feed/9768.xml";
     public final String RSS_URL3 = "http://www.dogear.cn/feed/10244.xml";
@@ -78,9 +77,9 @@ public class ParseTask extends AsyncTask<MainActivity.PlaceholderFragment, Integ
         MyApplication.mNetworkState = NetworkUtils.getNetworkState(mcontext);
 
         //无网络模式下或者有缓存状态
-       /* if (FileUtils.getCacheList() || MyApplication.mNetworkState == NetworkUtils.NETWORK_NONE) {
+        if (FileUtils.getCacheList(placeholderFragment.getpostionUrlName()) || MyApplication.mNetworkState == NetworkUtils.NETWORK_NONE) {
             return null;
-        }*/
+        }
         Log.v(TAG, "doInBackground");
         try {
             //urlString[0]代表要接收的字符串
@@ -113,16 +112,22 @@ public class ParseTask extends AsyncTask<MainActivity.PlaceholderFragment, Integ
         super.onPostExecute(rssFeedInfo);
         List<Map<String, Object>> list;
 
+        Log.v(TAG, "In PostExecute");
         mRssFeedInfo = rssFeedInfo;
         //数据对象为空时，置listview为空，然后返回
         if (mRssFeedInfo != null) {
             list = mRssFeedInfo.getAllItemForListView();
             CacheUtils.writeCacheList(rssFeedInfo);
         } else {
-            if (FileUtils.getCacheList()) {
-                mRssFeedInfo = CacheUtils.readCacheList();
+            Log.v(TAG, "In mRssinfo null");
+
+            if (FileUtils.getCacheList(placeholderFragment.getpostionUrlName())) {
+                mRssFeedInfo = CacheUtils.readCacheList(placeholderFragment.getpostionUrlName());
                 list = mRssFeedInfo.getAllItemForListView();
+
             } else {
+                Log.v(TAG, "else else");
+
                 mProgressBar.setVisibility(View.GONE);
                 //设置listview可见
                 listView.setVisibility(View.GONE);

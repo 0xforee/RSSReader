@@ -51,9 +51,11 @@ public class FileUtils {
     }
 
     //判断缓存文件是否存在
-    public static boolean getCacheList() {
+    public static boolean getCacheList(String urlName) {
+        String cacheName = CacheUtils.urlToName(urlName);
+
         try {
-            File file = new File(MyApplication.mySdcardCacheDir + "/listcache");
+            File file = new File(MyApplication.mySdcardCacheDir + "/" + cacheName);
             if (file.exists()) {
                 Log.v(TAG, "CacheFileExit");
                 return true;

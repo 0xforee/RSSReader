@@ -52,7 +52,7 @@ public class MainActivity extends BaseActivity
         //应用启动初始化环境变量
         myApplication = new MyApplication(this);
         myApplication.initEnv();
-        myApplication.cleanListCache();
+        //myApplication.cleanListCache();
         //myApplication.initSettings(this);
 
         //drawerlayout
@@ -161,6 +161,10 @@ public class MainActivity extends BaseActivity
         public final String RSS_URL3 = "http://www.dogear.cn/feed/10244.xml";
         private String URLString = null;
 
+        public final String urlName1 = "http://blog.sina.com.cn/phoenixweekly";
+        public final String urlName2 = "http://weixin.sogou.com/gzh?openid=oIWsFt916x87mkcHhJp_lgt1-Q7c";
+        public final String urlName3 = "http://weixin.sogou.com/gzh?openid=oIWsFt5vznVWdVAk9hw4dsXVj5y8";
+        private String urlName = null;
 
         public ListView getItemlist() {
             return articel_listview;
@@ -168,6 +172,10 @@ public class MainActivity extends BaseActivity
 
         public String getpostionString() {
             return URLString;
+        }
+
+        public String getpostionUrlName() {
+            return urlName;
         }
 
         public ProgressBar getmProgressBar() {
@@ -228,16 +236,19 @@ public class MainActivity extends BaseActivity
             switch (id) {
                 case 1:
                     URLString = RSS_URL;
+                    urlName = urlName1;
                     ParseTask parseTask = new ParseTask(mainActivity);
                     parseTask.execute(this);
                     break;
                 case 2:
                     URLString = RSS_URL2;
+                    urlName = urlName2;
                     ParseTask parseTask1 = new ParseTask(mainActivity);
                     parseTask1.execute(this);
                     break;
                 case 3:
                     URLString = RSS_URL3;
+                    urlName = urlName3;
                     ParseTask parseTask2 = new ParseTask(mainActivity);
                     parseTask2.execute(this);
             }
