@@ -1,22 +1,9 @@
 package com.rssinfo.foree.rssreader;
 
-import android.support.annotation.NonNull;
-
-import com.xmlparse.foree.rssreader.XmlParse;
-
-import org.xml.sax.InputSource;
-import org.xml.sax.XMLReader;
-
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 
 /**
  * Created by foree on 3/3/15.
@@ -56,7 +43,7 @@ public class RssFeedInfo {
         for (int i = 0; i < size; i++) {
             Map<String, Object> map = new HashMap<>();
             map.put("title", itemlist.get(i).getTitle());
-            map.put("pubdate", itemlist.get(i).getpubData());
+            map.put("pubdate", itemlist.get(i).getpubDate());
             // map.put("image",itemlist.get(i).getimage());
             datalist.add(map);
         }

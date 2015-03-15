@@ -37,7 +37,7 @@ import javax.xml.parsers.SAXParserFactory;
  * 异步线程，用来处理连接网络等耗时的操作
  */
 public class ParseTask extends AsyncTask<MainActivity.PlaceholderFragment, Integer, RssFeedInfo> {
-    XmlParse xmlParse;
+    XmlParseHandler xmlParseHandler;
     ListView listView;
     ProgressBar mProgressBar;
     TextView mTextView;
@@ -95,12 +95,12 @@ public class ParseTask extends AsyncTask<MainActivity.PlaceholderFragment, Integ
                 XMLReader xmlReader = parser.getXMLReader();
 
                 //获取一个代理，并设置xml解析的代理为xmlparse解析类
-                xmlParse = new XmlParse();
-                xmlReader.setContentHandler(xmlParse);
+            xmlParseHandler = new XmlParseHandler();
+            xmlReader.setContentHandler(xmlParseHandler);
 
                 xmlReader.parse(is);
 
-                return xmlParse.getFeedInfo();
+            return xmlParseHandler.getFeedInfo();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -157,7 +157,7 @@ public class ParseTask extends AsyncTask<MainActivity.PlaceholderFragment, Integ
                 bundle.putString("title", mRssFeedInfo.getItem(position).getTitle());
                 bundle.putString("description", mRssFeedInfo.getItem(position).getDescription());
                 bundle.putString("link", mRssFeedInfo.getItem(position).getLink());
-                bundle.putString("pubdate", mRssFeedInfo.getItem(position).getpubData());
+                bundle.putString("pubdate", mRssFeedInfo.getItem(position).getpubDate());
 
                 mintent.putExtra("com.rssinfo.foree.rssreader", bundle);
                 mcontext.startActivity(mintent);

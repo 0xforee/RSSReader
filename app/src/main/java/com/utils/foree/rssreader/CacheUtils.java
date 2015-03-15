@@ -6,7 +6,7 @@ import android.util.Xml;
 import com.baseapplication.foree.rssreader.MyApplication;
 import com.rssinfo.foree.rssreader.RssFeedInfo;
 import com.rssinfo.foree.rssreader.RssItemInfo;
-import com.xmlparse.foree.rssreader.XmlParse;
+import com.xmlparse.foree.rssreader.XmlParseHandler;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
@@ -51,7 +51,7 @@ public class CacheUtils {
                 xmlSerializer.endTag(null, "title");
                 //将pubdate存放到数据库中
                 xmlSerializer.startTag(null, "pubDate");
-                if (list.get(i).getpubData() == null)
+                if (list.get(i).getpubDate() == null)
                     xmlSerializer.text(" ");
                 xmlSerializer.endTag(null, "pubDate");
                 //将link放入到数据库中
@@ -72,7 +72,7 @@ public class CacheUtils {
     }
 
     public static RssFeedInfo readCacheList() {
-        XmlParse xmlParse;
+        XmlParseHandler xmlParseHandler;
 
         try {
             FileInputStream input = new FileInputStream(new File(MyApplication.mySdcardCacheDir + "/listcache"));
@@ -84,12 +84,12 @@ public class CacheUtils {
             XMLReader xmlReader = parser.getXMLReader();
 
             //获取一个代理，并设置xml解析的代理为xmlparse解析类
-            xmlParse = new XmlParse();
-            xmlReader.setContentHandler(xmlParse);
+            xmlParseHandler = new XmlParseHandler();
+            xmlReader.setContentHandler(xmlParseHandler);
 
             xmlReader.parse(inputSource);
 
-            return xmlParse.getFeedInfo();
+            return xmlParseHandler.getFeedInfo();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
