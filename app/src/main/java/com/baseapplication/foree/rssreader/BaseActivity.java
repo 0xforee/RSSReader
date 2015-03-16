@@ -2,6 +2,7 @@ package com.baseapplication.foree.rssreader;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 
 import com.rssreader.foree.rssreader.R;
@@ -20,8 +21,8 @@ public class BaseActivity extends ActionBarActivity {
 
     public void setContentView(int layoutResID) {
         //根据配置文件设置相应的主题
-        SharedPreferences sp = this.getSharedPreferences("settings", MODE_PRIVATE);
-        if (sp.getBoolean("darktheme", false))
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        if (sp.getBoolean("ck_darktheme", false))
             setTheme(R.style.NightTheme);
         else
             setTheme(R.style.DayTheme);
