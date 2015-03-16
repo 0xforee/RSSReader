@@ -32,7 +32,11 @@
         </activity>
         <activity
             android:name=".SettingsActivity"
-            android:label="RSSRedar" />
+            android:label="RSSRedar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
 
     </application>
 
