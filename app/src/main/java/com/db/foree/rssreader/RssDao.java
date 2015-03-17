@@ -5,6 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.rssinfo.foree.rssreader.RssFeedInfo;
+
+import java.sql.DatabaseMetaData;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by foree on 3/16/15.
  * 数据库增删改查的实现类
@@ -63,4 +69,24 @@ public class RssDao {
         return result;
     }
 
+    /**
+     * 数据库查找操作(返回所有数据库数据),填充到rssFeedInfo中
+     */
+    public List<RssFeedInfo> findAll() {
+        List<RssFeedInfo> feedInfos = new ArrayList<>();
+        SQLiteDatabase db = rssSQLiteOpenHelper.getReadableDatabase();
+        Cursor cursor = db.query("rss", new String[]{"id", "name", "url"}, null, null, null, null, null);
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(cursor.getColumnIndex("id"));
+            String name = cursor.getString(cursor.getColumnIndex("name"));
+            String url = cursor.getString(cursor.getColumnIndex("url"));
+            RssFeedInfo rssFeedInfo = new RssFeedInfo(id, name, url);
+            feedInfos.add(rssFeedInfo);
+        }
+        cursor.close();
+        db.close();
+
+        return feedInfos;
+
+    }
 }

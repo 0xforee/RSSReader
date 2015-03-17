@@ -11,11 +11,23 @@ import java.util.Map;
  */
 public class RssFeedInfo {
 
+    //订阅号的id(唯一指定)
+    private int id = 0;
     //订阅号的名称
     private String title = null;
     //订阅号的链接
     private String link = null;
     private String pubdate = "";
+
+    public RssFeedInfo() {
+    }
+
+    public RssFeedInfo(int id, String title, String link) {
+        this.id = id;
+        this.title = title;
+        this.link = link;
+    }
+
     //list中存放所有的保存新闻的对象
     private List<RssItemInfo> itemlist = new ArrayList<>();
 
