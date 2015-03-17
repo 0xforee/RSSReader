@@ -131,7 +131,7 @@ public class MainActivity extends BaseActivity
                 String message = "增加以下特性：" + "\n"
                         + "1.可以浏览新闻";
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("版本v0.2");
+                builder.setTitle("v" + MyApplication.myVersionName);
                 builder.setMessage(message);
                 builder.setNeutralButton("返回", null);
                 builder.show();

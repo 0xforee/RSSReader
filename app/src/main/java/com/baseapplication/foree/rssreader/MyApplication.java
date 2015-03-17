@@ -3,6 +3,8 @@ package com.baseapplication.foree.rssreader;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.nfc.Tag;
 import android.os.Environment;
 import android.util.Log;
@@ -34,6 +36,10 @@ public class MyApplication extends Application {
 
     //应用程序名称
     public static final String myApplicationName = "RSSReader";
+    //应用程序版本名称
+    public static String myVersionName;
+    //应用程序版本号
+    public static int myVersionCode;
     //应用程序的网络状态
     public static int mNetworkState = NetworkUtils.NETWORK_NONE;
     //应用程序的sdcard的目录路径
@@ -73,6 +79,9 @@ public class MyApplication extends Application {
         Log.v(TAG, "初始化环境变量成功");
         if (0 != rssDao.delete("sina"))
             Log.v(TAG, "数据删除成功");
+
+        //获取当前应用程序的版本号和版本名称
+        getApplicationVersionName(mContext);
     }
 
    /* //初始化一些系统设置
@@ -97,6 +106,22 @@ public class MyApplication extends Application {
         if (file.exists()) {
             if (file.delete())
                 Log.v(TAG, "cache cleand");
+        }
+    }
+
+    //获取应用程序的版本信息
+    public void getApplicationVersionName(Context context) {
+        PackageManager packageManager = context.getPackageManager();
+        PackageInfo packageInfo = null;
+        try {
+            //获取当前包的信息
+            packageInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
+            //获取版本号
+            myVersionCode = packageInfo.versionCode;
+            //获取版本名称
+            myVersionName = packageInfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
         }
     }
 }
