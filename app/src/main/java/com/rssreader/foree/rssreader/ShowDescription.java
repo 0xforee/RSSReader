@@ -1,21 +1,15 @@
 package com.rssreader.foree.rssreader;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Button;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
 import com.baseapplication.foree.rssreader.BaseActivity;
 
@@ -57,6 +51,28 @@ public class ShowDescription extends BaseActivity {
         webView.loadUrl(link);
     }
 
+    protected Dialog onCreateDialog(int id) {
+        if (id == 1) {
+            return new AlertDialog.Builder(this)
+                    .setTitle(R.string.action_textsize)
+                    .setItems(R.array.textsize, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            switch (whichButton) {
+                                case 0:
+                                    webView.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                                    break;
+                                case 1:
+                                    webView.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
+                                    break;
+                                case 2:
+                                    webView.getSettings().setTextSize(WebSettings.TextSize.LARGER);
+
+                            }
+                        }
+                    }).create();
+        }
+        return null;
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -81,16 +97,9 @@ public class ShowDescription extends BaseActivity {
                 shareIntent.setType("text/plain");
                 startActivity(shareIntent);
                 break;
-            case R.id.action_textsize_small:
-                webView.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+            case R.id.action_textsize:
+                showDialog(1);
                 break;
-            case R.id.action_textsize_normal:
-                webView.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
-                break;
-            case R.id.action_textsize_large:
-                webView.getSettings().setTextSize(WebSettings.TextSize.LARGER);
-                break;
-
         }
         return super.onOptionsItemSelected(item);
     }
