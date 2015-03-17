@@ -86,18 +86,18 @@ public class ParseTask extends AsyncTask<MainActivity.PlaceholderFragment, Integ
             URL url = new URL(placeholderFragment.getpostionString());
             InputSource is = new InputSource(url.openStream());
 
-                //构建SAX解析工厂
-                SAXParserFactory factory = SAXParserFactory.newInstance();
-                //使用SAX解析工厂构造SAX解析器
-                SAXParser parser = factory.newSAXParser();
-                //使用SAX解析器构建xml读取工具
-                XMLReader xmlReader = parser.getXMLReader();
+            //构建SAX解析工厂
+            SAXParserFactory factory = SAXParserFactory.newInstance();
+            //使用SAX解析工厂构造SAX解析器
+            SAXParser parser = factory.newSAXParser();
+            //使用SAX解析器构建xml读取工具
+            XMLReader xmlReader = parser.getXMLReader();
 
-                //获取一个代理，并设置xml解析的代理为xmlparse解析类
+            //获取一个代理，并设置xml解析的代理为xmlparse解析类
             xmlParseHandler = new XmlParseHandler();
             xmlReader.setContentHandler(xmlParseHandler);
 
-                xmlReader.parse(is);
+            xmlReader.parse(is);
 
             return xmlParseHandler.getFeedInfo();
         } catch (Exception e) {
@@ -140,7 +140,7 @@ public class ParseTask extends AsyncTask<MainActivity.PlaceholderFragment, Integ
         Log.v(TAG, "onPostExecute");
         SimpleAdapter adapter;
 
-        //将传来的数据显示到listview中，使用activity_main布局
+        //将传来的数据显示到listview中，使用title_list_layout布局
         adapter = new SimpleAdapter(mcontext,
                 list,
                 R.layout.title_list_layout,

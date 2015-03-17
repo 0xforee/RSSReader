@@ -7,6 +7,7 @@ import android.nfc.Tag;
 import android.os.Environment;
 import android.util.Log;
 
+import com.db.foree.rssreader.RssDao;
 import com.rssreader.foree.rssreader.MainActivity;
 import com.utils.foree.rssreader.NetworkUtils;
 
@@ -63,7 +64,15 @@ public class MyApplication extends Application {
                 myCacheDir.mkdir();
             mySdcardCacheDir = mySdcardDataDir + "/" + "cache";
         }
+
+        //进行数据库的初始化
+        RssDao rssDao = new RssDao(mContext, "rss.db", null, 1);
+        Long result = rssDao.add("新浪", "http://sina.com");
+        if (result != -1)
+            Log.v(TAG, "数据插入成功");
         Log.v(TAG, "初始化环境变量成功");
+        if (0 != rssDao.delete("sina"))
+            Log.v(TAG, "数据删除成功");
     }
 
    /* //初始化一些系统设置
