@@ -9,6 +9,10 @@
     <string name="action_share">Share</string>
     <string name="action_search">Search</string>
     <string name="action_new">New</string>
+    <string name="action_textsize_small">小</string>
+    <string name="action_textsize_normal">普通</string>
+    <string name="action_textsize_large">大</string>
+
     <string name="title_section1">新浪新闻</string>
     <string name="title_section2">凤凰读书</string>
     <string name="title_section3">好奇心日报</string>

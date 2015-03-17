@@ -8,5 +8,21 @@
         android:title="@string/action_share"
         android:icon="@drawable/ic_action_share"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_textsize_small"
+        android:orderInCategory="100"
+        android:title="@string/action_textsize_small"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_textsize_normal"
+        android:orderInCategory="100"
+        android:title="@string/action_textsize_normal"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_textsize_large"
+        android:orderInCategory="100"
+        android:title="@string/action_textsize_large"
+        app:showAsAction="ifRoom" />
+
 
 </menu>

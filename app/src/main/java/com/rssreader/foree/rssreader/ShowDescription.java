@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
@@ -26,6 +27,7 @@ public class ShowDescription extends BaseActivity {
     private static final String TAG = "ShowDescription";
     String link = null;
     String title = null;
+    WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +50,7 @@ public class ShowDescription extends BaseActivity {
             link = mBundle.getString("link");
             title = mBundle.getString("title");
         }
-        WebView webView = (WebView) findViewById(R.id.webview);
+        webView = (WebView) findViewById(R.id.webview);
         webView.setWebViewClient(new WebViewClient());
         //加载webview中的js脚本
         webView.getSettings().setJavaScriptEnabled(true);
@@ -78,6 +80,15 @@ public class ShowDescription extends BaseActivity {
                 shareIntent.putExtra(Intent.EXTRA_TEXT, link);
                 shareIntent.setType("text/plain");
                 startActivity(shareIntent);
+                break;
+            case R.id.action_textsize_small:
+                webView.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                break;
+            case R.id.action_textsize_normal:
+                webView.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
+                break;
+            case R.id.action_textsize_large:
+                webView.getSettings().setTextSize(WebSettings.TextSize.LARGER);
                 break;
 
         }
