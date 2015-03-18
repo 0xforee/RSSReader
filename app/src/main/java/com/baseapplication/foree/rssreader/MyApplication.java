@@ -84,14 +84,6 @@ public class MyApplication extends Application {
         }
         Log.v(TAG, "初始化数据库成功");
 
-        /*if (0 != rssDao.delete("测试1"))
-            Log.v(TAG, "数据删除成功");
-        if (0 != rssDao.delete("新浪"))
-            Log.v(TAG, "数据删除成功");
-
-        if (0 != rssDao.delete("凤凰读书"))
-            Log.v(TAG, "数据删除成功");*/
-
         //获取当前应用程序的版本号和版本名称
         getApplicationVersionName(mContext);
 
@@ -117,7 +109,6 @@ public class MyApplication extends Application {
     //清除列表缓存文件
     public void cleanListCache() {
         File file = new File(MyApplication.mySdcardCacheDir + "/listcache");
-
         if (file.exists()) {
             if (file.delete())
                 Log.v(TAG, "cache cleand");

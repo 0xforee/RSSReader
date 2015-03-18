@@ -43,19 +43,10 @@ public class ParseTask extends AsyncTask<MainActivity.PlaceholderFragment, Integ
     TextView mTextView;
     RssFeedInfo mRssFeedInfo;
     MainActivity.PlaceholderFragment placeholderFragment;
-    public final String RSS_URL = "http://blog.sina.com.cn/rss/1267454277.xml";
-    public final String RSS_URL2 = "http://www.dogear.cn/feed/9768.xml";
-    public final String RSS_URL3 = "http://www.dogear.cn/feed/10244.xml";
-    public final String RSS_URL4 = "http://home.meizu.cn/forum.php?mod=rss&fid=47&auth=75adh9VXN4w2LUlUU0Geo7K8IZfQN%2BCrljYieNxcSsqOKNcBDaFStvzrGsBM";
-    public final String RSS_URL5 = "https://diy-devz.rhcloud.com/weixin?openid=oIWsFt2GmdYbEi0kCF0K4yO5qAXo";
-    public final String RSS_URL6 = "http://www.dogear.cn/feed/9374.xml";
-    public final String filePath = Environment.getExternalStorageDirectory().getAbsolutePath();
-    public final String RSS_LOCAL = "file://" + filePath + "/ifengbook.xml";
-    private String URLString = null;
 
     //Activity继承的就是上下文，因此mcontext可以通过初始化activity来实现
     private MainActivity mainActivity;
-    private Context mcontext, placehold;
+    private Context mcontext;
 
     public ParseTask(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
@@ -127,7 +118,6 @@ public class ParseTask extends AsyncTask<MainActivity.PlaceholderFragment, Integ
 
             } else {
                 Log.v(TAG, "else else");
-
                 mProgressBar.setVisibility(View.GONE);
                 //设置listview可见
                 listView.setVisibility(View.GONE);

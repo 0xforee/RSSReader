@@ -91,7 +91,7 @@ public class NavigationDrawerFragment extends Fragment {
         //初始化侧边栏数组
         FeedInfos = new ArrayList<>();
         //初始化数据适配器
-        adapter = new ArrayAdapter<String>(
+        adapter = new ArrayAdapter<>(
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,

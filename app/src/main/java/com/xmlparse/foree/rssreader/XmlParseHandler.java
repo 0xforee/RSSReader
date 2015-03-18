@@ -44,7 +44,6 @@ public class XmlParseHandler extends DefaultHandler {
         //标签解析开始，将缓存清理
         mBuff.delete(0, mBuff.length());
 
-
         //如果一个item开始的时候，将子元素内容清除
         if (localName.equals("item")) {
             mInItem = true;
@@ -80,6 +79,6 @@ public class XmlParseHandler extends DefaultHandler {
     public void characters(char[] ch, int start, int length) throws SAXException {
         //存储解析出来的数据
         mBuff.append(ch, start, length);
-        }
+    }
 
 }

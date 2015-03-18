@@ -89,17 +89,6 @@ public class MainActivity extends BaseActivity
     //在section被选中的时候设置标题
     public void onSectionAttached(int number) {
         mTitle = NavigationDrawerFragment.FeedInfos.get(number - 1);
-        /*switch (number) {
-            case 1:
-                mTitle = getString(R.string.title_section1);
-                break;
-            case 2:
-                mTitle = getString(R.string.title_section2);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_section3);
-                break;
-        }*/
     }
 
 
@@ -273,7 +262,7 @@ public class MainActivity extends BaseActivity
                 //解析对应url获取数据
                 ParseTask parseTask = new ParseTask(mainActivity);
                 parseTask.execute(this);
-            Log.v(TAG, "onStart");
+                Log.v(TAG, "onStart");
             }
         }
     }
