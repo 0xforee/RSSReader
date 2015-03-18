@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.rssinfo.foree.rssreader.RssFeedInfo;
 
@@ -16,6 +17,7 @@ import java.util.List;
  * 数据库增删改查的实现类
  */
 public class RssDao {
+    private static final String TAG = "RssDao";
     private RssSQLiteOpenHelper rssSQLiteOpenHelper;
 
     public RssDao(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -75,7 +77,14 @@ public class RssDao {
     public String findUrl(String FeedName) {
         SQLiteDatabase db = rssSQLiteOpenHelper.getReadableDatabase();
         Cursor cursor = db.query("rss", null, "name=?", new String[]{FeedName}, null, null, null);
-        return cursor.getString(cursor.getColumnIndex("url"));
+        if (cursor.moveToNext()) {
+            String url = cursor.getString(cursor.getColumnIndex("url"));
+            cursor.close();
+            db.close();
+            Log.v(TAG, url);
+            return url;
+        }
+        return null;
     }
 
     /**

@@ -90,13 +90,12 @@ public class NavigationDrawerFragment extends Fragment {
 
         //初始化侧边栏数组
         FeedInfos = new ArrayList<>();
-        FeedInfos.add("新浪");
-        FeedInfos.add("支护");
         //初始化数据适配器
         adapter = new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1, FeedInfos
+                android.R.id.text1,
+                FeedInfos
         );
     }
 

@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.db.foree.rssreader.RssDao;
 import com.rssreader.foree.rssreader.MainActivity;
+import com.rssreader.foree.rssreader.NavigationDrawerFragment;
 import com.utils.foree.rssreader.NetworkUtils;
 
 import java.io.File;
@@ -73,12 +74,19 @@ public class MyApplication extends Application {
 
         //进行数据库的初始化
         RssDao rssDao = new RssDao(mContext, "rss.db", null, 1);
-        Long result = rssDao.add("新浪", "http://sina.com");
+        NavigationDrawerFragment.FeedInfos.add("新浪");
+        Long result = rssDao.add("新浪", "http://blog.sina.com.cn/rss/1267454277.xml");
         if (result != -1)
             Log.v(TAG, "数据插入成功");
         Log.v(TAG, "初始化环境变量成功");
-        if (0 != rssDao.delete("sina"))
+        if (0 != rssDao.delete("测试1"))
             Log.v(TAG, "数据删除成功");
+        if (0 != rssDao.delete("测试2"))
+            Log.v(TAG, "数据删除成功");
+
+        if (0 != rssDao.delete("测试3"))
+            Log.v(TAG, "数据删除成功");
+
 
         //获取当前应用程序的版本号和版本名称
         getApplicationVersionName(mContext);

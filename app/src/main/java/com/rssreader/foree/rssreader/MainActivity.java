@@ -3,6 +3,7 @@ package com.rssreader.foree.rssreader;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,9 +16,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baseapplication.foree.rssreader.BaseActivity;
 import com.baseapplication.foree.rssreader.MyApplication;
@@ -31,6 +34,7 @@ import java.util.List;
 public class MainActivity extends BaseActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
     private static final String TAG = "MainActivity";
+    int i = 0;
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      * fragment管理navigation drawer的行为，交互和描述
@@ -84,7 +88,8 @@ public class MainActivity extends BaseActivity
 
     //在section被选中的时候设置标题
     public void onSectionAttached(int number) {
-        switch (number) {
+        mTitle = NavigationDrawerFragment.FeedInfos.get(number - 1);
+        /*switch (number) {
             case 1:
                 mTitle = getString(R.string.title_section1);
                 break;
@@ -94,7 +99,7 @@ public class MainActivity extends BaseActivity
             case 3:
                 mTitle = getString(R.string.title_section3);
                 break;
-        }
+        }*/
     }
 
 
@@ -139,9 +144,34 @@ public class MainActivity extends BaseActivity
                 break;
             //点击new,对侧边的数据进行增加,并调用adapter提示变化
             case R.id.action_new:
-                //创建Dialog
-                NavigationDrawerFragment.FeedInfos.add("直呼");
-                NavigationDrawerFragment.adapter.setNotifyOnChange(true);
+
+                //将dialog布局文件转换为一个view对象
+                LayoutInflater factory = LayoutInflater.from(this);
+                final View view = factory.inflate(R.layout.dialog_newfeed, null);
+
+                //创建dialog
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                builder1.setTitle("请在下边输入一个合法的Rss链接");
+                builder1.setView(view);
+                builder1.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        EditText editText = (EditText) view.findViewById(R.id.et_newfeed_url);
+                        String url = editText.getText().toString();
+
+                        //开始解析url,并取得名称,填入feedinfos list
+                        i++;
+                        String FeedName = "测试" + i;
+                        NavigationDrawerFragment.FeedInfos.add(FeedName);
+                        NavigationDrawerFragment.adapter.notifyDataSetChanged();
+
+                        //将链接和名称加入到数据库中
+                        RssDao rssDao = new RssDao(MainActivity.this, "rss.db", null, 1);
+                        rssDao.add(FeedName, url);
+                        Toast.makeText(MainActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder1.show();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -163,14 +193,7 @@ public class MainActivity extends BaseActivity
         private MainActivity mainActivity;
         ProgressBar mProgressBar;
         TextView mTextView;
-        public final String RSS_URL = "http://blog.sina.com.cn/rss/1267454277.xml";
-        public final String RSS_URL2 = "http://www.dogear.cn/feed/9768.xml";
-        public final String RSS_URL3 = "http://www.dogear.cn/feed/10244.xml";
         private String URLString = null;
-
-        public final String urlName1 = "http://blog.sina.com.cn/phoenixweekly";
-        public final String urlName2 = "http://weixin.sogou.com/gzh?openid=oIWsFt916x87mkcHhJp_lgt1-Q7c";
-        public final String urlName3 = "http://weixin.sogou.com/gzh?openid=oIWsFt5vznVWdVAk9hw4dsXVj5y8";
         private String urlName = null;
 
         public ListView getItemlist() {
@@ -241,35 +264,17 @@ public class MainActivity extends BaseActivity
             //获取当前所选中的fragment,并解析对应的url
             int id = getArguments().getInt(ARG_SECTION_NUMBER);
             //获取左侧Drawer相对应位置的FeedName,来查找数据库中对应的url
-            String FeedName = NavigationDrawerFragment.FeedInfos.get(id);
+            String FeedName = NavigationDrawerFragment.FeedInfos.get(id - 1);
             RssDao rssDao = new RssDao(mainActivity, "rss.db", null, 1);
             //取得对应名称的url链接
             urlName = FeedName;
             URLString = rssDao.findUrl(FeedName);
-            //解析对应url获取数据
-            ParseTask parseTask = new ParseTask(mainActivity);
-            parseTask.execute(this);
-            /*Log.v(TAG,"Fragment的id = " + id);
-            switch (id) {
-                case 1:
-                    URLString = url;
-                    urlName = urlName1;
-                    ParseTask parseTask = new ParseTask(mainActivity);
-                    parseTask.execute(this);
-                    break;
-                case 2:
-                    URLString = RSS_URL2;
-                    urlName = urlName2;
-                    ParseTask parseTask1 = new ParseTask(mainActivity);
-                    parseTask1.execute(this);
-                    break;
-                case 3:
-                    URLString = RSS_URL3;
-                    urlName = urlName3;
-                    ParseTask parseTask2 = new ParseTask(mainActivity);
-                    parseTask2.execute(this);
-            }*/
+            if (URLString != null) {
+                //解析对应url获取数据
+                ParseTask parseTask = new ParseTask(mainActivity);
+                parseTask.execute(this);
             Log.v(TAG, "onStart");
+            }
         }
     }
 }
