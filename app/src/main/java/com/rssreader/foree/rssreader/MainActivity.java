@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.baseapplication.foree.rssreader.BaseActivity;
 import com.baseapplication.foree.rssreader.MyApplication;
+import com.db.foree.rssreader.RssDao;
 import com.xmlparse.foree.rssreader.ParseTask;
 
 import java.util.ArrayList;
@@ -136,6 +137,12 @@ public class MainActivity extends BaseActivity
                 builder.setNeutralButton("返回", null);
                 builder.show();
                 break;
+            //点击new,对侧边的数据进行增加,并调用adapter提示变化
+            case R.id.action_new:
+                //创建Dialog
+                NavigationDrawerFragment.FeedInfos.add("直呼");
+                NavigationDrawerFragment.adapter.setNotifyOnChange(true);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -233,9 +240,19 @@ public class MainActivity extends BaseActivity
             super.onStart();
             //获取当前所选中的fragment,并解析对应的url
             int id = getArguments().getInt(ARG_SECTION_NUMBER);
+            //获取左侧Drawer相对应位置的FeedName,来查找数据库中对应的url
+            String FeedName = NavigationDrawerFragment.FeedInfos.get(id);
+            RssDao rssDao = new RssDao(mainActivity, "rss.db", null, 1);
+            //取得对应名称的url链接
+            urlName = FeedName;
+            URLString = rssDao.findUrl(FeedName);
+            //解析对应url获取数据
+            ParseTask parseTask = new ParseTask(mainActivity);
+            parseTask.execute(this);
+            /*Log.v(TAG,"Fragment的id = " + id);
             switch (id) {
                 case 1:
-                    URLString = RSS_URL;
+                    URLString = url;
                     urlName = urlName1;
                     ParseTask parseTask = new ParseTask(mainActivity);
                     parseTask.execute(this);
@@ -251,7 +268,7 @@ public class MainActivity extends BaseActivity
                     urlName = urlName3;
                     ParseTask parseTask2 = new ParseTask(mainActivity);
                     parseTask2.execute(this);
-            }
+            }*/
             Log.v(TAG, "onStart");
         }
     }
