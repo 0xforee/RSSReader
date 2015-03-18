@@ -70,6 +70,15 @@ public class RssDao {
     }
 
     /**
+     * 通过名称来查找url
+     */
+    public String findUrl(String FeedName) {
+        SQLiteDatabase db = rssSQLiteOpenHelper.getReadableDatabase();
+        Cursor cursor = db.query("rss", null, "name=?", new String[]{FeedName}, null, null, null);
+        return cursor.getString(cursor.getColumnIndex("url"));
+    }
+
+    /**
      * 数据库查找操作(返回所有数据库数据),填充到rssFeedInfo中
      */
     public List<RssFeedInfo> findAll() {
