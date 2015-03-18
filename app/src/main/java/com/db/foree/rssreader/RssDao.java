@@ -29,12 +29,18 @@ public class RssDao {
      */
     public long add(String FeedName, String url) {
         SQLiteDatabase db = rssSQLiteOpenHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("name", FeedName);
-        values.put("url", url);
-        Long result = db.insert("rss", null, values);
-        db.close();
-        return result;
+        //不能添加重复的内容
+        Cursor cursor = db.query("rss", null, "name=?", new String[]{FeedName}, null, null, null);
+        if (cursor.getCount() == 0) {
+            ContentValues values = new ContentValues();
+            values.put("name", FeedName);
+            values.put("url", url);
+            Long result = db.insert("rss", null, values);
+            db.close();
+            return result;
+        } else {
+            return -1;
+        }
     }
 
     /**
