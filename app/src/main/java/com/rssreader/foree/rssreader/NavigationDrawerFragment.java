@@ -22,6 +22,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
  * See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
@@ -49,6 +52,12 @@ public class NavigationDrawerFragment extends Fragment {
      * Helper component that ties the action bar to the navigation drawer.
      */
     private ActionBarDrawerToggle mDrawerToggle;
+
+    //侧边栏的数据集合
+    public static List<String> FeedInfos;
+
+    //adapter数据控制器
+    public static ArrayAdapter<String> adapter;
 
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerListView;
@@ -78,6 +87,17 @@ public class NavigationDrawerFragment extends Fragment {
 
         // Select either the default item (0) or the last selected item.
         selectItem(mCurrentSelectedPosition);
+
+        //初始化侧边栏数组
+        FeedInfos = new ArrayList<>();
+        FeedInfos.add("新浪");
+        FeedInfos.add("支护");
+        //初始化数据适配器
+        adapter = new ArrayAdapter<String>(
+                getActionBar().getThemedContext(),
+                android.R.layout.simple_list_item_activated_1,
+                android.R.id.text1, FeedInfos
+        );
     }
 
     @Override
@@ -98,15 +118,8 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
-        mDrawerListView.setAdapter(new ArrayAdapter<String>(
-                getActionBar().getThemedContext(),
-                android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,
-                new String[]{
-                        getString(R.string.title_section1),
-                        getString(R.string.title_section2),
-                        getString(R.string.title_section3),
-                }));
+        //为drawer侧边的listview设置数据适配器
+        mDrawerListView.setAdapter(adapter);
         //设置高亮显示
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
