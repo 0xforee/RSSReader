@@ -17,7 +17,10 @@ public class RssFeedInfo {
     private String title = null;
     //订阅号的链接
     private String link = null;
+    //订阅号的发布日期
     private String pubdate = "";
+    //订阅号的描述
+    private String description = "";
 
     public RssFeedInfo() {
     }
@@ -86,6 +89,12 @@ public class RssFeedInfo {
         this.pubdate = pubdate;
     }
 
+    public String getDescription() {
+        return description;
+    }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
 

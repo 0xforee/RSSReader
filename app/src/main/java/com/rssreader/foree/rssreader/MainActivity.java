@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.baseapplication.foree.rssreader.BaseActivity;
 import com.baseapplication.foree.rssreader.MyApplication;
 import com.db.foree.rssreader.RssDao;
+import com.rssinfo.foree.rssreader.RssAddFeed;
 import com.xmlparse.foree.rssreader.ParseTask;
 
 import java.util.ArrayList;
@@ -34,7 +35,6 @@ import java.util.List;
 public class MainActivity extends BaseActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
     private static final String TAG = "MainActivity";
-    int i = 0;
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      * fragment管理navigation drawer的行为，交互和描述
@@ -119,7 +119,7 @@ public class MainActivity extends BaseActivity
 
         switch (id) {
             case R.id.action_settings:
-                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                final Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
                 MainActivity.this.startActivity(intent);
                 break;
             case R.id.action_about:
@@ -142,22 +142,26 @@ public class MainActivity extends BaseActivity
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
                 builder1.setTitle("请在下边输入一个合法的Rss链接");
                 builder1.setView(view);
+                final Intent intent1 = new Intent(this, RssAddFeed.class);
                 builder1.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         EditText editText = (EditText) view.findViewById(R.id.et_newfeed_url);
                         String url = editText.getText().toString();
+                        //使用bundle来传递数据
+                        Bundle args = new Bundle();
+                        args.putString("url", url);
 
-                        //开始解析url,并取得名称,填入feedinfos list
-                        i++;
-                        String FeedName = "测试" + i;
-                        NavigationDrawerFragment.FeedInfos.add(FeedName);
-                        NavigationDrawerFragment.adapter.notifyDataSetChanged();
+                        intent1.putExtra("com.rssreader.mainactivity", args);
+                        startActivity(intent1);
 
-                        //将链接和名称加入到数据库中
-                        RssDao rssDao = new RssDao(MainActivity.this, "rss.db", null, 1);
-                        rssDao.add(FeedName, url);
-                        Toast.makeText(MainActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "跳转成功", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder1.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "取消添加", Toast.LENGTH_SHORT).show();
                     }
                 });
                 builder1.show();

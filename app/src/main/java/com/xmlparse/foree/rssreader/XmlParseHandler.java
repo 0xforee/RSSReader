@@ -63,6 +63,7 @@ public class XmlParseHandler extends DefaultHandler {
             if (localName.equals("description")) mDescription = mBuff.toString();
             if (localName.equals("item")) {
                 Log.v(TAG, "添加item");
+                //要退出当前item时,设置为false
                 mInItem = false;
                 rssFeedInfo.addItem(new RssItemInfo(mTitle, mLink, mPubDate, mDescription));
             }
@@ -72,6 +73,7 @@ public class XmlParseHandler extends DefaultHandler {
             if (localName.equals("title")) rssFeedInfo.setTitle(mBuff.toString());
             if (localName.equals("link")) rssFeedInfo.setLink(mBuff.toString());
             if (localName.equals("pubDate")) rssFeedInfo.setPubdate(mBuff.toString());
+            if (localName.equals("description")) rssFeedInfo.setDescription(mBuff.toString());
         }
     }
 

@@ -17,7 +17,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
-        <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -28,10 +28,17 @@
             android:label="RSSRedar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.rssreader.foree.rssreader.MainActivity" />
+                android:value=".MainActivity" />
         </activity>
         <activity
             android:name=".SettingsActivity"
+            android:label="RSSRedar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name="com.rssinfo.foree.rssreader.RssAddFeed"
             android:label="RSSRedar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
