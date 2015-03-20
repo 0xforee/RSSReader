@@ -2,7 +2,6 @@ package com.rssreader.foree.rssreader;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -27,14 +26,6 @@ import com.baseapplication.foree.rssreader.MyApplication;
 import com.db.foree.rssreader.RssDao;
 import com.rssinfo.foree.rssreader.RssAddFeed;
 import com.xmlparse.foree.rssreader.ParseTask;
-
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class MainActivity extends BaseActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -61,8 +52,6 @@ public class MainActivity extends BaseActivity
         //应用启动初始化环境变量
         myApplication = new MyApplication(this);
         myApplication.initEnv();
-        //myApplication.cleanListCache();
-        //myApplication.initSettings(this);
 
         //drawerlayout
         mNavigationDrawerFragment = (NavigationDrawerFragment)
@@ -92,7 +81,9 @@ public class MainActivity extends BaseActivity
 
     //在section被选中的时候设置标题
     public void onSectionAttached(int number) {
+        if (!NavigationDrawerFragment.FeedInfos.isEmpty())
         mTitle = NavigationDrawerFragment.FeedInfos.get(number - 1);
+        mTitle = MyApplication.myApplicationName;
     }
 
 
@@ -265,7 +256,16 @@ public class MainActivity extends BaseActivity
             super.onStart();
             //获取当前所选中的fragment,并解析对应的url
             int id = getArguments().getInt(ARG_SECTION_NUMBER);
-            //获取左侧Drawer相对应位置的FeedName,来查找数据库中对应的url
+            /**
+             * 获取左侧Drawer相对应位置的FeedName,来查找数据库中对应的url
+             */
+            //用户数据为空时,提示用户添加
+            if (NavigationDrawerFragment.FeedInfos.isEmpty()) {
+                mTextView.setText("你还没有添加任何RSS源,请点击+添加");
+                mProgressBar.setVisibility(View.INVISIBLE);
+                mTextView.setVisibility(View.VISIBLE);
+                return;
+            }
             FeedName = NavigationDrawerFragment.FeedInfos.get(id - 1);
             RssDao rssDao = new RssDao(mainActivity, "rss.db", null, 1);
             //取得对应名称的url链接
