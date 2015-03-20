@@ -118,10 +118,13 @@ public class MainActivity extends BaseActivity
                 MainActivity.this.startActivity(intent);
                 break;
             case R.id.action_about:
-                String message = "增加以下特性：" + "\n"
-                        + "1.可以浏览新闻";
+                String message = "新特性：" + "\n"
+                        + "1.添加启动画面" + "\n"
+                        + "2.美化图标" + "\n"
+                        + "3.优化字体调节算法" + "\n"
+                        + "4.增加清除缓存功能";
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("v" + MyApplication.myVersionName);
+                builder.setTitle(MyApplication.myVersionName);
                 builder.setMessage(message);
                 builder.setNeutralButton("返回", null);
                 builder.show();
@@ -135,7 +138,7 @@ public class MainActivity extends BaseActivity
 
                 //创建dialog
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-                builder1.setTitle("请在下边输入一个合法的Rss链接");
+                builder1.setTitle("请输入一个合法的Rss链接");
                 builder1.setView(view);
                 final Intent intent1 = new Intent(this, RssAddFeed.class);
                 builder1.setPositiveButton("确定", new DialogInterface.OnClickListener() {

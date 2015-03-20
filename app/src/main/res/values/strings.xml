@@ -2,7 +2,7 @@
 <resources>
 
     <!-- application string -->
-    <string name="app_name">RSSReader</string>
+    <string name="app_name">Duker</string>
     <string name="about">About</string>
     <string name="rss_title">rsstitle</string>
     <string name="rss_time">rsstime</string>
@@ -39,7 +39,6 @@
     <string name="contactme">Contact me</string>
     <string name="email">beijing.2008.lm@163.com</string>
     <string name="version">Version</string>
-    <string name="versionnumber">RssReader 0.2</string>
     <string name="enjoy">Thank you for downloading. Enjoy!</string>
 
 </resources>

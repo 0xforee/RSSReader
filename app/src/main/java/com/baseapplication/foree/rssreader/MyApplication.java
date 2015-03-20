@@ -35,7 +35,7 @@ public class MyApplication extends Application {
     public static final String SdcardState = Environment.getExternalStorageState();
 
     //应用程序名称
-    public static final String myApplicationName = "RSSReader";
+    public static final String myApplicationName = "Duker";
     //应用程序包名
     public static final String myApplicationPackageName = "com.rssreader.foree.rssreader";
     //应用程序版本名称
@@ -61,12 +61,12 @@ public class MyApplication extends Application {
         //如果当前Sdcard已经挂载，应用程序目录与缓存目录是否建立完成
         if (SdcardState.equals(Environment.MEDIA_MOUNTED)) {
             //应用程序目录
-            File myDateDir = new File(SdcardPath + "/RSSReader/");
+            File myDateDir = new File(SdcardPath + "/" + myApplicationName + "/");
             if (!myDateDir.exists())
                 if (!myDateDir.mkdir()) {
                     Log.e(TAG, "创建应用程序目录失败");
                 }
-            mySdcardDataDir = SdcardPath + "/RSSReader";
+            mySdcardDataDir = SdcardPath + "/" + myApplicationName;
             //缓存目录
             File myCacheDir = new File(mySdcardDataDir + "/" + "cache/");
             if (!myCacheDir.exists())
@@ -101,7 +101,7 @@ public class MyApplication extends Application {
             //获取版本号
             myVersionCode = packageInfo.versionCode;
             //获取版本名称
-            myVersionName = myApplicationName + " " + packageInfo.versionName;
+            myVersionName = myApplicationName + " v" + packageInfo.versionName;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
