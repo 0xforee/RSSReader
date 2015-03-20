@@ -65,13 +65,13 @@ public class ShowDescription extends BaseActivity {
                         public void onClick(DialogInterface dialog, int whichButton) {
                             switch (whichButton) {
                                 case 0:
-                                    webView.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                                    webView.getSettings().setTextZoom(70);
                                     break;
                                 case 1:
-                                    webView.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
+                                    webView.getSettings().setTextZoom(100);
                                     break;
                                 case 2:
-                                    webView.getSettings().setTextSize(WebSettings.TextSize.LARGER);
+                                    webView.getSettings().setTextZoom(130);
 
                             }
                         }
