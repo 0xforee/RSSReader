@@ -27,6 +27,7 @@ import javax.xml.parsers.SAXParserFactory;
 public class CacheUtils {
     private static final String TAG = "CacheUtils";
 
+    //生成缓存文件
     public static void writeCacheList(RssFeedInfo rssFeedInfo) {
         XmlSerializer xmlSerializer = Xml.newSerializer();
         //获取所有的数据对象
@@ -34,7 +35,6 @@ public class CacheUtils {
 
         //获取缓存文件名称
         String cacheName = urlToName(rssFeedInfo.getLink());
-
 
         try {
             //建立一个cache文件
@@ -74,10 +74,11 @@ public class CacheUtils {
         }
     }
 
+    //读取缓存文件
     public static RssFeedInfo readCacheList(String urlName) {
         XmlParseHandler xmlParseHandler;
 
-//获取缓存文件
+        //标准化缓存文件名称
         String cacheName = urlToName(urlName);
         try {
             FileInputStream input = new FileInputStream(new File(MyApplication.mySdcardCacheDir + "/" + cacheName));
@@ -113,5 +114,33 @@ public class CacheUtils {
         name = name.replaceAll("&", "");
         name = name.replaceAll("\\?", "");
         return name;
+    }
+
+    //判断缓存文件是否存在
+    public static boolean isListCached(String urlName) {
+        String cacheName = CacheUtils.urlToName(urlName);
+        try {
+            File file = new File(MyApplication.mySdcardCacheDir + "/" + cacheName);
+            if (file.exists()) {
+                Log.v(TAG, "CacheFileExit");
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    //清除缓存文件
+    public void cleanAllCache() {
+        File file = new File(MyApplication.mySdcardCacheDir + "/");
+        if (file.isDirectory()) {
+            File files[] = file.listFiles();
+            for (File file1 : files) {
+                if (file1.delete())
+                    Log.v(TAG, file1.getName() + " cleaned");
+            }
+            Log.v(TAG, "All cache cleand");
+        }
     }
 }
