@@ -1,9 +1,5 @@
 package com.utils.foree.rssreader;
 
-import android.util.Log;
-
-import com.baseapplication.foree.rssreader.MyApplication;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -49,21 +45,5 @@ public class FileUtils {
         bufferedWriter.close();
         out.close();
     }
-
-    //判断缓存文件是否存在
-    public static boolean getCacheList(String urlName) {
-        String cacheName = CacheUtils.urlToName(urlName);
-
-        try {
-            File file = new File(MyApplication.mySdcardCacheDir + "/" + cacheName);
-            if (file.exists()) {
-                Log.v(TAG, "CacheFileExit");
-                return true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
-        return false;
-    }
 }
+
