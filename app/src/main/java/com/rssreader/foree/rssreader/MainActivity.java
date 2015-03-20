@@ -151,6 +151,7 @@ public class MainActivity extends BaseActivity
                         startActivity(intent1);
 
                         Toast.makeText(MainActivity.this, "跳转成功", Toast.LENGTH_SHORT).show();
+
                     }
                 });
                 builder1.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -275,6 +276,7 @@ public class MainActivity extends BaseActivity
                 //解析对应url获取数据
                 ParseTask parseTask = new ParseTask(mainActivity);
                 parseTask.execute(this);
+                mTextView.setVisibility(View.INVISIBLE);
                 Log.v(TAG, "onStart");
             }
         }
