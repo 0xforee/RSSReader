@@ -1,10 +1,8 @@
 package com.rssinfo.foree.rssreader;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -15,26 +13,17 @@ import android.widget.Toast;
 
 import com.baseapplication.foree.rssreader.BaseActivity;
 import com.db.foree.rssreader.RssDao;
-import com.rssreader.foree.rssreader.MainActivity;
 import com.rssreader.foree.rssreader.NavigationDrawerFragment;
 import com.rssreader.foree.rssreader.R;
 import com.rssreader.foree.rssreader.ShowDescription;
-import com.xmlparse.foree.rssreader.ParseTask;
+import com.utils.foree.rssreader.CacheUtils;
 import com.xmlparse.foree.rssreader.XmlParseHandler;
 
 import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.List;
-import java.util.Map;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
-
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
@@ -80,6 +69,9 @@ public class RssAddFeed extends BaseActivity {
                 if (rssDao.add(FeedName, url, FeedLink) != -1) {
                     NavigationDrawerFragment.FeedInfos.add(FeedName);
                     NavigationDrawerFragment.adapter.notifyDataSetChanged();
+                    //如果用户点击添加,那么保存缓存文件
+                    CacheUtils.writeCacheList(mrssFeedInfo);
+
                     Toast.makeText(RssAddFeed.this, "添加成功", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
