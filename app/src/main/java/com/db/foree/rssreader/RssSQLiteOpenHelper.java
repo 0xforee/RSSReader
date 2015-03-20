@@ -19,7 +19,7 @@ public class RssSQLiteOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //初始化数据库的表结构,表rss,字段id,name,url
-        db.execSQL("create table rss (id integer primary key autoincrement, name varchar(20), url varchar(20)) ");
+        db.execSQL("create table rss (id integer primary key autoincrement, name varchar(20), url varchar(20), link varchar(20)) ");
     }
 
     //在数据库版本号增加的时候调用

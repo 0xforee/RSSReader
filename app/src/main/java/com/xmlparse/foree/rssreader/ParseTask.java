@@ -68,13 +68,14 @@ public class ParseTask extends AsyncTask<MainActivity.PlaceholderFragment, Integ
         MyApplication.mNetworkState = NetworkUtils.getNetworkState(mcontext);
 
         //无网络模式下或者有缓存状态
-        if (FileUtils.getCacheList(placeholderFragment.getpostionUrlName()) || MyApplication.mNetworkState == NetworkUtils.NETWORK_NONE) {
+        if (FileUtils.getCacheList(placeholderFragment.getFeedLink()) || MyApplication.mNetworkState == NetworkUtils.NETWORK_NONE) {
+            Log.v(TAG, "有缓存或者无网络");
             return null;
         }
         Log.v(TAG, "doInBackground");
         try {
             //urlString[0]代表要接收的字符串
-            URL url = new URL(placeholderFragment.getpostionString());
+            URL url = new URL(placeholderFragment.getpostionUrl());
             InputSource is = new InputSource(url.openStream());
 
             //构建SAX解析工厂
@@ -108,12 +109,12 @@ public class ParseTask extends AsyncTask<MainActivity.PlaceholderFragment, Integ
         //数据对象为空时，置listview为空，然后返回
         if (mRssFeedInfo != null) {
             list = mRssFeedInfo.getAllItemForListView();
-            CacheUtils.writeCacheList(rssFeedInfo);
+            CacheUtils.writeCacheList(mRssFeedInfo);
         } else {
             Log.v(TAG, "In mRssinfo null");
 
-            if (FileUtils.getCacheList(placeholderFragment.getpostionUrlName())) {
-                mRssFeedInfo = CacheUtils.readCacheList(placeholderFragment.getpostionUrlName());
+            if (FileUtils.getCacheList(placeholderFragment.getFeedLink())) {
+                mRssFeedInfo = CacheUtils.readCacheList(placeholderFragment.getFeedLink());
                 list = mRssFeedInfo.getAllItemForListView();
 
             } else {

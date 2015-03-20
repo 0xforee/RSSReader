@@ -47,6 +47,7 @@ public class RssAddFeed extends BaseActivity {
     private RssFeedInfo mrssFeedInfo;
     ListView listView;
     TextView tv_title, tv_description;
+    private String FeedLink = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +77,7 @@ public class RssAddFeed extends BaseActivity {
 
                 //将链接和名称加入到数据库中,如果有重复,则提示重复并退出
                 RssDao rssDao = new RssDao(RssAddFeed.this, "rss.db", null, 1);
-                if (rssDao.add(FeedName, url) != -1) {
+                if (rssDao.add(FeedName, url, FeedLink) != -1) {
                     NavigationDrawerFragment.FeedInfos.add(FeedName);
                     NavigationDrawerFragment.adapter.notifyDataSetChanged();
                     Toast.makeText(RssAddFeed.this, "添加成功", Toast.LENGTH_SHORT).show();
@@ -134,6 +135,7 @@ public class RssAddFeed extends BaseActivity {
             //设置预览界面的标题和描述
             tv_title.setText(rssFeedInfo.getTitle());
             tv_description.setText(rssFeedInfo.getDescription());
+            FeedLink = rssFeedInfo.getLink();
             //设置列表显示
             listView.setAdapter(new SimpleAdapter(RssAddFeed.this,
                     mrssFeedInfo.getAllItemForListView(),

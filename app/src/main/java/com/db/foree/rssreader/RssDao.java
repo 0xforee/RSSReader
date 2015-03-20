@@ -27,7 +27,7 @@ public class RssDao {
     /**
      * 数据库增加操作
      */
-    public long add(String FeedName, String url) {
+    public long add(String FeedName, String url, String link) {
         SQLiteDatabase db = rssSQLiteOpenHelper.getWritableDatabase();
         //不能添加重复的内容
         Cursor cursor = db.query("rss", null, "name=?", new String[]{FeedName}, null, null, null);
@@ -35,6 +35,7 @@ public class RssDao {
             ContentValues values = new ContentValues();
             values.put("name", FeedName);
             values.put("url", url);
+            values.put("link", link);
             Long result = db.insert("rss", null, values);
             db.close();
             return result;
@@ -78,7 +79,7 @@ public class RssDao {
     }
 
     /**
-     * 通过名称来查找url
+     * 通过名称来查找url(数据解析的链接)
      */
     public String findUrl(String FeedName) {
         SQLiteDatabase db = rssSQLiteOpenHelper.getReadableDatabase();
@@ -94,17 +95,34 @@ public class RssDao {
     }
 
     /**
+     * 通过名称来查找link(从xml里解析出来的链接,用来作为缓存文件的名称)
+     */
+    public String findLink(String FeedName) {
+        SQLiteDatabase db = rssSQLiteOpenHelper.getReadableDatabase();
+        Cursor cursor = db.query("rss", null, "name=?", new String[]{FeedName}, null, null, null);
+        if (cursor.moveToNext()) {
+            String link = cursor.getString(cursor.getColumnIndex("link"));
+            cursor.close();
+            db.close();
+            Log.v(TAG, link);
+            return link;
+        }
+        return null;
+    }
+
+    /**
      * 数据库查找操作(返回所有数据库数据),填充到rssFeedInfo中
      */
     public List<RssFeedInfo> findAll() {
         List<RssFeedInfo> feedInfos = new ArrayList<>();
         SQLiteDatabase db = rssSQLiteOpenHelper.getReadableDatabase();
-        Cursor cursor = db.query("rss", new String[]{"id", "name", "url"}, null, null, null, null, null);
+        Cursor cursor = db.query("rss", new String[]{"id", "name", "url", "link"}, null, null, null, null, null);
         while (cursor.moveToNext()) {
             int id = cursor.getInt(cursor.getColumnIndex("id"));
             String name = cursor.getString(cursor.getColumnIndex("name"));
             String url = cursor.getString(cursor.getColumnIndex("url"));
-            RssFeedInfo rssFeedInfo = new RssFeedInfo(id, name, url);
+            String link = cursor.getString(cursor.getColumnIndex("link"));
+            RssFeedInfo rssFeedInfo = new RssFeedInfo(id, name, url, link);
             feedInfos.add(rssFeedInfo);
         }
         cursor.close();

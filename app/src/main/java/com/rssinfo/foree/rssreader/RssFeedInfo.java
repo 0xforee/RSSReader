@@ -15,8 +15,10 @@ public class RssFeedInfo {
     private int id = 0;
     //订阅号的名称
     private String title = null;
-    //订阅号的链接
+    //订阅号link字段中的值
     private String link = null;
+    //解析订阅号的rss链接
+    private String url = null;
     //订阅号的发布日期
     private String pubdate = "";
     //订阅号的描述
@@ -25,9 +27,10 @@ public class RssFeedInfo {
     public RssFeedInfo() {
     }
 
-    public RssFeedInfo(int id, String title, String link) {
+    public RssFeedInfo(int id, String title, String url, String link) {
         this.id = id;
         this.title = title;
+        this.url = url;
         this.link = link;
     }
 
@@ -95,6 +98,14 @@ public class RssFeedInfo {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }
 

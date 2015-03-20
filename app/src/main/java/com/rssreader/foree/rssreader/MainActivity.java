@@ -28,6 +28,10 @@ import com.db.foree.rssreader.RssDao;
 import com.rssinfo.foree.rssreader.RssAddFeed;
 import com.xmlparse.foree.rssreader.ParseTask;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -186,19 +190,24 @@ public class MainActivity extends BaseActivity
         private MainActivity mainActivity;
         ProgressBar mProgressBar;
         TextView mTextView;
-        private String URLString = null;
-        private String urlName = null;
+        private String URLString;
+        private String FeedLink;
+        private String FeedName;
 
         public ListView getItemlist() {
             return articel_listview;
         }
 
-        public String getpostionString() {
+        public String getpostionUrl() {
             return URLString;
         }
 
-        public String getpostionUrlName() {
-            return urlName;
+        public String getFeedLink() {
+            return FeedLink;
+        }
+
+        public String getpostionFeedName() {
+            return FeedName;
         }
 
         public ProgressBar getmProgressBar() {
@@ -257,11 +266,11 @@ public class MainActivity extends BaseActivity
             //获取当前所选中的fragment,并解析对应的url
             int id = getArguments().getInt(ARG_SECTION_NUMBER);
             //获取左侧Drawer相对应位置的FeedName,来查找数据库中对应的url
-            String FeedName = NavigationDrawerFragment.FeedInfos.get(id - 1);
+            FeedName = NavigationDrawerFragment.FeedInfos.get(id - 1);
             RssDao rssDao = new RssDao(mainActivity, "rss.db", null, 1);
             //取得对应名称的url链接
-            urlName = FeedName;
             URLString = rssDao.findUrl(FeedName);
+            FeedLink = rssDao.findLink(FeedName);
             if (URLString != null) {
                 //解析对应url获取数据
                 ParseTask parseTask = new ParseTask(mainActivity);

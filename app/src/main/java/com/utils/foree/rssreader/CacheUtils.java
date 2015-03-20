@@ -32,7 +32,7 @@ public class CacheUtils {
         //获取所有的数据对象
         List<RssItemInfo> list = rssFeedInfo.getItemlist();
 
-        //获取缓存文件
+        //获取缓存文件名称
         String cacheName = urlToName(rssFeedInfo.getLink());
 
 
@@ -111,6 +111,7 @@ public class CacheUtils {
         name = name.replaceAll("-", "");
         name = name.replaceAll(",", "");
         name = name.replaceAll("&", "");
+        name = name.replaceAll("\\?", "");
         return name;
     }
 }
