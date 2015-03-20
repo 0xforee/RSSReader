@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,7 +18,6 @@ import com.rssreader.foree.rssreader.MainActivity;
 import com.rssreader.foree.rssreader.R;
 import com.rssreader.foree.rssreader.ShowDescription;
 import com.utils.foree.rssreader.CacheUtils;
-import com.utils.foree.rssreader.FileUtils;
 import com.utils.foree.rssreader.NetworkUtils;
 
 import org.xml.sax.InputSource;
@@ -68,7 +66,7 @@ public class ParseTask extends AsyncTask<MainActivity.PlaceholderFragment, Integ
         MyApplication.mNetworkState = NetworkUtils.getNetworkState(mcontext);
 
         //无网络模式下或者有缓存状态
-        if (FileUtils.getCacheList(placeholderFragment.getFeedLink()) || MyApplication.mNetworkState == NetworkUtils.NETWORK_NONE) {
+        if (CacheUtils.isListCached(placeholderFragment.getFeedLink()) || MyApplication.mNetworkState == NetworkUtils.NETWORK_NONE) {
             Log.v(TAG, "有缓存或者无网络");
             return null;
         }
@@ -113,7 +111,7 @@ public class ParseTask extends AsyncTask<MainActivity.PlaceholderFragment, Integ
         } else {
             Log.v(TAG, "In mRssinfo null");
 
-            if (FileUtils.getCacheList(placeholderFragment.getFeedLink())) {
+            if (CacheUtils.isListCached(placeholderFragment.getFeedLink())) {
                 mRssFeedInfo = CacheUtils.readCacheList(placeholderFragment.getFeedLink());
                 list = mRssFeedInfo.getAllItemForListView();
 
