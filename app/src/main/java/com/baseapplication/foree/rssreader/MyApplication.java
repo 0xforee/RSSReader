@@ -101,7 +101,7 @@ public class MyApplication extends Application {
             //获取版本号
             myVersionCode = packageInfo.versionCode;
             //获取版本名称
-            myVersionName = packageInfo.versionName;
+            myVersionName = myApplicationName + " " + packageInfo.versionName;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }

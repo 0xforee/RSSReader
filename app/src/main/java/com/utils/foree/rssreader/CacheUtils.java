@@ -139,8 +139,6 @@ public class CacheUtils {
             for (File file1 : files) {
                 if (file1.delete())
                     Log.v(TAG, file1.getName() + " cleaned");
-                else
-                    return false;
             }
             return true;
         }

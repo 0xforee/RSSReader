@@ -40,7 +40,6 @@
         <ListPreference
             android:enabled="false"
             android:key="lp_versionnumber"
-            android:summary="@string/enjoy"
-            android:title="@string/versionnumber" />
+            android:summary="@string/enjoy" />
     </PreferenceCategory>
 </PreferenceScreen>
