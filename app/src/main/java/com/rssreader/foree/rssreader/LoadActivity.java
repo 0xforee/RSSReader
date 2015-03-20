@@ -19,7 +19,7 @@ public class LoadActivity extends Activity {
             public void run() {
                 try {
                     synchronized (this) {
-                        wait(700);
+                        wait(2000);
                         startActivity(new Intent(LoadActivity.this, MainActivity.class));
                     }
                 } catch (InterruptedException e) {
