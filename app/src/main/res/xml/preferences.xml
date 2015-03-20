@@ -4,41 +4,43 @@
     <PreferenceCategory android:title="@string/account">
         <ListPreference
             android:key="lp_editaccount"
-            android:title="@string/editaccount"
-            android:summary="@string/accountname" />
-        <ListPreference
-            android:key="lp_logout"
+            android:summary="@string/accountname"
+            android:title="@string/editaccount" />
+        <com.rssreader.foree.rssreader.myDialogPreference
+            android:key="md_logout"
             android:title="@string/logout" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/general">
         <CheckBoxPreference
             android:key="lp_darktheme"
-            android:title="@string/darktheme"
-            android:summary="@string/dark_description" />
+            android:summary="@string/dark_description"
+            android:title="@string/darktheme" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/offline">
         <CheckBoxPreference
             android:key="lp_downloadonwifi"
             android:title="@string/downloadonwifi" />
-        <CheckBoxPreference
-            android:key="lp_cleancache"
-            android:title="@string/cleancache"
-            android:summary="@string/clean_des" />
+        <com.rssreader.foree.rssreader.myDialogPreference
+            android:key="md_cleancache"
+            android:summary="@string/clean_des"
+            android:title="@string/cleancache" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/about">
         <ListPreference
+            android:enabled="false"
             android:key="lp_contactme"
-            android:title="@string/contactme"
-            android:summary="@string/email" />
+            android:summary="@string/email"
+            android:title="@string/contactme" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/version">
         <ListPreference
+            android:enabled="false"
             android:key="lp_versionnumber"
-            android:title="@string/versionnumber"
-            android:summary="@string/enjoy" />
+            android:summary="@string/enjoy"
+            android:title="@string/versionnumber" />
     </PreferenceCategory>
 </PreferenceScreen>

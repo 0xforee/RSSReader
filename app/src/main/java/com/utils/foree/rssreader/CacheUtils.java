@@ -132,15 +132,18 @@ public class CacheUtils {
     }
 
     //清除缓存文件
-    public void cleanAllCache() {
+    public static boolean cleanAllCache() {
         File file = new File(MyApplication.mySdcardCacheDir + "/");
         if (file.isDirectory()) {
             File files[] = file.listFiles();
             for (File file1 : files) {
                 if (file1.delete())
                     Log.v(TAG, file1.getName() + " cleaned");
+                else
+                    return false;
             }
-            Log.v(TAG, "All cache cleand");
+            return true;
         }
+        return false;
     }
 }
