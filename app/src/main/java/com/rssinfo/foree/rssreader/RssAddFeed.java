@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +38,8 @@ public class RssAddFeed extends BaseActivity {
     private RssFeedInfo mrssFeedInfo;
     ListView listView;
     TextView tv_title, tv_description;
+    ProgressBar progressBar;
+    LinearLayout linearLayout;
     private String FeedLink = null;
 
     @Override
@@ -47,6 +51,8 @@ public class RssAddFeed extends BaseActivity {
         //获取title和description
         tv_title = (TextView) findViewById(R.id.tv_title);
         tv_description = (TextView) findViewById(R.id.tv_description);
+        progressBar = (ProgressBar) findViewById(R.id.pb_addfeed);
+        linearLayout = (LinearLayout) findViewById(R.id.ll_addfeed);
         Button button = (Button) findViewById(R.id.bt_add);
 
         //获取传递的url数据
@@ -125,6 +131,8 @@ public class RssAddFeed extends BaseActivity {
         protected void onPostExecute(RssFeedInfo rssFeedInfo) {
             mrssFeedInfo = rssFeedInfo;
             //设置预览界面的标题和描述
+            progressBar.setVisibility(View.INVISIBLE);
+            linearLayout.setVisibility(View.VISIBLE);
             tv_title.setText(rssFeedInfo.getTitle());
             tv_description.setText(rssFeedInfo.getDescription());
             FeedLink = rssFeedInfo.getLink();

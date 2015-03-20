@@ -1,46 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <ProgressBar
+        android:id="@+id/pb_addfeed"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible" />
+
+    <LinearLayout
+        android:id="@+id/ll_addfeed"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/iv_icon"
-            android:layout_width="wrap_content"
-            android:background="@drawable/ic_action_share"
-            android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <Button
-            android:layout_below="@id/iv_icon"
-            android:id="@+id/bt_add"
-            android:text="@string/addfeed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/iv_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_action_share" />
 
-        <TextView
-            android:layout_toEndOf="@id/iv_icon"
-            android:layout_toRightOf="@id/iv_icon"
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/bt_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_icon"
+                android:text="@string/addfeed" />
 
-        <TextView
-            android:layout_alignStart="@id/tv_title"
-            android:layout_alignLeft="@id/tv_title"
-            android:layout_below="@id/tv_title"
-            android:layout_toEndOf="@id/bt_add"
-            android:layout_toRightOf="@id/bt_add"
-            android:id="@+id/tv_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/iv_icon"
+                android:layout_toRightOf="@id/iv_icon" />
 
-    <ListView
-        android:id="@+id/lv_addfeed"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</LinearLayout>
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/tv_title"
+                android:layout_alignStart="@id/tv_title"
+                android:layout_below="@id/tv_title"
+                android:layout_toEndOf="@id/bt_add"
+                android:layout_toRightOf="@id/bt_add" />
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/lv_addfeed"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</FrameLayout>
