@@ -112,6 +112,7 @@ public class ParseTask extends AsyncTask<MainActivity.PlaceholderFragment, Integ
             Log.v(TAG, "In mRssinfo null");
 
             if (CacheUtils.isListCached(placeholderFragment.getFeedLink())) {
+                mTextView.setVisibility(View.INVISIBLE);
                 mRssFeedInfo = CacheUtils.readCacheList(placeholderFragment.getFeedLink());
                 list = mRssFeedInfo.getAllItemForListView();
 

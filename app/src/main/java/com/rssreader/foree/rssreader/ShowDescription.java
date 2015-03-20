@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebSettings;
@@ -28,6 +29,10 @@ public class ShowDescription extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.webview);
 
+        //获取Actionbar,设置标题
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowTitleEnabled(true);
+
         //接收数据
         String content = null;
         Intent intent = getIntent();
@@ -43,6 +48,7 @@ public class ShowDescription extends BaseActivity {
 
             link = mBundle.getString("link");
             title = mBundle.getString("title");
+            actionBar.setTitle(title);
         }
         webView = (WebView) findViewById(R.id.webview);
         webView.setWebViewClient(new WebViewClient());
