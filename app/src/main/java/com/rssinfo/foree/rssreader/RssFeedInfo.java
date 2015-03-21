@@ -10,7 +10,7 @@ import java.util.Map;
  * //一个Rssfeed需要的元素有title,link,pubdata,image(后加）
  */
 public class RssFeedInfo {
-
+    private static final String TAG = "RssFeedInfo";
     //订阅号的id(唯一指定)
     private int id = 0;
     //订阅号的名称
@@ -62,7 +62,7 @@ public class RssFeedInfo {
             Map<String, Object> map = new HashMap<>();
             map.put("title", itemlist.get(i).getTitle());
             map.put("pubdate", itemlist.get(i).getpubDate());
-            // map.put("image",itemlist.get(i).getimage());
+            // map.put("image",itemlist.get(i).getImage());
             datalist.add(map);
         }
         return datalist;

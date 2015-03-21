@@ -1,5 +1,7 @@
 package com.rssinfo.foree.rssreader;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by foree on 3/3/15.
  * 每个Item自己的信息集合
@@ -9,6 +11,7 @@ public class RssItemInfo {
     private String link;
     private String pubdate;
     private String description;
+    private Bitmap image;
 
     //初始化变量
     public RssItemInfo() {
@@ -18,11 +21,12 @@ public class RssItemInfo {
         description = "";
     }
 
-    public RssItemInfo(String title, String link, String pubdate, String description) {
+    public RssItemInfo(String title, String link, String pubdate, String description, Bitmap image) {
         this.title = title;
         this.link = link;
         this.pubdate = pubdate;
         this.description = description;
+        this.image = image;
     }
 
     public String getTitle() {
@@ -55,5 +59,13 @@ public class RssItemInfo {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Bitmap getImage() {
+        return image;
+    }
+
+    public void setImage(Bitmap image) {
+        this.image = image;
     }
 }
