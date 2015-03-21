@@ -2,8 +2,10 @@ package com.rssreader.foree.rssreader;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -15,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -25,7 +28,10 @@ import com.baseapplication.foree.rssreader.BaseActivity;
 import com.baseapplication.foree.rssreader.MyApplication;
 import com.db.foree.rssreader.RssDao;
 import com.rssinfo.foree.rssreader.RssAddFeed;
+import com.rssinfo.foree.rssreader.RssItemInfo;
 import com.xmlparse.foree.rssreader.ParseTask;
+
+import java.util.List;
 
 public class MainActivity extends BaseActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -42,6 +48,7 @@ public class MainActivity extends BaseActivity
      */
     private CharSequence mTitle;
     MyApplication myApplication;
+    private Handler mHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +71,8 @@ public class MainActivity extends BaseActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
         Log.v(TAG, "onCreate");
+
+        mHandler = new Handler();
 
     }
 
@@ -277,11 +286,16 @@ public class MainActivity extends BaseActivity
             FeedLink = rssDao.findLink(FeedName);
             if (URLString != null) {
                 //解析对应url获取数据
-                ParseTask parseTask = new ParseTask(mainActivity);
-                parseTask.execute(this);
+                doRSS(URLString);
                 mTextView.setVisibility(View.INVISIBLE);
                 Log.v(TAG, "onStart");
             }
         }
+
+        private void doRSS(String rssUrl) {
+            RssParse worker = new RssParse(mainActivity, rssUrl);
+            worker.start();
+        }
     }
+
 }

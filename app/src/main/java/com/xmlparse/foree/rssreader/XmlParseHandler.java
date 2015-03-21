@@ -4,18 +4,15 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
+import com.baseapplication.foree.rssreader.BaseActivity;
 import com.rssinfo.foree.rssreader.RssFeedInfo;
 import com.rssinfo.foree.rssreader.RssItemInfo;
 
 import org.xml.sax.Attributes;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.regex.Matcher;
@@ -29,6 +26,7 @@ import java.util.regex.Pattern;
 public class XmlParseHandler extends DefaultHandler {
     private static final String TAG = "XmlParseHandler";
     private RssFeedInfo rssFeedInfo;
+    BaseActivity mActivity;
     Bitmap bitmap;
     //多次调用characters时的多次解析的数据总和
     StringBuilder mBuff;
@@ -39,13 +37,18 @@ public class XmlParseHandler extends DefaultHandler {
     String mDescription;
     Bitmap mImage;
 
+    public XmlParseHandler(BaseActivity activity) {
+        this.mActivity = activity;
+        rssFeedInfo = new RssFeedInfo();
+        mBuff = new StringBuilder();
+        mInItem = false;
+    }
+
     //当前是否位于Item内,可用于判断解析头数据
     boolean mInItem;
 
     public XmlParseHandler() {
-        rssFeedInfo = new RssFeedInfo();
-        mBuff = new StringBuilder();
-        mInItem = false;
+
     }
 
     public RssFeedInfo getFeedInfo() {
@@ -89,7 +92,10 @@ public class XmlParseHandler extends DefaultHandler {
                 Log.v(TAG, "添加item");
                 //要退出当前item时,设置为false
                 mInItem = false;
-                rssFeedInfo.addItem(new RssItemInfo(mTitle, mLink, mPubDate, mDescription, mImage));
+
+                //  rssFeedInfo.addItem();
+                //handler发送消息到主队列
+                mActivity.getmHandler().post(new BaseActivity.RssAddr(new RssItemInfo(mTitle, mLink, mPubDate, mDescription, mImage)));
             }
         }
         //解析RSS的头部的信息
