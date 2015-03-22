@@ -2,10 +2,8 @@ package com.rssreader.foree.rssreader;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -17,7 +15,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -28,10 +25,6 @@ import com.baseapplication.foree.rssreader.BaseActivity;
 import com.baseapplication.foree.rssreader.MyApplication;
 import com.db.foree.rssreader.RssDao;
 import com.rssinfo.foree.rssreader.RssAddFeed;
-import com.rssinfo.foree.rssreader.RssItemInfo;
-import com.xmlparse.foree.rssreader.ParseTask;
-
-import java.util.List;
 
 public class MainActivity extends BaseActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -48,7 +41,6 @@ public class MainActivity extends BaseActivity
      */
     private CharSequence mTitle;
     MyApplication myApplication;
-    private Handler mHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +63,6 @@ public class MainActivity extends BaseActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
         Log.v(TAG, "onCreate");
-
-        mHandler = new Handler();
 
     }
 
@@ -248,6 +238,7 @@ public class MainActivity extends BaseActivity
             articel_listview = (ListView) rootView.findViewById(R.id.articel_listview);
             mProgressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
             mTextView = (TextView) rootView.findViewById(R.id.nonetwork);
+            articel_listview.setAdapter(mainActivity.getmRssAdapter());
             Log.v(TAG, "onCreateView");
             return rootView;
         }
@@ -285,11 +276,44 @@ public class MainActivity extends BaseActivity
             URLString = rssDao.findUrl(FeedName);
             FeedLink = rssDao.findLink(FeedName);
             if (URLString != null) {
+                //设置进度条不可见
+                //设置进度条不可见
+                mProgressBar.setVisibility(View.GONE);
+                //设置listview可见
+                articel_listview.setVisibility(View.VISIBLE);
                 //解析对应url获取数据
                 doRSS(URLString);
                 mTextView.setVisibility(View.INVISIBLE);
                 Log.v(TAG, "onStart");
             }
+        }
+
+        @Override
+        public void onPause() {
+            super.onPause();
+            Log.v(TAG, "onPause");
+        }
+
+        @Override
+        public void onStop() {
+            super.onStop();
+            Log.v(TAG, "onStop");
+
+        }
+
+        @Override
+        public void onDestroy() {
+            super.onDestroy();
+            Log.v(TAG, "onDestroy");
+
+        }
+
+        @Override
+        public void onDetach() {
+            super.onDetach();
+            Log.v(TAG, "onDetach");
+            mainActivity.resetUI(articel_listview);
+
         }
 
         private void doRSS(String rssUrl) {
