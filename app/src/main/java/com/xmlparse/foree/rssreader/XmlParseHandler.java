@@ -27,6 +27,7 @@ public class XmlParseHandler extends DefaultHandler {
     private static final String TAG = "XmlParseHandler";
     private RssFeedInfo rssFeedInfo;
     BaseActivity mActivity;
+    private RssItemInfo mRssItemInfo;
     Bitmap bitmap;
     //多次调用characters时的多次解析的数据总和
     StringBuilder mBuff;
@@ -95,7 +96,8 @@ public class XmlParseHandler extends DefaultHandler {
 
                 //  rssFeedInfo.addItem();
                 //handler发送消息到主队列
-                mActivity.getmHandler().post(new BaseActivity.RssAddr(new RssItemInfo(mTitle, mLink, mPubDate, mDescription, mImage)));
+                mRssItemInfo = new RssItemInfo(mTitle, mLink, mPubDate, mDescription, mImage);
+                mActivity.getmHandler().post(new RssAddr());
             }
         }
         //解析RSS的头部的信息
@@ -130,5 +132,18 @@ public class XmlParseHandler extends DefaultHandler {
             e.printStackTrace();
         }
         return bitmap;
+    }
+
+    public class RssAddr implements Runnable {
+        private BaseActivity.RssAdaper mRssAdaper;
+
+        public RssAddr() {
+            mRssAdaper = mActivity.getmRssAdaper();
+        }
+
+        @Override
+        public void run() {
+            mRssAdaper.add(mRssItemInfo);
+        }
     }
 }

@@ -20,6 +20,7 @@ import com.xmlparse.foree.rssreader.XmlParseHandler;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.SAXParser;
@@ -31,9 +32,13 @@ import javax.xml.parsers.SAXParserFactory;
  */
 public class BaseActivity extends ActionBarActivity {
     private Handler mHandler;
+    private RssAdaper mRssAdaper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mHandler = new Handler();
+        List<RssItemInfo> rssItemInfos = new ArrayList<>();
+        mRssAdaper = new RssAdaper(this, rssItemInfos);
 
     }
 
@@ -52,18 +57,8 @@ public class BaseActivity extends ActionBarActivity {
         return mHandler;
     }
 
-    public static class RssAddr implements Runnable {
-        private RssAdaper mRssAdaper;
-        private RssItemInfo mRssItemInfo;
-
-        public RssAddr(RssItemInfo rssItemInfo) {
-            this.mRssItemInfo = rssItemInfo;
-        }
-
-        @Override
-        public void run() {
-            mRssAdaper.add(mRssItemInfo);
-        }
+    public RssAdaper getmRssAdaper() {
+        return mRssAdaper;
     }
 
     public static class RssAdaper extends ArrayAdapter<RssItemInfo> {
@@ -145,5 +140,10 @@ public class BaseActivity extends ActionBarActivity {
             }
         }
 
+    }
+
+    public void doRss(String urlName) {
+        RssParse rssParse = new RssParse(this, urlName);
+        rssParse.start();
     }
 }

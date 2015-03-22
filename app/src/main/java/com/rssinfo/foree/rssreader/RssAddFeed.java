@@ -53,17 +53,22 @@ public class RssAddFeed extends BaseActivity {
         tv_description = (TextView) findViewById(R.id.tv_description);
         progressBar = (ProgressBar) findViewById(R.id.pb_addfeed);
         linearLayout = (LinearLayout) findViewById(R.id.ll_addfeed);
+        progressBar.setVisibility(View.INVISIBLE);
+        linearLayout.setVisibility(View.VISIBLE);
         Button button = (Button) findViewById(R.id.bt_add);
 
         //获取传递的url数据
         Bundle bundle = getIntent().getBundleExtra("com.rssreader.mainactivity");
         final String url = bundle.getString("url");
 //开始解析url
-        UrlTask urlTask = new UrlTask();
-        urlTask.execute(url);
+        /*UrlTask urlTask = new UrlTask();
+        urlTask.execute(url);*/
 
+        listView.setAdapter(this.getmRssAdaper());
+
+        this.doRss(url);
         //点击添加到数据库
-        button.setOnClickListener(new View.OnClickListener() {
+        /*button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -84,83 +89,11 @@ public class RssAddFeed extends BaseActivity {
                     Toast.makeText(RssAddFeed.this, "此订阅号已添加过啦", Toast.LENGTH_SHORT).show();
                 }
             }
-        });
+        });*/
     }
 
-    /**
-     * 执行url解析操作
-     */
-    public class UrlTask extends AsyncTask<String, Integer, RssFeedInfo> {
-        @Override
-        protected RssFeedInfo doInBackground(String... params) {
-            String urlName = params[0];
-            try {
-                //进行url链接
-                URL url = new URL(urlName);
-                URLConnection urlConnection = url.openConnection();
-                urlConnection.setConnectTimeout(10000);
-                urlConnection.connect();
 
-                //获取inputStream
-                InputSource inputSource = new InputSource(urlConnection.getInputStream());
 
-                SAXParserFactory factory = SAXParserFactory.newInstance();
-                SAXParser saxParser = factory.newSAXParser();
-                XMLReader xmlReader = saxParser.getXMLReader();
 
-                //获取一个xml解析代理
-                XmlParseHandler xmlParseHandler = new XmlParseHandler();
-                //将xmlreader的解析器设置为自定义的解析器
-                xmlReader.setContentHandler(xmlParseHandler);
-                //开始xml解析
-                xmlReader.parse(inputSource);
-
-                return xmlParseHandler.getFeedInfo();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        /**
-         * 执行更新主要ui操作
-         *
-         * @param rssFeedInfo
-         */
-        @Override
-        protected void onPostExecute(RssFeedInfo rssFeedInfo) {
-            mrssFeedInfo = rssFeedInfo;
-            //设置预览界面的标题和描述
-            progressBar.setVisibility(View.INVISIBLE);
-            linearLayout.setVisibility(View.VISIBLE);
-            tv_title.setText(rssFeedInfo.getTitle());
-            tv_description.setText(rssFeedInfo.getDescription());
-            FeedLink = rssFeedInfo.getLink();
-            //设置列表显示
-            listView.setAdapter(new SimpleAdapter(RssAddFeed.this,
-                    mrssFeedInfo.getAllItemForListView(),
-                    R.layout.title_list_layout,
-                    new String[]{"title", "pubdate"},
-                    new int[]{R.id.title, R.id.time}
-            ));
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent mintent = new Intent(RssAddFeed.this, ShowDescription.class);
-
-                    //绑定数据
-                    Bundle bundle = new Bundle();
-                    bundle.putString("title", mrssFeedInfo.getItem(position).getTitle());
-                    bundle.putString("description", mrssFeedInfo.getItem(position).getDescription());
-                    bundle.putString("link", mrssFeedInfo.getItem(position).getLink());
-                    bundle.putString("pubdate", mrssFeedInfo.getItem(position).getpubDate());
-
-                    mintent.putExtra("com.rssinfo.foree.rssreader", bundle);
-                    RssAddFeed.this.startActivity(mintent);
-                }
-            });
-            super.onPostExecute(rssFeedInfo);
-        }
-    }
 
 }
