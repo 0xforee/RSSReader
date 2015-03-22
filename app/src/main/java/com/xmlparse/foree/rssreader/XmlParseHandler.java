@@ -67,7 +67,6 @@ public class XmlParseHandler extends DefaultHandler {
             mInItem = true;
             mTitle = mPubDate = mLink = mDescription = "";
         }
-
     }
 
     //遇到结束某一个标签的时候，触发此方法
@@ -97,7 +96,7 @@ public class XmlParseHandler extends DefaultHandler {
                 //  rssFeedInfo.addItem();
                 //handler发送消息到主队列
                 mRssItemInfo = new RssItemInfo(mTitle, mLink, mPubDate, mDescription, mImage);
-                mActivity.getmHandler().post(new RssAddr());
+                mActivity.getmHandler().post(new RssAdder());
             }
         }
         //解析RSS的头部的信息
@@ -115,13 +114,15 @@ public class XmlParseHandler extends DefaultHandler {
         mBuff.append(ch, start, length);
     }
 
+    /**
+     * @param url 图片的链接
+     * @return 返回一个bitmap对象, 用与设置listview的图片位
+     */
     public Bitmap getBitMap(final String url) {
         try {
             synchronized (this) {
                 URL imageurl = new URL(url);
                 URLConnection urlConnection = imageurl.openConnection();
-                //   HttpURLConnection httpURLConnection = (HttpURLConnection) imageurl.openConnection();
-                //  httpURLConnection.setDoInput(true);
                 urlConnection.connect();
                 InputStream in = urlConnection.getInputStream();
                 bitmap = BitmapFactory.decodeStream(in);
@@ -134,16 +135,21 @@ public class XmlParseHandler extends DefaultHandler {
         return bitmap;
     }
 
-    public class RssAddr implements Runnable {
-        private BaseActivity.RssAdaper mRssAdaper;
+    /**
+     * RssAdder用于将解析出来的RssItemInfo置于listview中,
+     * Runnable接口,用于post传递给主线程使用
+     */
+    public class RssAdder implements Runnable {
+        private BaseActivity.RssAdapter mRssAdapter;
 
-        public RssAddr() {
-            mRssAdaper = mActivity.getmRssAdaper();
+        //获取与类相关的Adapter
+        public RssAdder() {
+            mRssAdapter = mActivity.getmRssAdapter();
         }
 
         @Override
         public void run() {
-            mRssAdaper.add(mRssItemInfo);
+            mRssAdapter.add(mRssItemInfo);
         }
     }
 }
