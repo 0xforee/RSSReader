@@ -25,10 +25,11 @@ import com.foree.rssreader.base.BaseActivity;
 import com.foree.rssreader.base.MyApplication;
 import com.foree.rssreader.db.RssDao;
 import com.foree.rssreader.rssinfo.RssAddFeed;
+import com.foree.rssreader.xmlparse.XmlParseHandler;
 import com.rssreader.foree.rssreader.R;
 
 public class MainActivity extends BaseActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, XmlParseHandler.ParseHandlerCallbacks {
     private static final String TAG = "MainActivity";
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -160,7 +161,7 @@ public class MainActivity extends BaseActivity
                 builder1.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(MainActivity.this, "取消添加", Toast.LENGTH_SHORT).show();
+
                     }
                 });
                 builder1.show();
@@ -169,11 +170,17 @@ public class MainActivity extends BaseActivity
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void notifyUiUpdate() {
+
+    }
+
+
     /**
      * A placeholder fragment containing a simple view.
      * 一个位置存储fragment包含一个简单的视图
      */
-    public static class PlaceholderFragment extends Fragment {
+    public static class PlaceholderFragment extends Fragment implements XmlParseHandler.ParseHandlerCallbacks {
         private static final String TAG = "PlaceholderFragment";
         /**
          * The fragment argument representing the section number for this
@@ -277,14 +284,9 @@ public class MainActivity extends BaseActivity
             URLString = rssDao.findUrl(FeedName);
             FeedLink = rssDao.findLink(FeedName);
             if (URLString != null) {
-                //设置进度条不可见
-                //设置进度条不可见
-                mProgressBar.setVisibility(View.GONE);
-                //设置listview可见
-                articel_listview.setVisibility(View.VISIBLE);
+
                 //解析对应url获取数据
                 doRSS(URLString);
-                mTextView.setVisibility(View.INVISIBLE);
                 Log.v(TAG, "onStart");
             }
         }
@@ -320,6 +322,24 @@ public class MainActivity extends BaseActivity
         private void doRSS(String rssUrl) {
             RssParse worker = new RssParse(mainActivity, rssUrl);
             worker.start();
+        }
+
+        //第一个解析出来之后,更新ProgressBar,并显示listview
+        @Override
+        public void notifyUiUpdate() {
+            mainActivity.getmHandler().post(new updateUi());
+        }
+
+        public class updateUi implements Runnable {
+            @Override
+            public void run() {
+                //设置进度条不可见
+                mProgressBar.setVisibility(View.GONE);
+                //设置listview可见
+                articel_listview.setVisibility(View.VISIBLE);
+                mTextView.setVisibility(View.INVISIBLE);
+
+            }
         }
     }
 

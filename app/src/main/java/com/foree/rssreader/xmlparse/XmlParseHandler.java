@@ -26,6 +26,7 @@ import java.util.regex.Pattern;
 public class XmlParseHandler extends DefaultHandler {
     private static final String TAG = "XmlParseHandler";
     private RssFeedInfo rssFeedInfo;
+    private ParseHandlerCallbacks mCallbacks;
     BaseActivity mActivity;
     private RssItemInfo mRssItemInfo;
     Bitmap bitmap;
@@ -41,12 +42,15 @@ public class XmlParseHandler extends DefaultHandler {
     String mLink;
     String mDescription;
     Bitmap mImage;
+    boolean isNotify = false;
 
     public XmlParseHandler(BaseActivity activity) {
         this.mActivity = activity;
         rssFeedInfo = new RssFeedInfo();
         mBuff = new StringBuilder();
         mInItem = false;
+        mCallbacks = (ParseHandlerCallbacks) mActivity;
+
     }
 
     //当前是否位于Item内,可用于判断解析头数据
@@ -101,6 +105,10 @@ public class XmlParseHandler extends DefaultHandler {
                 //handler发送消息到主队列
                 mRssItemInfo = new RssItemInfo(mTitle, mLink, mPubDate, mDescription, mImage, feedTitle, feedLink, feedPubdate, feedDescription);
                 mActivity.getmHandler().post(new RssAdder());
+                if (!isNotify && mCallbacks != null) {
+                    mCallbacks.notifyUiUpdate();
+                    isNotify = true;
+                }
             }
         }
         //解析RSS的头部的信息
@@ -156,5 +164,10 @@ public class XmlParseHandler extends DefaultHandler {
         public void run() {
             mRssAdapter.add(mRssItemInfo);
         }
+    }
+
+    public static interface ParseHandlerCallbacks {
+        //提示更新ui,主要是progressBar
+        void notifyUiUpdate();
     }
 }

@@ -12,17 +12,14 @@ import android.widget.Toast;
 import com.foree.rssreader.base.BaseActivity;
 import com.foree.rssreader.db.RssDao;
 import com.foree.rssreader.ui.NavigationDrawerFragment;
+import com.foree.rssreader.xmlparse.XmlParseHandler;
 import com.rssreader.foree.rssreader.R;
-import com.foree.rssreader.utils.CacheUtils;
-
-import java.util.List;
-
 
 /**
  * Created by foree on 3/18/15.
  * 添加RssFeed时预览窗口
  */
-public class RssAddFeed extends BaseActivity {
+public class RssAddFeed extends BaseActivity implements XmlParseHandler.ParseHandlerCallbacks {
     private static final String TAG = "RssAddFeed";
     private RssFeedInfo mrssFeedInfo;
     ListView listView;
@@ -30,12 +27,14 @@ public class RssAddFeed extends BaseActivity {
     ProgressBar progressBar;
     LinearLayout linearLayout;
     private String FeedLink = null;
+    private String FeedName;
+    boolean isUpdate = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_feed);
-//获取listview
+        //获取listview
         listView = (ListView) findViewById(R.id.lv_addfeed);
         //获取title和description
         tv_title = (TextView) findViewById(R.id.tv_title);
@@ -44,8 +43,7 @@ public class RssAddFeed extends BaseActivity {
         progressBar = (ProgressBar) findViewById(R.id.pb_addfeed);
         linearLayout = (LinearLayout) findViewById(R.id.ll_addfeed);
         //准备显示ListView
-        progressBar.setVisibility(View.INVISIBLE);
-        linearLayout.setVisibility(View.VISIBLE);
+
         Button button = (Button) findViewById(R.id.bt_add);
 
         //获取传递的url数据
@@ -53,16 +51,15 @@ public class RssAddFeed extends BaseActivity {
         final String url = bundle.getString("url");
 
         listView.setAdapter(this.getmRssAdapter());
-//开始解析url
+        //开始解析url
         doRss(url);
-        //点击添加到数据库
 
+        //点击添加到数据库
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //取得名称,填入feedinfos list
-                String FeedName = getRssItemInfos().get(1).getFeedTitle();
+                //取得要作为缓存文件的链接存入数据库中
                 FeedLink = getRssItemInfos().get(1).getFeedLink();
                 //将链接和名称加入到数据库中,如果有重复,则提示重复并退出
                 RssDao rssDao = new RssDao(RssAddFeed.this, "rss.db", null, 1);
@@ -77,9 +74,25 @@ public class RssAddFeed extends BaseActivity {
                 } else {
                     Toast.makeText(RssAddFeed.this, "此订阅号已添加过啦", Toast.LENGTH_SHORT).show();
                 }
-            }
+                }
         });
     }
 
+    @Override
+    public void notifyUiUpdate() {
+        this.getmHandler().post(new updatUI());
+    }
 
+    public class updatUI implements Runnable {
+
+        @Override
+        public void run() {
+            progressBar.setVisibility(View.INVISIBLE);
+            linearLayout.setVisibility(View.VISIBLE);
+            //解析完毕,设置界面相应的信息
+            FeedName = getRssItemInfos().get(0).getFeedTitle();
+            tv_title.setText(FeedName);
+            tv_description.setText(getRssItemInfos().get(0).getFeedDescription());
+        }
+    }
 }

@@ -18,9 +18,9 @@ public class MainActivityTest extends AndroidTestCase {
 
     public void testDelete() throws Exception {
         RssDao rssDao = new RssDao(getContext(), "rss.db", null, 1);
-        rssDao.delete("测试1");
-        // rssDao.delete("新浪");
-        // rssDao.delete("凤凰读书");
+        rssDao.delete("新浪");
+        rssDao.delete("凤凰读书");
+        rssDao.delete("好奇心日报");
+        rssDao.delete("雅虎 20 年起伏，互联网成长的 20 年缩影");
     }
-
 }
