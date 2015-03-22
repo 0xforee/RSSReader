@@ -1,15 +1,11 @@
 package com.rssinfo.foree.rssreader;
 
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,17 +13,8 @@ import com.baseapplication.foree.rssreader.BaseActivity;
 import com.db.foree.rssreader.RssDao;
 import com.rssreader.foree.rssreader.NavigationDrawerFragment;
 import com.rssreader.foree.rssreader.R;
-import com.rssreader.foree.rssreader.ShowDescription;
 import com.utils.foree.rssreader.CacheUtils;
-import com.xmlparse.foree.rssreader.XmlParseHandler;
 
-import org.xml.sax.InputSource;
-import org.xml.sax.XMLReader;
-
-import java.net.URL;
-import java.net.URLConnection;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 
 /**
  * Created by foree on 3/18/15.
@@ -51,8 +38,10 @@ public class RssAddFeed extends BaseActivity {
         //获取title和description
         tv_title = (TextView) findViewById(R.id.tv_title);
         tv_description = (TextView) findViewById(R.id.tv_description);
+        //获取progressBar和linearLayout布局
         progressBar = (ProgressBar) findViewById(R.id.pb_addfeed);
         linearLayout = (LinearLayout) findViewById(R.id.ll_addfeed);
+        //准备显示ListView
         progressBar.setVisibility(View.INVISIBLE);
         linearLayout.setVisibility(View.VISIBLE);
         Button button = (Button) findViewById(R.id.bt_add);
@@ -60,15 +49,12 @@ public class RssAddFeed extends BaseActivity {
         //获取传递的url数据
         Bundle bundle = getIntent().getBundleExtra("com.rssreader.mainactivity");
         final String url = bundle.getString("url");
+
+        listView.setAdapter(this.getmRssAdapter());
 //开始解析url
-        /*UrlTask urlTask = new UrlTask();
-        urlTask.execute(url);*/
-
-        listView.setAdapter(this.getmRssAdaper());
-
-        this.doRss(url);
+        doRss(url);
         //点击添加到数据库
-        /*button.setOnClickListener(new View.OnClickListener() {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -89,7 +75,7 @@ public class RssAddFeed extends BaseActivity {
                     Toast.makeText(RssAddFeed.this, "此订阅号已添加过啦", Toast.LENGTH_SHORT).show();
                 }
             }
-        });*/
+        });
     }
 
 
