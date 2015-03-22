@@ -35,6 +35,12 @@ public class BaseActivity extends ActionBarActivity {
     private Handler mHandler;
     private RssAdapter mRssAdapter;
 
+    public List<RssItemInfo> getRssItemInfos() {
+        return rssItemInfos;
+    }
+
+    List<RssItemInfo> rssItemInfos;
+
     public Handler getmHandler() {
         return mHandler;
     }
@@ -50,7 +56,7 @@ public class BaseActivity extends ActionBarActivity {
         //新建一个Handler用于传递数据
         mHandler = new Handler();
         //新构建rssAdapter,用于解析处理listview
-        List<RssItemInfo> rssItemInfos = new ArrayList<>();
+        rssItemInfos = new ArrayList<>();
         mRssAdapter = new RssAdapter(this, rssItemInfos);
 
     }
@@ -99,8 +105,8 @@ public class BaseActivity extends ActionBarActivity {
             ImageView iv_title_image = (ImageView) view.findViewById(R.id.title_image);
 
             tv_title.setText(rssItemInfo.getTitle());
-            //rssFeedInfo中的channel信息
-            tv_rssfeed.setText(rssItemInfo.getTitle());
+            //rssItem中所对应的中的channel信息
+            tv_rssfeed.setText(rssItemInfo.getFeedTitle());
             tv_tiem.setText(rssItemInfo.getpubDate());
             iv_title_image.setImageBitmap(rssItemInfo.getImage());
 

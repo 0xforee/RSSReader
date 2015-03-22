@@ -32,6 +32,10 @@ public class XmlParseHandler extends DefaultHandler {
     //多次调用characters时的多次解析的数据总和
     StringBuilder mBuff;
 
+    private String feedTitle;
+    private String feedDescription;
+    private String feedLink;
+    private String feedPubdate;
     String mTitle;
     String mPubDate;
     String mLink;
@@ -95,16 +99,17 @@ public class XmlParseHandler extends DefaultHandler {
 
                 //  rssFeedInfo.addItem();
                 //handler发送消息到主队列
-                mRssItemInfo = new RssItemInfo(mTitle, mLink, mPubDate, mDescription, mImage);
+                mRssItemInfo = new RssItemInfo(mTitle, mLink, mPubDate, mDescription, mImage, feedTitle, feedLink, feedPubdate, feedDescription);
                 mActivity.getmHandler().post(new RssAdder());
             }
         }
         //解析RSS的头部的信息
         else {
-            if (localName.equals("title")) rssFeedInfo.setTitle(mBuff.toString());
-            if (localName.equals("link")) rssFeedInfo.setLink(mBuff.toString());
-            if (localName.equals("pubDate")) rssFeedInfo.setPubdate(mBuff.toString());
-            if (localName.equals("description")) rssFeedInfo.setDescription(mBuff.toString());
+
+            if (localName.equals("title")) feedTitle = mBuff.toString();
+            if (localName.equals("link")) feedLink = mBuff.toString();
+            if (localName.equals("pubDate")) feedPubdate = mBuff.toString();
+            if (localName.equals("description")) feedDescription = mBuff.toString();
         }
     }
 

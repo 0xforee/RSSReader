@@ -7,6 +7,10 @@ import android.graphics.Bitmap;
  * 每个Item自己的信息集合
  */
 public class RssItemInfo {
+    private String feedTitle;
+    private String feedDescription;
+    private String feedLink;
+    private String feedPubdate;
     private String title;
     private String link;
     private String pubdate;
@@ -21,12 +25,16 @@ public class RssItemInfo {
         description = "";
     }
 
-    public RssItemInfo(String title, String link, String pubdate, String description, Bitmap image) {
+    public RssItemInfo(String title, String link, String pubdate, String description, Bitmap image, String feedTitle, String feedLink, String feedPubdate, String feedDescription) {
         this.title = title;
         this.link = link;
         this.pubdate = pubdate;
         this.description = description;
         this.image = image;
+        this.feedTitle = feedTitle;
+        this.feedLink = feedLink;
+        this.feedPubdate = feedPubdate;
+        this.feedDescription = feedDescription;
     }
 
     public String getTitle() {
@@ -67,5 +75,37 @@ public class RssItemInfo {
 
     public void setImage(Bitmap image) {
         this.image = image;
+    }
+
+    public String getFeedTitle() {
+        return feedTitle;
+    }
+
+    public void setFeedTitle(String feedTitle) {
+        this.feedTitle = feedTitle;
+    }
+
+    public String getFeedDescription() {
+        return feedDescription;
+    }
+
+    public void setFeedDescription(String feedDescription) {
+        this.feedDescription = feedDescription;
+    }
+
+    public String getFeedLink() {
+        return feedLink;
+    }
+
+    public void setFeedLink(String feedLink) {
+        this.feedLink = feedLink;
+    }
+
+    public String getFeedPubdate() {
+        return feedPubdate;
+    }
+
+    public void setFeedPubdate(String feedPubdate) {
+        this.feedPubdate = feedPubdate;
     }
 }

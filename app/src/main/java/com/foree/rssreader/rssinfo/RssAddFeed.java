@@ -15,6 +15,8 @@ import com.foree.rssreader.ui.NavigationDrawerFragment;
 import com.rssreader.foree.rssreader.R;
 import com.foree.rssreader.utils.CacheUtils;
 
+import java.util.List;
+
 
 /**
  * Created by foree on 3/18/15.
@@ -54,20 +56,21 @@ public class RssAddFeed extends BaseActivity {
 //开始解析url
         doRss(url);
         //点击添加到数据库
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 //取得名称,填入feedinfos list
-                String FeedName = tv_title.getText().toString();
-
+                String FeedName = getRssItemInfos().get(1).getFeedTitle();
+                FeedLink = getRssItemInfos().get(1).getFeedLink();
                 //将链接和名称加入到数据库中,如果有重复,则提示重复并退出
                 RssDao rssDao = new RssDao(RssAddFeed.this, "rss.db", null, 1);
                 if (rssDao.add(FeedName, url, FeedLink) != -1) {
                     NavigationDrawerFragment.FeedInfos.add(FeedName);
                     NavigationDrawerFragment.adapter.notifyDataSetChanged();
                     //如果用户点击添加,那么保存缓存文件
-                    CacheUtils.writeCacheList(mrssFeedInfo);
+                    // CacheUtils.writeCacheList(mrssFeedInfo);
 
                     Toast.makeText(RssAddFeed.this, "添加成功", Toast.LENGTH_SHORT).show();
                     finish();
