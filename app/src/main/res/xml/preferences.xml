@@ -6,7 +6,7 @@
             android:key="lp_editaccount"
             android:summary="@string/accountname"
             android:title="@string/editaccount" />
-        <com.rssreader.foree.rssreader.myDialogPreference
+        <com.foree.rssreader.ui.myDialogPreference
             android:key="md_logout"
             android:title="@string/logout" />
     </PreferenceCategory>
@@ -22,7 +22,7 @@
         <CheckBoxPreference
             android:key="lp_downloadonwifi"
             android:title="@string/downloadonwifi" />
-        <com.rssreader.foree.rssreader.myDialogPreference
+        <com.foree.rssreader.ui.myDialogPreference
             android:key="md_cleancache"
             android:summary="@string/clean_des"
             android:title="@string/cleancache" />

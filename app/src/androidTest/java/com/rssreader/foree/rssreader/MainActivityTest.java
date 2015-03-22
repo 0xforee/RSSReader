@@ -2,7 +2,7 @@ package com.rssreader.foree.rssreader;
 
 import android.test.AndroidTestCase;
 
-import com.db.foree.rssreader.RssDao;
+import com.foree.rssreader.db.RssDao;
 
 public class MainActivityTest extends AndroidTestCase {
     public void testAdd() throws Exception {

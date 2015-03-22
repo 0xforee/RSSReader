@@ -1,4 +1,4 @@
-package com.db.foree.rssreader;
+package com.foree.rssreader.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

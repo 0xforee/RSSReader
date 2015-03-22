@@ -1,4 +1,4 @@
-package com.baseapplication.foree.rssreader;
+package com.foree.rssreader.base;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -14,9 +14,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.rssinfo.foree.rssreader.RssItemInfo;
+import com.foree.rssreader.rssinfo.RssItemInfo;
 import com.rssreader.foree.rssreader.R;
-import com.xmlparse.foree.rssreader.XmlParseHandler;
+import com.foree.rssreader.xmlparse.XmlParseHandler;
 
 import java.io.InputStream;
 import java.net.URL;

@@ -1,4 +1,4 @@
-package com.rssinfo.foree.rssreader;
+package com.foree.rssreader.rssinfo;
 
 import android.graphics.Bitmap;
 

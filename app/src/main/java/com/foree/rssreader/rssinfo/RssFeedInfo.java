@@ -1,4 +1,4 @@
-package com.rssinfo.foree.rssreader;
+package com.foree.rssreader.rssinfo;
 
 import java.util.ArrayList;
 import java.util.HashMap;

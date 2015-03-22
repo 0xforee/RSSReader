@@ -1,8 +1,10 @@
-package com.rssreader.foree.rssreader;
+package com.foree.rssreader.ui;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.rssreader.foree.rssreader.R;
 
 /**
  * Created by foree on 3/5/15.

@@ -1,4 +1,4 @@
-package com.rssreader.foree.rssreader;
+package com.foree.rssreader.ui;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -8,11 +8,11 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.baseapplication.foree.rssreader.BaseActivity;
+import com.foree.rssreader.base.BaseActivity;
+import com.rssreader.foree.rssreader.R;
 
 /**
  * Created by foree on 3/5/15.
@@ -79,6 +79,7 @@ public class ShowDescription extends BaseActivity {
         }
         return null;
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

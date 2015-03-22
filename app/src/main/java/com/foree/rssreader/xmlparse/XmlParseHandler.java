@@ -1,12 +1,12 @@
-package com.xmlparse.foree.rssreader;
+package com.foree.rssreader.xmlparse;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
-import com.baseapplication.foree.rssreader.BaseActivity;
-import com.rssinfo.foree.rssreader.RssFeedInfo;
-import com.rssinfo.foree.rssreader.RssItemInfo;
+import com.foree.rssreader.base.BaseActivity;
+import com.foree.rssreader.rssinfo.RssFeedInfo;
+import com.foree.rssreader.rssinfo.RssItemInfo;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;

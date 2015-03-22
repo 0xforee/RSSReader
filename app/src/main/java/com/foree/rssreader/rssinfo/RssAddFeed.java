@@ -1,4 +1,4 @@
-package com.rssinfo.foree.rssreader;
+package com.foree.rssreader.rssinfo;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,11 +9,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baseapplication.foree.rssreader.BaseActivity;
-import com.db.foree.rssreader.RssDao;
-import com.rssreader.foree.rssreader.NavigationDrawerFragment;
+import com.foree.rssreader.base.BaseActivity;
+import com.foree.rssreader.db.RssDao;
+import com.foree.rssreader.ui.NavigationDrawerFragment;
 import com.rssreader.foree.rssreader.R;
-import com.utils.foree.rssreader.CacheUtils;
+import com.foree.rssreader.utils.CacheUtils;
 
 
 /**
@@ -77,9 +77,6 @@ public class RssAddFeed extends BaseActivity {
             }
         });
     }
-
-
-
 
 
 }

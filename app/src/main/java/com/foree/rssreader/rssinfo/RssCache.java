@@ -1,10 +1,7 @@
-package com.rssinfo.foree.rssreader;
+package com.foree.rssreader.rssinfo;
 
-import android.app.Application;
-import android.os.AsyncTask;
-
-import com.baseapplication.foree.rssreader.MyApplication;
-import com.utils.foree.rssreader.FileUtils;
+import com.foree.rssreader.base.MyApplication;
+import com.foree.rssreader.utils.FileUtils;
 
 import java.io.File;
 

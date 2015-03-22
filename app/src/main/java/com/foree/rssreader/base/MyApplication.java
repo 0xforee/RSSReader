@@ -1,4 +1,4 @@
-package com.baseapplication.foree.rssreader;
+package com.foree.rssreader.base;
 
 import android.app.Application;
 import android.content.Context;
@@ -7,11 +7,11 @@ import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.util.Log;
 
-import com.db.foree.rssreader.RssDao;
-import com.rssinfo.foree.rssreader.RssFeedInfo;
-import com.rssreader.foree.rssreader.MainActivity;
-import com.rssreader.foree.rssreader.NavigationDrawerFragment;
-import com.utils.foree.rssreader.NetworkUtils;
+import com.foree.rssreader.db.RssDao;
+import com.foree.rssreader.rssinfo.RssFeedInfo;
+import com.foree.rssreader.ui.MainActivity;
+import com.foree.rssreader.ui.NavigationDrawerFragment;
+import com.foree.rssreader.utils.NetworkUtils;
 
 import java.io.File;
 import java.util.List;

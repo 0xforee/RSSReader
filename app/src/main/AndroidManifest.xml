@@ -13,38 +13,38 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/DayTheme">
-        <activity android:name=".LoadActivity">
-        <intent-filter>
+        <activity android:name="com.foree.rssreader.ui.LoadActivity">
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.foree.rssreader.ui.MainActivity"
             android:label="@string/app_name">
 
         </activity>
         <activity
-            android:name=".ShowDescription"
+            android:name="com.foree.rssreader.ui.ShowDescription"
             android:label="RSSRedar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.foree.rssreader.ui.MainActivity" />
         </activity>
         <activity
-            android:name=".SettingsActivity"
+            android:name="com.foree.rssreader.ui.SettingsActivity"
             android:label="RSSRedar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.foree.rssreader.ui.MainActivity" />
         </activity>
         <activity
-            android:name="com.rssinfo.foree.rssreader.RssAddFeed"
+            android:name="com.foree.rssreader.rssinfo.RssAddFeed"
             android:label="RSSRedar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.foree.rssreader.ui.MainActivity" />
         </activity>
 
     </application>

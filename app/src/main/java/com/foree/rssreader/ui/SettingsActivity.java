@@ -1,12 +1,13 @@
-package com.rssreader.foree.rssreader;
+package com.foree.rssreader.ui;
 
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.PreferenceFragment;
 import android.support.v7.app.ActionBar;
 
-import com.baseapplication.foree.rssreader.BaseActivity;
-import com.baseapplication.foree.rssreader.MyApplication;
+import com.foree.rssreader.base.BaseActivity;
+import com.foree.rssreader.base.MyApplication;
+import com.rssreader.foree.rssreader.R;
 
 /**
  * Created by foree on 3/11/15.

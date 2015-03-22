@@ -1,4 +1,4 @@
-package com.xmlparse.foree.rssreader;
+package com.foree.rssreader.xmlparse;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,13 +12,13 @@ import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
-import com.baseapplication.foree.rssreader.MyApplication;
-import com.rssinfo.foree.rssreader.RssFeedInfo;
-import com.rssreader.foree.rssreader.MainActivity;
+import com.foree.rssreader.base.MyApplication;
+import com.foree.rssreader.rssinfo.RssFeedInfo;
+import com.foree.rssreader.ui.MainActivity;
 import com.rssreader.foree.rssreader.R;
-import com.rssreader.foree.rssreader.ShowDescription;
-import com.utils.foree.rssreader.CacheUtils;
-import com.utils.foree.rssreader.NetworkUtils;
+import com.foree.rssreader.ui.ShowDescription;
+import com.foree.rssreader.utils.CacheUtils;
+import com.foree.rssreader.utils.NetworkUtils;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;

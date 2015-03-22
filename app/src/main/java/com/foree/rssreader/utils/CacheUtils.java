@@ -1,12 +1,12 @@
-package com.utils.foree.rssreader;
+package com.foree.rssreader.utils;
 
 import android.util.Log;
 import android.util.Xml;
 
-import com.baseapplication.foree.rssreader.MyApplication;
-import com.rssinfo.foree.rssreader.RssFeedInfo;
-import com.rssinfo.foree.rssreader.RssItemInfo;
-import com.xmlparse.foree.rssreader.XmlParseHandler;
+import com.foree.rssreader.base.MyApplication;
+import com.foree.rssreader.rssinfo.RssFeedInfo;
+import com.foree.rssreader.rssinfo.RssItemInfo;
+import com.foree.rssreader.xmlparse.XmlParseHandler;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;

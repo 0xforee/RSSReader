@@ -1,4 +1,4 @@
-package com.rssreader.foree.rssreader;
+package com.foree.rssreader.ui;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -21,10 +21,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baseapplication.foree.rssreader.BaseActivity;
-import com.baseapplication.foree.rssreader.MyApplication;
-import com.db.foree.rssreader.RssDao;
-import com.rssinfo.foree.rssreader.RssAddFeed;
+import com.foree.rssreader.base.BaseActivity;
+import com.foree.rssreader.base.MyApplication;
+import com.foree.rssreader.db.RssDao;
+import com.foree.rssreader.rssinfo.RssAddFeed;
+import com.rssreader.foree.rssreader.R;
 
 public class MainActivity extends BaseActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -81,7 +82,7 @@ public class MainActivity extends BaseActivity
     //在section被选中的时候设置标题
     public void onSectionAttached(int number) {
         if (!NavigationDrawerFragment.FeedInfos.isEmpty())
-        mTitle = NavigationDrawerFragment.FeedInfos.get(number - 1);
+            mTitle = NavigationDrawerFragment.FeedInfos.get(number - 1);
         mTitle = MyApplication.myApplicationName;
     }
 

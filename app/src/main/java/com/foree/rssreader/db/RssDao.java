@@ -1,4 +1,4 @@
-package com.db.foree.rssreader;
+package com.foree.rssreader.db;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,9 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.rssinfo.foree.rssreader.RssFeedInfo;
+import com.foree.rssreader.rssinfo.RssFeedInfo;
 
-import java.sql.DatabaseMetaData;
 import java.util.ArrayList;
 import java.util.List;
 

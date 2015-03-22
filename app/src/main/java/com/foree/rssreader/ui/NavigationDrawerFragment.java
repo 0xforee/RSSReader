@@ -1,4 +1,4 @@
-package com.rssreader.foree.rssreader;
+package com.foree.rssreader.ui;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -21,6 +21,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.rssreader.foree.rssreader.R;
 
 import java.util.ArrayList;
 import java.util.List;

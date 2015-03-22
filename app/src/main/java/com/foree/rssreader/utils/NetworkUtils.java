@@ -1,4 +1,4 @@
-package com.utils.foree.rssreader;
+package com.foree.rssreader.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

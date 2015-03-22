@@ -1,4 +1,4 @@
-package com.rssreader.foree.rssreader;
+package com.foree.rssreader.ui;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.utils.foree.rssreader.CacheUtils;
+import com.foree.rssreader.utils.CacheUtils;
 
 /**
  * Created by foree on 3/20/15.
