@@ -1,7 +1,9 @@
 package com.foree.rssreader.rssinfo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 import com.foree.rssreader.base.BaseActivity;
 import com.foree.rssreader.db.RssDao;
 import com.foree.rssreader.ui.NavigationDrawerFragment;
+import com.foree.rssreader.ui.ShowDescription;
 import com.foree.rssreader.xmlparse.XmlParseHandler;
 import com.rssreader.foree.rssreader.R;
 
@@ -53,7 +56,23 @@ public class RssAddFeed extends BaseActivity implements XmlParseHandler.ParseHan
         listView.setAdapter(this.getmRssAdapter());
         //开始解析url
         doRss(url);
+        //绑定listview点击事件
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent mintent = new Intent(RssAddFeed.this, ShowDescription.class);
 
+                //绑定数据
+                Bundle bundle = new Bundle();
+                bundle.putString("title", getRssItemInfos().get(position).getTitle());
+                bundle.putString("description", getRssItemInfos().get(position).getDescription());
+                bundle.putString("link", getRssItemInfos().get(position).getLink());
+                bundle.putString("pubdate", getRssItemInfos().get(position).getpubDate());
+
+                mintent.putExtra("com.rssinfo.foree.rssreader", bundle);
+                RssAddFeed.this.startActivity(mintent);
+            }
+        });
         //点击添加到数据库
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +102,7 @@ public class RssAddFeed extends BaseActivity implements XmlParseHandler.ParseHan
         this.getmHandler().post(new updatUI());
     }
 
-    public class updatUI implements Runnable {
+    private class updatUI implements Runnable {
 
         @Override
         public void run() {
@@ -93,6 +112,7 @@ public class RssAddFeed extends BaseActivity implements XmlParseHandler.ParseHan
             FeedName = getRssItemInfos().get(0).getFeedTitle();
             tv_title.setText(FeedName);
             tv_description.setText(getRssItemInfos().get(0).getFeedDescription());
+
         }
     }
 }

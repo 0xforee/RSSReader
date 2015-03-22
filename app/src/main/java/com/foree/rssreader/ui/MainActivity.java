@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -284,9 +285,25 @@ public class MainActivity extends BaseActivity
             URLString = rssDao.findUrl(FeedName);
             FeedLink = rssDao.findLink(FeedName);
             if (URLString != null) {
-
                 //解析对应url获取数据
                 doRSS(URLString);
+                //绑定listview点击事件
+                articel_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent mintent = new Intent(mainActivity, ShowDescription.class);
+
+                        //绑定数据
+                        Bundle bundle = new Bundle();
+                        bundle.putString("title", mainActivity.getRssItemInfos().get(position).getTitle());
+                        bundle.putString("description", mainActivity.getRssItemInfos().get(position).getDescription());
+                        bundle.putString("link", mainActivity.getRssItemInfos().get(position).getLink());
+                        bundle.putString("pubdate", mainActivity.getRssItemInfos().get(position).getpubDate());
+
+                        mintent.putExtra("com.rssinfo.foree.rssreader", bundle);
+                        mainActivity.startActivity(mintent);
+                    }
+                });
                 Log.v(TAG, "onStart");
             }
         }
