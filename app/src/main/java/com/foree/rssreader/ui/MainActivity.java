@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -26,8 +27,15 @@ import com.foree.rssreader.base.BaseActivity;
 import com.foree.rssreader.base.MyApplication;
 import com.foree.rssreader.db.RssDao;
 import com.foree.rssreader.rssinfo.RssAddFeed;
+import com.foree.rssreader.rssinfo.RssItemInfo;
 import com.foree.rssreader.xmlparse.XmlParseHandler;
 import com.rssreader.foree.rssreader.R;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 public class MainActivity extends BaseActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, XmlParseHandler.ParseHandlerCallbacks {
@@ -309,6 +317,52 @@ public class MainActivity extends BaseActivity
         }
 
         @Override
+        public void onSaveInstanceState(Bundle outState) {
+            super.onSaveInstanceState(outState);
+
+            //获取RssItemInfo的数量
+            int count = mainActivity.getmRssAdapter().getCount();
+
+            //使用charsequence 列表保存数据
+            ArrayList<CharSequence> strings = new ArrayList<>();
+            for (int i = 0; i < count; i++) {
+                RssItemInfo rssItemInfo = mainActivity.getRssItemInfos().get(i);
+                strings.add(rssItemInfo.getFeedTitle());
+                strings.add(rssItemInfo.getTitle());
+            }
+            outState.putSerializable("RSSITEMIFO_KEY", strings);
+
+            if (articel_listview.hasFocus()) {
+                outState.putInt("SELECTION_KEY", Integer.valueOf(articel_listview.getSelectedItemPosition()));
+            }
+
+            Log.v(TAG, "onSavedInstanceState");
+        }
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            if (savedInstanceState == null) return;
+
+            List<CharSequence> strings = (ArrayList<CharSequence>) savedInstanceState.getSerializable("RSSITEMIFO_KEY");
+            List<RssItemInfo> items = new ArrayList<RssItemInfo>();
+            for (int i = 0; i < strings.size(); i += 2) {
+                items.add(new RssItemInfo(strings.get(i).toString(), strings.get(i + 1).toString()));
+            }
+
+            // Reset the list view to show this data.
+            mainActivity.resetUI(articel_listview, items);
+
+            // Restore selection
+            if (savedInstanceState.containsKey("SELECTION_KEY")) {
+                articel_listview.requestFocus(View.FOCUS_FORWARD);
+                // todo: is above right? needed it to work
+                articel_listview.setSelection(savedInstanceState.getInt("SELECTION_KEY"));
+            }
+            Log.v(TAG, "onCreate");
+        }
+
+        @Override
         public void onPause() {
             super.onPause();
             Log.v(TAG, "onPause");
@@ -332,7 +386,7 @@ public class MainActivity extends BaseActivity
         public void onDetach() {
             super.onDetach();
             Log.v(TAG, "onDetach");
-            mainActivity.resetUI(articel_listview);
+            mainActivity.resetUI(articel_listview, new ArrayList<RssItemInfo>());
 
         }
 

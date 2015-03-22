@@ -166,8 +166,7 @@ public class BaseActivity extends ActionBarActivity {
     }
 
     //重新归零listview,用于在切换fragment的时候使用
-    public void resetUI(ListView listView) {
-        List<RssItemInfo> items = new ArrayList<>();
+    public void resetUI(ListView listView, List<RssItemInfo> items) {
         mRssAdapter = new RssAdapter(this, items);
         listView.setAdapter(mRssAdapter);
     }

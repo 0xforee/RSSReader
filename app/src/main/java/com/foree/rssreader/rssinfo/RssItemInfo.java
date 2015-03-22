@@ -25,6 +25,11 @@ public class RssItemInfo {
         description = "";
     }
 
+    public RssItemInfo(String feedTitle, String title) {
+        this.feedTitle = feedTitle;
+        this.title = title;
+    }
+
     public RssItemInfo(String title, String link, String pubdate, String description, Bitmap image, String feedTitle, String feedLink, String feedPubdate, String feedDescription) {
         this.title = title;
         this.link = link;
