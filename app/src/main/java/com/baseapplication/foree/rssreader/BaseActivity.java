@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.rssinfo.foree.rssreader.RssItemInfo;
@@ -32,13 +33,25 @@ import javax.xml.parsers.SAXParserFactory;
  */
 public class BaseActivity extends ActionBarActivity {
     private Handler mHandler;
-    private RssAdaper mRssAdaper;
+    private RssAdapter mRssAdapter;
+
+    public Handler getmHandler() {
+        return mHandler;
+    }
+
+    public RssAdapter getmRssAdapter() {
+        return mRssAdapter;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //新建一个Handler用于传递数据
         mHandler = new Handler();
+        //新构建rssAdapter,用于解析处理listview
         List<RssItemInfo> rssItemInfos = new ArrayList<>();
-        mRssAdaper = new RssAdaper(this, rssItemInfos);
+        mRssAdapter = new RssAdapter(this, rssItemInfos);
 
     }
 
@@ -53,18 +66,14 @@ public class BaseActivity extends ActionBarActivity {
         super.setContentView(layoutResID);
     }
 
-    public Handler getmHandler() {
-        return mHandler;
-    }
-
-    public RssAdaper getmRssAdaper() {
-        return mRssAdaper;
-    }
-
-    public static class RssAdaper extends ArrayAdapter<RssItemInfo> {
+    /**
+     * rss数据适配器,专为title_list_layout布局文件打造,如果有其他的布局文件想使用
+     * 可以考虑将view对象单独摘出来,通过子类来重构
+     */
+    public static class RssAdapter extends ArrayAdapter<RssItemInfo> {
         private LayoutInflater mLayoutInflater;
 
-        public RssAdaper(Context context, List<RssItemInfo> objects) {
+        public RssAdapter(Context context, List<RssItemInfo> objects) {
             super(context, 0, objects);
             //获取系统服务layoutInfalter
             mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -99,8 +108,10 @@ public class BaseActivity extends ActionBarActivity {
         }
     }
 
+    /**
+     * rss解析线程类,用来打开url链接,并调用rss解析器
+     */
     public static class RssParse extends Thread {
-        //线程类,用来打开url链接,并启用解析
         private String mUrl;
         private BaseActivity mActivity;
 
@@ -112,12 +123,12 @@ public class BaseActivity extends ActionBarActivity {
         @Override
         public void run() {
             try {
-                //打开url连接类
+                //打开url连接
                 URL url = new URL(mUrl);
                 URLConnection urlConnection = url.openConnection();
                 urlConnection.setConnectTimeout(1000);
                 urlConnection.connect();
-
+                //获取url的输入流
                 InputStream in = urlConnection.getInputStream();
                 //解析Rss文档
                 parseRss(in);
@@ -129,12 +140,12 @@ public class BaseActivity extends ActionBarActivity {
 
         public void parseRss(InputStream in) {
             try {
+                //调用rss解析工厂构造SAX解析器
                 SAXParser saxParser = SAXParserFactory.newInstance().newSAXParser();
-
+                //使用自定义的事件处理器(传入当前对象用于获取所对应的Handler和adapter
                 XmlParseHandler xmlParseHandler = new XmlParseHandler(mActivity);
-
+                //开始解析
                 saxParser.parse(in, xmlParseHandler);
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -142,8 +153,16 @@ public class BaseActivity extends ActionBarActivity {
 
     }
 
+    //开一个线程来解析Rss
     public void doRss(String urlName) {
         RssParse rssParse = new RssParse(this, urlName);
         rssParse.start();
+    }
+
+    //重新归零listview,用于在切换fragment的时候使用
+    public void resetUI(ListView listView) {
+        List<RssItemInfo> items = new ArrayList<>();
+        mRssAdapter = new RssAdapter(this, items);
+        listView.setAdapter(mRssAdapter);
     }
 }
