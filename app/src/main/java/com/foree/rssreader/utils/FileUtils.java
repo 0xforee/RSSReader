@@ -1,8 +1,15 @@
 package com.foree.rssreader.utils;
 
+import android.graphics.Bitmap;
+import android.os.Environment;
+
+import com.foree.rssreader.base.MyApplication;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -44,6 +51,33 @@ public class FileUtils {
         bufferedWriter.write(string);
         bufferedWriter.close();
         out.close();
+    }
+
+    //取得缓存目录下缓存文件大小
+    public long getFileSize(String fileName) {
+        return new File(MyApplication.mySdcardCacheDir + File.separator + fileName).length();
+    }
+
+    /**
+     * 保存Image的方法，有sd卡存储到sd卡，没有就存储到手机目录
+     *
+     * @param fileName
+     * @param bitmap
+     * @throws IOException
+     */
+    public void saveBitmap(String fileName, Bitmap bitmap) throws FileNotFoundException {
+        File file = new File(MyApplication.mySdcardCacheDir + File.separator + fileName);
+        try {
+            if (file.createNewFile()) {
+                FileOutputStream output = new FileOutputStream(file);
+                //压缩bitmap
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, output);
+                output.flush();
+                output.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 
