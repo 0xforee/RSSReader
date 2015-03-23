@@ -17,6 +17,16 @@ public class RssItemInfo {
     private String description;
     private Bitmap image;
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    private String imageUrl;
+
     //初始化变量
     public RssItemInfo() {
         title = "";
@@ -30,12 +40,13 @@ public class RssItemInfo {
         this.title = title;
     }
 
-    public RssItemInfo(String title, String link, String pubdate, String description, Bitmap image, String feedTitle, String feedLink, String feedPubdate, String feedDescription) {
+    public RssItemInfo(String title, String link, String pubdate, String description, Bitmap image, String imageUrl, String feedTitle, String feedLink, String feedPubdate, String feedDescription) {
         this.title = title;
         this.link = link;
         this.pubdate = pubdate;
         this.description = description;
         this.image = image;
+        this.imageUrl = imageUrl;
         this.feedTitle = feedTitle;
         this.feedLink = feedLink;
         this.feedPubdate = feedPubdate;
