@@ -86,17 +86,18 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
-        //仅当GridView静止时才去下载图片，GridView滑动时取消所有正在下载的任务
+        //仅当ListView静止时才去下载图片，ListView滑动时取消所有正在下载的任务
         if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
             showImage(mFirstVisibleItem, mVisibleItemCount);
         } else {
+            Log.v(TAG, "cancelTask");
             cancelTask();
         }
 
     }
 
-    //在滑动过程中,去得可见的数据和第一个项目
-    //GridView滚动的时候调用的方法，刚开始显示GridView也会调用此方法
+    //在滑动过程中,取得可见的数据和第一个项目
+    //ListView滑动的时候调用的方法
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem,
                          int visibleItemCount, int totalItemCount) {
@@ -150,6 +151,13 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
      * 可以考虑将view对象单独摘出来,通过子类来重构
      */
     public class RssAdapter extends ArrayAdapter<RssItemInfo> {
+
+        private class ViewHolder {
+            TextView tv_title;
+            TextView tv_rssfeed;
+            TextView tv_time;
+            ImageView iv_title_image;
+        }
         private LayoutInflater mLayoutInflater;
         private Context mContext;
 
@@ -178,46 +186,42 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
         //重写getview方法
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder viewHolder;
             //获取系统的view控件
-            View view;
-            if (convertView == null)
-                view = mLayoutInflater.inflate(R.layout.title_list_layout, null);
-            else
-                view = convertView;
-
+            if (convertView == null) {
+                convertView = mLayoutInflater.inflate(R.layout.title_list_layout, null);
+                viewHolder = new ViewHolder();
+                //将rssItemInfo数据设置到viewHolder中
+                viewHolder.tv_title = (TextView) convertView.findViewById(R.id.title);
+                viewHolder.tv_rssfeed = (TextView) convertView.findViewById(R.id.rssfeed);
+                viewHolder.tv_time = (TextView) convertView.findViewById(R.id.time);
+                viewHolder.iv_title_image = (ImageView) convertView.findViewById(R.id.title_image);
+                convertView.setTag(viewHolder);
+            } else {
+                viewHolder = (ViewHolder) convertView.getTag();
+            }
             //获取RssItemInfo,从Arraylist中
             RssItemInfo rssItemInfo = this.getItem(position);
 
-            //将rssItemInfo数据设置到控件上
-            TextView tv_title = (TextView) view.findViewById(R.id.title);
-            TextView tv_rssfeed = (TextView) view.findViewById(R.id.rssfeed);
-            TextView tv_tiem = (TextView) view.findViewById(R.id.time);
-            ImageView iv_title_image = (ImageView) view.findViewById(R.id.title_image);
+            Log.v(TAG, rssItemInfo.getTitle());
 
-            tv_title.setText(rssItemInfo.getTitle());
+            viewHolder.tv_title.setText(rssItemInfo.getTitle());
             //rssItem中所对应的中的channel信息
-            tv_rssfeed.setText(rssItemInfo.getFeedTitle());
-            tv_tiem.setText(rssItemInfo.getpubDate());
+            viewHolder.tv_rssfeed.setText(rssItemInfo.getFeedTitle());
+            viewHolder.tv_time.setText(rssItemInfo.getpubDate());
             // iv_title_image.setImageBitmap(rssItemInfo.getImage());
 
-            iv_title_image.setTag(rssItemInfo.getImageUrl());
-
-            if (rssItemInfo.getImageUrl() == null) {
-                Log.v(TAG, "imageUrl is null");
-            }
+            viewHolder.iv_title_image.setTag(rssItemInfo.getImageUrl());
 
             //显示缓存中的bitmap
             Bitmap bitmap = mImageDownLoader.showCacheBitmap(rssItemInfo.getImageUrl().replaceAll("[^\\w]", ""));
             if (bitmap != null) {
-                Log.v(TAG, "bitmap is not null");
-                iv_title_image.setImageBitmap(bitmap);
+                viewHolder.iv_title_image.setImageBitmap(bitmap);
             } else {
-                iv_title_image.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_launcher));
+                viewHolder.iv_title_image.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_launcher));
             }
 
-
-
-            return view;
+            return convertView;
         }
     }
 
