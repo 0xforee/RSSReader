@@ -95,7 +95,8 @@ public class CacheUtils {
 
             xmlReader.parse(inputSource);
 
-            return xmlParseHandler.getFeedInfo();
+            return null;
+            // return xmlParseHandler.getFeedInfo();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -104,15 +105,6 @@ public class CacheUtils {
 
     //将URL中不合适的字符去掉(用URL来标识对应的缓存文件)
     public static String urlToName(String url) {
-        /*String name = url.replaceAll(":", "");
-        name = name.replaceAll("\\.", "");
-        name = name.replaceAll("//", "");
-        name = name.replaceAll("/", "");
-        name = name.replaceAll("=", "");
-        name = name.replaceAll("-", "");
-        name = name.replaceAll(",", "");
-        name = name.replaceAll("&", "");
-        name = name.replaceAll("\\?", "");*/
         return url.replaceAll("[^\\w]", "");
     }
 
