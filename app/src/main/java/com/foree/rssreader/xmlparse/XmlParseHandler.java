@@ -25,11 +25,11 @@ import java.util.regex.Pattern;
  */
 public class XmlParseHandler extends DefaultHandler {
     private static final String TAG = "XmlParseHandler";
-    private RssFeedInfo rssFeedInfo;
+    // private RssFeedInfo rssFeedInfo;
     private ParseHandlerCallbacks mCallbacks;
     BaseActivity mActivity;
-    private RssItemInfo mRssItemInfo;
-    Bitmap bitmap;
+    //private RssItemInfo mRssItemInfo;
+    //Bitmap bitmap;
     //多次调用characters时的多次解析的数据总和
     StringBuilder mBuff;
 
@@ -41,13 +41,13 @@ public class XmlParseHandler extends DefaultHandler {
     String mPubDate;
     String mLink;
     String mDescription;
-    Bitmap mImage;
+    // Bitmap mImage;
     String mImageUrl;
     boolean isNotify = false;
 
     public XmlParseHandler(BaseActivity activity) {
         this.mActivity = activity;
-        rssFeedInfo = new RssFeedInfo();
+        // rssFeedInfo = new RssFeedInfo();
         mBuff = new StringBuilder();
         mInItem = false;
         mCallbacks = (ParseHandlerCallbacks) mActivity;
@@ -61,9 +61,9 @@ public class XmlParseHandler extends DefaultHandler {
 
     }
 
-    public RssFeedInfo getFeedInfo() {
+    /*public RssFeedInfo getFeedInfo() {
         return rssFeedInfo;
-    }
+    }*/
 
     //遇到某一个便签的时候，触发此方法
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
@@ -93,10 +93,8 @@ public class XmlParseHandler extends DefaultHandler {
                 Pattern pattern = Pattern.compile("http://mmbiz\\.qpic\\.cn/mmbiz/[^\"]+");
                 final Matcher matcher = pattern.matcher(mDescription);
                 if (matcher.find()) {
-                    Log.v(TAG, "(匹配只适用于微信公众号)图片链接:" + matcher.group());
-                    //  mImage = getBitMap(matcher.group());
                     mImageUrl = matcher.group();
-                    //  Log.v(TAG, mImage.getByteCount() + "");
+                    Log.v(TAG, "(匹配只适用于微信公众号)图片链接:" + mImageUrl);
                 }
             }
             if (localName.equals("item")) {
@@ -106,9 +104,11 @@ public class XmlParseHandler extends DefaultHandler {
 
                 //  rssFeedInfo.addItem();
                 //handler发送消息到主队列
-                mRssItemInfo = new RssItemInfo(mTitle, mLink, mPubDate, mDescription, mImage, mImageUrl, feedTitle, feedLink, feedPubdate, feedDescription);
-                mActivity.getmHandler().post(new RssAdder());
+                //此处对象必须重新引用和新建,而不是使用全局的引用来接收对象,防止出现相同对象被传递进而出现的列表重复问题
+                RssItemInfo mRssItemInfo = new RssItemInfo(mTitle, mLink, mPubDate, mDescription, mImageUrl, feedTitle, feedLink, feedPubdate, feedDescription);
+                mActivity.getmHandler().post(new RssAdder(mRssItemInfo));
                 if (!isNotify && mCallbacks != null) {
+                    //更新progressBar等ui
                     mCallbacks.notifyUiUpdate();
                     isNotify = true;
                 }
@@ -130,26 +130,6 @@ public class XmlParseHandler extends DefaultHandler {
         mBuff.append(ch, start, length);
     }
 
-    /**
-     * @param url 图片的链接
-     * @return 返回一个bitmap对象, 用与设置listview的图片位
-     */
-    public Bitmap getBitMap(final String url) {
-        try {
-            synchronized (this) {
-                URL imageurl = new URL(url);
-                URLConnection urlConnection = imageurl.openConnection();
-                urlConnection.connect();
-                InputStream in = urlConnection.getInputStream();
-                bitmap = BitmapFactory.decodeStream(in);
-                in.close();
-                // Log.v(TAG, "run 内部");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return bitmap;
-    }
 
     /**
      * RssAdder用于将解析出来的RssItemInfo置于listview中,
@@ -157,9 +137,11 @@ public class XmlParseHandler extends DefaultHandler {
      */
     public class RssAdder implements Runnable {
         private BaseActivity.RssAdapter mRssAdapter;
+        private RssItemInfo mRssItemInfo;
 
         //获取与类相关的Adapter
-        public RssAdder() {
+        public RssAdder(RssItemInfo rssItemInfo) {
+            this.mRssItemInfo = rssItemInfo;
             mRssAdapter = mActivity.getmRssAdapter();
         }
 
