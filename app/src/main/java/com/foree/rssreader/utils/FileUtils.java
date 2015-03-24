@@ -2,14 +2,12 @@ package com.foree.rssreader.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 
 import com.foree.rssreader.base.MyApplication;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -55,7 +53,7 @@ public class FileUtils {
     }
 
     //取得缓存目录下缓存文件大小
-    public long getFileSize(String fileName) {
+    public static long getFileSize(String fileName) {
         return new File(MyApplication.mySdcardCacheDir + File.separator + fileName).length();
     }
 
@@ -66,7 +64,7 @@ public class FileUtils {
      * @param bitmap
      * @throws IOException
      */
-    public void saveBitmap(String fileName, Bitmap bitmap) throws FileNotFoundException {
+    public static void saveBitmap(String fileName, Bitmap bitmap) {
         File file = new File(MyApplication.mySdcardCacheDir + File.separator + fileName);
         try {
             if (file.createNewFile()) {
@@ -81,12 +79,10 @@ public class FileUtils {
         }
     }
 
-
     /**
      * 从内存卡中获取bitmap文件
      */
-    public Bitmap getBitmap(String fileName) {
-        Log.v(TAG, MyApplication.mySdcardCacheDir + File.separator + fileName);
+    public static Bitmap getBitmap(String fileName) {
         return BitmapFactory.decodeFile(MyApplication.mySdcardCacheDir + File.separator + fileName);
     }
 }

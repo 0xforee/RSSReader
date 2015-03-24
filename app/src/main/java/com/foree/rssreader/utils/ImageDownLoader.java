@@ -10,7 +10,6 @@ import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.concurrent.ExecutorService;
@@ -114,12 +113,7 @@ public class ImageDownLoader {
                     Message msg = handler.obtainMessage();
                     msg.obj = bitmap;
                     handler.sendMessage(msg);
-
-                    try {
                         FileUtils.saveBitmap(subUrl, bitmap);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
                     addBitmapToMemoryCache(subUrl, bitmap);
                 }
             });
@@ -159,7 +153,7 @@ public class ImageDownLoader {
                 InputStream in = urlConnection.getInputStream();
                 bitmap = BitmapFactory.decodeStream(in);
                 in.close();
-                Log.v(TAG, "下载image");
+                Log.v(TAG, "从" + url + "下载image");
             }
         } catch (Exception e) {
             e.printStackTrace();
