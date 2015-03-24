@@ -197,7 +197,6 @@ public class MainActivity extends BaseActivity
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
         private View rootView;
-        private ListView articel_listview;
         private MainActivity mainActivity;
         ProgressBar mProgressBar;
         TextView mTextView;
@@ -206,7 +205,7 @@ public class MainActivity extends BaseActivity
         private String FeedName;
 
         public ListView getItemlist() {
-            return articel_listview;
+            return listView;
         }
 
         public String getpostionUrl() {
@@ -252,10 +251,11 @@ public class MainActivity extends BaseActivity
                                  Bundle savedInstanceState) {
             rootView = inflater.inflate(R.layout.fragment_main, container, false);
             //初始化fragment中的控件
-            articel_listview = (ListView) rootView.findViewById(R.id.articel_listview);
+            listView = (ListView) rootView.findViewById(R.id.articel_listview);
             mProgressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
             mTextView = (TextView) rootView.findViewById(R.id.nonetwork);
-            articel_listview.setAdapter(mainActivity.getmRssAdapter());
+            listView.setAdapter(mainActivity.getmRssAdapter());
+
             Log.v(TAG, "onCreateView");
             return rootView;
         }
@@ -295,8 +295,10 @@ public class MainActivity extends BaseActivity
             if (URLString != null) {
                 //解析对应url获取数据
                 doRSS(URLString);
+                //设置滑动监听
+                listView.setOnScrollListener(mainActivity);
                 //绑定listview点击事件
-                articel_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent mintent = new Intent(mainActivity, ShowDescription.class);
@@ -332,8 +334,8 @@ public class MainActivity extends BaseActivity
             }
             outState.putSerializable("RSSITEMIFO_KEY", strings);
 
-            if (articel_listview.hasFocus()) {
-                outState.putInt("SELECTION_KEY", Integer.valueOf(articel_listview.getSelectedItemPosition()));
+            if (listView.hasFocus()) {
+                outState.putInt("SELECTION_KEY", Integer.valueOf(listView.getSelectedItemPosition()));
             }
 
             Log.v(TAG, "onSavedInstanceState");
@@ -351,13 +353,13 @@ public class MainActivity extends BaseActivity
             }
 
             // Reset the list view to show this data.
-            mainActivity.resetUI(articel_listview, items);
+            mainActivity.resetUI(listView, items);
 
             // Restore selection
             if (savedInstanceState.containsKey("SELECTION_KEY")) {
-                articel_listview.requestFocus(View.FOCUS_FORWARD);
+                listView.requestFocus(View.FOCUS_FORWARD);
                 // todo: is above right? needed it to work
-                articel_listview.setSelection(savedInstanceState.getInt("SELECTION_KEY"));
+                listView.setSelection(savedInstanceState.getInt("SELECTION_KEY"));
             }
             Log.v(TAG, "onCreate");
         }
@@ -386,7 +388,7 @@ public class MainActivity extends BaseActivity
         public void onDetach() {
             super.onDetach();
             Log.v(TAG, "onDetach");
-            mainActivity.resetUI(articel_listview, new ArrayList<RssItemInfo>());
+            mainActivity.resetUI(listView, new ArrayList<RssItemInfo>());
 
         }
 
@@ -407,7 +409,7 @@ public class MainActivity extends BaseActivity
                 //设置进度条不可见
                 mProgressBar.setVisibility(View.GONE);
                 //设置listview可见
-                articel_listview.setVisibility(View.VISIBLE);
+                listView.setVisibility(View.VISIBLE);
                 mTextView.setVisibility(View.INVISIBLE);
 
             }

@@ -104,7 +104,7 @@ public class CacheUtils {
 
     //将URL中不合适的字符去掉(用URL来标识对应的缓存文件)
     public static String urlToName(String url) {
-        String name = url.replaceAll(":", "");
+        /*String name = url.replaceAll(":", "");
         name = name.replaceAll("\\.", "");
         name = name.replaceAll("//", "");
         name = name.replaceAll("/", "");
@@ -112,17 +112,17 @@ public class CacheUtils {
         name = name.replaceAll("-", "");
         name = name.replaceAll(",", "");
         name = name.replaceAll("&", "");
-        name = name.replaceAll("\\?", "");
-        return name;
+        name = name.replaceAll("\\?", "");*/
+        return url.replaceAll("[^\\w]", "");
     }
 
     //判断缓存文件是否存在
     public static boolean isListCached(String urlName) {
-        String cacheName = CacheUtils.urlToName(urlName);
+        //  String cacheName = CacheUtils.urlToName(urlName);
         try {
-            File file = new File(MyApplication.mySdcardCacheDir + "/" + cacheName);
+            File file = new File(MyApplication.mySdcardCacheDir + "/" + urlName);
             if (file.exists()) {
-                Log.v(TAG, "CacheFileExit");
+                Log.v(TAG, MyApplication.mySdcardCacheDir + File.separator + urlName + " CacheFileExit");
                 return true;
             }
         } catch (Exception e) {

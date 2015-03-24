@@ -2,19 +2,23 @@ package com.foree.rssreader.base;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.foree.rssreader.rssinfo.RssItemInfo;
+import com.foree.rssreader.utils.ImageDownLoader;
 import com.rssreader.foree.rssreader.R;
 import com.foree.rssreader.xmlparse.XmlParseHandler;
 
@@ -31,9 +35,15 @@ import javax.xml.parsers.SAXParserFactory;
  * Created by foree on 15-3-10.
  * 所有activity的基类，用于实现一些所有activity共有的方法，比如设置主题
  */
-public class BaseActivity extends ActionBarActivity {
+public class BaseActivity extends ActionBarActivity implements ListView.OnScrollListener {
+    private static final String TAG = "BaseActivity";
     private Handler mHandler;
     private RssAdapter mRssAdapter;
+    public ImageDownLoader mImageDownLoader;
+    private boolean isFirstEnter = true;
+    private int mFirstVisibleItem;
+    private int mVisibleItemCount;
+    public static ListView listView;
 
     public List<RssItemInfo> getRssItemInfos() {
         return rssItemInfos;
@@ -59,6 +69,8 @@ public class BaseActivity extends ActionBarActivity {
         rssItemInfos = new ArrayList<>();
         mRssAdapter = new RssAdapter(this, rssItemInfos);
 
+        mImageDownLoader = new ImageDownLoader(this);
+
     }
 
     public void setContentView(int layoutResID) {
@@ -72,17 +84,95 @@ public class BaseActivity extends ActionBarActivity {
         super.setContentView(layoutResID);
     }
 
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+        //仅当GridView静止时才去下载图片，GridView滑动时取消所有正在下载的任务
+        if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+            showImage(mFirstVisibleItem, mVisibleItemCount);
+        } else {
+            cancelTask();
+        }
+
+    }
+
+    //在滑动过程中,去得可见的数据和第一个项目
+    //GridView滚动的时候调用的方法，刚开始显示GridView也会调用此方法
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem,
+                         int visibleItemCount, int totalItemCount) {
+        mFirstVisibleItem = firstVisibleItem;
+        mVisibleItemCount = visibleItemCount;
+        if (isFirstEnter && visibleItemCount > 0) {
+            showImage(mFirstVisibleItem, mVisibleItemCount);
+            isFirstEnter = false;
+        }
+    }
+
+    /**
+     * 显示当前屏幕的图片，先会去查找LruCache，LruCache没有就去sd卡或者手机目录查找，再没有就开启线程去下载
+     * @param firstVisibleItem 第一个可见的item
+     * @param visibleItemCount 总可见的item数量
+     */
+    private void showImage(int firstVisibleItem, int visibleItemCount) {
+        Bitmap bitmap = null;
+        for (int i = firstVisibleItem; i < firstVisibleItem + visibleItemCount; i++) {
+            String mImageUrl = getRssItemInfos().get(i).getImageUrl();
+            if (mImageUrl == null) {
+                Log.v(TAG, "download showImage is null");
+            }
+            final ImageView mImageView = (ImageView) listView.findViewWithTag(mImageUrl);
+            bitmap = this.mImageDownLoader.downloadImage(mImageUrl, new ImageDownLoader.onImageLoaderListener() {
+
+                @Override
+                public void onImageLoader(Bitmap bitmap, String url) {
+                    if (mImageView != null && bitmap != null) {
+                        mImageView.setImageBitmap(bitmap);
+                    }
+                }
+            });
+
+            if (bitmap != null) {
+                mImageView.setImageBitmap(bitmap);
+            } else {
+                mImageView.setImageDrawable(this.getResources().getDrawable(R.drawable.ic_launcher));
+            }
+        }
+    }
+
+    /**
+     */
+    public void cancelTask() {
+        mImageDownLoader.cancelTask();
+    }
+
     /**
      * rss数据适配器,专为title_list_layout布局文件打造,如果有其他的布局文件想使用
      * 可以考虑将view对象单独摘出来,通过子类来重构
      */
-    public static class RssAdapter extends ArrayAdapter<RssItemInfo> {
+    public class RssAdapter extends ArrayAdapter<RssItemInfo> {
         private LayoutInflater mLayoutInflater;
+        private Context mContext;
 
         public RssAdapter(Context context, List<RssItemInfo> objects) {
             super(context, 0, objects);
             //获取系统服务layoutInfalter
             mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            mContext = context;
+        }
+
+        @Override
+        public int getCount() {
+            return rssItemInfos.size();
+        }
+
+        @Override
+        public RssItemInfo getItem(int position) {
+            return rssItemInfos.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
         }
 
         //重写getview方法
@@ -108,7 +198,24 @@ public class BaseActivity extends ActionBarActivity {
             //rssItem中所对应的中的channel信息
             tv_rssfeed.setText(rssItemInfo.getFeedTitle());
             tv_tiem.setText(rssItemInfo.getpubDate());
-            iv_title_image.setImageBitmap(rssItemInfo.getImage());
+            // iv_title_image.setImageBitmap(rssItemInfo.getImage());
+
+            iv_title_image.setTag(rssItemInfo.getImageUrl());
+
+            if (rssItemInfo.getImageUrl() == null) {
+                Log.v(TAG, "imageUrl is null");
+            }
+
+            //显示缓存中的bitmap
+            Bitmap bitmap = mImageDownLoader.showCacheBitmap(rssItemInfo.getImageUrl().replaceAll("[^\\w]", ""));
+            if (bitmap != null) {
+                Log.v(TAG, "bitmap is not null");
+                iv_title_image.setImageBitmap(bitmap);
+            } else {
+                iv_title_image.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_launcher));
+            }
+
+
 
             return view;
         }
@@ -170,4 +277,6 @@ public class BaseActivity extends ActionBarActivity {
         mRssAdapter = new RssAdapter(this, items);
         listView.setAdapter(mRssAdapter);
     }
+
+
 }

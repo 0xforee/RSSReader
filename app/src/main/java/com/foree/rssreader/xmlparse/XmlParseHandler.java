@@ -42,6 +42,7 @@ public class XmlParseHandler extends DefaultHandler {
     String mLink;
     String mDescription;
     Bitmap mImage;
+    String mImageUrl;
     boolean isNotify = false;
 
     public XmlParseHandler(BaseActivity activity) {
@@ -73,7 +74,7 @@ public class XmlParseHandler extends DefaultHandler {
         //如果一个item开始的时候，将子元素内容清除
         if (localName.equals("item")) {
             mInItem = true;
-            mTitle = mPubDate = mLink = mDescription = "";
+            mTitle = mPubDate = mLink = mDescription = mImageUrl = "";
         }
     }
 
@@ -93,7 +94,9 @@ public class XmlParseHandler extends DefaultHandler {
                 final Matcher matcher = pattern.matcher(mDescription);
                 if (matcher.find()) {
                     Log.v(TAG, "(匹配只适用于微信公众号)图片链接:" + matcher.group());
-                    mImage = getBitMap(matcher.group());
+                    //  mImage = getBitMap(matcher.group());
+                    mImageUrl = matcher.group();
+                    //  Log.v(TAG, mImage.getByteCount() + "");
                 }
             }
             if (localName.equals("item")) {
@@ -103,7 +106,7 @@ public class XmlParseHandler extends DefaultHandler {
 
                 //  rssFeedInfo.addItem();
                 //handler发送消息到主队列
-                mRssItemInfo = new RssItemInfo(mTitle, mLink, mPubDate, mDescription, mImage, feedTitle, feedLink, feedPubdate, feedDescription);
+                mRssItemInfo = new RssItemInfo(mTitle, mLink, mPubDate, mDescription, mImage, mImageUrl, feedTitle, feedLink, feedPubdate, feedDescription);
                 mActivity.getmHandler().post(new RssAdder());
                 if (!isNotify && mCallbacks != null) {
                     mCallbacks.notifyUiUpdate();
@@ -140,7 +143,7 @@ public class XmlParseHandler extends DefaultHandler {
                 InputStream in = urlConnection.getInputStream();
                 bitmap = BitmapFactory.decodeStream(in);
                 in.close();
-                Log.v(TAG, "run 内部");
+                // Log.v(TAG, "run 内部");
             }
         } catch (Exception e) {
             e.printStackTrace();

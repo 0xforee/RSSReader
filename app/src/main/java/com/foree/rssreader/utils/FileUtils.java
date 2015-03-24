@@ -2,7 +2,7 @@ package com.foree.rssreader.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Environment;
+import android.util.Log;
 
 import com.foree.rssreader.base.MyApplication;
 
@@ -86,7 +86,7 @@ public class FileUtils {
      * 从内存卡中获取bitmap文件
      */
     public Bitmap getBitmap(String fileName) {
+        Log.v(TAG, MyApplication.mySdcardCacheDir + File.separator + fileName);
         return BitmapFactory.decodeFile(MyApplication.mySdcardCacheDir + File.separator + fileName);
     }
 }
-

@@ -1,10 +1,13 @@
 package com.foree.rssreader.rssinfo;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -15,6 +18,7 @@ import com.foree.rssreader.base.BaseActivity;
 import com.foree.rssreader.db.RssDao;
 import com.foree.rssreader.ui.NavigationDrawerFragment;
 import com.foree.rssreader.ui.ShowDescription;
+import com.foree.rssreader.utils.ImageDownLoader;
 import com.foree.rssreader.xmlparse.XmlParseHandler;
 import com.rssreader.foree.rssreader.R;
 
@@ -25,13 +29,13 @@ import com.rssreader.foree.rssreader.R;
 public class RssAddFeed extends BaseActivity implements XmlParseHandler.ParseHandlerCallbacks {
     private static final String TAG = "RssAddFeed";
     private RssFeedInfo mrssFeedInfo;
-    ListView listView;
     TextView tv_title, tv_description;
     ProgressBar progressBar;
     LinearLayout linearLayout;
     private String FeedLink = null;
     private String FeedName;
     boolean isUpdate = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,7 @@ public class RssAddFeed extends BaseActivity implements XmlParseHandler.ParseHan
         final String url = bundle.getString("url");
 
         listView.setAdapter(this.getmRssAdapter());
+        listView.setOnScrollListener(this);
         //开始解析url
         doRss(url);
         //绑定listview点击事件
@@ -115,4 +120,6 @@ public class RssAddFeed extends BaseActivity implements XmlParseHandler.ParseHan
 
         }
     }
+
+
 }
