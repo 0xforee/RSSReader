@@ -244,7 +244,7 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
                 //打开url连接
                 URL url = new URL(mUrl);
                 URLConnection urlConnection = url.openConnection();
-                urlConnection.setConnectTimeout(1000);
+                urlConnection.setConnectTimeout(10000);
                 urlConnection.connect();
                 //获取url的输入流
                 InputStream in = urlConnection.getInputStream();
@@ -277,10 +277,11 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
         rssParse.start();
     }
 
-    //重新归零listview,用于在切换fragment的时候使用
+    //重新清理Adapter,用于在切换fragment的时候使用
     public void resetUI(ListView listView, List<RssItemInfo> items) {
-        mRssAdapter = new RssAdapter(this, items);
-        listView.setAdapter(mRssAdapter);
+        // mRssAdapter = new RssAdapter(this, items);
+        mRssAdapter.clear();
+        //  listView.setAdapter(mRssAdapter);
     }
 
 
