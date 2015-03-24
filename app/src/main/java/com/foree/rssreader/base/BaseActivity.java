@@ -71,6 +71,8 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
 
         mImageDownLoader = new ImageDownLoader(this);
 
+        Log.v(TAG, "onCreate");
+
     }
 
     public void setContentView(int layoutResID) {
@@ -203,7 +205,7 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
             //获取RssItemInfo,从Arraylist中
             RssItemInfo rssItemInfo = this.getItem(position);
 
-            Log.v(TAG, rssItemInfo.getTitle());
+            //  Log.v(TAG, rssItemInfo.getTitle());
 
             viewHolder.tv_title.setText(rssItemInfo.getTitle());
             //rssItem中所对应的中的channel信息
@@ -216,9 +218,8 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
             //显示缓存中的bitmap
             Bitmap bitmap = mImageDownLoader.showCacheBitmap(rssItemInfo.getImageUrl().replaceAll("[^\\w]", ""));
             if (bitmap != null) {
+                viewHolder.iv_title_image.setVisibility(View.VISIBLE);
                 viewHolder.iv_title_image.setImageBitmap(bitmap);
-            } else {
-                viewHolder.iv_title_image.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_launcher));
             }
 
             return convertView;

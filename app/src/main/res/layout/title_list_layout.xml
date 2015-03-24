@@ -52,7 +52,7 @@
     </LinearLayout>
 
     <ImageView
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/title_image"
         android:layout_width="70dp"
         android:contentDescription="@string/title_image"
