@@ -135,9 +135,8 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
             });
 
             if (bitmap != null) {
+                mImageView.setVisibility(View.VISIBLE);
                 mImageView.setImageBitmap(bitmap);
-            } else {
-                mImageView.setImageDrawable(this.getResources().getDrawable(R.drawable.ic_launcher));
             }
         }
     }
