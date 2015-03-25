@@ -8,7 +8,6 @@ import android.os.Message;
 import android.support.v4.util.LruCache;
 import android.util.Log;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
@@ -45,6 +44,7 @@ public class ImageDownLoader {
 
     /**
      * 获取线程池，因为涉及到并发的问题，我们加上同步锁
+     *
      * @return
      */
     public ExecutorService getThreadPool() {
@@ -61,7 +61,8 @@ public class ImageDownLoader {
 
     /**
      * 添加Bitmap到内存缓存,即所谓的lrucache
-     * @param key 查询的key
+     *
+     * @param key    查询的key
      * @param bitmap 需要缓存的bitmap
      */
     public void addBitmapToMemoryCache(String key, Bitmap bitmap) {
@@ -72,6 +73,7 @@ public class ImageDownLoader {
 
     /**
      * 从内存缓存中获取一个Bitmap
+     *
      * @param key 需要查询的key
      * @return 返回取得的bitmap
      */
@@ -82,7 +84,8 @@ public class ImageDownLoader {
     /**
      * 先从内存缓存中获取Bitmap,如果没有就从SD卡或者手机缓存中获取
      * SD卡或者手机缓存没有就去下载
-     * @param url 原始的image的url,从description中截取
+     *
+     * @param url      原始的image的url,从description中截取
      * @param listener image加载时刻的监听对象
      * @return 返回下载的bitmap
      */
@@ -113,7 +116,7 @@ public class ImageDownLoader {
                     Message msg = handler.obtainMessage();
                     msg.obj = bitmap;
                     handler.sendMessage(msg);
-                        FileUtils.saveBitmap(subUrl, bitmap);
+                    FileUtils.saveBitmap(subUrl, bitmap);
                     addBitmapToMemoryCache(subUrl, bitmap);
                 }
             });
@@ -160,6 +163,7 @@ public class ImageDownLoader {
         }
         return bitmap;
     }
+
     /**
      */
     public synchronized void cancelTask() {

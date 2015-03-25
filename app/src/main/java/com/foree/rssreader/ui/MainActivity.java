@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -32,10 +31,7 @@ import com.foree.rssreader.xmlparse.XmlParseHandler;
 import com.rssreader.foree.rssreader.R;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 public class MainActivity extends BaseActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, XmlParseHandler.ParseHandlerCallbacks {
@@ -255,7 +251,8 @@ public class MainActivity extends BaseActivity
             mProgressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
             mTextView = (TextView) rootView.findViewById(R.id.nonetwork);
             listView.setAdapter(mainActivity.getmRssAdapter());
-
+            //设置滑动监听
+            listView.setOnScrollListener(mainActivity);
             Log.v(TAG, "onCreateView");
             return rootView;
         }
@@ -295,8 +292,6 @@ public class MainActivity extends BaseActivity
             if (URLString != null) {
                 //解析对应url获取数据
                 doRSS(URLString);
-                //设置滑动监听
-                listView.setOnScrollListener(mainActivity);
                 //绑定listview点击事件
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -353,7 +348,7 @@ public class MainActivity extends BaseActivity
             }
 
             // Reset the list view to show this data.
-            mainActivity.resetUI(listView, items);
+            // mainActivity.resetUI(listView, items);
 
             // Restore selection
             if (savedInstanceState.containsKey("SELECTION_KEY")) {
@@ -363,7 +358,6 @@ public class MainActivity extends BaseActivity
             }
             Log.v(TAG, "onCreate");
         }
-
         @Override
         public void onPause() {
             super.onPause();

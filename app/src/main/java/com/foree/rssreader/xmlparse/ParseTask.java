@@ -60,7 +60,7 @@ public class ParseTask extends AsyncTask<MainActivity.PlaceholderFragment, Integ
         placeholderFragment = position[0];
         mProgressBar = placeholderFragment.getmProgressBar();
         mTextView = placeholderFragment.getmTextView();
-        listView = placeholderFragment.getItemlist();
+        //listView = placeholderFragment.getItemlist();
 
         //获取网络状态
         MyApplication.mNetworkState = NetworkUtils.getNetworkState(mcontext);
@@ -89,7 +89,8 @@ public class ParseTask extends AsyncTask<MainActivity.PlaceholderFragment, Integ
 
             xmlReader.parse(is);
 
-            return xmlParseHandler.getFeedInfo();
+            return null;
+            // return xmlParseHandler.getFeedInfo();
         } catch (Exception e) {
             e.printStackTrace();
         }

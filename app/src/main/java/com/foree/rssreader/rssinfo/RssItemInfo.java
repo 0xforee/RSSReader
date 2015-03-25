@@ -40,12 +40,12 @@ public class RssItemInfo {
         this.title = title;
     }
 
-    public RssItemInfo(String title, String link, String pubdate, String description, Bitmap image, String imageUrl, String feedTitle, String feedLink, String feedPubdate, String feedDescription) {
+    public RssItemInfo(String title, String link, String pubdate, String description, String imageUrl, String feedTitle, String feedLink, String feedPubdate, String feedDescription) {
         this.title = title;
         this.link = link;
         this.pubdate = pubdate;
         this.description = description;
-        this.image = image;
+        //   this.image = image;
         this.imageUrl = imageUrl;
         this.feedTitle = feedTitle;
         this.feedLink = feedLink;
