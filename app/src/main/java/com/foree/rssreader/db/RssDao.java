@@ -4,12 +4,17 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.foree.rssreader.rssinfo.RssFeedInfo;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by foree on 3/16/15.
@@ -44,7 +49,7 @@ public class RssDao {
     }
 
     /**
-     * 用户个人数据库增加操作
+     * feedlist增加函数
      */
     public long addToList(String Type, String FeedName, String url) {
         SQLiteDatabase db = rssSQLiteOpenHelper.getWritableDatabase();
@@ -62,6 +67,7 @@ public class RssDao {
             return -1;
         }
     }
+
     /**
      * 数据库删除操作
      */
@@ -113,6 +119,22 @@ public class RssDao {
     }
 
     /**
+     * 通过名称来查找List中的url(数据解析的链接)
+     */
+    public String findUrlFromList(String FeedName) {
+        SQLiteDatabase db = rssSQLiteOpenHelper.getReadableDatabase();
+        Cursor cursor = db.query("feedlist", null, "name=?", new String[]{FeedName}, null, null, null);
+        if (cursor.moveToNext()) {
+            String url = cursor.getString(cursor.getColumnIndex("url"));
+            cursor.close();
+            db.close();
+            Log.v(TAG, url);
+            return url;
+        }
+        return null;
+    }
+
+    /**
      * 通过名称来查找link(从xml里解析出来的链接,用来作为缓存文件的名称)
      */
     public String findLink(String FeedName) {
@@ -148,5 +170,68 @@ public class RssDao {
 
         return feedInfos;
 
+    }
+
+    /**
+     * 数据库查找操作,查找feedlist的type,填充到groupList<Map<String, String>>
+     */
+    public List<Map<String, String>> findGroup() {
+        String First;
+        String Second = null;
+        List<Map<String, String>> groupList = new ArrayList<>();
+        SQLiteDatabase db = rssSQLiteOpenHelper.getReadableDatabase();
+        Cursor cursor = db.query("feedlist", new String[]{"type"}, null, null, "type", null, "type");
+        while (cursor.moveToNext()) {
+            First = cursor.getString(cursor.getColumnIndex("type"));
+            if (!First.equals(Second)) {
+                Map<String, String> map = new HashMap<>();
+                map.put("type", First);
+                Log.v(TAG, First);
+                groupList.add(map);
+            }
+            Second = First;
+        }
+        cursor.close();
+        db.close();
+        return groupList;
+    }
+
+    /**
+     * 数据库查找操作,查找feedlist的type,填充到childList<List<Map<String, String>>>
+     */
+    public List<List<Map<String, String>>> findChild() {
+        String First;
+        String Second = null;
+        List<List<Map<String, String>>> childList = new ArrayList<>();
+        SQLiteDatabase db = rssSQLiteOpenHelper.getReadableDatabase();
+        Cursor cursor = db.query("feedlist", new String[]{"type", "name"}, null, null, null, null, "type");
+        cursor.moveToFirst();
+        First = cursor.getString(cursor.getColumnIndex("type"));
+        //Log.v(TAG, First);
+        while (!First.equals(Second)) {
+            List<Map<String, String>> children = new ArrayList<>();
+            Map<String, String> map = new HashMap<>();
+            map.put("name", cursor.getString(cursor.getColumnIndex("name")));
+            Log.v(TAG, cursor.getString(cursor.getColumnIndex("name")));
+            children.add(map);
+            Second = First;
+            while (cursor.moveToNext()) {
+                First = cursor.getString(cursor.getColumnIndex("type"));
+                // Log.v(TAG, First);
+                if (First.equals(Second)) {
+                    Map<String, String> map1 = new HashMap<>();
+                    map.put("name", cursor.getString(cursor.getColumnIndex("name")));
+                    Log.v(TAG, cursor.getString(cursor.getColumnIndex("name")));
+                    children.add(map1);
+                    Second = First;
+                } else {
+                    break;
+                }
+            }
+            childList.add(children);
+        }
+        cursor.close();
+        db.close();
+        return childList;
     }
 }
