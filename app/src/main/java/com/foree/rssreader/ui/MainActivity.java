@@ -26,6 +26,7 @@ import com.foree.rssreader.base.BaseActivity;
 import com.foree.rssreader.base.MyApplication;
 import com.foree.rssreader.db.RssDao;
 import com.foree.rssreader.rssinfo.RssAddFeed;
+import com.foree.rssreader.rssinfo.RssFeedList;
 import com.foree.rssreader.rssinfo.RssItemInfo;
 import com.foree.rssreader.xmlparse.XmlParseHandler;
 import com.rssreader.foree.rssreader.R;
@@ -171,6 +172,9 @@ public class MainActivity extends BaseActivity
                 });
                 builder1.show();
                 break;
+            case R.id.action_search:
+                Intent intent2 = new Intent(this, RssFeedList.class);
+                startActivity(intent2);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -285,7 +289,7 @@ public class MainActivity extends BaseActivity
                 return;
             }
             FeedName = NavigationDrawerFragment.FeedInfos.get(id - 1);
-            RssDao rssDao = new RssDao(mainActivity, "rss.db", null, 1);
+            RssDao rssDao = new RssDao(mainActivity);
             //取得对应名称的url链接
             URLString = rssDao.findUrl(FeedName);
             FeedLink = rssDao.findLink(FeedName);

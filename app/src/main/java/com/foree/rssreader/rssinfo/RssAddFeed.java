@@ -86,7 +86,7 @@ public class RssAddFeed extends BaseActivity implements XmlParseHandler.ParseHan
                 //取得要作为缓存文件的链接存入数据库中
                 FeedLink = getRssItemInfos().get(1).getFeedLink();
                 //将链接和名称加入到数据库中,如果有重复,则提示重复并退出
-                RssDao rssDao = new RssDao(RssAddFeed.this, "rss.db", null, 1);
+                RssDao rssDao = new RssDao(RssAddFeed.this);
                 if (rssDao.add(FeedName, url, FeedLink) != -1) {
                     NavigationDrawerFragment.FeedInfos.add(FeedName);
                     NavigationDrawerFragment.adapter.notifyDataSetChanged();

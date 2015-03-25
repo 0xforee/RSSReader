@@ -19,8 +19,8 @@ public class RssDao {
     private static final String TAG = "RssDao";
     private RssSQLiteOpenHelper rssSQLiteOpenHelper;
 
-    public RssDao(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        rssSQLiteOpenHelper = new RssSQLiteOpenHelper(context, name, null, version);
+    public RssDao(Context context) {
+        rssSQLiteOpenHelper = new RssSQLiteOpenHelper(context);
     }
 
     /**

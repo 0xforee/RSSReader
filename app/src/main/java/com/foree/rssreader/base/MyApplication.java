@@ -48,6 +48,8 @@ public class MyApplication extends Application {
     public static String mySdcardDataDir;
     //应用程序的缓存目录路径
     public static String mySdcardCacheDir;
+    //应用程序的数据库版本
+    public static int myDataBaseVersion = 1;
 
     public MyApplication(MainActivity context) {
         mContext = context;
@@ -77,7 +79,7 @@ public class MyApplication extends Application {
         }
 
         //进行数据库的初始化
-        RssDao rssDao = new RssDao(mContext, "rss.db", null, 1);
+        RssDao rssDao = new RssDao(mContext);
         List<RssFeedInfo> rssFeedInfoList = rssDao.findAll();
         for (RssFeedInfo rssFeedInfo : rssFeedInfoList) {
             NavigationDrawerFragment.FeedInfos.add(rssFeedInfo.getTitle());

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.foree.rssreader.base.MyApplication;
+
 /**
  * Created by foree on 3/16/15.
  * 为RSS创建一个数据库用来保存RSS的类别
@@ -11,8 +13,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class RssSQLiteOpenHelper extends SQLiteOpenHelper {
 
     //默认的构造方法,用来传入数据库的名字,游标和版本
-    public RssSQLiteOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    public RssSQLiteOpenHelper(Context context) {
+        super(context, "rss.db", null, MyApplication.myDataBaseVersion);
     }
 
     //在数据库第一次被创建的时候调用

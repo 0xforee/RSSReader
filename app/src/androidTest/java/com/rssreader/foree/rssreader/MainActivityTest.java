@@ -6,7 +6,7 @@ import com.foree.rssreader.db.RssDao;
 
 public class MainActivityTest extends AndroidTestCase {
     public void testAdd() throws Exception {
-        RssDao rssDao = new RssDao(getContext(), "rss", null, 1);
+        RssDao rssDao = new RssDao(getContext());
         // rssDao.add("好奇心日报","http://feed.dogear.cn/rss/10244.xml");
         //rssDao.add("香港《凤凰周刊》官方博客", "http://blog.sina.com.cn/rss/1267454277.xml");
         // rssDao.add("凤凰读书", "http://www.dogear.cn/feed/9768.xml");
@@ -17,7 +17,7 @@ public class MainActivityTest extends AndroidTestCase {
     }
 
     public void testDelete() throws Exception {
-        RssDao rssDao = new RssDao(getContext(), "rss.db", null, 1);
+        RssDao rssDao = new RssDao(getContext());
         rssDao.delete("新浪");
         rssDao.delete("凤凰读书");
         rssDao.delete("好奇心日报");
