@@ -204,7 +204,7 @@ public class RssDao {
         String Second = null;
         List<List<Map<String, String>>> childList = new ArrayList<>();
         SQLiteDatabase db = rssSQLiteOpenHelper.getReadableDatabase();
-        Cursor cursor = db.query("feedlist", new String[]{"type", "name"}, null, null, null, null, "type");
+        Cursor cursor = db.query("feedlist", new String[]{"type", "name", "url"}, null, null, null, null, "type");
         cursor.moveToFirst();
         First = cursor.getString(cursor.getColumnIndex("type"));
         //Log.v(TAG, First);
@@ -212,7 +212,9 @@ public class RssDao {
             List<Map<String, String>> children = new ArrayList<>();
             Map<String, String> map = new HashMap<>();
             map.put("name", cursor.getString(cursor.getColumnIndex("name")));
+            map.put("url", cursor.getString(cursor.getColumnIndex("url")));
             Log.v(TAG, cursor.getString(cursor.getColumnIndex("name")));
+            Log.v(TAG, cursor.getString(cursor.getColumnIndex("url")));
             children.add(map);
             Second = First;
             while (cursor.moveToNext()) {
@@ -220,8 +222,10 @@ public class RssDao {
                 // Log.v(TAG, First);
                 if (First.equals(Second)) {
                     Map<String, String> map1 = new HashMap<>();
-                    map.put("name", cursor.getString(cursor.getColumnIndex("name")));
+                    map1.put("name", cursor.getString(cursor.getColumnIndex("name")));
+                    map1.put("url", cursor.getString(cursor.getColumnIndex("url")));
                     Log.v(TAG, cursor.getString(cursor.getColumnIndex("name")));
+                    Log.v(TAG, cursor.getString(cursor.getColumnIndex("url")));
                     children.add(map1);
                     Second = First;
                 } else {
