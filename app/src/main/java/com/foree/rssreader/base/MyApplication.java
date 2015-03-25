@@ -49,7 +49,7 @@ public class MyApplication extends Application {
     //应用程序的缓存目录路径
     public static String mySdcardCacheDir;
     //应用程序的数据库版本
-    public static int myDataBaseVersion = 1;
+    public static int myDataBaseVersion = 2;
 
     public MyApplication(MainActivity context) {
         mContext = context;

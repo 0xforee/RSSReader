@@ -24,7 +24,7 @@ public class RssDao {
     }
 
     /**
-     * 数据库增加操作
+     * 用户个人数据库增加操作
      */
     public long add(String FeedName, String url, String link) {
         SQLiteDatabase db = rssSQLiteOpenHelper.getWritableDatabase();
@@ -43,6 +43,25 @@ public class RssDao {
         }
     }
 
+    /**
+     * 用户个人数据库增加操作
+     */
+    public long addToList(String Type, String FeedName, String url) {
+        SQLiteDatabase db = rssSQLiteOpenHelper.getWritableDatabase();
+        //不能添加重复的内容
+        Cursor cursor = db.query("feedlist", null, "name=?", new String[]{FeedName}, null, null, null);
+        if (cursor.getCount() == 0) {
+            ContentValues values = new ContentValues();
+            values.put("name", FeedName);
+            values.put("url", url);
+            values.put("type", Type);
+            Long result = db.insert("feedlist", null, values);
+            db.close();
+            return result;
+        } else {
+            return -1;
+        }
+    }
     /**
      * 数据库删除操作
      */
