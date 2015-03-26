@@ -4,17 +4,15 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.foree.rssreader.base.MyApplication;
 import com.foree.rssreader.rssinfo.RssFeedInfo;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by foree on 3/16/15.
@@ -34,13 +32,13 @@ public class RssDao {
     public long add(String FeedName, String url, String link) {
         SQLiteDatabase db = rssSQLiteOpenHelper.getWritableDatabase();
         //不能添加重复的内容
-        Cursor cursor = db.query("rss", null, "name=?", new String[]{FeedName}, null, null, null);
+        Cursor cursor = db.query(MyApplication.userFeedTable, null, "name=?", new String[]{FeedName}, null, null, null);
         if (cursor.getCount() == 0) {
             ContentValues values = new ContentValues();
             values.put("name", FeedName);
             values.put("url", url);
             values.put("link", link);
-            Long result = db.insert("rss", null, values);
+            Long result = db.insert(MyApplication.userFeedTable, null, values);
             cursor.close();
             db.close();
             return result;
@@ -57,13 +55,13 @@ public class RssDao {
     public long addToList(String Type, String FeedName, String url) {
         SQLiteDatabase db = rssSQLiteOpenHelper.getWritableDatabase();
         //不能添加重复的内容
-        Cursor cursor = db.query("feedlist", null, "name=?", new String[]{FeedName}, null, null, null);
+        Cursor cursor = db.query(MyApplication.allFeedTable, null, "name=?", new String[]{FeedName}, null, null, null);
         if (cursor.getCount() == 0) {
             ContentValues values = new ContentValues();
             values.put("name", FeedName);
             values.put("url", url);
             values.put("type", Type);
-            Long result = db.insert("feedlist", null, values);
+            Long result = db.insert(MyApplication.allFeedTable, null, values);
             cursor.close();
             db.close();
             return result;
@@ -79,9 +77,18 @@ public class RssDao {
      */
     public int delete(String FeedName) {
         SQLiteDatabase db = rssSQLiteOpenHelper.getReadableDatabase();
-        int result = db.delete("rss", "name=?", new String[]{FeedName});
+        int result = db.delete(MyApplication.userFeedTable, "name=?", new String[]{FeedName});
         db.close();
         return result;
+    }
+
+    /**
+     * 数据库全部删除
+     */
+    public void deleteAll(String tableName) {
+        SQLiteDatabase db = rssSQLiteOpenHelper.getWritableDatabase();
+        db.delete(tableName, null, null);
+        db.close();
     }
 
     /**
@@ -91,7 +98,7 @@ public class RssDao {
         SQLiteDatabase db = rssSQLiteOpenHelper.getReadableDatabase();
         ContentValues values = new ContentValues();
         values.put("url", newUrl);
-        int result = db.update("rss", values, "name=?", new String[]{newUrl});
+        int result = db.update(MyApplication.userFeedTable, values, "name=?", new String[]{newUrl});
         db.close();
         return result;
     }
@@ -101,7 +108,7 @@ public class RssDao {
      */
     public boolean find(String FeedName) {
         SQLiteDatabase db = rssSQLiteOpenHelper.getReadableDatabase();
-        Cursor cursor = db.query("rss", null, "name=?", new String[]{FeedName}, null, null, null);
+        Cursor cursor = db.query(MyApplication.userFeedTable, null, "name=?", new String[]{FeedName}, null, null, null);
         boolean result = cursor.moveToNext();
         cursor.close();
         db.close();
@@ -113,7 +120,7 @@ public class RssDao {
      */
     public String findUrl(String FeedName) {
         SQLiteDatabase db = rssSQLiteOpenHelper.getReadableDatabase();
-        Cursor cursor = db.query("rss", null, "name=?", new String[]{FeedName}, null, null, null);
+        Cursor cursor = db.query(MyApplication.userFeedTable, null, "name=?", new String[]{FeedName}, null, null, null);
         if (cursor.moveToNext()) {
             String url = cursor.getString(cursor.getColumnIndex("url"));
             cursor.close();
@@ -131,7 +138,7 @@ public class RssDao {
      */
     public String findUrlFromList(String FeedName) {
         SQLiteDatabase db = rssSQLiteOpenHelper.getReadableDatabase();
-        Cursor cursor = db.query("feedlist", null, "name=?", new String[]{FeedName}, null, null, null);
+        Cursor cursor = db.query(MyApplication.allFeedTable, null, "name=?", new String[]{FeedName}, null, null, null);
         if (cursor.moveToNext()) {
             String url = cursor.getString(cursor.getColumnIndex("url"));
             cursor.close();
@@ -149,7 +156,7 @@ public class RssDao {
      */
     public String findLink(String FeedName) {
         SQLiteDatabase db = rssSQLiteOpenHelper.getReadableDatabase();
-        Cursor cursor = db.query("rss", null, "name=?", new String[]{FeedName}, null, null, null);
+        Cursor cursor = db.query(MyApplication.userFeedTable, null, "name=?", new String[]{FeedName}, null, null, null);
         if (cursor.moveToNext()) {
             String link = cursor.getString(cursor.getColumnIndex("link"));
             cursor.close();
@@ -168,7 +175,7 @@ public class RssDao {
     public List<RssFeedInfo> findAll() {
         List<RssFeedInfo> feedInfos = new ArrayList<>();
         SQLiteDatabase db = rssSQLiteOpenHelper.getReadableDatabase();
-        Cursor cursor = db.query("rss", new String[]{"id", "name", "url", "link"}, null, null, null, null, null);
+        Cursor cursor = db.query(MyApplication.userFeedTable, new String[]{"id", "name", "url", "link"}, null, null, null, null, null);
         while (cursor.moveToNext()) {
             int id = cursor.getInt(cursor.getColumnIndex("id"));
             String name = cursor.getString(cursor.getColumnIndex("name"));
@@ -190,7 +197,7 @@ public class RssDao {
         String Second = null;
         List<Map<String, String>> groupList = new ArrayList<>();
         SQLiteDatabase db = rssSQLiteOpenHelper.getReadableDatabase();
-        Cursor cursor = db.query("feedlist", new String[]{"type"}, null, null, "type", null, "type");
+        Cursor cursor = db.query(MyApplication.allFeedTable, new String[]{"type"}, null, null, "type", null, "type");
         while (cursor.moveToNext()) {
             First = cursor.getString(cursor.getColumnIndex("type"));
             if (!First.equals(Second)) {
@@ -214,7 +221,7 @@ public class RssDao {
         String Second = null;
         List<List<Map<String, String>>> childList = new ArrayList<>();
         SQLiteDatabase db = rssSQLiteOpenHelper.getReadableDatabase();
-        Cursor cursor = db.query("feedlist", new String[]{"type", "name", "url"}, null, null, null, null, "type");
+        Cursor cursor = db.query(MyApplication.allFeedTable, new String[]{"type", "name", "url"}, null, null, null, null, "type");
         cursor.moveToFirst();
         First = cursor.getString(cursor.getColumnIndex("type"));
         //Log.v(TAG, First);

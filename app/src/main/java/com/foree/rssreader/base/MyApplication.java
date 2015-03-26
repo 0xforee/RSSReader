@@ -29,11 +29,29 @@ public class MyApplication extends Application {
     private static final String TAG = "MyApplication";
     private Context mContext;
 
+    /**
+     * 数据库信息
+     */
+    //数据库名称
+    public static final String dbName = "rss.db";
+    //存放用户个人订阅信息的表
+    public static final String userFeedTable = "rss";
+    //存放所有订阅信息的表
+    public static final String allFeedTable = "feedlist";
+    //应用程序的数据库版本
+    public static int myDataBaseVersion = 2;
+
+    /**
+     * Sdcard信息
+     */
     //Sdcard的路径
     public static final String SdcardPath = Environment.getExternalStorageDirectory().getAbsolutePath();
     //Sdcard的状态（用于判断是否挂载）
     public static final String SdcardState = Environment.getExternalStorageState();
 
+    /**
+     * 应用程序信息
+     */
     //应用程序名称
     public static final String myApplicationName = "Duker";
     //应用程序包名
@@ -48,8 +66,6 @@ public class MyApplication extends Application {
     public static String mySdcardDataDir;
     //应用程序的缓存目录路径
     public static String mySdcardCacheDir;
-    //应用程序的数据库版本
-    public static int myDataBaseVersion = 2;
 
     public MyApplication(MainActivity context) {
         mContext = context;
