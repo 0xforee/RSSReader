@@ -41,9 +41,12 @@ public class RssDao {
             values.put("url", url);
             values.put("link", link);
             Long result = db.insert("rss", null, values);
+            cursor.close();
             db.close();
             return result;
         } else {
+            cursor.close();
+            db.close();
             return -1;
         }
     }
@@ -61,9 +64,12 @@ public class RssDao {
             values.put("url", url);
             values.put("type", Type);
             Long result = db.insert("feedlist", null, values);
+            cursor.close();
             db.close();
             return result;
         } else {
+            cursor.close();
+            db.close();
             return -1;
         }
     }
@@ -115,6 +121,8 @@ public class RssDao {
             Log.v(TAG, url);
             return url;
         }
+        cursor.close();
+        db.close();
         return null;
     }
 
@@ -131,6 +139,8 @@ public class RssDao {
             Log.v(TAG, url);
             return url;
         }
+        cursor.close();
+        db.close();
         return null;
     }
 
@@ -147,6 +157,8 @@ public class RssDao {
             Log.v(TAG, link);
             return link;
         }
+        cursor.close();
+        db.close();
         return null;
     }
 
@@ -167,9 +179,7 @@ public class RssDao {
         }
         cursor.close();
         db.close();
-
         return feedInfos;
-
     }
 
     /**
