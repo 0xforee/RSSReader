@@ -1,19 +1,26 @@
 package com.foree.rssreader.utils;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
 import com.foree.rssreader.base.MyApplication;
+import com.foree.rssreader.xmlparse.OpmlParse;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 /**
  * Created by foree on 3/7/15.
@@ -117,10 +124,41 @@ public class FileUtils {
             Bitmap bitmap = BitmapFactory.decodeStream(stream2, null, o2);
             stream2.close();
             return bitmap;
-        } catch (FileNotFoundException e) {
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static void copyFile(InputStream fromFile, String toFile) {
+        try {
+            OutputStream out = new FileOutputStream(toFile);
+            byte[] buff = new byte[1024];
+            int length;
+            while ((length = fromFile.read(buff)) > 0) {
+                out.write(buff, 0, length);
+            }
+            out.flush();
+            out.close();
+            fromFile.close();
+            Log.v(TAG, "copy success");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void parseOpml(Context context) {
+        //opml name
+        String fileName = "111111";
+        try {
+            String FilePath = MyApplication.mySdcardDataDir;
+            File filepath = new File(FilePath + File.separator + fileName);
+            SAXParser saxParser = SAXParserFactory.newInstance().newSAXParser();
+            OpmlParse opmlParse = new OpmlParse(context);
+
+            saxParser.parse(filepath, opmlParse);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
