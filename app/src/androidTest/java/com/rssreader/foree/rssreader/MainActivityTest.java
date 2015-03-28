@@ -2,7 +2,14 @@ package com.rssreader.foree.rssreader;
 
 import android.test.AndroidTestCase;
 
+import com.foree.rssreader.base.MyApplication;
 import com.foree.rssreader.db.RssDao;
+import com.foree.rssreader.xmlparse.OpmlParse;
+
+import java.io.File;
+
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 public class MainActivityTest extends AndroidTestCase {
     public void testAdd() throws Exception {
@@ -22,5 +29,16 @@ public class MainActivityTest extends AndroidTestCase {
         rssDao.delete("凤凰读书");
         rssDao.delete("好奇心日报");
         rssDao.delete("雅虎 20 年起伏，互联网成长的 20 年缩影");
+    }
+
+    public void testOpmlParse() throws Exception {
+        // String fileName = "那些好看的微信公众号合集.xml";
+        String fileName = "11.xml";
+        // String fileName = "历史-读书合集.xml";
+        String FilePath = "/sdcard/Duker";
+        File filepath = new File(FilePath + File.separator + fileName);
+        SAXParser saxParser = SAXParserFactory.newInstance().newSAXParser();
+        OpmlParse opmlParse = new OpmlParse(getContext());
+        saxParser.parse(filepath, opmlParse);
     }
 }
