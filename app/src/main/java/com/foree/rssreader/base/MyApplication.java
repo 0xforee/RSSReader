@@ -40,6 +40,8 @@ public class MyApplication extends Application {
     public static final String allFeedTable = "feedlist";
     //应用程序的数据库版本
     public static int myDataBaseVersion = 2;
+    //数据库的存放路径
+    public static String myDataBasePath;
 
     /**
      * Sdcard信息
@@ -55,7 +57,7 @@ public class MyApplication extends Application {
     //应用程序名称
     public static final String myApplicationName = "Duker";
     //应用程序包名
-    public static final String myApplicationPackageName = "com.rssreader.foree.rssreader";
+    public static String myApplicationPackageName;
     //应用程序版本名称
     public static String myVersionName;
     //应用程序版本号
@@ -73,6 +75,8 @@ public class MyApplication extends Application {
 
     //初始化环境
     public void initEnv() {
+        //初始化应用程序的包名
+        myApplicationPackageName = mContext.getPackageName();
         //判断当前网络状况
         mNetworkState = NetworkUtils.getNetworkState(mContext);
 
@@ -93,6 +97,9 @@ public class MyApplication extends Application {
                 }
             mySdcardCacheDir = mySdcardDataDir + "/" + "cache";
         }
+
+        //初始化数据库文件所在的路径
+        myDataBasePath = mContext.getFilesDir().getPath() + "/.." + File.separator + "databases";
 
         //进行数据库的初始化
         RssDao rssDao = new RssDao(mContext);
