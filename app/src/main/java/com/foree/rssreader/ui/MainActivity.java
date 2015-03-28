@@ -258,24 +258,6 @@ public class MainActivity extends BaseActivity
             //设置滑动监听
             listView.setOnScrollListener(mainActivity);
             Log.v(TAG, "onCreateView");
-            return rootView;
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((MainActivity) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
-            //初始化mainactivity实例，用于与主界面通信
-            mainActivity = (MainActivity) activity;
-            Log.v(TAG, "OnAttach");
-
-        }
-
-        //在onStart方法中对listview进行动态的数据添加
-        @Override
-        public void onStart() {
-            super.onStart();
             //获取当前所选中的fragment,并解析对应的url
             int id = getArguments().getInt(ARG_SECTION_NUMBER);
             /**
@@ -286,7 +268,7 @@ public class MainActivity extends BaseActivity
                 mTextView.setText("你还没有添加任何RSS源,请点击+添加");
                 mProgressBar.setVisibility(View.INVISIBLE);
                 mTextView.setVisibility(View.VISIBLE);
-                return;
+                return rootView;
             }
             FeedName = NavigationDrawerFragment.FeedInfos.get(id - 1);
             RssDao rssDao = new RssDao(mainActivity);
@@ -315,6 +297,25 @@ public class MainActivity extends BaseActivity
                 });
                 Log.v(TAG, "onStart");
             }
+            return rootView;
+        }
+
+        @Override
+        public void onAttach(Activity activity) {
+            super.onAttach(activity);
+            ((MainActivity) activity).onSectionAttached(
+                    getArguments().getInt(ARG_SECTION_NUMBER));
+            //初始化mainactivity实例，用于与主界面通信
+            mainActivity = (MainActivity) activity;
+            Log.v(TAG, "OnAttach");
+
+        }
+
+        //在onStart方法中对listview进行动态的数据添加
+        @Override
+        public void onStart() {
+            super.onStart();
+
         }
 
         @Override
