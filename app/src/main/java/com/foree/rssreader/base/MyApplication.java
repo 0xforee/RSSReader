@@ -2,18 +2,24 @@ package com.foree.rssreader.base;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.foree.rssreader.db.RssDao;
 import com.foree.rssreader.rssinfo.RssFeedInfo;
 import com.foree.rssreader.ui.MainActivity;
 import com.foree.rssreader.ui.NavigationDrawerFragment;
+import com.foree.rssreader.utils.FileUtils;
 import com.foree.rssreader.utils.NetworkUtils;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -28,6 +34,7 @@ import java.util.List;
 public class MyApplication extends Application {
     private static final String TAG = "MyApplication";
     private Context mContext;
+    public static boolean mFirstRun;
 
     /**
      * 数据库信息
@@ -108,6 +115,26 @@ public class MyApplication extends Application {
             NavigationDrawerFragment.FeedInfos.add(rssFeedInfo.getTitle());
         }
         Log.v(TAG, "数据库初始化成功");
+        /**
+         * if the application is first run, you can init opml, else skip it
+         */
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(mContext);
+        mFirstRun = sp.getBoolean("FIRST_RUN", true);
+        if (mFirstRun) {
+            //copy opml file and parse it
+            try {
+                InputStream in = mContext.getAssets().open("111111");
+                String filePath = MyApplication.mySdcardDataDir + File.separator + "111111";
+                FileUtils.copyFile(in, filePath);
+
+                //解析文件
+                FileUtils.parseOpml(mContext);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            sp.edit().putBoolean("FIRST_RUN", false).apply();
+        }
 
         //获取当前应用程序的版本号和版本名称
         initApplicationVersionInfo(mContext);
