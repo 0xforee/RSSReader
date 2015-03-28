@@ -277,10 +277,10 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
     }
 
     //重新清理Adapter,用于在切换fragment的时候使用
-    public void resetUI(ListView listView, List<RssItemInfo> items) {
-        // mRssAdapter = new RssAdapter(this, items);
-        mRssAdapter.clear();
-        //  listView.setAdapter(mRssAdapter);
+    public void resetUI() {
+        rssItemInfos = new ArrayList<>();
+        mRssAdapter = new RssAdapter(this, rssItemInfos);
+        //mRssAdapter.clear();
     }
 
 

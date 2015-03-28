@@ -386,7 +386,7 @@ public class MainActivity extends BaseActivity
         public void onDetach() {
             super.onDetach();
             Log.v(TAG, "onDetach");
-            mainActivity.resetUI(listView, new ArrayList<RssItemInfo>());
+            mainActivity.resetUI();
 
         }
 
