@@ -136,42 +136,6 @@ public class MainActivity extends BaseActivity
                 builder.setNeutralButton("返回", null);
                 builder.show();
                 break;
-            //点击new,对侧边的数据进行增加,并调用adapter提示变化
-            case R.id.action_new:
-
-                //将dialog布局文件转换为一个view对象
-                LayoutInflater factory = LayoutInflater.from(this);
-                final View view = factory.inflate(R.layout.dialog_newfeed, null);
-
-                //创建dialog
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-                builder1.setTitle("请输入一个合法的Rss链接");
-                builder1.setView(view);
-                final Intent intent1 = new Intent(this, RssAddFeed.class);
-                builder1.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        EditText editText = (EditText) view.findViewById(R.id.et_newfeed_url);
-                        String url = editText.getText().toString();
-                        //使用bundle来传递数据
-                        Bundle args = new Bundle();
-                        args.putString("url", url);
-
-                        intent1.putExtra("com.rssreader.mainactivity", args);
-                        startActivity(intent1);
-
-                        Toast.makeText(MainActivity.this, "跳转成功", Toast.LENGTH_SHORT).show();
-
-                    }
-                });
-                builder1.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                builder1.show();
-                break;
             case R.id.action_search:
                 Intent intent2 = new Intent(this, RssFeedList.class);
                 startActivity(intent2);
@@ -363,6 +327,7 @@ public class MainActivity extends BaseActivity
             }
             Log.v(TAG, "onCreate");
         }
+
         @Override
         public void onPause() {
             super.onPause();

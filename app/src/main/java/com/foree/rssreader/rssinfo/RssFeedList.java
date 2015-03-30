@@ -1,9 +1,15 @@
 package com.foree.rssreader.rssinfo;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.Toast;
@@ -71,6 +77,57 @@ public class RssFeedList extends BaseActivity {
                 return false;
             }
         });
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_feedlist, menu);
+        //return true表示事件处理到此处结束,不需要向下传递
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        switch (id) {
+            //点击new,对侧边的数据进行增加,并调用adapter提示变化
+            case R.id.action_new:
+                //将dialog布局文件转换为一个view对象
+                LayoutInflater factory = LayoutInflater.from(this);
+                final View view = factory.inflate(R.layout.dialog_newfeed, null);
+
+                //创建dialog
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                builder1.setTitle("请输入一个合法的Rss链接");
+                builder1.setView(view);
+                final Intent intent1 = new Intent(this, RssAddFeed.class);
+                builder1.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        EditText editText = (EditText) view.findViewById(R.id.et_newfeed_url);
+                        String url = editText.getText().toString();
+                        //使用bundle来传递数据
+                        Bundle args = new Bundle();
+                        args.putString("url", url);
+
+                        intent1.putExtra("com.rssreader.mainactivity", args);
+                        startActivity(intent1);
+                    }
+                });
+                builder1.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //nothings to do
+                    }
+                });
+                builder1.show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }
