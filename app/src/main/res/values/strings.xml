@@ -16,6 +16,7 @@
     <string name="action_share">Share</string>
     <string name="action_search">Search</string>
     <string name="action_new">New</string>
+    <string name="action_delete">Delete</string>
     <string name="action_textsize">textsize</string>
     <string name="action_textsize_small">small</string>
     <string name="action_textsize_normal">normal</string>

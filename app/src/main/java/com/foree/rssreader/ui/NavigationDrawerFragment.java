@@ -11,17 +11,21 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.foree.rssreader.db.RssDao;
 import com.rssreader.foree.rssreader.R;
 
 import java.util.ArrayList;
@@ -103,6 +107,11 @@ public class NavigationDrawerFragment extends Fragment {
                              Bundle savedInstanceState) {
         mDrawerListView = (ListView) inflater.inflate(
                 R.layout.fragment_navigation_drawer, container, false);
+        //set listview's ChoiceMode multiple
+        mDrawerListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        //set listener
+        mDrawerListView.setMultiChoiceModeListener(new MyCallBack());
+        //if not in multiple mode, set clickListener
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -112,7 +121,7 @@ public class NavigationDrawerFragment extends Fragment {
         //为drawer侧边的listview设置数据适配器
         mDrawerListView.setAdapter(adapter);
         //设置高亮显示
-        mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+        // mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }
 
@@ -196,7 +205,7 @@ public class NavigationDrawerFragment extends Fragment {
     private void selectItem(int position) {
         mCurrentSelectedPosition = position;
         if (mDrawerListView != null) {
-            mDrawerListView.setItemChecked(position, true);
+            //    mDrawerListView.setItemChecked(position, true);
         }
         if (mDrawerLayout != null) {
             mDrawerLayout.closeDrawer(mFragmentContainerView);
@@ -278,5 +287,74 @@ public class NavigationDrawerFragment extends Fragment {
          * 当Item选中的时候调用
          */
         void onNavigationDrawerItemSelected(int position);
+    }
+
+    /**
+     * 进入多选状态时的回调方法
+     */
+    private class MyCallBack implements ListView.MultiChoiceModeListener {
+        private static final String TAG = "MyCallBack";
+        private List<String> selections;
+        private RssDao rssDao;
+
+        @Override
+        public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
+            Toast.makeText(getActivity(), "选中", Toast.LENGTH_SHORT).show();
+            if (checked) {
+                selections.add(NavigationDrawerFragment.FeedInfos.get(position));
+                Log.v(TAG, "add position " + NavigationDrawerFragment.FeedInfos.get(position));
+            } else {
+                selections.remove(NavigationDrawerFragment.FeedInfos.get(position));
+                Log.v(TAG, "delete position " + NavigationDrawerFragment.FeedInfos.get(position));
+            }
+        }
+
+        //在此处创建多选选中时候的menu功能
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            MenuInflater inflater = getActivity().getMenuInflater();
+            //插入一个菜单按键,可以全选以及删除
+            inflater.inflate(R.menu.menu_multiselection, menu);
+            selections = new ArrayList<>();
+            rssDao = new RssDao(getActivity());
+            Log.v(TAG, "onCreateActionMode");
+            return true;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            Log.v(TAG, "onPrepareActionMode");
+            return false;
+        }
+
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.action_delete:
+                    Log.v(TAG, "delete!");
+                    //delete rss data
+                    for (int i = 0; i < selections.size(); i++) {
+                        //  String DeleteName = NavigationDrawerFragment.FeedInfos.get(selections.get(i));
+                        //delete data from FeedInfos, and notify
+                        NavigationDrawerFragment.FeedInfos.remove(selections.get(i));
+                        //selections.remove(i);
+                        adapter.notifyDataSetChanged();
+                        //delete data from userdatabase
+                        rssDao.delete(selections.get(i));
+                    }
+                    //finish mode
+                    mode.finish();
+                    //refresh( later )
+                    break;
+            }
+            Log.v(TAG, "onActionItemClicked");
+
+            return true;
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+            Log.v(TAG, "onDestroyActionMode");
+        }
     }
 }
