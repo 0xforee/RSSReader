@@ -1,37 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <opml version="1.0">
   <head>
-    <title>那些好看的公众号 created by foree</title>
+    <title>财经·金融-公众号 created by foree</title>
   </head>
   <body>
-    <outline text="那些好看的公众号" title="那些好看的公众号">
-      <outline text="凤凰读书" title="凤凰读书" type="rss" xmlUrl="http://feed.dogear.cn/rss/53a5baf56297372db76ce640.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt0kbfgwDQwsFzhw8DyT2Nvg"/>
-      <outline text="豆瓣阅读" title="豆瓣阅读" type="rss" xmlUrl="http://feed.dogear.cn/rss/53a5b8876297372da3563813.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt6nIEUjb5d27TzwgZovJCoE"/>
-      <outline text="网易公开课" title="网易公开课" type="rss" xmlUrl="http://feed.dogear.cn/rss/539fa161629737793ac17ee9.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt4tXwQq3dJRBRyZX5PbPYOU"/>
-      <outline text="豆瓣电影" title="豆瓣电影" type="rss" xmlUrl="http://feed.dogear.cn/rss/539bad866297376b9f634a21.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt5lSvLfdMHn0Ua0CtDjmh70"/>
-      <outline text="果壳网" title="果壳网" type="rss" xmlUrl="http://feed.dogear.cn/rss/539ad9f26297376baf86098b.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt7Er833fvFpNZIx4m5_duR0"/>
-      <outline text="知乎日报" title="知乎日报" type="rss" xmlUrl="http://feed.dogear.cn/rss/539ad7e76297376baf860984.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt_fvQ_llbDUPDyr1Ik553jo"/>
-      <outline text="方舟子" title="方舟子" type="rss" xmlUrl="http://feed.dogear.cn/rss/539aa9e96297376b970c2f24.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt7oFq-SDHE7ve1HP8GnPHUQ"/>
-      <outline text="VICE中国" title="VICE中国" type="rss" xmlUrl="http://feed.dogear.cn/rss/539aa8c26297376b9f634894.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt2NYk3IRxVW0oWt6xNsbI_4"/>
-      <outline text="读首诗再睡觉" title="读首诗再睡觉" type="rss" xmlUrl="http://feed.dogear.cn/rss/53a6ef3d6297372dbf158b9e.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt6WKRnEKV4a1pFrc9T7XQdg"/>
+    <outline text="财经·金融-公众号" title="财经·金融-公众号">
       <outline text="经济学人" title="经济学人" type="rss" xmlUrl="http://feed.dogear.cn/rss/53a8fe166297377e0a338326.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt7WNmRWBvsqqZc2C6cuZ6Dk"/>
-      <outline text="最美应用" title="最美应用" type="rss" xmlUrl="http://feed.dogear.cn/rss/53aae4566297377e1a85cea6.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFtzj_XNQy_pjrr_8NJyh5lgo"/>
-      <outline text="凤凰历史" title="凤凰历史" type="rss" xmlUrl="http://feed.dogear.cn/rss/53b1793362973737741426b6.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt59oskeLQOEwrHML7MMLEfo"/>
-      <outline text="凤凰新闻" title="凤凰新闻" type="rss" xmlUrl="http://feed.dogear.cn/rss/53b948a66297375ce8d81985.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFtwMeHKlgc8U6rPtQWR3AOTI"/>
-      <outline text="好奇心日报" title="好奇心日报" type="rss" xmlUrl="http://feed.dogear.cn/rss/53be19c36297377fa20d96d7.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt7EVnIjsiOajYQ-jfO9L6QA"/>
-      <outline text="单向街书店" title="单向街书店" type="rss" xmlUrl="http://feed.dogear.cn/rss/539aa88f6297376ba77359f7.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt2w7J2ciAdD722lQRr6_Tec"/>
-      <outline text="经典短篇阅读" title="经典短篇阅读" type="rss" xmlUrl="http://feed.dogear.cn/rss/53996c766297374a69bca2e7.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt1olu_yRDryBug_RXycoH5s"/>
-      <outline text="扇贝网" title="扇贝网" type="rss" xmlUrl="http://feed.dogear.cn/rss/53991dd96297374a7150358c.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt1dQ08TtCh945YTveGxZWlk"/>
-      <outline text="少数派" title="少数派" type="rss" xmlUrl="http://feed.dogear.cn/rss/539906636297374a7150354a.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFtx61Ldu2VHrYTmONXI7xa04"/>
-      <outline text="每天进步一点点" title="每天进步一点点" type="rss" xmlUrl="http://feed.dogear.cn/rss/5398fa4f6297374a69bca1df.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFtwo1az2FajUL609KV51jhrM"/>
-      <outline text="罗永浩" title="罗永浩" type="rss" xmlUrl="http://feed.dogear.cn/rss/539858656297374a81585d06.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt-2p5D1dhFk56xyIXf1zg8U"/>
-      <outline text="程序猿" title="程序猿" type="rss" xmlUrl="http://feed.dogear.cn/rss/539835696297374a69bca0eb.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt91hxUcNesArMCsfk_J7iN8"/>
-      <outline text="我们爱讲冷笑话" title="我们爱讲冷笑话" type="rss" xmlUrl="http://feed.dogear.cn/rss/5397e57b6297374a007135ee.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFtzI5nA_qV-u7bUKPyekqBZs"/>
-      <outline text="拇指阅读" title="拇指阅读" type="rss" xmlUrl="http://feed.dogear.cn/rss/5397e6c26297374a08f5e4a9.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt95M-b4EIuRvc6Ddw6RPha0"/>
-      <outline text="36氪" title="36氪" type="rss" xmlUrl="http://feed.dogear.cn/rss/5397e23b6297374930b2df34.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt_9GG8-VHrOmAyMi8UXDTdM"/>
-      <outline text="今天吃什么" title="今天吃什么" type="rss" xmlUrl="http://feed.dogear.cn/rss/5397e12b6297374928ae3d4e.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFtx_6xVdSQt3TTtwZCBUGO_U"/>
-      <outline text="理想国" title="理想国" type="rss" xmlUrl="http://feed.dogear.cn/rss/53971a1962973731b093e586.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt8aIts4eeVI5aQqKCT1f4K8"/>
-      <outline text="warfalcon" title="warfalcon" type="rss" xmlUrl="http://feed.dogear.cn/rss/5396bfcd62973727a3528714.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt-UBjb3xUDrvaIy1dgvbHm0"/>
+      <outline text="理财周刊" title="理财周刊" type="rss" xmlUrl="http://feed.dogear.cn/rss/53ab1b116297377e02d50d1d.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt1669G-mnqZamXOBlx9FK8E"/>
+      <outline text="经济学人" title="经济学人" type="rss" xmlUrl="http://feed.dogear.cn/rss/53a8fe166297377e0a338326.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt8PYUunas7VI7BjDodG7EVg"/>
+      <outline text="明周刊" title="明周刊" type="rss" xmlUrl="http://feed.dogear.cn/rss/539aa8eb6297376b9f634899.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt6u4gaBLyVI56SLhcSyAclA"/>
     </outline>
   </body>
 </opml>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="1.0">
+  <head>
+    <title>历史·读书-公众号 created by foree</title>
+  </head>
+  <body>
+    <outline text="历史·读书-公众号" title="历史·读书-公众号">
+      <outline text="张佳玮写字的地方" title="张佳玮写字的地方" type="rss" xmlUrl="http://feed.dogear.cn/rss/539c098e6297376b9f634a86.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt7J-rt7u0hRCfy3AQF95vQU"/>
+      <outline text="凤凰历史" title="凤凰历史" type="rss" xmlUrl="http://feed.dogear.cn/rss/53b1793362973737741426b6.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt3SbOz3Zd3sLwZdGDGP1xfU"/>
+      <outline text="一个人的书房" title="一个人的书房" type="rss" xmlUrl="http://feed.dogear.cn/rss/53a66a526297372dad73f57a.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt9QEbe2cJH5UunjUh1D6vNo"/>
+      <outline text="豆瓣阅读" title="豆瓣阅读" type="rss" xmlUrl="http://feed.dogear.cn/rss/53a5b8876297372da3563813.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFtwsxv-USx9RRag_OJHv0qE4"/>
+      <outline text="不止读书" title="不止读书" type="rss" xmlUrl="http://feed.dogear.cn/rss/53a256c16297372dbf15854c.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt2uPI9NFSUWw8hNI5ISggjg"/>
+      <outline text="慢书房" title="慢书房" type="rss" xmlUrl="http://feed.dogear.cn/rss/539db12c6297376b9f634c62.xml" htmlUrl="http://iread.libsyn.com/"/>
+      <outline text="博客天下" title="博客天下" type="rss" xmlUrl="http://feed.dogear.cn/rss/539af5116297376b9f634942.xml" htmlUrl="http://iread.libsyn.com/"/>
+    </outline>
+  </body>
+</opml>

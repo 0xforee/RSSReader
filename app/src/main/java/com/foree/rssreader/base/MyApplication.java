@@ -75,6 +75,8 @@ public class MyApplication extends Application {
     public static String mySdcardDataDir;
     //应用程序的缓存目录路径
     public static String mySdcardCacheDir;
+    //应用程序来源的缓存目录
+    public static String MYSDCARDSOURCEDIR;
 
     public MyApplication(MainActivity context) {
         mContext = context;
@@ -103,6 +105,13 @@ public class MyApplication extends Application {
                     Log.e(TAG, "创建缓存目录失败");
                 }
             mySdcardCacheDir = mySdcardDataDir + "/" + "cache";
+            //source目录
+            File mySourceDir = new File(mySdcardDataDir + File.separator + "source/");
+            if (!mySourceDir.exists())
+                if (!mySourceDir.mkdir()) {
+                    Log.e(TAG, "创建source目录失败");
+                }
+            MYSDCARDSOURCEDIR = mySdcardDataDir + File.separator + "source";
         }
 
         //初始化数据库文件所在的路径
@@ -123,15 +132,19 @@ public class MyApplication extends Application {
         mFirstRun = sp.getBoolean("FIRST_RUN", true);
         if (mFirstRun) {
             //copy opml file and parse it
-            try {
-                InputStream in = mContext.getAssets().open("111111");
-                String filePath = MyApplication.mySdcardDataDir + File.separator + "111111";
-                FileUtils.copyFile(in, filePath);
+            for (int i = 111111; i < 111116; i++) {
+                try {
 
-                //解析文件
-                FileUtils.parseOpml(mContext);
-            } catch (IOException e) {
-                e.printStackTrace();
+                    InputStream in = mContext.getAssets().open(i + "");
+                    String filePath = MyApplication.MYSDCARDSOURCEDIR + File.separator + i;
+                    FileUtils.copyFile(in, filePath);
+                    in.close();
+
+                    //start parse opml file
+                    FileUtils.parseOpml(mContext);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             sp.edit().putBoolean("FIRST_RUN", false).apply();
         }

@@ -148,15 +148,18 @@ public class FileUtils {
     }
 
     public static void parseOpml(Context context) {
-        //opml name
-        String fileName = "111111";
         try {
-            String FilePath = MyApplication.mySdcardDataDir;
-            File filepath = new File(FilePath + File.separator + fileName);
             SAXParser saxParser = SAXParserFactory.newInstance().newSAXParser();
             OpmlParse opmlParse = new OpmlParse(context);
-
-            saxParser.parse(filepath, opmlParse);
+            //find sourceDir
+            File sourceDir = new File(MyApplication.MYSDCARDSOURCEDIR);
+            if (sourceDir.exists()) {
+                File souceList[] = sourceDir.listFiles();
+                for (File filepath : souceList) {
+                    //parse all opml files under source dir
+                    saxParser.parse(filepath, opmlParse);
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

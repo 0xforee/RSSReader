@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="1.0">
+  <head>
+    <title>媒体·达人-公众号 created by foree</title>
+  </head>
+  <body>
+    <outline text="媒体·达人-公众号" title="媒体·达人-公众号">
+      <outline text="爱范儿" title="爱范儿" type="rss" xmlUrl="http://feed.dogear.cn/rss/53bab16e6297375ce06d3e65.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt7aKQ7FTOcRkd5VlHnLFVL0"/>
+      <outline text="南方人物周刊" title="南方人物周刊" type="rss" xmlUrl="http://feed.dogear.cn/rss/53a5b85b6297372da3563811.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt_h2qw3gkzv_veqFgGMI3qA"/>
+      <outline text="Lens杂志" title="Lens杂志" type="rss" xmlUrl="http://feed.dogear.cn/rss/539aa8a56297376b970c2f16.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt8gc9qVZhxtIYn4qhmkZdDs"/>
+    </outline>
+  </body>
+</opml>

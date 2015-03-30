@@ -39,7 +39,7 @@ public class RssFeedList extends BaseActivity {
         //设置ActionBar的标题
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle("feedlist");
+        actionBar.setTitle("FeedList");
 
         //获取group和child
         RssDao rssDao = new RssDao(this);

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="1.0">
+  <head>
+    <title>娱乐·休闲-公众号 created by foree</title>
+  </head>
+  <body>
+    <outline text="娱乐·休闲-公众号" title="娱乐·休闲-公众号">
+      <outline text="天涯社区" title="天涯社区" type="rss" xmlUrl="http://feed.dogear.cn/rss/53db2109629737590fec9fff.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt2PomDdWIycVYWb0skUQGes"/>
+      <outline text="改变自己" title="改变自己" type="rss" xmlUrl="http://feed.dogear.cn/rss/5397d71662973746769936d4.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFty7elEdAKkBfTYqMOKM__WU"/>
+      <outline text="豆果网" title="豆果网" type="rss" xmlUrl="http://feed.dogear.cn/rss/53a669a16297372dbf158a96.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt98hSC2cIwjX6m1XHboauTM"/>
+      <outline text="三联生活周刊" title="三联生活周刊" type="rss" xmlUrl="http://feed.dogear.cn/rss/53a4396f6297372dad73f2be.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFtwKQ632eDPaveDooBewM-5s"/>
+      <outline text="豆瓣电影" title="豆瓣电影" type="rss" xmlUrl="http://feed.dogear.cn/rss/539bad866297376b9f634a21.xml" htmlUrl="http://weixin.sogou.com/gzh?openid=oIWsFt8nAoVQGpZRGtS8UaufH4ng"/>
+    </outline>
+  </body>
+</opml>
