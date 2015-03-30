@@ -90,7 +90,8 @@ public class MainActivity extends BaseActivity
     public void onSectionAttached(int number) {
         if (!NavigationDrawerFragment.FeedInfos.isEmpty())
             mTitle = NavigationDrawerFragment.FeedInfos.get(number - 1);
-        mTitle = MyApplication.myApplicationName;
+        else
+            mTitle = MyApplication.myApplicationName;
     }
 
 
