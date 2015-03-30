@@ -1,13 +1,11 @@
 package com.foree.rssreader.rssinfo;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -18,7 +16,6 @@ import com.foree.rssreader.base.BaseActivity;
 import com.foree.rssreader.db.RssDao;
 import com.foree.rssreader.ui.NavigationDrawerFragment;
 import com.foree.rssreader.ui.ShowDescription;
-import com.foree.rssreader.utils.ImageDownLoader;
 import com.foree.rssreader.xmlparse.XmlParseHandler;
 import com.rssreader.foree.rssreader.R;
 
@@ -34,6 +31,7 @@ public class RssAddFeed extends BaseActivity implements XmlParseHandler.ParseHan
     LinearLayout linearLayout;
     private String FeedLink = null;
     private String FeedName;
+    private ActionBar actionBar;
     boolean isUpdate = false;
 
 
@@ -50,6 +48,10 @@ public class RssAddFeed extends BaseActivity implements XmlParseHandler.ParseHan
         progressBar = (ProgressBar) findViewById(R.id.pb_addfeed);
         linearLayout = (LinearLayout) findViewById(R.id.ll_addfeed);
         //准备显示ListView
+
+        //获取actionbar
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayShowTitleEnabled(true);
 
         Button button = (Button) findViewById(R.id.bt_add);
 
@@ -116,6 +118,7 @@ public class RssAddFeed extends BaseActivity implements XmlParseHandler.ParseHan
             //解析完毕,设置界面相应的信息
             FeedName = getRssItemInfos().get(0).getFeedTitle();
             tv_title.setText(FeedName);
+            actionBar.setTitle(FeedName);
             tv_description.setText(getRssItemInfos().get(0).getFeedDescription());
 
         }
