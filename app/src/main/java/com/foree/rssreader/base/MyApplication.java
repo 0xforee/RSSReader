@@ -15,6 +15,7 @@ import com.foree.rssreader.ui.MainActivity;
 import com.foree.rssreader.ui.NavigationDrawerFragment;
 import com.foree.rssreader.utils.FileUtils;
 import com.foree.rssreader.utils.NetworkUtils;
+import com.rssreader.foree.rssreader.R;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -62,7 +63,7 @@ public class MyApplication extends Application {
      * 应用程序信息
      */
     //应用程序名称
-    public static final String myApplicationName = "Duker";
+    public static String myApplicationName;
     //应用程序包名
     public static String myApplicationPackageName;
     //应用程序版本名称
@@ -84,6 +85,8 @@ public class MyApplication extends Application {
 
     //初始化环境
     public void initEnv() {
+        //初始化应用程序名
+        myApplicationName = mContext.getString(R.string.app_name);
         //初始化应用程序的包名
         myApplicationPackageName = mContext.getPackageName();
         //判断当前网络状况
