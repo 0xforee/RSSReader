@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="panel_array">
+        <item>view1</item>
+        <item>view2</item>
+        <item>view3</item>
+    </string-array>
+    <string-array name="textsize">
+        <item>small</item>
+        <item>normal</item>
+        <item>large</item>
+    </string-array>
+</resources>
