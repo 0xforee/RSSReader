@@ -45,7 +45,7 @@ public class MyApplication extends Application {
     //存放用户个人订阅信息的表
     public static final String userFeedTable = "rss";
     //存放所有订阅信息的表
-    public static final String allFeedTable = "feedlist";
+    public static final String allFeedTable = "activity_feedlist";
     //应用程序的数据库版本
     public static int myDataBaseVersion = 2;
     //数据库的存放路径

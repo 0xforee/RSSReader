@@ -134,7 +134,7 @@ public class ParseTask extends AsyncTask<MainActivity.PlaceholderFragment, Integ
         //将传来的数据显示到listview中，使用title_list_layout布局
         adapter = new SimpleAdapter(mcontext,
                 list,
-                R.layout.title_list_layout,
+                R.layout.listview_item_layout,
                 new String[]{"title", "pubdate"},
                 new int[]{R.id.title, R.id.time});
 

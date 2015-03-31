@@ -15,7 +15,7 @@ public class LoadActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.load);
+        setContentView(R.layout.activity_load);
         Thread loadThread = new Thread() {
             @Override
             public void run() {

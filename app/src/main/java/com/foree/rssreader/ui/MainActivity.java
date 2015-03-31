@@ -2,7 +2,6 @@ package com.foree.rssreader.ui;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,16 +15,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.foree.rssreader.base.BaseActivity;
 import com.foree.rssreader.base.MyApplication;
 import com.foree.rssreader.db.RssDao;
-import com.foree.rssreader.rssinfo.RssAddFeed;
 import com.foree.rssreader.rssinfo.RssFeedList;
 import com.foree.rssreader.rssinfo.RssItemInfo;
 import com.foree.rssreader.xmlparse.XmlParseHandler;
@@ -54,7 +50,7 @@ public class MainActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.DayTheme);
-        setContentView(R.layout.main);
+        setContentView(R.layout.activity_main);
 
         //应用启动初始化环境变量
         myApplication = new MyApplication(this);
@@ -77,7 +73,7 @@ public class MainActivity extends BaseActivity
     //在navigation被选中的时候
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        // update the main content by replacing fragments
+        // update the activity_main content by replacing fragments
         // 同过替换fragment来更新主界面
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
@@ -260,7 +256,6 @@ public class MainActivity extends BaseActivity
                         mainActivity.startActivity(mintent);
                     }
                 });
-                Log.v(TAG, "onStart");
             }
             return rootView;
         }
@@ -280,6 +275,7 @@ public class MainActivity extends BaseActivity
         @Override
         public void onStart() {
             super.onStart();
+            Log.v(TAG, "onStart");
 
         }
 

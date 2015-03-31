@@ -71,7 +71,6 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
 
         mImageDownLoader = new ImageDownLoader(this);
 
-        Log.v(TAG, "onCreate");
 
     }
 
@@ -113,6 +112,7 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
 
     /**
      * 显示当前屏幕的图片，先会去查找LruCache，LruCache没有就去sd卡或者手机目录查找，再没有就开启线程去下载
+     *
      * @param firstVisibleItem 第一个可见的item
      * @param visibleItemCount 总可见的item数量
      */
@@ -159,6 +159,7 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
             TextView tv_time;
             ImageView iv_title_image;
         }
+
         private LayoutInflater mLayoutInflater;
         private Context mContext;
 
@@ -190,7 +191,7 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
             ViewHolder viewHolder;
             //获取系统的view控件
             if (convertView == null) {
-                convertView = mLayoutInflater.inflate(R.layout.title_list_layout, null);
+                convertView = mLayoutInflater.inflate(R.layout.listview_item_layout, null);
                 viewHolder = new ViewHolder();
                 //将rssItemInfo数据设置到viewHolder中
                 viewHolder.tv_title = (TextView) convertView.findViewById(R.id.title);

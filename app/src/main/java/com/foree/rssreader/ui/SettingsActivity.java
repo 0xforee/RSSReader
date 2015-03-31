@@ -17,7 +17,7 @@ public class SettingsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.setting_activity);
+        setContentView(R.layout.activity_setting);
 
         //添加ActionBar的标题
         ActionBar actionBar = getSupportActionBar();

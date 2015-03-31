@@ -38,7 +38,7 @@ public class RssAddFeed extends BaseActivity implements XmlParseHandler.ParseHan
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_feed);
+        setContentView(R.layout.activity_add_feed);
         //获取listview
         listView = (ListView) findViewById(R.id.lv_addfeed);
         //获取title和description
@@ -100,7 +100,7 @@ public class RssAddFeed extends BaseActivity implements XmlParseHandler.ParseHan
                 } else {
                     Toast.makeText(RssAddFeed.this, "此订阅号已添加过啦", Toast.LENGTH_SHORT).show();
                 }
-                }
+            }
         });
     }
 

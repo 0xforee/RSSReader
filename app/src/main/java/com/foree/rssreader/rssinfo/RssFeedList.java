@@ -31,7 +31,7 @@ public class RssFeedList extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.feedlist);
+        setContentView(R.layout.activity_feedlist);
 
         //找到控件
         ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.el_feedlist);

@@ -27,7 +27,7 @@ public class ShowDescription extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.webview);
+        setContentView(R.layout.activity_showdescription);
 
         //获取Actionbar,设置标题
         ActionBar actionBar = getSupportActionBar();
