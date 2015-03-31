@@ -22,30 +22,20 @@
         </activity>
         <activity
             android:name="com.foree.rssreader.ui.MainActivity"
-            android:label="@string/app_name"></activity>
+            android:label="@string/app_name" />
         <activity
             android:name="com.foree.rssreader.ui.ShowDescription"
-            android:label="RSSRedar"></activity>
+            android:label="RSSRedar" />
         <activity
             android:name="com.foree.rssreader.ui.SettingsActivity"
-            android:label="RSSRedar"></activity>
+            android:label="RSSRedar" />
         <activity
             android:name="com.foree.rssreader.rssinfo.RssAddFeed"
             android:label="RSSRedar">
-            <meta-data
+            <!--左上角添加返回导航键 -->
+            <!--<meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.foree.rssreader.ui.MainActivity" />
-        </activity>
-
-        <activity
-            android:name="com.foree.rssreader.ui.SearchActivity"
-            android:label="RSSReader">
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
-            <intent-filter>
-                <action android:name="android.intent.action.search" />
-            </intent-filter>
+                android:value="com.foree.rssreader.ui.MainActivity" />-->
         </activity>
         <activity android:name="com.foree.rssreader.rssinfo.RssFeedList" />
     </application>

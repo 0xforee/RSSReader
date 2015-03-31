@@ -2,7 +2,6 @@ package com.rssreader.foree.rssreader;
 
 import android.test.AndroidTestCase;
 
-import com.foree.rssreader.base.MyApplication;
 import com.foree.rssreader.db.RssDao;
 import com.foree.rssreader.xmlparse.OpmlParse;
 
@@ -33,7 +32,7 @@ public class MainActivityTest extends AndroidTestCase {
 
     public void testOpmlParse() throws Exception {
         // String fileName = "那些好看的微信公众号合集.xml";
-        String fileName = "11.xml";
+        String fileName = "111111";
         // String fileName = "历史-读书合集.xml";
         String FilePath = "/sdcard/Duker";
         File filepath = new File(FilePath + File.separator + fileName);
