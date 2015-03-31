@@ -64,6 +64,8 @@ public class MyApplication extends Application {
      */
     //应用程序名称
     public static String myApplicationName;
+    //应用程序sdcard目录名
+    public static String myApplicationDir = "Duker";
     //应用程序包名
     public static String myApplicationPackageName;
     //应用程序版本名称
@@ -95,12 +97,12 @@ public class MyApplication extends Application {
         //如果当前Sdcard已经挂载，应用程序目录与缓存目录是否建立完成
         if (SdcardState.equals(Environment.MEDIA_MOUNTED)) {
             //应用程序目录
-            File myDateDir = new File(SdcardPath + "/" + myApplicationName + "/");
+            File myDateDir = new File(SdcardPath + "/" + myApplicationDir + "/");
             if (!myDateDir.exists())
                 if (!myDateDir.mkdir()) {
                     Log.e(TAG, "创建应用程序目录失败");
                 }
-            mySdcardDataDir = SdcardPath + "/" + myApplicationName;
+            mySdcardDataDir = SdcardPath + "/" + myApplicationDir;
             //缓存目录
             File myCacheDir = new File(mySdcardDataDir + "/" + "cache/");
             if (!myCacheDir.exists())
