@@ -39,7 +39,7 @@ public class RssFeedList extends BaseActivity {
         //设置ActionBar的标题
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle("FeedList");
+        actionBar.setTitle(R.string.feedListTitle);
 
         //获取group和child
         RssDao rssDao = new RssDao(this);
@@ -106,7 +106,7 @@ public class RssFeedList extends BaseActivity {
                 builder1.setTitle("请输入一个合法的Rss链接");
                 builder1.setView(view);
                 final Intent intent1 = new Intent(this, RssAddFeed.class);
-                builder1.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                builder1.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         EditText editText = (EditText) view.findViewById(R.id.et_newfeed_url);
@@ -119,7 +119,7 @@ public class RssFeedList extends BaseActivity {
                         startActivity(intent1);
                     }
                 });
-                builder1.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                builder1.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //nothings to do

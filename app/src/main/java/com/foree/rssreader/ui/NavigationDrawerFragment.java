@@ -290,7 +290,7 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     /**
-     * 进入多选状态时的回调方法
+     * 进入多选状态时的回调方法(用于删除侧边栏的订阅)
      */
     private class MyCallBack implements ListView.MultiChoiceModeListener {
         private static final String TAG = "MyCallBack";
@@ -348,7 +348,6 @@ public class NavigationDrawerFragment extends Fragment {
                     break;
             }
             Log.v(TAG, "onActionItemClicked");
-
             return true;
         }
 
