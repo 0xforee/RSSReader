@@ -21,7 +21,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by foree on 3/7/15.
@@ -45,7 +48,7 @@ public class MyApplication extends Application {
     //存放用户个人订阅信息的表
     public static final String userFeedTable = "rss";
     //存放所有订阅信息的表
-    public static final String allFeedTable = "activity_feedlist";
+    public static final String allFeedTable = "feedlist";
     //应用程序的数据库版本
     public static int myDataBaseVersion = 2;
     //数据库的存放路径
@@ -80,6 +83,8 @@ public class MyApplication extends Application {
     public static String mySdcardCacheDir;
     //应用程序来源的缓存目录
     public static String MYSDCARDSOURCEDIR;
+    //程序当前运行的最新日期
+    public static String myDate;
 
     public MyApplication(MainActivity context) {
         mContext = context;
@@ -93,6 +98,9 @@ public class MyApplication extends Application {
         myApplicationPackageName = mContext.getPackageName();
         //判断当前网络状况
         mNetworkState = NetworkUtils.getNetworkState(mContext);
+        //初始化当前日期
+        myDate = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US).format(new Date());
+        // Log.v(TAG, myDate);
 
         //如果当前Sdcard已经挂载，应用程序目录与缓存目录是否建立完成
         if (SdcardState.equals(Environment.MEDIA_MOUNTED)) {
