@@ -18,7 +18,7 @@ import com.rssreader.foree.rssreader.R;
  * Created by foree on 3/5/15.
  * 显示每条Item的具体的信息
  */
-public class ShowDescription extends BaseActivity {
+public class DescriptionActivity extends BaseActivity {
     private static final String TAG = "ShowDescription";
     String link = null;
     String title = null;

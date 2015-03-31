@@ -1,4 +1,4 @@
-package com.foree.rssreader.rssinfo;
+package com.foree.rssreader.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,8 +14,7 @@ import android.widget.Toast;
 
 import com.foree.rssreader.base.BaseActivity;
 import com.foree.rssreader.db.RssDao;
-import com.foree.rssreader.ui.NavigationDrawerFragment;
-import com.foree.rssreader.ui.ShowDescription;
+import com.foree.rssreader.rssinfo.RssFeedInfo;
 import com.foree.rssreader.xmlparse.XmlParseHandler;
 import com.rssreader.foree.rssreader.R;
 
@@ -23,7 +22,7 @@ import com.rssreader.foree.rssreader.R;
  * Created by foree on 3/18/15.
  * 添加RssFeed时预览窗口
  */
-public class RssAddFeed extends BaseActivity implements XmlParseHandler.ParseHandlerCallbacks {
+public class AddFeedActivity extends BaseActivity implements XmlParseHandler.ParseHandlerCallbacks {
     private static final String TAG = "RssAddFeed";
     private RssFeedInfo mrssFeedInfo;
     TextView tv_title, tv_description;
@@ -67,7 +66,7 @@ public class RssAddFeed extends BaseActivity implements XmlParseHandler.ParseHan
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent mintent = new Intent(RssAddFeed.this, ShowDescription.class);
+                Intent mintent = new Intent(AddFeedActivity.this, DescriptionActivity.class);
 
                 //绑定数据
                 Bundle bundle = new Bundle();
@@ -77,7 +76,7 @@ public class RssAddFeed extends BaseActivity implements XmlParseHandler.ParseHan
                 bundle.putString("pubdate", getRssItemInfos().get(position).getpubDate());
 
                 mintent.putExtra("com.rssinfo.foree.rssreader", bundle);
-                RssAddFeed.this.startActivity(mintent);
+                AddFeedActivity.this.startActivity(mintent);
             }
         });
         //点击添加到数据库
@@ -88,17 +87,17 @@ public class RssAddFeed extends BaseActivity implements XmlParseHandler.ParseHan
                 //取得要作为缓存文件的链接存入数据库中
                 FeedLink = getRssItemInfos().get(0).getFeedLink();
                 //将链接和名称加入到数据库中,如果有重复,则提示重复并退出
-                RssDao rssDao = new RssDao(RssAddFeed.this);
+                RssDao rssDao = new RssDao(AddFeedActivity.this);
                 if (rssDao.add(FeedName, url, FeedLink) != -1) {
                     NavigationDrawerFragment.FeedInfos.add(FeedName);
                     NavigationDrawerFragment.adapter.notifyDataSetChanged();
                     //如果用户点击添加,那么保存缓存文件
                     // CacheUtils.writeCacheList(mrssFeedInfo);
 
-                    Toast.makeText(RssAddFeed.this, "添加成功", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddFeedActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
-                    Toast.makeText(RssAddFeed.this, "此订阅号已添加过啦", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddFeedActivity.this, "此订阅号已添加过啦", Toast.LENGTH_SHORT).show();
                 }
             }
         });

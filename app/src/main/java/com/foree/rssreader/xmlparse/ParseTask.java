@@ -14,9 +14,9 @@ import android.widget.TextView;
 
 import com.foree.rssreader.base.MyApplication;
 import com.foree.rssreader.rssinfo.RssFeedInfo;
+import com.foree.rssreader.ui.DescriptionActivity;
 import com.foree.rssreader.ui.MainActivity;
 import com.rssreader.foree.rssreader.R;
-import com.foree.rssreader.ui.ShowDescription;
 import com.foree.rssreader.utils.CacheUtils;
 import com.foree.rssreader.utils.NetworkUtils;
 
@@ -146,7 +146,7 @@ public class ParseTask extends AsyncTask<MainActivity.PlaceholderFragment, Integ
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent mintent = new Intent(mcontext, ShowDescription.class);
+                Intent mintent = new Intent(mcontext, DescriptionActivity.class);
 
                 //绑定数据
                 Bundle bundle = new Bundle();

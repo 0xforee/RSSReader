@@ -22,7 +22,6 @@ import android.widget.TextView;
 import com.foree.rssreader.base.BaseActivity;
 import com.foree.rssreader.base.MyApplication;
 import com.foree.rssreader.db.RssDao;
-import com.foree.rssreader.rssinfo.RssFeedList;
 import com.foree.rssreader.rssinfo.RssItemInfo;
 import com.foree.rssreader.xmlparse.XmlParseHandler;
 import com.rssreader.foree.rssreader.R;
@@ -134,7 +133,7 @@ public class MainActivity extends BaseActivity
                 builder.show();
                 break;
             case R.id.action_search:
-                Intent intent2 = new Intent(this, RssFeedList.class);
+                Intent intent2 = new Intent(this, FeedListActivity.class);
                 startActivity(intent2);
         }
         return super.onOptionsItemSelected(item);
@@ -243,7 +242,7 @@ public class MainActivity extends BaseActivity
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent mintent = new Intent(mainActivity, ShowDescription.class);
+                        Intent mintent = new Intent(mainActivity, DescriptionActivity.class);
 
                         //绑定数据
                         Bundle bundle = new Bundle();

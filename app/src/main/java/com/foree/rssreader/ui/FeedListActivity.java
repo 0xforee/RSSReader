@@ -1,4 +1,4 @@
-package com.foree.rssreader.rssinfo;
+package com.foree.rssreader.ui;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -25,7 +25,7 @@ import java.util.Map;
  * Created by foree on 3/25/15.
  * 可添加的Feed信息的列表显示
  */
-public class RssFeedList extends BaseActivity {
+public class FeedListActivity extends BaseActivity {
     private static final String TAG = "RssFeedList";
 
     @Override
@@ -64,11 +64,11 @@ public class RssFeedList extends BaseActivity {
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 //从child里找到对应的Feed名称
                 String FeedName = child.get(groupPosition).get(childPosition).get("name");
-                Toast.makeText(RssFeedList.this, FeedName + "", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FeedListActivity.this, FeedName + "", Toast.LENGTH_SHORT).show();
                 //从child里找到对应的url
                 String FeedUrl = child.get(groupPosition).get(childPosition).get("url");
                 //加入Intent
-                Intent addFeedIntent = new Intent(RssFeedList.this, RssAddFeed.class);
+                Intent addFeedIntent = new Intent(FeedListActivity.this, AddFeedActivity.class);
                 //放入数据,并启动activity
                 Bundle bundle = new Bundle();
                 bundle.putString("url", FeedUrl);
@@ -105,7 +105,7 @@ public class RssFeedList extends BaseActivity {
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
                 builder1.setTitle("请输入一个合法的Rss链接");
                 builder1.setView(view);
-                final Intent intent1 = new Intent(this, RssAddFeed.class);
+                final Intent intent1 = new Intent(this, AddFeedActivity.class);
                 builder1.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
