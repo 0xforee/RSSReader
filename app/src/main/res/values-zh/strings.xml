@@ -45,5 +45,6 @@
     <string name="ok">确定</string>
     <string name="cancel">取消</string>
     <string name="feedListTitle">订阅列表</string>
+    <string name="action_refresh">刷新</string>
 
 </resources>
