@@ -23,7 +23,7 @@ public class RssSQLiteOpenHelper extends SQLiteOpenHelper {
         //初始化数据库的表结构,表rss,字段id,name,url
         db.execSQL("create table rss (id integer primary key autoincrement, name varchar(20), url varchar(20), link varchar(20)) ");
         //创建新表,用于存放数据源
-        db.execSQL("create table activity_feedlist (id integer primary key autoincrement, type varchar(20), name varchar(20), url varchar(40))");
+        db.execSQL("create table feedlist (id integer primary key autoincrement, type varchar(20), name varchar(20), url varchar(40))");
     }
 
     //在数据库版本号增加的时候调用

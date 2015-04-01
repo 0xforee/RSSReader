@@ -225,7 +225,7 @@ public class MainActivity extends BaseActivity
              */
             //用户数据为空时,提示用户添加
             if (NavigationDrawerFragment.FeedInfos.isEmpty()) {
-                mTextView.setText("你还没有添加任何RSS源,请点击+添加");
+                mTextView.setText("你还没有添加任何RSS源,请点击搜索添加");
                 mProgressBar.setVisibility(View.INVISIBLE);
                 mTextView.setVisibility(View.VISIBLE);
                 return rootView;
