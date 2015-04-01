@@ -1,20 +1,13 @@
 package com.foree.rssreader.xmlparse;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.util.Log;
-
 import com.foree.rssreader.base.BaseActivity;
-import com.foree.rssreader.rssinfo.RssFeedInfo;
 import com.foree.rssreader.rssinfo.RssItemInfo;
+import com.foree.rssreader.utils.DateUtils;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -85,16 +78,35 @@ public class XmlParseHandler extends DefaultHandler {
         if (mInItem) {
             if (localName.equals("title")) mTitle = mBuff.toString();
             if (localName.equals("link")) mLink = mBuff.toString();
-            if (localName.equals("pubDate")) mPubDate = mBuff.toString();
+            if (localName.equals("pubDate")) {
+                mPubDate = mBuff.toString();
+                //如果pubDate为空,则使用FeedPubDate
+                if (mPubDate.isEmpty())
+                    mPubDate = feedPubdate;
+            }
             if (localName.equals("description")) {
                 //打印description信息,cdata中数据是否包含在其中
                 mDescription = mBuff.toString();
-                // Log.v(TAG, mDescription);
-                Pattern pattern = Pattern.compile("http://mmbiz\\.qpic\\.cn/mmbiz/[^\"]+");
-                final Matcher matcher = pattern.matcher(mDescription);
-                if (matcher.find()) {
-                    mImageUrl = matcher.group();
+
+                //匹配description中的image链接的正则表达式
+                Pattern imagePattern = Pattern.compile("http://mmbiz\\.qpic\\.cn/mmbiz/[^\"]+");
+
+                //匹配description中的时间的正则表达式
+                Pattern datePattern = Pattern.compile("[0-9]{4}-[0-9]{2}-[0-9]{2}");
+
+                final Matcher imageMatcher = imagePattern.matcher(mDescription);
+                final Matcher dateMatcher = datePattern.matcher(mDescription);
+
+                //如果匹配成功,获取url链接
+                if (imageMatcher.find()) {
+                    mImageUrl = imageMatcher.group();
                     Log.v(TAG, "(匹配只适用于微信公众号)图片链接:" + mImageUrl);
+                }
+
+                //如果匹配成功,获取日期
+                if (dateMatcher.find()) {
+                    mPubDate = DateUtils.parseDate(dateMatcher.group());
+                    Log.v(TAG, "日期:" + mPubDate);
                 }
             }
             if (localName.equals("item")) {
@@ -119,7 +131,7 @@ public class XmlParseHandler extends DefaultHandler {
 
             if (localName.equals("title")) feedTitle = mBuff.toString();
             if (localName.equals("link")) feedLink = mBuff.toString();
-            if (localName.equals("pubDate")) feedPubdate = mBuff.toString();
+            if (localName.equals("lastBuildDate")) feedPubdate = mBuff.toString();
             if (localName.equals("description")) feedDescription = mBuff.toString();
         }
     }
