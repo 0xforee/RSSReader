@@ -2,22 +2,27 @@ package com.foree.rssreader.ui;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.foree.rssreader.base.BaseActivity;
 import com.foree.rssreader.base.MyApplication;
@@ -146,6 +151,32 @@ public class MainActivity extends BaseActivity
 
     }
 
+    //声明一个接口
+    public interface myTouchListener {
+        public void onTouchEvent(MotionEvent event);
+    }
+
+    //保存listener的接口
+    private List<myTouchListener> myTouchListeners = new ArrayList<>();
+
+    //注册的函数
+    public void registerMyTouchListener(myTouchListener listener) {
+        myTouchListeners.add(listener);
+    }
+
+    //取消注册的函数
+    public void unregisterMyTouchListener(myTouchListener listener) {
+        myTouchListeners.remove(listener);
+    }
+
+    //事件分发的函数
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        for (myTouchListener listener : myTouchListeners) {
+            listener.onTouchEvent(ev);
+        }
+        return super.dispatchTouchEvent(ev);
+    }
 
     /**
      * A placeholder fragment containing a simple view.
@@ -153,6 +184,7 @@ public class MainActivity extends BaseActivity
      */
     public static class PlaceholderFragment extends Fragment implements XmlParseHandler.ParseHandlerCallbacks {
         private static final String TAG = "PlaceholderFragment";
+        private GestureDetectorCompat gestureDetectorCompat;
         /**
          * The fragment argument representing the section number for this
          * fragment.
@@ -165,6 +197,10 @@ public class MainActivity extends BaseActivity
         private String URLString;
         private String FeedLink;
         private String FeedName;
+        private boolean isSearchAvailable = false;
+        private boolean isSettingAvailable = false;
+        private boolean openSearch = false;
+        private boolean openSetting = false;
 
         public ListView getItemlist() {
             return listView;
@@ -279,8 +315,107 @@ public class MainActivity extends BaseActivity
                     }
                 });
             }
+            //注册touch事件
+            mainActivity.registerMyTouchListener(touchListener);
+
+            //监听手势
+            //手势实现
+            gestureDetectorCompat = new GestureDetectorCompat(mainActivity, new GestureDetector.OnGestureListener() {
+                @Override
+                public boolean onDown(MotionEvent e) {
+                    return false;
+                }
+
+                @Override
+                public void onShowPress(MotionEvent e) {
+
+                }
+
+                @Override
+                public boolean onSingleTapUp(MotionEvent e) {
+                    return false;
+                }
+
+                @Override
+                public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+                    Log.v(TAG, "x = " + e2.getX() + " y = " + e2.getY());
+                    if (e2.getY() - e1.getY() > 400) {
+                        isSearchAvailable = true;
+                        Log.v(TAG, "hhhhhhh");
+                    } else if (e2.getY() - e1.getY() < -400) {
+                        isSearchAvailable = false;
+                        isSettingAvailable = true;
+                    } else {
+                        isSearchAvailable = false;
+                        isSettingAvailable = false;
+                    }
+                    if (isSearchAvailable) {
+                        if (e2.getX() - e1.getX() > 400) {
+                            //   if (distanceY > 20)
+                            Log.i(TAG, "&&&&&&&&&&&&&&&&&&&&&&&");
+                            openSearch = true;
+                        }
+                    }
+                    if (isSettingAvailable) {
+                        if (e2.getX() - e1.getX() > 400)
+                            Log.v(TAG, "**********************");
+                        openSetting = true;
+                    }
+                    return false;
+                }
+
+                @Override
+                public void onLongPress(MotionEvent e) {
+
+                }
+
+                @Override
+                public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                    // if (Math.abs(e1.getRawX() - e2.getRawX()) > 250) {
+                    // // System.out.println("水平方向移动距离过大");
+                    // return true;
+                    // }
+                   /* if (Math.abs(velocityY) < 100) {
+                        // System.out.println("手指移动的太慢了");
+                        return true;
+                    }*/
+
+                    Log.v(TAG, openSearch + "");
+                    if (openSearch) {
+                        Toast.makeText(mainActivity, "打开搜索", Toast.LENGTH_SHORT).show();
+                        Intent searchIntent = new Intent(mainActivity, FeedListActivity.class);
+                        startActivity(searchIntent);
+                        openSearch = false;
+                    }
+                    if (openSetting) {
+                        Toast.makeText(mainActivity, "打开设置", Toast.LENGTH_SHORT).show();
+                        Intent searchIntent = new Intent(mainActivity, SettingsActivity.class);
+                        startActivity(searchIntent);
+                        openSetting = false;
+                    }
+                    /*// 手势向下 down
+                    if ((e2.getRawY() - e1.getRawY()) > 200) {
+                        Toast.makeText(mainActivity,"打开搜索", Toast.LENGTH_SHORT).show();
+                        Intent searchIntent = new Intent(mainActivity, FeedListActivity.class);
+                        startActivity(searchIntent);
+                        return true;
+                    }
+                    // 手势向上 up
+                    if ((e1.getRawY() - e2.getRawY()) > 200) {
+                        return true;
+                    }*/
+                    return true;
+                }
+            });
             return rootView;
         }
+
+        private myTouchListener touchListener = new myTouchListener() {
+            @Override
+            public void onTouchEvent(MotionEvent event) {
+                gestureDetectorCompat.onTouchEvent(event);
+            }
+        };
 
         @Override
         public void onAttach(Activity activity) {
@@ -372,6 +507,7 @@ public class MainActivity extends BaseActivity
             super.onDetach();
             Log.v(TAG, "onDetach");
             mainActivity.resetUI();
+            mainActivity.unregisterMyTouchListener(touchListener);
 
         }
 
