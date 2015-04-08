@@ -24,6 +24,8 @@ import com.foree.rssreader.base.MyApplication;
 import com.foree.rssreader.db.RssDao;
 import com.foree.rssreader.rssinfo.RssItemInfo;
 import com.foree.rssreader.xmlparse.XmlParseHandler;
+import com.melnykov.fab.FloatingActionButton;
+import com.melnykov.fab.ScrollDirectionListener;
 import com.rssreader.foree.rssreader.R;
 
 import java.util.ArrayList;
@@ -212,6 +214,27 @@ public class MainActivity extends BaseActivity
             rootView = inflater.inflate(R.layout.fragment_main, container, false);
             //初始化fragment中的控件
             listView = (ListView) rootView.findViewById(R.id.articel_listview);
+            //找到fb,并绑定到listview中
+            FloatingActionButton fb = (FloatingActionButton) rootView.findViewById(R.id.fab);
+            fb.attachToListView(listView, new ScrollDirectionListener() {
+                @Override
+                public void onScrollDown() {
+                    Log.v(TAG, "onScrollDown");
+                }
+
+                @Override
+                public void onScrollUp() {
+                    Log.v(TAG, "onScrollUp");
+
+                }
+            });
+            fb.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent2 = new Intent(mainActivity, FeedListActivity.class);
+                    startActivity(intent2);
+                }
+            });
             mProgressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
             mTextView = (TextView) rootView.findViewById(R.id.nonetwork);
             listView.setAdapter(mainActivity.getmRssAdapter());

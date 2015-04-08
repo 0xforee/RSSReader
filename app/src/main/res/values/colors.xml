@@ -4,4 +4,7 @@
     <color name="item_option_color">#000000</color>
     <color name="item_description_color">#66000000</color>
     <color name="my_actionbar_background">#0088ff</color>
+    <color name="primary">#990088ff</color>
+    <color name="primary_pressed">#0088ff</color>
+    <color name="ripple">#0088ff</color>
 </resources>
