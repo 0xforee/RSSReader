@@ -35,8 +35,8 @@
         </activity>
         <activity
             android:name="com.foree.rssreader.ui.AddFeedActivity"
-            android:label="RSSRedar">
-            <!--左上角添加返回导航键 -->
+            android:label="@string/app_name">
+        <!--左上角添加返回导航键 -->
             <!--<meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.foree.rssreader.ui.MainActivity" />-->
