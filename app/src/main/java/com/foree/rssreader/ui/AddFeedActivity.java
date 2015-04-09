@@ -57,6 +57,9 @@ public class AddFeedActivity extends BaseActivity implements XmlParseHandler.Par
         //获取传递的url数据
         Bundle bundle = getIntent().getBundleExtra("com.rssreader.mainactivity");
         final String url = bundle.getString("url");
+        FeedName = bundle.getString("name");
+
+        actionBar.setTitle(FeedName);
 
         listView.setAdapter(this.getmRssAdapter());
         listView.setOnScrollListener(this);
@@ -117,7 +120,6 @@ public class AddFeedActivity extends BaseActivity implements XmlParseHandler.Par
             //解析完毕,设置界面相应的信息
             FeedName = getRssItemInfos().get(0).getFeedTitle();
             tv_title.setText(FeedName);
-            actionBar.setTitle(FeedName);
             tv_description.setText(getRssItemInfos().get(0).getFeedDescription());
 
         }

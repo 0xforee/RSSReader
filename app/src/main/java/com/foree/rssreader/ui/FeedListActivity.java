@@ -64,7 +64,7 @@ public class FeedListActivity extends BaseActivity {
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 //从child里找到对应的Feed名称
                 String FeedName = child.get(groupPosition).get(childPosition).get("name");
-                Toast.makeText(FeedListActivity.this, FeedName + "", Toast.LENGTH_SHORT).show();
+                //   Toast.makeText(FeedListActivity.this, FeedName + "", Toast.LENGTH_SHORT).show();
                 //从child里找到对应的url
                 String FeedUrl = child.get(groupPosition).get(childPosition).get("url");
                 //加入Intent
@@ -72,6 +72,7 @@ public class FeedListActivity extends BaseActivity {
                 //放入数据,并启动activity
                 Bundle bundle = new Bundle();
                 bundle.putString("url", FeedUrl);
+                bundle.putString("name", FeedName);
                 addFeedIntent.putExtra("com.rssreader.mainactivity", bundle);
                 startActivity(addFeedIntent);
                 return false;
