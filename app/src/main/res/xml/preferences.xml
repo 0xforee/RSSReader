@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="@string/account">
+    <PreferenceCategory
+        android:title="@string/account"
+        android:layout="@layout/preference_category_holo">
         <ListPreference
             android:key="lp_editaccount"
+            android:enabled="false"
             android:summary="@string/accountname"
             android:title="@string/editaccount" />
         <com.foree.rssreader.ui.myDialogPreference
@@ -11,15 +14,20 @@
             android:title="@string/logout" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/general">
-        <CheckBoxPreference
+    <PreferenceCategory
+        android:title="@string/general"
+        android:layout="@layout/preference_category_holo">
+    <CheckBoxPreference
             android:key="lp_darktheme"
             android:summary="@string/dark_description"
             android:title="@string/darktheme" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/offline">
+    <PreferenceCategory
+        android:title="@string/offline"
+        android:layout="@layout/preference_category_holo">
         <CheckBoxPreference
+            android:layout="@layout/preference_information_holo"
             android:key="lp_downloadonwifi"
             android:title="@string/downloadonwifi" />
         <com.foree.rssreader.ui.myDialogPreference
@@ -28,16 +36,20 @@
             android:title="@string/cleancache" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/about">
-        <ListPreference
+    <PreferenceCategory
+        android:title="@string/about"
+        android:layout="@layout/preference_category_holo">
+    <ListPreference
             android:enabled="false"
             android:key="lp_contactme"
             android:summary="@string/email"
             android:title="@string/contactme" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/version">
-        <ListPreference
+    <PreferenceCategory
+        android:title="@string/version"
+        android:layout="@layout/preference_category_holo">
+    <ListPreference
             android:enabled="false"
             android:key="lp_versionnumber"
             android:summary="@string/enjoy" />

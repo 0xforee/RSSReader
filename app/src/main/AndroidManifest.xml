@@ -28,7 +28,11 @@
             android:label="RSSRedar" />
         <activity
             android:name="com.foree.rssreader.ui.SettingsActivity"
-            android:label="RSSRedar" />
+            android:label="RSSRedar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.foree.rssreader.ui.MainActivity" />
+        </activity>
         <activity
             android:name="com.foree.rssreader.ui.AddFeedActivity"
             android:label="RSSRedar">

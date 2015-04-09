@@ -77,7 +77,7 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
     public void setContentView(int layoutResID) {
         //根据配置文件设置相应的主题
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        if (sp.getBoolean("ck_darktheme", false))
+        if (sp.getBoolean("lp_darktheme", false))
             setTheme(R.style.NightTheme);
         else
             setTheme(R.style.DayTheme);
@@ -273,8 +273,12 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
 
     //开一个线程来解析Rss
     public void doRss(String urlName) {
-        RssParse rssParse = new RssParse(this, urlName);
-        rssParse.start();
+        //判断是否选中设置
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        if (!sp.getBoolean("lp_downloadonwifi", false)) {
+            RssParse rssParse = new RssParse(this, urlName);
+            rssParse.start();
+        }
     }
 
     //重新清理Adapter,用于在切换fragment的时候使用
