@@ -4,5 +4,9 @@
         <attr name="myTextColor" format="color" />
         <attr name="myBackground" format="color|reference" />
         <attr name="mylistdivider" format="color" />
+        <attr name="myActionbarBackground" format="color" />
+        <attr name="primaryBackground" format="color" />
+        <attr name="primary_pressedBackground" format="color" />
+        <attr name="rippleBackground" format="color" />
     </declare-styleable>
 </resources>

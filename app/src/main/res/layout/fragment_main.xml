@@ -30,7 +30,7 @@
         android:layout_gravity="bottom|start"
         android:layout_margin="16dp"
         android:src="@drawable/ic_action_new"
-        fab:fab_colorNormal="@color/primary"
-        fab:fab_colorPressed="@color/primary_pressed"
-        fab:fab_colorRipple="@color/ripple" />
+        fab:fab_colorNormal="?attr/primaryBackground"
+        fab:fab_colorPressed="?attr/primary_pressedBackground"
+        fab:fab_colorRipple="?attr/rippleBackground" />
 </FrameLayout>

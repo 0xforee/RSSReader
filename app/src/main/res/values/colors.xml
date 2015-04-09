@@ -4,9 +4,13 @@
     <color name="item_option_color">#000000</color>
     <color name="item_description_color">#66000000</color>
     <color name="my_actionbar_background">#0088ff</color>
+    <color name="dark_my_actionbar_background">#66000000</color>
     <color name="primary">#990088ff</color>
+    <color name="dark_primary">#99000000</color>
     <color name="primary_pressed">#0088ff</color>
+    <color name="dark_primary_pressed">#000000</color>
     <color name="ripple">#0088ff</color>
+    <color name="dark_ripple">#000000</color>
     <!--template-->
 
     <color name="transparent">#00000000</color>
@@ -331,6 +335,7 @@
 
     <!--theme-->
     <color name="dark_theme_background">#201E1C</color>
+    <color name="dark_text_Color">#7b7b7b</color>
 
 
     <!--link-->
