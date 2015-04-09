@@ -17,7 +17,7 @@
     <PreferenceCategory
         android:title="@string/general"
         android:layout="@layout/preference_category_holo">
-    <CheckBoxPreference
+        <CheckBoxPreference
             android:key="lp_darktheme"
             android:summary="@string/dark_description"
             android:title="@string/darktheme" />
@@ -27,7 +27,6 @@
         android:title="@string/offline"
         android:layout="@layout/preference_category_holo">
         <CheckBoxPreference
-            android:layout="@layout/preference_information_holo"
             android:key="lp_downloadonwifi"
             android:title="@string/downloadonwifi" />
         <com.foree.rssreader.ui.myDialogPreference
@@ -39,7 +38,7 @@
     <PreferenceCategory
         android:title="@string/about"
         android:layout="@layout/preference_category_holo">
-    <ListPreference
+        <ListPreference
             android:enabled="false"
             android:key="lp_contactme"
             android:summary="@string/email"
@@ -49,7 +48,7 @@
     <PreferenceCategory
         android:title="@string/version"
         android:layout="@layout/preference_category_holo">
-    <ListPreference
+        <ListPreference
             android:enabled="false"
             android:key="lp_versionnumber"
             android:summary="@string/enjoy" />

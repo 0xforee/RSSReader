@@ -16,9 +16,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.foree.rssreader.rssinfo.RssItemInfo;
 import com.foree.rssreader.utils.ImageDownLoader;
+import com.foree.rssreader.utils.NetworkUtils;
 import com.rssreader.foree.rssreader.R;
 import com.foree.rssreader.xmlparse.XmlParseHandler;
 
@@ -273,9 +275,14 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
 
     //开一个线程来解析Rss
     public void doRss(String urlName) {
-        //判断是否选中设置
+        //根据是否只在wifi下下载来决定是否开始解析
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        if (!sp.getBoolean("lp_downloadonwifi", false)) {
+        if ((sp.getBoolean("lp_downloadonwifi", false)) && MyApplication.mNetworkState == NetworkUtils.NETWORK_MOBILE) {
+            Toast.makeText(this, "请在有wifi的地方重试", Toast.LENGTH_LONG).show();
+
+        } else if (MyApplication.mNetworkState == NetworkUtils.NETWORK_NONE) {
+            Toast.makeText(this, "网络错误", Toast.LENGTH_LONG).show();
+        } else {
             RssParse rssParse = new RssParse(this, urlName);
             rssParse.start();
         }
