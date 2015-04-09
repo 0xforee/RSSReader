@@ -48,13 +48,13 @@ public class FeedListActivity extends BaseActivity {
         SimpleExpandableListAdapter mAdapter = new SimpleExpandableListAdapter(
                 this,
                 group,
-                R.layout.feedinfo,
+                R.layout.feedinfo_title,
                 new String[]{"type"},
-                new int[]{R.id.feedinfo},
+                new int[]{R.id.feedinfo_title},
                 child,
-                android.R.layout.simple_expandable_list_item_2,
+                R.layout.feedinfo_itme,
                 new String[]{"name"},
-                new int[]{android.R.id.text1}
+                new int[]{R.id.feedinfo_itme}
 
         );
         expandableListView.setAdapter(mAdapter);
