@@ -2,11 +2,11 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-        android:title="@string/account"
-        android:layout="@layout/my_preference_category">
-    <ListPreference
-            android:key="lp_editaccount"
+        android:layout="@layout/my_preference_category"
+        android:title="@string/account">
+        <ListPreference
             android:enabled="false"
+            android:key="lp_editaccount"
             android:summary="@string/accountname"
             android:title="@string/editaccount" />
         <com.foree.rssreader.ui.myDialogPreference
@@ -15,20 +15,24 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/general"
-        android:layout="@layout/my_preference_category">
-    <CheckBoxPreference
+        android:layout="@layout/my_preference_category"
+        android:title="@string/general">
+        <CheckBoxPreference
             android:key="lp_darktheme"
+            android:layout="@layout/my_preference"
             android:summary="@string/dark_description"
-            android:title="@string/darktheme" />
+            android:title="@string/darktheme"
+            android:widgetLayout="@layout/my_preference_widget_checkbox" />
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/offline"
-        android:layout="@layout/my_preference_category">
-    <CheckBoxPreference
+        android:layout="@layout/my_preference_category"
+        android:title="@string/offline">
+        <CheckBoxPreference
             android:key="lp_downloadonwifi"
-            android:title="@string/downloadonwifi" />
+            android:layout="@layout/my_preference"
+            android:title="@string/downloadonwifi"
+            android:widgetLayout="@layout/my_preference_widget_checkbox" />
         <com.foree.rssreader.ui.myDialogPreference
             android:key="md_cleancache"
             android:summary="@string/clean_des"
@@ -36,9 +40,9 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/about"
-        android:layout="@layout/my_preference_category">
-    <ListPreference
+        android:layout="@layout/my_preference_category"
+        android:title="@string/about">
+        <ListPreference
             android:enabled="false"
             android:key="lp_contactme"
             android:summary="@string/email"
@@ -46,9 +50,9 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/version"
-        android:layout="@layout/my_preference_category">
-    <ListPreference
+        android:layout="@layout/my_preference_category"
+        android:title="@string/version">
+        <ListPreference
             android:enabled="false"
             android:key="lp_versionnumber"
             android:summary="@string/enjoy" />
