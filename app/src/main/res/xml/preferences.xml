@@ -45,10 +45,9 @@
     <PreferenceCategory
         android:layout="@layout/my_preference_category"
         android:title="@string/about">
-        <ListPreference
+        <Preference
             android:layout="@layout/my_preference"
-            android:enabled="false"
-            android:key="lp_contactme"
+            android:key="md_contactme"
             android:summary="@string/email"
             android:title="@string/contactme" />
     </PreferenceCategory>
@@ -56,7 +55,7 @@
     <PreferenceCategory
         android:layout="@layout/my_preference_category"
         android:title="@string/version">
-        <ListPreference
+        <Preference
             android:layout="@layout/my_preference"
             android:enabled="false"
             android:key="lp_versionnumber"

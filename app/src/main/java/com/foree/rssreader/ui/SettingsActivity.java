@@ -3,7 +3,6 @@ package com.foree.rssreader.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.ListPreference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
@@ -74,8 +73,8 @@ public class SettingsActivity extends BaseActivity implements SharedPreferences.
 
             // 从资源文件中加载一个配置项
             addPreferencesFromResource(R.xml.preferences);
-            ListPreference listPreference = (ListPreference) findPreference("lp_versionnumber");
-            listPreference.setTitle(MyApplication.myVersionName);
+            //设置VersionName
+            findPreference("lp_versionnumber").setTitle(MyApplication.myVersionName);
         }
     }
 }
