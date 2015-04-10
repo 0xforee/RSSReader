@@ -5,11 +5,13 @@
         android:layout="@layout/my_preference_category"
         android:title="@string/account">
         <ListPreference
+            android:layout="@layout/my_preference"
             android:enabled="false"
             android:key="lp_editaccount"
             android:summary="@string/accountname"
             android:title="@string/editaccount" />
         <com.foree.rssreader.ui.myDialogPreference
+            android:layout="@layout/my_preference"
             android:key="md_logout"
             android:title="@string/logout" />
     </PreferenceCategory>
@@ -34,6 +36,7 @@
             android:title="@string/downloadonwifi"
             android:widgetLayout="@layout/my_preference_widget_checkbox" />
         <com.foree.rssreader.ui.myDialogPreference
+            android:layout="@layout/my_preference"
             android:key="md_cleancache"
             android:summary="@string/clean_des"
             android:title="@string/cleancache" />
@@ -43,6 +46,7 @@
         android:layout="@layout/my_preference_category"
         android:title="@string/about">
         <ListPreference
+            android:layout="@layout/my_preference"
             android:enabled="false"
             android:key="lp_contactme"
             android:summary="@string/email"
@@ -53,6 +57,7 @@
         android:layout="@layout/my_preference_category"
         android:title="@string/version">
         <ListPreference
+            android:layout="@layout/my_preference"
             android:enabled="false"
             android:key="lp_versionnumber"
             android:summary="@string/enjoy" />
