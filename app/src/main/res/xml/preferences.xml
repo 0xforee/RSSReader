@@ -3,8 +3,8 @@
 
     <PreferenceCategory
         android:title="@string/account"
-        android:layout="@layout/preference_category_holo">
-        <ListPreference
+        android:layout="@layout/my_preference_category">
+    <ListPreference
             android:key="lp_editaccount"
             android:enabled="false"
             android:summary="@string/accountname"
@@ -16,8 +16,8 @@
 
     <PreferenceCategory
         android:title="@string/general"
-        android:layout="@layout/preference_category_holo">
-        <CheckBoxPreference
+        android:layout="@layout/my_preference_category">
+    <CheckBoxPreference
             android:key="lp_darktheme"
             android:summary="@string/dark_description"
             android:title="@string/darktheme" />
@@ -25,8 +25,8 @@
 
     <PreferenceCategory
         android:title="@string/offline"
-        android:layout="@layout/preference_category_holo">
-        <CheckBoxPreference
+        android:layout="@layout/my_preference_category">
+    <CheckBoxPreference
             android:key="lp_downloadonwifi"
             android:title="@string/downloadonwifi" />
         <com.foree.rssreader.ui.myDialogPreference
@@ -37,8 +37,8 @@
 
     <PreferenceCategory
         android:title="@string/about"
-        android:layout="@layout/preference_category_holo">
-        <ListPreference
+        android:layout="@layout/my_preference_category">
+    <ListPreference
             android:enabled="false"
             android:key="lp_contactme"
             android:summary="@string/email"
@@ -47,8 +47,8 @@
 
     <PreferenceCategory
         android:title="@string/version"
-        android:layout="@layout/preference_category_holo">
-        <ListPreference
+        android:layout="@layout/my_preference_category">
+    <ListPreference
             android:enabled="false"
             android:key="lp_versionnumber"
             android:summary="@string/enjoy" />
