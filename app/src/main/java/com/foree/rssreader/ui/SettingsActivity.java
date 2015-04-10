@@ -17,7 +17,19 @@ import com.rssreader.foree.rssreader.R;
  * settings的activity
  */
 public class SettingsActivity extends BaseActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
-    private static final String TAG = "SettingsActivity";
+    public static final String TAG = "SettingsActivity";
+
+    //开发者的邮箱信息
+    public static String MY_EMAIL = "beijing.2008.lm@163.com";
+
+    //preference的key
+    public static final String KEY_EDIT_ACCOUNT = "lp_editaccount";
+    public static final String KEY_LOGOUT = "md_logout";
+    public static final String KEY_DARK_THEME = "lp_darktheme";
+    public static final String KEY_DOWNLOAD_ON_WIFI = "lp_downloadonwifi";
+    public static final String KEY_CLEAN_CACHE = "md_cleancache";
+    public static final String KEY_CONTACT_ME = "md_contactme";
+    public static final String KEY_VERSION_NAME = "lp_versionnumber";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +63,7 @@ public class SettingsActivity extends BaseActivity implements SharedPreferences.
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 
-        if (key.equals("lp_darktheme")) {
+        if (key.equals(SettingsActivity.KEY_DARK_THEME)) {
             Intent intent = new Intent(SettingsActivity.this, SettingsActivity.class);
 
             finish();
@@ -74,7 +86,7 @@ public class SettingsActivity extends BaseActivity implements SharedPreferences.
             // 从资源文件中加载一个配置项
             addPreferencesFromResource(R.xml.preferences);
             //设置VersionName
-            findPreference("lp_versionnumber").setTitle(MyApplication.myVersionName);
+            findPreference(SettingsActivity.KEY_VERSION_NAME).setTitle(MyApplication.myVersionName);
         }
     }
 }
