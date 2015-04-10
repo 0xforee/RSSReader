@@ -2,15 +2,20 @@ package com.foree.rssreader.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.foree.rssreader.base.BaseActivity;
 import com.foree.rssreader.base.MyApplication;
 import com.rssreader.foree.rssreader.R;
+
+import java.net.URL;
 
 /**
  * Created by foree on 3/11/15.
@@ -87,6 +92,20 @@ public class SettingsActivity extends BaseActivity implements SharedPreferences.
             addPreferencesFromResource(R.xml.preferences);
             //设置VersionName
             findPreference(SettingsActivity.KEY_VERSION_NAME).setTitle(MyApplication.myVersionName);
+
+            //设置联系开发者
+            findPreference(SettingsActivity.KEY_CONTACT_ME).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Log.v(TAG, "send");
+                    Uri emailUri = Uri.parse("mailto:" + SettingsActivity.MY_EMAIL);
+                    Intent sendEmail = new Intent(Intent.ACTION_SENDTO, emailUri);
+                    sendEmail.putExtra(Intent.EXTRA_SUBJECT, "@反馈:");
+                    //  sendEmail.putExtra(Intent.EXTRA_TEXT, "这是内容");
+                    startActivity(sendEmail);
+                    return true;
+                }
+            });
         }
     }
 }
