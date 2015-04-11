@@ -138,10 +138,6 @@ public class MainActivity extends BaseActivity
                 builder.setMessage(message);
                 builder.setNeutralButton("返回", null);
                 builder.show();
-                break;
-            case R.id.action_search:
-                Intent intent2 = new Intent(this, FeedListActivity.class);
-                startActivity(intent2);
         }
         return super.onOptionsItemSelected(item);
     }
