@@ -19,9 +19,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -60,6 +60,7 @@ public class NavigationDrawerFragment extends Fragment {
     public static ArrayAdapter<String> adapter;
 
     private DrawerLayout mDrawerLayout;
+    private LinearLayout mLinearLayout;
     private ListView mDrawerListView;
     private View mFragmentContainerView;
 
@@ -105,8 +106,9 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mDrawerListView = (ListView) inflater.inflate(
-                R.layout.fragment_navigation_drawer, container, false);
+        mLinearLayout = (LinearLayout) inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+
+        mDrawerListView = (ListView) mLinearLayout.findViewById(R.id.drawer_listView);
         //set listview's ChoiceMode multiple
         mDrawerListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         //set listener
@@ -122,7 +124,7 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerListView.setAdapter(adapter);
         //设置高亮显示
         // mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
-        return mDrawerListView;
+        return mLinearLayout;
     }
 
     public boolean isDrawerOpen() {
@@ -138,6 +140,7 @@ public class NavigationDrawerFragment extends Fragment {
     public void setUp(int fragmentId, DrawerLayout drawerLayout) {
         mFragmentContainerView = getActivity().findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
+
 
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 
