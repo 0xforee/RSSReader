@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?><!-- 占位资源文件,用于在hack ActionBar时有View可用 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+</LinearLayout>

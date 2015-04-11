@@ -2,7 +2,6 @@ package com.foree.rssreader.ui;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -19,6 +18,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -50,40 +50,76 @@ public class MainActivity extends BaseActivity
      * 通常用来存储最后一个屏幕的标题
      */
     private CharSequence mTitle;
+    private DrawerLayout mDrawerLayout;
     MyApplication myApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.DayTheme);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.decor);
+
+        //使navigationDrawer覆盖actionBar
+        moveDrawToTop();
 
         //应用启动初始化环境变量
         myApplication = new MyApplication(this);
         myApplication.initEnv();
 
-        //drawerlayout
+        //drawerLayout
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
         // Set up the drawer.
-        // 启动drawer，将drawer的布局加载到位于navigationDrawer上的fragment中
+        // 启动drawer，将drawerLayout的布局加载到位于navigationDrawer上的fragment中
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
+                mDrawerLayout);
         Log.v(TAG, "onCreate");
 
+    }
+
+    public void moveDrawToTop() {
+        LayoutInflater layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        mDrawerLayout = (DrawerLayout) layoutInflater.inflate(R.layout.activity_main, null);
+
+        //获取根视图,并移除actionBar
+        ViewGroup rootGroup = (ViewGroup) getWindow().getDecorView();
+        View child = rootGroup.getChildAt(0);
+        rootGroup.removeView(child);
+
+        //将actionBar加回主视图(非drawer视图)
+        LinearLayout linearLayout = (LinearLayout) mDrawerLayout.findViewById(R.id.container);
+        linearLayout.addView(child, 0);
+
+        //设置drawerLayout在状态栏以下
+        mDrawerLayout.findViewById(R.id.navigation_drawer).setPadding(0, getStatusBarHeight(), 0, 0);
+
+        //将设置好的view添加到根视图
+        rootGroup.addView(mDrawerLayout);
+    }
+
+    //获取状态栏的高度
+    public int getStatusBarHeight() {
+        int result = 0;
+        //取得状态栏的高度的资源ID
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            //从资源中获取数值
+            result = getResources().getDimensionPixelOffset(resourceId);
+        }
+        return result;
     }
 
     //在navigation被选中的时候
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the activity_main content by replacing fragments
-        // 同过替换fragment来更新主界面
+        // 同过替换fragment来更新主界面(主界面使用android.R.id.content来获取,可用hierarchyViewer查看)
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(android.R.id.content, PlaceholderFragment.newInstance(position + 1))
                 .commit();
         Log.v(TAG, "onNavigationDrawerItemSelected");
     }
