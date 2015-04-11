@@ -1,24 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?><!-- A DrawerLayout is intended to be used as the top-level content view using match_parent for both width and height to consume the full space available. -->
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
+<?xml version="1.0" encoding="utf-8"?><!-- 占位资源文件,用于在hack ActionBar时有View可用,实际布局为decor_actionBar.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-    <!-- As the activity_main content view, the view below consumes the entire
-         space available using match_parent in both dimensions. -->
-    <LinearLayout
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"></LinearLayout>
-
-    <fragment
-        android:id="@+id/navigation_drawer"
-        android:layout_width="@dimen/navigation_drawer_width"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:name="com.foree.rssreader.ui.NavigationDrawerFragment"
-        tools:layout="@layout/fragment_navigation_drawer" />
-</android.support.v4.widget.DrawerLayout>
+</LinearLayout>

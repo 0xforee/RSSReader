@@ -57,7 +57,7 @@ public class MainActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.DayTheme);
-        setContentView(R.layout.decor);
+        setContentView(R.layout.activity_main);
 
         //使navigationDrawer覆盖actionBar
         moveDrawToTop();
@@ -82,7 +82,7 @@ public class MainActivity extends BaseActivity
 
     public void moveDrawToTop() {
         LayoutInflater layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-        mDrawerLayout = (DrawerLayout) layoutInflater.inflate(R.layout.activity_main, null);
+        mDrawerLayout = (DrawerLayout) layoutInflater.inflate(R.layout.decor_actionbar, null);
 
         //获取根视图,并移除actionBar
         ViewGroup rootGroup = (ViewGroup) getWindow().getDecorView();
@@ -115,7 +115,7 @@ public class MainActivity extends BaseActivity
     //在navigation被选中的时候
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        // update the activity_main content by replacing fragments
+        // update the decor_actionBar content by replacing fragments
         // 同过替换fragment来更新主界面(主界面使用android.R.id.content来获取,可用hierarchyViewer查看)
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
