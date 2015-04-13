@@ -80,6 +80,7 @@ public class MainActivity extends BaseActivity
 
     }
 
+    //将drawer移动覆盖actionBar
     public void moveDrawToTop() {
         LayoutInflater layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         mDrawerLayout = (DrawerLayout) layoutInflater.inflate(R.layout.decor_actionbar, null);
@@ -93,23 +94,11 @@ public class MainActivity extends BaseActivity
         LinearLayout linearLayout = (LinearLayout) mDrawerLayout.findViewById(R.id.container);
         linearLayout.addView(child, 0);
 
-        //设置drawerLayout在状态栏以下
-        mDrawerLayout.findViewById(R.id.navigation_drawer).setPadding(0, getStatusBarHeight(), 0, 0);
+        //设置drawerLayout占据全屏
+        mDrawerLayout.findViewById(R.id.navigation_drawer).setPadding(0, 0, 0, 0);
 
         //将设置好的view添加到根视图
         rootGroup.addView(mDrawerLayout);
-    }
-
-    //获取状态栏的高度
-    public int getStatusBarHeight() {
-        int result = 0;
-        //取得状态栏的高度的资源ID
-        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            //从资源中获取数值
-            result = getResources().getDimensionPixelOffset(resourceId);
-        }
-        return result;
     }
 
     //在navigation被选中的时候

@@ -1,8 +1,10 @@
 package com.foree.rssreader.base;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -11,6 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -21,6 +25,7 @@ import android.widget.Toast;
 import com.foree.rssreader.rssinfo.RssItemInfo;
 import com.foree.rssreader.utils.ImageDownLoader;
 import com.foree.rssreader.utils.NetworkUtils;
+import com.foree.rssreader.utils.WindowUtils;
 import com.rssreader.foree.rssreader.R;
 import com.foree.rssreader.xmlparse.XmlParseHandler;
 
@@ -46,6 +51,7 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
     private int mFirstVisibleItem;
     private int mVisibleItemCount;
     public static ListView listView;
+    protected SystemBarTintManager mTintManager;
 
     public List<RssItemInfo> getRssItemInfos() {
         return rssItemInfos;
@@ -73,7 +79,39 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
 
         mImageDownLoader = new ImageDownLoader(this);
 
+        //在api大于19时候才使用状态栏透明模式
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            setTranslucentStatus(true);
+        }
+        mTintManager = new SystemBarTintManager(this);
 
+        //设置状态栏沉浸模式
+        mTintManager.setStatusBarTintEnabled(true);
+        mTintManager.setStatusBarTintResource(R.color.my_actionbar_background);
+
+
+    }
+
+    //sdk大于19使用透明状态栏模式
+    @TargetApi(19)
+    protected void setTranslucentStatus(boolean on) {
+        Window win = getWindow();
+        WindowManager.LayoutParams winParams = win.getAttributes();
+        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+        if (on) {
+            winParams.flags |= bits;
+        } else {
+            winParams.flags &= ~bits;
+        }
+        win.setAttributes(winParams);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //设置content的状态的偏移
+        View view = getWindow().findViewById(android.R.id.content);
+        view.setPadding(0, WindowUtils.getInstance().getPadding(this), 0, 0);
     }
 
     public void setContentView(int layoutResID) {
