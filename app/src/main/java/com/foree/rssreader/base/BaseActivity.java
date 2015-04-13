@@ -87,7 +87,12 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
 
         //设置状态栏沉浸模式
         mTintManager.setStatusBarTintEnabled(true);
-        mTintManager.setStatusBarTintResource(R.color.my_actionbar_background);
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        if (sp.getBoolean("lp_darktheme", false)) {
+            mTintManager.setStatusBarTintResource(R.color.dark_my_actionbar_background);
+        } else {
+            mTintManager.setStatusBarTintResource(R.color.my_actionbar_background);
+        }
 
 
     }

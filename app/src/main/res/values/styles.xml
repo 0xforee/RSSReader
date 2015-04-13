@@ -26,11 +26,21 @@
         <item name="primaryBackground">@color/dark_primary</item>
         <item name="primary_pressedBackground">@color/dark_primary_pressed</item>
         <item name="rippleBackground">@color/dark_ripple</item>
+        <item name="android:actionBarStyle">@style/MyDarkactionBar</item>
+
+        <!--support library compatibility -->
+        <item name="actionBarStyle">@style/MyDarkactionBar</item>
     </style>
 
     <style name="MyactionBar" parent="Widget.AppCompat.Light.ActionMode.Inverse">
         <item name="android:background">@color/my_actionbar_background</item>
         <!--support library compatibility -->
         <item name="background">@color/my_actionbar_background</item>
+    </style>
+
+    <style name="MyDarkactionBar" parent="Widget.AppCompat.Light.ActionMode.Inverse">
+        <item name="android:background">@color/dark_my_actionbar_background</item>
+        <!--support library compatibility -->
+        <item name="background">@color/dark_my_actionbar_background</item>
     </style>
 </resources>
