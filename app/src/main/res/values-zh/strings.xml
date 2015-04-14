@@ -47,4 +47,6 @@
     <string name="feedListTitle">订阅列表</string>
     <string name="action_refresh">刷新</string>
 
+    <!-- load strings -->
+    <string name="load_tv_app_name">读 客</string>
 </resources>

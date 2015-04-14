@@ -1,5 +1,6 @@
 package com.foree.rssreader.base;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,14 +12,12 @@ import android.util.Log;
 
 import com.foree.rssreader.db.RssDao;
 import com.foree.rssreader.rssinfo.RssFeedInfo;
-import com.foree.rssreader.ui.MainActivity;
 import com.foree.rssreader.ui.NavigationDrawerFragment;
 import com.foree.rssreader.utils.FileUtils;
 import com.foree.rssreader.utils.NetworkUtils;
 import com.rssreader.foree.rssreader.R;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -73,8 +72,10 @@ public class MyApplication extends Application {
     public static String myApplicationPackageName;
     //应用程序版本名称
     public static String myVersionName;
-    //应用程序版本号
+    //应用程序版本序号(应用程序用来判断是否升级的,例如:17)
     public static int myVersionCode;
+    //应用程序版本号(开发者自定义,例如:1.7.3
+    public static String myApplicationVersion;
     //应用程序的网络状态
     public static int mNetworkState = NetworkUtils.NETWORK_NONE;
     //应用程序的sdcard的目录路径
@@ -86,11 +87,11 @@ public class MyApplication extends Application {
     //程序当前运行的最新日期
     public static String myDate;
 
-    public MyApplication(MainActivity context) {
+    public MyApplication(Activity context) {
         mContext = context;
     }
 
-    //初始化环境
+    //初始化环境(loading...时候使用)
     public void initEnv() {
         //初始化应用程序名
         myApplicationName = mContext.getString(R.string.app_name);
@@ -130,13 +131,6 @@ public class MyApplication extends Application {
         //初始化数据库文件所在的路径
         myDataBasePath = mContext.getFilesDir().getPath() + "/.." + File.separator + "databases";
 
-        //进行数据库的初始化
-        RssDao rssDao = new RssDao(mContext);
-        List<RssFeedInfo> rssFeedInfoList = rssDao.findAll();
-        for (RssFeedInfo rssFeedInfo : rssFeedInfoList) {
-            NavigationDrawerFragment.FeedInfos.add(rssFeedInfo.getTitle());
-        }
-        Log.v(TAG, "数据库初始化成功");
         /**
          * if the application is first run, you can init opml, else skip it
          */
@@ -169,6 +163,17 @@ public class MyApplication extends Application {
 
     }
 
+    //用于进行mainActivity的初始化
+    public void mainInitEnv() {
+        //进行数据库的初始化
+        RssDao rssDao = new RssDao(mContext);
+        List<RssFeedInfo> rssFeedInfoList = rssDao.findAll();
+        for (RssFeedInfo rssFeedInfo : rssFeedInfoList) {
+            NavigationDrawerFragment.FeedInfos.add(rssFeedInfo.getTitle());
+        }
+        Log.v(TAG, "数据库初始化成功");
+    }
+
     //获取应用程序的版本信息
     public void initApplicationVersionInfo(Context context) {
         PackageManager packageManager = context.getPackageManager();
@@ -176,7 +181,9 @@ public class MyApplication extends Application {
         try {
             //获取当前包的信息
             packageInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
-            //获取版本号
+            //获取应用程序版本号
+            myApplicationVersion = packageInfo.versionName;
+            //获取版本序号
             myVersionCode = packageInfo.versionCode;
             //获取版本名称
             myVersionName = myApplicationName + " v" + packageInfo.versionName;

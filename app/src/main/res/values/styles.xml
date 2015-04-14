@@ -45,4 +45,11 @@
         <!--support library compatibility -->
         <item name="background">@color/dark_my_actionbar_background</item>
     </style>
+
+    <style name="speakTextViewStyle">
+        <item name="android:textColor">@color/whitesmoke</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginLeft">50dp</item>
+    </style>
 </resources>

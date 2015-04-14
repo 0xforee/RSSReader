@@ -64,7 +64,7 @@ public class MainActivity extends BaseActivity
 
         //应用启动初始化环境变量
         myApplication = new MyApplication(this);
-        myApplication.initEnv();
+        myApplication.mainInitEnv();
 
         //drawerLayout
         mNavigationDrawerFragment = (NavigationDrawerFragment)
