@@ -14,6 +14,7 @@ import com.foree.rssreader.db.RssDao;
 import com.foree.rssreader.rssinfo.RssFeedInfo;
 import com.foree.rssreader.ui.NavigationDrawerFragment;
 import com.foree.rssreader.utils.FileUtils;
+import com.foree.rssreader.utils.LogUtils;
 import com.foree.rssreader.utils.NetworkUtils;
 import com.rssreader.foree.rssreader.R;
 
@@ -93,6 +94,10 @@ public class MyApplication extends Application {
 
     //初始化环境(loading...时候使用)
     public void initEnv() {
+
+        //初始化log打印级别,默认为VERBOSE
+        //LogUtils.logLevel = Log.INFO;
+
         //初始化应用程序名
         myApplicationName = mContext.getString(R.string.app_name);
         //初始化应用程序的包名
