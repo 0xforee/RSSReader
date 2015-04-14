@@ -4,11 +4,36 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageView
+    <RelativeLayout
+        android:id="@+id/rl_image"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:contentDescription="@string/account"
-        android:src="@drawable/load" />
+        android:layout_height="@dimen/navigation_image_width"
+        android:background="@drawable/back">
+
+        <ImageButton
+            android:id="@+id/ib_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:contentDescription="@string/account"
+            android:background="@drawable/account"
+            android:layout_marginStart="40dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/tv_account"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="beijing.2008.lm@163.com"
+            android:layout_below="@+id/ib_image"
+            android:layout_marginTop="8dp"
+            android:layout_alignLeft="@+id/ib_image"
+            android:layout_alignStart="@+id/ib_image" />
+    </RelativeLayout>
+
 
     <ListView
         android:id="@+id/drawer_listView"
