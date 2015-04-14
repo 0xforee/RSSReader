@@ -2,9 +2,11 @@ package com.foree.rssreader.ui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -23,6 +25,14 @@ public class LoadActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //根据配置文件设置相应的主题
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        if (sp.getBoolean(SettingsActivity.KEY_DARK_THEME, false))
+            setTheme(R.style.NightTheme);
+        else
+            setTheme(R.style.DayTheme);
+
         setContentView(R.layout.activity_load);
 
         //应用启动初始化环境变量

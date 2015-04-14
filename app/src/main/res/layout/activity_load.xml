@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/my_actionbar_background"
+    android:background="?attr/myActionbarBackground"
     android:orientation="vertical">
 
     <TextView
@@ -12,7 +12,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="92dp"
         android:text="@string/load_tv_app_name"
-        android:textColor="@color/whitesmoke"
+        android:textColor="?attr/myLoadTextColor"
         android:textSize="72sp"
         android:textStyle="bold" />
 
@@ -20,12 +20,12 @@
         android:id="@+id/load_tv_version"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/whitesmoke"
-        android:textSize="25sp"
         android:layout_alignBaseline="@+id/load_tv_app_name"
         android:layout_alignBottom="@+id/load_tv_app_name"
+        android:layout_toEndOf="@+id/load_tv_app_name"
         android:layout_toRightOf="@+id/load_tv_app_name"
-        android:layout_toEndOf="@+id/load_tv_app_name" />
+        android:textColor="?attr/myLoadTextColor"
+        android:textSize="25sp" />
 
     <TextView
         android:id="@+id/load_tv_speak1"
@@ -35,7 +35,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="86dp"
         android:text="@string/load_speak1"
-        android:textColor="@color/whitesmoke"
+        android:textColor="?attr/myLoadTextColor"
         android:textStyle="bold"
         android:typeface="monospace" />
 
@@ -50,7 +50,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="12dp"
         android:text="@string/load_speak2"
-        android:textColor="@color/whitesmoke"
+        android:textColor="?attr/myLoadTextColor"
         android:textStyle="bold" />
 
     <TextView
@@ -63,7 +63,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="12dp"
         android:text="@string/load_speak3"
-        android:textColor="@color/whitesmoke"
+        android:textColor="?attr/myLoadTextColor"
         android:textStyle="bold" />
 
     <TextView
@@ -75,7 +75,7 @@
         android:layout_below="@id/load_tv_speak3"
         android:layout_marginTop="12dp"
         android:text="@string/speak_author"
-        android:textColor="@color/whitesmoke"
+        android:textColor="?attr/myLoadTextColor"
         android:textStyle="bold" />
 
     <TextView
@@ -86,5 +86,5 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
         android:text="@string/copyright"
-        android:textColor="@color/whitesmoke" />
+        android:textColor="?attr/myLoadTextColor" />
 </RelativeLayout>

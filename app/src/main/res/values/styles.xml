@@ -7,9 +7,10 @@
     </style>
 
     <style name="DayTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="myTextColor">#000000</item>
-        <item name="myBackground">#ffffff</item>
-        <item name="mylistdivider">#ffffff</item>
+        <item name="myLoadTextColor">@color/whitesmoke</item>
+        <item name="myTextColor">@color/black</item>
+        <item name="myBackground">@color/white</item>
+        <item name="mylistdivider">@color/white</item>
         <item name="myActionbarBackground">@color/my_actionbar_background</item>
         <item name="primaryBackground">@color/primary</item>
         <item name="primary_pressedBackground">@color/primary_pressed</item>
@@ -21,6 +22,7 @@
     </style>
 
     <style name="NightTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="myLoadTextColor">#424952</item>
         <item name="myTextColor">#424952</item>
         <item name="myBackground">#080c10</item>
         <item name="mylistdivider">#080c10</item>
