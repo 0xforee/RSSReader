@@ -10,6 +10,7 @@
         <item name="myTextColor">#000000</item>
         <item name="myBackground">#ffffff</item>
         <item name="mylistdivider">#ffffff</item>
+        <item name="myActionbarBackground">@color/my_actionbar_background</item>
         <item name="primaryBackground">@color/primary</item>
         <item name="primary_pressedBackground">@color/primary_pressed</item>
         <item name="rippleBackground">@color/ripple</item>
@@ -23,6 +24,7 @@
         <item name="myTextColor">#424952</item>
         <item name="myBackground">#080c10</item>
         <item name="mylistdivider">#080c10</item>
+        <item name="myActionbarBackground">@color/dark_my_actionbar_background</item>
         <item name="primaryBackground">@color/dark_primary</item>
         <item name="primary_pressedBackground">@color/dark_primary_pressed</item>
         <item name="rippleBackground">@color/dark_ripple</item>
