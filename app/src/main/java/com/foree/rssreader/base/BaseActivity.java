@@ -23,7 +23,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.foree.rssreader.rssinfo.RssItemInfo;
+import com.foree.rssreader.ui.SettingsActivity;
 import com.foree.rssreader.utils.ImageDownLoader;
+import com.foree.rssreader.utils.LogUtils;
 import com.foree.rssreader.utils.NetworkUtils;
 import com.foree.rssreader.utils.WindowUtils;
 import com.rssreader.foree.rssreader.R;
@@ -73,7 +75,7 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
 
         //新建一个Handler用于传递数据
         mHandler = new Handler();
-        //新构建rssAdapter,用于解析处理listview
+        //新构建rssAdapter,用于解析处理listView
         rssItemInfos = new ArrayList<>();
         mRssAdapter = new RssAdapter(this, rssItemInfos);
 
@@ -88,7 +90,7 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
         //设置状态栏沉浸模式
         mTintManager.setStatusBarTintEnabled(true);
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        if (sp.getBoolean("lp_darktheme", false)) {
+        if (sp.getBoolean(SettingsActivity.KEY_DARK_THEME, false)) {
             mTintManager.setStatusBarTintResource(R.color.dark_my_actionbar_background);
         } else {
             mTintManager.setStatusBarTintResource(R.color.my_actionbar_background);
@@ -122,7 +124,7 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
     public void setContentView(int layoutResID) {
         //根据配置文件设置相应的主题
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        if (sp.getBoolean("lp_darktheme", false))
+        if (sp.getBoolean(SettingsActivity.KEY_DARK_THEME, false))
             setTheme(R.style.NightTheme);
         else
             setTheme(R.style.DayTheme);
@@ -136,7 +138,7 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
         if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
             showImage(mFirstVisibleItem, mVisibleItemCount);
         } else {
-            Log.v(TAG, "cancelTask");
+            if (LogUtils.isCompilerLog) Log.v(TAG, "cancelTask");
             cancelTask();
         }
 
@@ -162,11 +164,11 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
      * @param visibleItemCount 总可见的item数量
      */
     private void showImage(int firstVisibleItem, int visibleItemCount) {
-        Bitmap bitmap = null;
+        Bitmap bitmap;
         for (int i = firstVisibleItem; i < firstVisibleItem + visibleItemCount; i++) {
             String mImageUrl = getRssItemInfos().get(i).getImageUrl();
             if (mImageUrl == null) {
-                Log.v(TAG, "download showImage is null");
+                if (LogUtils.isCompilerLog) Log.v(TAG, "download showImage is null");
             }
             final ImageView mImageView = (ImageView) listView.findViewWithTag(mImageUrl);
             bitmap = this.mImageDownLoader.downloadImage(mImageUrl, new ImageDownLoader.onImageLoaderListener() {
@@ -206,13 +208,11 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
         }
 
         private LayoutInflater mLayoutInflater;
-        private Context mContext;
 
         public RssAdapter(Context context, List<RssItemInfo> objects) {
             super(context, 0, objects);
             //获取系统服务layoutInfalter
             mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            mContext = context;
         }
 
         @Override
@@ -230,7 +230,7 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
             return position;
         }
 
-        //重写getview方法
+        //重写getView方法
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder viewHolder;
@@ -247,7 +247,7 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
-            //获取RssItemInfo,从Arraylist中
+            //获取RssItemInfo,从ArrayList中
             RssItemInfo rssItemInfo = this.getItem(position);
 
             //  Log.v(TAG, rssItemInfo.getTitle());
@@ -320,11 +320,11 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
     public void doRss(String urlName) {
         //根据是否只在wifi下下载来决定是否开始解析
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        if ((sp.getBoolean("lp_downloadonwifi", false)) && MyApplication.mNetworkState == NetworkUtils.NETWORK_MOBILE) {
-            Toast.makeText(this, "请在有wifi的地方重试", Toast.LENGTH_LONG).show();
+        if ((sp.getBoolean(SettingsActivity.KEY_DOWNLOAD_ON_WIFI, false)) && MyApplication.mNetworkState == NetworkUtils.NETWORK_MOBILE) {
+            Toast.makeText(this, R.string.error10000, Toast.LENGTH_LONG).show();
 
         } else if (MyApplication.mNetworkState == NetworkUtils.NETWORK_NONE) {
-            Toast.makeText(this, "网络错误", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.error10001, Toast.LENGTH_LONG).show();
         } else {
             RssParse rssParse = new RssParse(this, urlName);
             rssParse.start();
