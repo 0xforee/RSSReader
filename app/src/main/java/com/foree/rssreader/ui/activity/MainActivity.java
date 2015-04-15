@@ -1,9 +1,8 @@
-package com.foree.rssreader.ui;
+package com.foree.rssreader.ui.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -30,6 +29,7 @@ import com.foree.rssreader.base.BaseActivity;
 import com.foree.rssreader.base.MyApplication;
 import com.foree.rssreader.db.RssDao;
 import com.foree.rssreader.rssinfo.RssItemInfo;
+import com.foree.rssreader.ui.NavigationDrawerFragment;
 import com.foree.rssreader.xmlparse.XmlParseHandler;
 import com.melnykov.fab.FloatingActionButton;
 import com.melnykov.fab.ScrollDirectionListener;

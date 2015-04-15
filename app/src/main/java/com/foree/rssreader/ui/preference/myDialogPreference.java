@@ -1,4 +1,4 @@
-package com.foree.rssreader.ui;
+package com.foree.rssreader.ui.preference;
 
 import android.app.AlertDialog;
 import android.content.Context;

@@ -14,8 +14,8 @@ import android.widget.TextView;
 
 import com.foree.rssreader.base.MyApplication;
 import com.foree.rssreader.rssinfo.RssFeedInfo;
-import com.foree.rssreader.ui.DescriptionActivity;
-import com.foree.rssreader.ui.MainActivity;
+import com.foree.rssreader.ui.activity.DescriptionActivity;
+import com.foree.rssreader.ui.activity.MainActivity;
 import com.rssreader.foree.rssreader.R;
 import com.foree.rssreader.utils.CacheUtils;
 import com.foree.rssreader.utils.NetworkUtils;

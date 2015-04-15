@@ -1,4 +1,4 @@
-package com.foree.rssreader.ui;
+package com.foree.rssreader.ui.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
-import android.widget.Toast;
 
 import com.foree.rssreader.base.BaseActivity;
 import com.foree.rssreader.db.RssDao;

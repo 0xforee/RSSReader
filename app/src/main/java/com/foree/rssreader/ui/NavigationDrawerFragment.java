@@ -11,7 +11,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,9 +22,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.foree.rssreader.db.RssDao;
+import com.foree.rssreader.ui.activity.SettingsActivity;
 import com.foree.rssreader.utils.LogUtils;
 import com.rssreader.foree.rssreader.R;
 
@@ -279,7 +278,7 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     /**
-     *使用这个Navigation的所有的activity都得实现这个回调接口
+     * 使用这个Navigation的所有的activity都得实现这个回调接口
      */
     public static interface NavigationDrawerCallbacks {
         /**

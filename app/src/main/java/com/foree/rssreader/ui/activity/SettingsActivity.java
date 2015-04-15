@@ -1,4 +1,4 @@
-package com.foree.rssreader.ui;
+package com.foree.rssreader.ui.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -50,7 +50,7 @@ public class SettingsActivity extends BaseActivity implements SharedPreferences.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting);
+        //setContentView(R.layout.activity_setting);
 
         //add actionBar title
         ActionBar actionBar = getSupportActionBar();
@@ -58,7 +58,7 @@ public class SettingsActivity extends BaseActivity implements SharedPreferences.
         actionBar.setTitle(R.string.action_settings);
         // using fragment replace settings UI
         getFragmentManager().beginTransaction()
-                .replace(R.id.fr_settings, new SettingsFragment())
+                .replace(android.R.id.content, new SettingsFragment())
                 .commit();
     }
 
@@ -91,6 +91,7 @@ public class SettingsActivity extends BaseActivity implements SharedPreferences.
             Log.i(TAG, "onSharedPreferenceChanged");
         }
     }
+
     //settingFragment的内部类实现
     public static class SettingsFragment extends PreferenceFragment {
         private static final String TAG = "SettingsFragment";
@@ -100,7 +101,7 @@ public class SettingsActivity extends BaseActivity implements SharedPreferences.
             super.onCreate(savedInstanceState);
 
             // add preference content from a xml file
-            addPreferencesFromResource(R.xml.preferences);
+            addPreferencesFromResource(R.xml.preference_all);
             //set VersionName
             findPreference(SettingsActivity.KEY_VERSION_NAME).setTitle(MyApplication.myVersionName);
 

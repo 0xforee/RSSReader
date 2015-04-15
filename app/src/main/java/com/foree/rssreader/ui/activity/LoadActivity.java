@@ -1,4 +1,4 @@
-package com.foree.rssreader.ui;
+package com.foree.rssreader.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,7 +7,6 @@ import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.foree.rssreader.base.MyApplication;

@@ -13,7 +13,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/DayTheme">
-        <activity android:name="com.foree.rssreader.ui.LoadActivity">
+        <activity android:name="com.foree.rssreader.ui.activity.LoadActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,27 +21,27 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.foree.rssreader.ui.MainActivity"
+            android:name="com.foree.rssreader.ui.activity.MainActivity"
             android:label="@string/app_name" />
         <activity
-            android:name="com.foree.rssreader.ui.DescriptionActivity"
+            android:name="com.foree.rssreader.ui.activity.DescriptionActivity"
             android:label="RSSRedar" />
         <activity
-            android:name="com.foree.rssreader.ui.SettingsActivity"
+            android:name="com.foree.rssreader.ui.activity.SettingsActivity"
             android:label="RSSRedar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.foree.rssreader.ui.MainActivity" />
+                android:value="com.foree.rssreader.ui.activity.MainActivity" />
         </activity>
         <activity
-            android:name="com.foree.rssreader.ui.AddFeedActivity"
+            android:name="com.foree.rssreader.ui.activity.AddFeedActivity"
             android:label="@string/app_name">
-        <!--左上角添加返回导航键 -->
+            <!--左上角添加返回导航键 -->
             <!--<meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.foree.rssreader.ui.MainActivity" />-->
+                android:value="com.foree.rssreader.ui.activity.MainActivity" />-->
         </activity>
-        <activity android:name="com.foree.rssreader.ui.FeedListActivity" />
+        <activity android:name="com.foree.rssreader.ui.activity.FeedListActivity" />
     </application>
 
 </manifest>

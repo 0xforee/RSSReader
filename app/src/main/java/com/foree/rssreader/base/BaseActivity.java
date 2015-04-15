@@ -23,7 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.foree.rssreader.rssinfo.RssItemInfo;
-import com.foree.rssreader.ui.SettingsActivity;
+import com.foree.rssreader.ui.activity.SettingsActivity;
 import com.foree.rssreader.utils.ImageDownLoader;
 import com.foree.rssreader.utils.LogUtils;
 import com.foree.rssreader.utils.NetworkUtils;
