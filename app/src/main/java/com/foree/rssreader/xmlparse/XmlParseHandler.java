@@ -78,7 +78,11 @@ public class XmlParseHandler extends DefaultHandler {
         if (mInItem) {
             if (localName.equals("title")) {
                 mTitle = mBuff.toString();
-                LogUtils.d(TAG, mTitle);
+                //Pattern titlePattern = Pattern.compile("")
+                //规范标题,去掉多个空格,和多个回车
+                mTitle = mTitle.replaceAll(" {2,}", "");
+                mTitle = mTitle.replaceAll("\n", "");
+                System.out.println(mBuff);
             }
             if (localName.equals("link")) mLink = mBuff.toString();
             if (localName.equals("pubDate")) {
