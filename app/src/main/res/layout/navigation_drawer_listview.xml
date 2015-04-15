@@ -8,5 +8,5 @@
     android:paddingLeft="@dimen/listPreferredItemPaddingStart"
     android:paddingRight="@dimen/listPreferredItemPaddingEnd"
     android:background="?android:attr/activatedBackgroundIndicator"
-    android:textColor="@color/black"
+    android:textColor="?attr/myTextColor"
     android:minHeight="?android:attr/listPreferredItemHeightSmall" />
