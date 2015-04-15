@@ -1,9 +1,9 @@
 package com.foree.rssreader.xmlparse;
 
-import android.util.Log;
 import com.foree.rssreader.base.BaseActivity;
 import com.foree.rssreader.rssinfo.RssItemInfo;
 import com.foree.rssreader.utils.DateUtils;
+import com.foree.rssreader.utils.LogUtils;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -76,7 +76,10 @@ public class XmlParseHandler extends DefaultHandler {
         //Log.v(TAG, "标签解析停止 ");
         //等待地址全部解析完成，将内容添加
         if (mInItem) {
-            if (localName.equals("title")) mTitle = mBuff.toString();
+            if (localName.equals("title")) {
+                mTitle = mBuff.toString();
+                LogUtils.d(TAG, mTitle);
+            }
             if (localName.equals("link")) mLink = mBuff.toString();
             if (localName.equals("pubDate")) {
                 mPubDate = mBuff.toString();
@@ -100,17 +103,17 @@ public class XmlParseHandler extends DefaultHandler {
                 //如果匹配成功,获取url链接
                 if (imageMatcher.find()) {
                     mImageUrl = imageMatcher.group();
-                    Log.v(TAG, "(匹配只适用于微信公众号)图片链接:" + mImageUrl);
+                    if (LogUtils.isCompilerLog) LogUtils.v(TAG, "(匹配只适用于微信公众号)图片链接:" + mImageUrl);
                 }
 
                 //如果匹配成功,获取日期
                 if (dateMatcher.find()) {
                     mPubDate = DateUtils.parseDate(dateMatcher.group());
-                    Log.v(TAG, "日期:" + mPubDate);
+                    if (LogUtils.isCompilerLog) LogUtils.v(TAG, "日期:" + mPubDate);
                 }
             }
             if (localName.equals("item")) {
-                Log.v(TAG, "添加item");
+                if (LogUtils.isCompilerLog) LogUtils.v(TAG, "添加item");
                 //要退出当前item时,设置为false
                 mInItem = false;
 
