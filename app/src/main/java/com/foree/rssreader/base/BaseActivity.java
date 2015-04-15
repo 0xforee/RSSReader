@@ -119,9 +119,11 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
     @Override
     protected void onResume() {
         super.onResume();
-        //设置content的状态的偏移
-        View view = getWindow().findViewById(android.R.id.content);
-        view.setPadding(0, WindowUtils.getInstance().getPadding(this), 0, 0);
+        //设置content的状态的偏移,只适用于大于api19
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            View view = getWindow().findViewById(android.R.id.content);
+            view.setPadding(0, WindowUtils.getInstance().getPadding(this), 0, 0);
+        }
     }
 
     public void setContentView(int layoutResID) {
