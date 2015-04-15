@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error10000">请在有wifi的地方重试</string>
+    <string name="error10001">网络错误</string>
+</resources>
