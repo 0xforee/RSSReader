@@ -15,13 +15,15 @@ public class AboutActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_setting);
+
         //add actionBar title
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(R.string.action_settings);
         // using fragment replace settings UI
         getFragmentManager().beginTransaction()
-                .replace(android.R.id.content, new AboutFragment())
+                .replace(R.id.fr_settings, new AboutFragment())
                 .commit();
     }
 }

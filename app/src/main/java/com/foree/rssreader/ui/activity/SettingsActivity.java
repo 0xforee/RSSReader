@@ -39,9 +39,9 @@ public class SettingsActivity extends BaseActivity implements SharedPreferences.
     //key: clean your cache
     public static final String KEY_CLEAN_CACHE = "md_cleancache";
     //key: contact me using email
-    public static final String KEY_CONTACT_ME = "md_contactme";
+    public static final String KEY_CONTACT_ME = "pf_contact_me";
     //key: version number
-    public static final String KEY_VERSION_NAME = "lp_versionnumber";
+    public static final String KEY_VERSION_NAME = "pf_version_number";
     //key: first run
     public static final String KEY_FIRST_RUN = "FIRST_RUN";
     //key: if user have learned open navigation drawer
@@ -50,7 +50,7 @@ public class SettingsActivity extends BaseActivity implements SharedPreferences.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_setting);
+        setContentView(R.layout.activity_setting);
 
         //add actionBar title
         ActionBar actionBar = getSupportActionBar();
@@ -58,7 +58,7 @@ public class SettingsActivity extends BaseActivity implements SharedPreferences.
         actionBar.setTitle(R.string.action_settings);
         // using fragment replace settings UI
         getFragmentManager().beginTransaction()
-                .replace(android.R.id.content, new SettingsFragment())
+                .replace(R.id.fr_settings, new SettingsFragment())
                 .commit();
     }
 
