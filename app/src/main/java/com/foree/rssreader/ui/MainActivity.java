@@ -3,6 +3,8 @@ package com.foree.rssreader.ui;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GestureDetectorCompat;
@@ -56,7 +58,6 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.DayTheme);
         setContentView(R.layout.activity_main);
 
         //使navigationDrawer覆盖actionBar
@@ -78,6 +79,27 @@ public class MainActivity extends BaseActivity
                 mDrawerLayout);
         Log.v(TAG, "onCreate");
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //if darkTheme setting changed, reload activity
+        boolean sp = PreferenceManager.getDefaultSharedPreferences(this).getBoolean(SettingsActivity.KEY_DARK_THEME, false);
+        if (isDarkTheme != sp) {
+            reload();
+            isDarkTheme = !isDarkTheme;
+        }
+    }
+
+    private void reload() {
+        Intent intent = getIntent();
+        overridePendingTransition(0, 0);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        finish();
+
+        overridePendingTransition(0, 0);
+        startActivity(intent);
     }
 
     //将drawer移动覆盖actionBar

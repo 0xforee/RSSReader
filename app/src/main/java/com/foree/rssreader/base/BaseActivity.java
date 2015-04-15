@@ -54,6 +54,7 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
     private int mVisibleItemCount;
     public static ListView listView;
     protected SystemBarTintManager mTintManager;
+    public boolean isDarkTheme = false;
 
     public List<RssItemInfo> getRssItemInfos() {
         return rssItemInfos;
@@ -91,8 +92,10 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
         mTintManager.setStatusBarTintEnabled(true);
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         if (sp.getBoolean(SettingsActivity.KEY_DARK_THEME, false)) {
+            isDarkTheme = true;
             mTintManager.setStatusBarTintResource(R.color.dark_my_actionbar_background);
         } else {
+            isDarkTheme = false;
             mTintManager.setStatusBarTintResource(R.color.my_actionbar_background);
         }
 
