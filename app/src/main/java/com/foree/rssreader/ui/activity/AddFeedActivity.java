@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.foree.rssreader.base.BaseActivity;
 import com.foree.rssreader.db.RssDao;
 import com.foree.rssreader.rssinfo.RssFeedInfo;
-import com.foree.rssreader.ui.NavigationDrawerFragment;
+import com.foree.rssreader.ui.fragment.NavigationDrawerFragment;
 import com.foree.rssreader.xmlparse.XmlParseHandler;
 import com.rssreader.foree.rssreader.R;
 

@@ -1,4 +1,4 @@
-package com.foree.rssreader.ui;
+package com.foree.rssreader.ui.fragment;
 
 import android.app.Activity;
 import android.content.SharedPreferences;

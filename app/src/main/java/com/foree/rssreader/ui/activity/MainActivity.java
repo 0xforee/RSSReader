@@ -29,7 +29,7 @@ import com.foree.rssreader.base.BaseActivity;
 import com.foree.rssreader.base.MyApplication;
 import com.foree.rssreader.db.RssDao;
 import com.foree.rssreader.rssinfo.RssItemInfo;
-import com.foree.rssreader.ui.NavigationDrawerFragment;
+import com.foree.rssreader.ui.fragment.NavigationDrawerFragment;
 import com.foree.rssreader.xmlparse.XmlParseHandler;
 import com.melnykov.fab.FloatingActionButton;
 import com.melnykov.fab.ScrollDirectionListener;

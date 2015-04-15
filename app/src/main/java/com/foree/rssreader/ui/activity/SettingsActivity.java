@@ -102,22 +102,7 @@ public class SettingsActivity extends BaseActivity implements SharedPreferences.
 
             // add preference content from a xml file
             addPreferencesFromResource(R.xml.preference_all);
-            //set VersionName
-            findPreference(SettingsActivity.KEY_VERSION_NAME).setTitle(MyApplication.myVersionName);
 
-            //send email to developer
-            findPreference(SettingsActivity.KEY_CONTACT_ME).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    if (LogUtils.isCompilerLog) LogUtils.v(TAG, "send");
-                    Uri emailUri = Uri.parse("mailto:" + SettingsActivity.MY_EMAIL);
-                    Intent sendEmail = new Intent(Intent.ACTION_SENDTO, emailUri);
-                    sendEmail.putExtra(Intent.EXTRA_SUBJECT, "@反馈:");
-                    //  sendEmail.putExtra(Intent.EXTRA_TEXT, "这是内容");
-                    startActivity(sendEmail);
-                    return true;
-                }
-            });
         }
     }
 }

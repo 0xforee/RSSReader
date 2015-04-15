@@ -25,13 +25,25 @@
             android:label="@string/app_name" />
         <activity
             android:name="com.foree.rssreader.ui.activity.DescriptionActivity"
-            android:label="RSSRedar" />
+            android:label="@string/app_name" />
         <activity
             android:name="com.foree.rssreader.ui.activity.SettingsActivity"
-            android:label="RSSRedar">
-            <meta-data
+            android:label="@string/app_name">
+        <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.foree.rssreader.ui.activity.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.foree.rssreader.ui.activity.AboutActivity"
+            android:label="@string/app_name">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.foree.rssreader.ui.activity.SettingsActivity" />
+            <intent-filter>
+                <action android:name=".AboutActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
         </activity>
         <activity
             android:name="com.foree.rssreader.ui.activity.AddFeedActivity"

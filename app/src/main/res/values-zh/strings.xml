@@ -30,7 +30,7 @@
     <string name="editaccount">编辑账户</string>
     <string name="accountname">beijing2008lm@gmail.com</string>
     <string name="logout">登出</string>
-    <string name="general">常用设置</string>
+    <string name="general">常项</string>
     <string name="darktheme">夜间模式</string>
     <string name="dark_description">夜间打开</string>
     <string name="offline">离线下载</string>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:layout="@layout/my_preference_category"
+        android:title="@string/general">
+        <Preference
+            android:layout="@layout/my_preference"
+            android:key="md_contactme"
+            android:summary="@string/email"
+            android:title="@string/contactme" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:layout="@layout/my_preference_category"
+        android:title="@string/version">
+        <Preference
+            android:layout="@layout/my_preference"
+            android:enabled="false"
+            android:key="lp_versionnumber"
+            android:summary="@string/enjoy" />
+    </PreferenceCategory>
+</PreferenceScreen>

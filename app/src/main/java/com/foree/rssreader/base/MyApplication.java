@@ -11,7 +11,7 @@ import android.preference.PreferenceManager;
 
 import com.foree.rssreader.db.RssDao;
 import com.foree.rssreader.rssinfo.RssFeedInfo;
-import com.foree.rssreader.ui.NavigationDrawerFragment;
+import com.foree.rssreader.ui.fragment.NavigationDrawerFragment;
 import com.foree.rssreader.ui.activity.SettingsActivity;
 import com.foree.rssreader.utils.FileUtils;
 import com.foree.rssreader.utils.LogUtils;
