@@ -26,6 +26,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.foree.rssreader.db.RssDao;
+import com.foree.rssreader.utils.LogUtils;
 import com.rssreader.foree.rssreader.R;
 
 import java.util.ArrayList;
@@ -41,7 +42,6 @@ public class NavigationDrawerFragment extends Fragment {
     /**
      * 在用户手动展开drawer之前,启动的时候保证drawer是开着的
      */
-    private static final String PREF_USER_LEARNED_DRAWER = "navigation_drawer_learned";
 
     /**
      * 指向当前回调函数的接口
@@ -77,7 +77,7 @@ public class NavigationDrawerFragment extends Fragment {
 
         //防止用户不知道drawer，在第一次打开应用时，打开drawer
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        mUserLearnedDrawer = sp.getBoolean(PREF_USER_LEARNED_DRAWER, false);
+        mUserLearnedDrawer = sp.getBoolean(SettingsActivity.KEY_PREF_USER_LEARNED_DRAWER, false);
 
         if (savedInstanceState != null) {
             mCurrentSelectedPosition = savedInstanceState.getInt(STATE_SELECTED_POSITION);
@@ -181,7 +181,7 @@ public class NavigationDrawerFragment extends Fragment {
                     mUserLearnedDrawer = true;
                     SharedPreferences sp = PreferenceManager
                             .getDefaultSharedPreferences(getActivity());
-                    sp.edit().putBoolean(PREF_USER_LEARNED_DRAWER, true).apply();
+                    sp.edit().putBoolean(SettingsActivity.KEY_PREF_USER_LEARNED_DRAWER, true).apply();
                 }
 
                 getActivity().supportInvalidateOptionsMenu(); // calls onPrepareOptionsMenu()
@@ -207,9 +207,9 @@ public class NavigationDrawerFragment extends Fragment {
     //在选中之后的动作
     private void selectItem(int position) {
         mCurrentSelectedPosition = position;
-        if (mDrawerListView != null) {
-            //    mDrawerListView.setItemChecked(position, true);
-        }
+        /*if (mDrawerListView != null) {
+                mDrawerListView.setItemChecked(position, true);
+        }*/
         if (mDrawerLayout != null) {
             mDrawerLayout.closeDrawer(mFragmentContainerView);
         }
@@ -261,11 +261,7 @@ public class NavigationDrawerFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 
     /**
@@ -302,13 +298,15 @@ public class NavigationDrawerFragment extends Fragment {
 
         @Override
         public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
-            Toast.makeText(getActivity(), "选中", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), "选中", Toast.LENGTH_SHORT).show();
             if (checked) {
                 selections.add(NavigationDrawerFragment.FeedInfos.get(position));
-                Log.v(TAG, "add position " + NavigationDrawerFragment.FeedInfos.get(position));
+                if (LogUtils.isCompilerLog)
+                    LogUtils.v(TAG, "add position " + NavigationDrawerFragment.FeedInfos.get(position));
             } else {
                 selections.remove(NavigationDrawerFragment.FeedInfos.get(position));
-                Log.v(TAG, "delete position " + NavigationDrawerFragment.FeedInfos.get(position));
+                if (LogUtils.isCompilerLog)
+                    LogUtils.v(TAG, "delete position " + NavigationDrawerFragment.FeedInfos.get(position));
             }
         }
 
@@ -320,13 +318,13 @@ public class NavigationDrawerFragment extends Fragment {
             inflater.inflate(R.menu.menu_multiselection, menu);
             selections = new ArrayList<>();
             rssDao = new RssDao(getActivity());
-            Log.v(TAG, "onCreateActionMode");
+            LogUtils.i(TAG, "onCreateActionMode");
             return true;
         }
 
         @Override
         public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-            Log.v(TAG, "onPrepareActionMode");
+            LogUtils.i(TAG, "onPrepareActionMode");
             return false;
         }
 
@@ -334,7 +332,7 @@ public class NavigationDrawerFragment extends Fragment {
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.action_delete:
-                    Log.v(TAG, "delete!");
+                    LogUtils.i(TAG, "delete!");
                     //delete rss data
                     for (int i = 0; i < selections.size(); i++) {
                         //  String DeleteName = NavigationDrawerFragment.FeedInfos.get(selections.get(i));
@@ -350,13 +348,13 @@ public class NavigationDrawerFragment extends Fragment {
                     //refresh( later )
                     break;
             }
-            Log.v(TAG, "onActionItemClicked");
+            LogUtils.i(TAG, "onActionItemClicked");
             return true;
         }
 
         @Override
         public void onDestroyActionMode(ActionMode mode) {
-            Log.v(TAG, "onDestroyActionMode");
+            LogUtils.i(TAG, "onDestroyActionMode");
         }
     }
 }

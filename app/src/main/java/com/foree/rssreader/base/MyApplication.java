@@ -8,11 +8,11 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import com.foree.rssreader.db.RssDao;
 import com.foree.rssreader.rssinfo.RssFeedInfo;
 import com.foree.rssreader.ui.NavigationDrawerFragment;
+import com.foree.rssreader.ui.SettingsActivity;
 import com.foree.rssreader.utils.FileUtils;
 import com.foree.rssreader.utils.LogUtils;
 import com.foree.rssreader.utils.NetworkUtils;
@@ -114,21 +114,21 @@ public class MyApplication extends Application {
             File myDateDir = new File(SdcardPath + "/" + myApplicationDir + "/");
             if (!myDateDir.exists())
                 if (!myDateDir.mkdir()) {
-                    Log.e(TAG, "创建应用程序目录失败");
+                    LogUtils.e(TAG, "创建应用程序目录失败");
                 }
             mySdcardDataDir = SdcardPath + "/" + myApplicationDir;
             //缓存目录
             File myCacheDir = new File(mySdcardDataDir + "/" + "cache/");
             if (!myCacheDir.exists())
                 if (!myCacheDir.mkdir()) {
-                    Log.e(TAG, "创建缓存目录失败");
+                    LogUtils.e(TAG, "创建缓存目录失败");
                 }
             mySdcardCacheDir = mySdcardDataDir + "/" + "cache";
             //source目录
             File mySourceDir = new File(mySdcardDataDir + File.separator + "source/");
             if (!mySourceDir.exists())
                 if (!mySourceDir.mkdir()) {
-                    Log.e(TAG, "创建source目录失败");
+                    LogUtils.e(TAG, "创建source目录失败");
                 }
             MYSDCARDSOURCEDIR = mySdcardDataDir + File.separator + "source";
         }
@@ -141,7 +141,7 @@ public class MyApplication extends Application {
          */
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(mContext);
-        mFirstRun = sp.getBoolean("FIRST_RUN", true);
+        mFirstRun = sp.getBoolean(SettingsActivity.KEY_FIRST_RUN, true);
         if (mFirstRun) {
             //copy opml file and parse it
             for (int i = 111111; i < 111116; i++) {
@@ -158,13 +158,13 @@ public class MyApplication extends Application {
                     e.printStackTrace();
                 }
             }
-            sp.edit().putBoolean("FIRST_RUN", false).apply();
+            sp.edit().putBoolean(SettingsActivity.KEY_FIRST_RUN, false).apply();
         }
 
         //获取当前应用程序的版本号和版本名称
         initApplicationVersionInfo(mContext);
 
-        Log.v(TAG, "环境变量初始化成功");
+        if (LogUtils.isCompilerLog) LogUtils.v(TAG, "环境变量初始化成功");
 
     }
 
@@ -176,7 +176,7 @@ public class MyApplication extends Application {
         for (RssFeedInfo rssFeedInfo : rssFeedInfoList) {
             NavigationDrawerFragment.FeedInfos.add(rssFeedInfo.getTitle());
         }
-        Log.v(TAG, "数据库初始化成功");
+        if (LogUtils.isCompilerLog) LogUtils.v(TAG, "数据库初始化成功");
     }
 
     //获取应用程序的版本信息

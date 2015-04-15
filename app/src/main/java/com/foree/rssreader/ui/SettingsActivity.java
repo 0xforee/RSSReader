@@ -9,43 +9,54 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.foree.rssreader.base.BaseActivity;
 import com.foree.rssreader.base.MyApplication;
+import com.foree.rssreader.utils.LogUtils;
 import com.rssreader.foree.rssreader.R;
-
-import java.net.URL;
 
 /**
  * Created by foree on 3/11/15.
- * settings的activity
+ * settings activity
  */
 public class SettingsActivity extends BaseActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     public static final String TAG = "SettingsActivity";
 
-    //开发者的邮箱信息
+    //email address
     public static String MY_EMAIL = "beijing.2008.lm@163.com";
 
-    //preference的key
+    /**
+     * keys for Application preference
+     */
+    //key: edit account
     public static final String KEY_EDIT_ACCOUNT = "lp_editaccount";
+    //key: log out
     public static final String KEY_LOGOUT = "md_logout";
+    //key: dark theme
     public static final String KEY_DARK_THEME = "lp_darktheme";
+    //key: download only on wifi
     public static final String KEY_DOWNLOAD_ON_WIFI = "lp_downloadonwifi";
+    //key: clean your cache
     public static final String KEY_CLEAN_CACHE = "md_cleancache";
+    //key: contact me using email
     public static final String KEY_CONTACT_ME = "md_contactme";
+    //key: version number
     public static final String KEY_VERSION_NAME = "lp_versionnumber";
+    //key: first run
+    public static final String KEY_FIRST_RUN = "FIRST_RUN";
+    //key: if user have learned open navigation drawer
+    public static final String KEY_PREF_USER_LEARNED_DRAWER = "navigation_drawer_learned";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
-        //添加ActionBar的标题
+        //add actionBar title
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(R.string.action_settings);
-        // 使用fragment来替换主界面的fragment
+        // using fragment replace settings UI
         getFragmentManager().beginTransaction()
                 .replace(R.id.fr_settings, new SettingsFragment())
                 .commit();
@@ -54,14 +65,14 @@ public class SettingsActivity extends BaseActivity implements SharedPreferences.
     @Override
     protected void onPause() {
         super.onPause();
-        //解除注册
+        //unregister
         PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        //注册sharePreference监听器
+        //register sharePreference Listener
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
     }
 
@@ -77,7 +88,7 @@ public class SettingsActivity extends BaseActivity implements SharedPreferences.
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             // overridePendingTransition(R.anim.stay, R.anim.alphaout);
-            Log.v(TAG, "onSharedPreferenceChanged");
+            Log.i(TAG, "onSharedPreferenceChanged");
         }
     }
     //settingFragment的内部类实现
@@ -88,16 +99,16 @@ public class SettingsActivity extends BaseActivity implements SharedPreferences.
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
-            // 从资源文件中加载一个配置项
+            // add preference content from a xml file
             addPreferencesFromResource(R.xml.preferences);
-            //设置VersionName
+            //set VersionName
             findPreference(SettingsActivity.KEY_VERSION_NAME).setTitle(MyApplication.myVersionName);
 
-            //设置联系开发者
+            //send email to developer
             findPreference(SettingsActivity.KEY_CONTACT_ME).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
-                    Log.v(TAG, "send");
+                    if (LogUtils.isCompilerLog) LogUtils.v(TAG, "send");
                     Uri emailUri = Uri.parse("mailto:" + SettingsActivity.MY_EMAIL);
                     Intent sendEmail = new Intent(Intent.ACTION_SENDTO, emailUri);
                     sendEmail.putExtra(Intent.EXTRA_SUBJECT, "@反馈:");
