@@ -185,6 +185,9 @@ public class MainActivity extends BaseActivity
                 builder.setMessage(message);
                 builder.setNeutralButton("返回", null);
                 builder.show();
+                break;
+            case R.id.action_refresh:
+                reload();
         }
         return super.onOptionsItemSelected(item);
     }

@@ -42,7 +42,7 @@ public class StringUtils {
             result = matcher.group();
 
             if (flag == StringUtils.FLAG_IMAGEURL) {
-                if (LogUtils.isCompilerLog) LogUtils.v(TAG, "(匹配只适用于微信公众号)图片链接:" + msg);
+                if (LogUtils.isCompilerLog) LogUtils.v(TAG, "(匹配只适用于微信公众号)图片链接:" + result);
             } else {
                 result = DateUtils.parseDate(result);
                 if (LogUtils.isCompilerLog) LogUtils.v(TAG, "日期:" + result);
