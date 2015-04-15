@@ -18,32 +18,32 @@ public class LogUtils {
     public static int logLevel = Log.VERBOSE;
 
     //print Verbose log
-    public static void v(String TAG, String info) {
+    public static void v(String TAG, String msg) {
         if (Log.VERBOSE >= logLevel)
-            Log.v(TAG, info);
+            Log.v(TAG, msg);
     }
 
     //print Debug log
-    public static void d(String TAG, String info) {
+    public static void d(String TAG, String msg) {
         if (Log.DEBUG >= logLevel)
-            Log.d(TAG, info);
+            Log.d(TAG, msg);
     }
 
     //print Info log
-    public static void i(String TAG, String info) {
+    public static void i(String TAG, String msg) {
         if (Log.INFO >= logLevel)
-            Log.i(TAG, info);
+            Log.i(TAG, msg);
     }
 
     //print Warn log
-    public static void w(String TAG, String info) {
+    public static void w(String TAG, String msg) {
         if (Log.WARN >= logLevel)
-            Log.w(TAG, info);
+            Log.w(TAG, msg);
     }
 
     //print Error log
-    public static void e(String TAG, String info) {
+    public static void e(String TAG, String msg) {
         if (Log.ERROR >= logLevel)
-            Log.e(TAG, info);
+            Log.e(TAG, msg);
     }
 }
