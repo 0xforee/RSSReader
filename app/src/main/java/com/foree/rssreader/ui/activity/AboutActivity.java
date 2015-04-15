@@ -20,7 +20,7 @@ public class AboutActivity extends BaseActivity {
         //add actionBar title
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(R.string.action_settings);
+        actionBar.setTitle(R.string.about);
         // using fragment replace settings UI
         getFragmentManager().beginTransaction()
                 .replace(R.id.fr_settings, new AboutFragment())

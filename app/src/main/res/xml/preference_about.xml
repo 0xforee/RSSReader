@@ -5,9 +5,38 @@
         android:title="@string/general">
         <Preference
             android:layout="@layout/my_preference"
-            android:key="md_contactme"
+            android:key="pf_contact_me"
             android:summary="@string/email"
-            android:title="@string/contactme" />
+            android:title="@string/contact_me" />
+        <Preference
+            android:layout="@layout/my_preference"
+            android:key="pf_github"
+            android:summary="@string/github_address"
+            android:title="@string/github">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/github_address" />
+        </Preference>
+        <Preference
+            android:layout="@layout/my_preference"
+            android:key="pf_license"
+            android:title="@string/public_license">
+            <intent android:action=".LisenceActivity" />
+        </Preference>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:layout="@layout/my_preference_category"
+        android:title="@string/storage">
+        <Preference
+            android:key="pf_dir_application"
+            android:layout="@layout/my_preference"
+            android:enabled="false"
+            android:title="@string/dir_application" />
+        <Preference
+            android:key="pf_dir_cache"
+            android:layout="@layout/my_preference"
+            android:enabled="false"
+            android:title="@string/dir_cache" />
     </PreferenceCategory>
     <PreferenceCategory
         android:layout="@layout/my_preference_category"
@@ -15,7 +44,7 @@
         <Preference
             android:layout="@layout/my_preference"
             android:enabled="false"
-            android:key="lp_versionnumber"
+            android:key="pf_version_number"
             android:summary="@string/enjoy" />
     </PreferenceCategory>
 </PreferenceScreen>

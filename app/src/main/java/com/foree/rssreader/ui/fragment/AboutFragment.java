@@ -40,6 +40,11 @@ public class AboutFragment extends PreferenceFragment {
             }
         });
 
+        //set application Data dir info
+        findPreference(SettingsActivity.KEY_APPLICATION_DIR).setSummary(MyApplication.mySdcardDataDir);
+
+        //set application Cache dir info
+        findPreference(SettingsActivity.KEY_APPLICATION_CACHE_DIR).setSummary(MyApplication.mySdcardCacheDir);
 
     }
 }

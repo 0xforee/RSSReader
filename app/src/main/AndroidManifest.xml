@@ -46,6 +46,17 @@
 
         </activity>
         <activity
+            android:name="com.foree.rssreader.ui.activity.LicenseActivity"
+            android:label="@string/app_name">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.foree.rssreader.ui.activity.AboutActivity" />
+            <intent-filter>
+                <action android:name=".LisenceActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name="com.foree.rssreader.ui.activity.AddFeedActivity"
             android:label="@string/app_name">
             <!--左上角添加返回导航键 -->

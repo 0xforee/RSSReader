@@ -37,10 +37,17 @@
     <string name="downloadonwifi">只在wifi下下载</string>
     <string name="clean_des">点击清除缓存</string>
     <string name="cleancache">清除缓存</string>
-    <string name="contactme">联系我</string>
+
+    <!-- settings-about string -->
+    <string name="contact_me">联系我</string>
     <string name="email">beijing.2008.lm@163.com</string>
     <string name="version">版本</string>
     <string name="enjoy">感谢您的下载,玩的开心!</string>
+    <string name="dir_application">应用程序目录</string>
+    <string name="dir_cache">缓存目录</string>
+    <string name="public_license">开源协议</string>
+    <string name="storage">存储</string>
+
     <string name="action_textsize_small">小号字体</string>
     <string name="ok">确定</string>
     <string name="cancel">取消</string>

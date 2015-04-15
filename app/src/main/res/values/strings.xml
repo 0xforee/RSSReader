@@ -44,17 +44,25 @@
     <string name="downloadonwifi">Download on WiFi</string>
     <string name="clean_des">Clean your cache</string>
     <string name="cleancache">Clean Cache</string>
-    <string name="contactme">Contact me</string>
+
+    <!-- settings-about string -->
+    <string name="contact_me">Contact me</string>
     <string name="email" translatable="false">beijing.2008.lm@163.com</string>
+    <string name="storage">Storage</string>
+    <string name="dir_application">Application Directory</string>
+    <string name="dir_cache">Application Cache Directory</string>
+    <string name="github" translatable="false">Github</string>
+    <string name="github_address" translatable="false">https://github.com/lixiao123/RSSReader</string>
+    <string name="public_license">PUBLIC LICENSE</string>
     <string name="version">Version</string>
     <string name="enjoy">Thank you for downloading. Enjoy!</string>
 
     <!-- load string -->
-    <string name="copyright">Copyright(&#169;) 2014&#8211;2015 Foree Inc.</string>
-    <string name="speak_author">— C.Clarke</string>
-    <string name="load_speak3">beyond them into the impossible</string>
-    <string name="load_speak2">possible is by going</string>
+    <string name="copyright" translatable="false">Copyright(&#169;) 2014&#8211;2015 Foree Inc.</string>
+    <string name="speak_author" translatable="false">— C.Clarke</string>
+    <string name="load_speak3" translatable="false">beyond them into the impossible</string>
+    <string name="load_speak2" translatable="false">possible is by going</string>
     <string name="load_tv_app_name">DUKER</string>
-    <string name="load_speak1">The only way of finding the limits of the</string>
+    <string name="load_speak1" translatable="false">The only way of finding the limits of the</string>
 
 </resources>

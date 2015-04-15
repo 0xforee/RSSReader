@@ -42,6 +42,10 @@ public class SettingsActivity extends BaseActivity implements SharedPreferences.
     public static final String KEY_CONTACT_ME = "pf_contact_me";
     //key: version number
     public static final String KEY_VERSION_NAME = "pf_version_number";
+    //key: application Directory
+    public static final String KEY_APPLICATION_DIR = "pf_dir_application";
+    //key: application Cache Directory
+    public static final String KEY_APPLICATION_CACHE_DIR = "pf_dir_cache";
     //key: first run
     public static final String KEY_FIRST_RUN = "FIRST_RUN";
     //key: if user have learned open navigation drawer
