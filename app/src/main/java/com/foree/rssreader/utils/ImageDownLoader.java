@@ -42,15 +42,13 @@ public class ImageDownLoader {
     }
 
     /**
-     * 获取线程池，因为涉及到并发的问题，我们加上同步锁
-     *
-     * @return
+     * @return ThreadPool
      */
     public ExecutorService getThreadPool() {
         if (mImageThreadPool == null) {
             synchronized (ExecutorService.class) {
                 if (mImageThreadPool == null) {
-                    //为了下载图片更加的流畅，我们用了2个线程来下载图片
+                    //using 2 threads to download image
                     mImageThreadPool = Executors.newFixedThreadPool(2);
                 }
             }
@@ -61,8 +59,8 @@ public class ImageDownLoader {
     /**
      * 添加Bitmap到内存缓存,即所谓的lrucache
      *
-     * @param key    查询的key
-     * @param bitmap 需要缓存的bitmap
+     * @param key    get value from this
+     * @param bitmap bitmap of you should add
      */
     public void addBitmapToMemoryCache(String key, Bitmap bitmap) {
         if (getBitmapFromMemCache(key) == null && bitmap != null) {
@@ -73,8 +71,8 @@ public class ImageDownLoader {
     /**
      * 从内存缓存中获取一个Bitmap
      *
-     * @param key 需要查询的key
-     * @return 返回取得的bitmap
+     * @param key get value from this
+     * @return bitmap that get from LruCache
      */
     public Bitmap getBitmapFromMemCache(String key) {
         return mMemoryCache.get(key);
@@ -99,6 +97,7 @@ public class ImageDownLoader {
             //如果内存中没有,本地磁盘也没有,那么就去下载
             final Handler handler = new Handler() {
 
+                //处理使用message发送来的消息
                 @Override
                 public void handleMessage(Message msg) {
                     super.handleMessage(msg);

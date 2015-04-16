@@ -38,7 +38,6 @@
         <com.foree.rssreader.ui.preference.myDialogPreference
             android:layout="@layout/my_preference"
             android:key="md_cleancache"
-            android:summary="@string/clean_des"
             android:title="@string/cleancache" />
     </PreferenceCategory>
 
