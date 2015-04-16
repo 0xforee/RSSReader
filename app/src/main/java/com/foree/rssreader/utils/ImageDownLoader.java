@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.util.LruCache;
-import android.util.Log;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -29,9 +28,9 @@ public class ImageDownLoader {
     public ImageDownLoader(Context context) {
         //获取系统分配的最大内存
         int maxMemory = (int) Runtime.getRuntime().maxMemory();
-        //规定缓存的尺寸为系统最大内润的1/8
+        //规定缓存的尺寸为系统最大内存的1/8
         int mCacheSize = maxMemory / 8;
-        //使用lrucache来实现缓存机制
+        //使用lruCache来实现缓存机制
         mMemoryCache = new LruCache<String, Bitmap>(mCacheSize) {
 
             //必须重写此方法，来测量Bitmap的大小
@@ -150,13 +149,13 @@ public class ImageDownLoader {
         Bitmap bitmap = null;
         try {
             synchronized (this) {
-                URL imageurl = new URL(url);
-                URLConnection urlConnection = imageurl.openConnection();
+                URL imageUrl = new URL(url);
+                URLConnection urlConnection = imageUrl.openConnection();
                 urlConnection.connect();
                 InputStream in = urlConnection.getInputStream();
                 bitmap = BitmapFactory.decodeStream(in);
                 in.close();
-                Log.v(TAG, "从" + url + "下载image");
+                if (LogUtils.isCompilerLog) LogUtils.v(TAG, "download image from " + url);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -165,6 +164,7 @@ public class ImageDownLoader {
     }
 
     /**
+     * when user scroll, cancel download task
      */
     public synchronized void cancelTask() {
         if (mImageThreadPool != null) {
@@ -173,9 +173,6 @@ public class ImageDownLoader {
         }
     }
 
-    /**
-     * @author len
-     */
     public interface onImageLoaderListener {
         void onImageLoader(Bitmap bitmap, String url);
     }
