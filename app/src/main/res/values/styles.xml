@@ -1,26 +1,138 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-
-    </style>
-
     <style name="DayTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="myLoadTextColor">@color/whitesmoke</item>
         <item name="myTextColor">@color/black</item>
         <item name="myBackground">@color/white</item>
         <item name="mylistdivider">@color/white</item>
-        <item name="myActionbarBackground">@color/my_actionbar_background</item>
-        <item name="primaryBackground">@color/primary</item>
-        <item name="primary_pressedBackground">@color/primary_pressed</item>
-        <item name="rippleBackground">@color/ripple</item>
+        <item name="myActionbarBackground">@color/aquamarine_my_actionbar_background</item>
+        <item name="primaryBackground">@color/aquamarine_primary</item>
+        <item name="primary_pressedBackground">@color/aquamarine_primary_pressed</item>
+        <item name="rippleBackground">@color/aquamarine_ripple</item>
         <item name="android:actionBarStyle">@style/MyactionBar</item>
 
         <!--support library compatibility -->
         <item name="actionBarStyle">@style/MyactionBar</item>
     </style>
 
+    <style name="MyactionBar" parent="Widget.AppCompat.Light.ActionMode.Inverse">
+        <item name="android:background">@color/aquamarine_my_actionbar_background</item>
+        <!--support library compatibility -->
+        <item name="background">@color/aquamarine_my_actionbar_background</item>
+    </style>
+
+    <!-- blue theme. -->
+    <style name="BlueTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="myLoadTextColor">@color/whitesmoke</item>
+        <item name="myTextColor">@color/black</item>
+        <item name="myBackground">@color/white</item>
+        <item name="mylistdivider">@color/white</item>
+        <item name="myActionbarBackground">@color/blue_my_actionbar_background</item>
+        <item name="primaryBackground">@color/blue_primary</item>
+        <item name="primary_pressedBackground">@color/blue_primary_pressed</item>
+        <item name="rippleBackground">@color/blue_ripple</item>
+        <item name="android:actionBarStyle">@style/MyBlueactionBar</item>
+
+        <!--support library compatibility -->
+        <item name="actionBarStyle">@style/MyBlueactionBar</item>
+    </style>
+
+    <style name="MyBlueactionBar" parent="Widget.AppCompat.Light.ActionMode.Inverse">
+        <item name="android:background">@color/blue_my_actionbar_background</item>
+        <!--support library compatibility -->
+        <item name="background">@color/blue_my_actionbar_background</item>
+    </style>
+
+    <!-- green theme. -->
+    <style name="GreenTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="myLoadTextColor">@color/whitesmoke</item>
+        <item name="myTextColor">@color/black</item>
+        <item name="myBackground">@color/white</item>
+        <item name="mylistdivider">@color/white</item>
+        <item name="myActionbarBackground">@color/green_my_actionbar_background</item>
+        <item name="primaryBackground">@color/green_primary</item>
+        <item name="primary_pressedBackground">@color/green_primary_pressed</item>
+        <item name="rippleBackground">@color/green_ripple</item>
+        <item name="android:actionBarStyle">@style/MyGreenactionBar</item>
+
+        <!--support library compatibility -->
+        <item name="actionBarStyle">@style/MyGreenactionBar</item>
+    </style>
+
+    <style name="MyGreenactionBar" parent="Widget.AppCompat.Light.ActionMode.Inverse">
+        <item name="android:background">@color/green_my_actionbar_background</item>
+        <!--support library compatibility -->
+        <item name="background">@color/green_my_actionbar_background</item>
+    </style>
+
+    <!-- orange theme. -->
+    <style name="OrangeTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="myLoadTextColor">@color/whitesmoke</item>
+        <item name="myTextColor">@color/black</item>
+        <item name="myBackground">@color/white</item>
+        <item name="mylistdivider">@color/white</item>
+        <item name="myActionbarBackground">@color/orange_my_actionbar_background</item>
+        <item name="primaryBackground">@color/orange_primary</item>
+        <item name="primary_pressedBackground">@color/orange_primary_pressed</item>
+        <item name="rippleBackground">@color/orange_ripple</item>
+        <item name="android:actionBarStyle">@style/MyOrangeactionBar</item>
+
+        <!--support library compatibility -->
+        <item name="actionBarStyle">@style/MyOrangeactionBar</item>
+    </style>
+
+    <style name="MyOrangeactionBar" parent="Widget.AppCompat.Light.ActionMode.Inverse">
+        <item name="android:background">@color/orange_my_actionbar_background</item>
+        <!--support library compatibility -->
+        <item name="background">@color/orange_my_actionbar_background</item>
+    </style>
+
+    <!-- red theme. -->
+    <style name="RedTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="myLoadTextColor">@color/whitesmoke</item>
+        <item name="myTextColor">@color/black</item>
+        <item name="myBackground">@color/white</item>
+        <item name="mylistdivider">@color/white</item>
+        <item name="myActionbarBackground">@color/red_my_actionbar_background</item>
+        <item name="primaryBackground">@color/red_primary</item>
+        <item name="primary_pressedBackground">@color/red_primary_pressed</item>
+        <item name="rippleBackground">@color/red_ripple</item>
+        <item name="android:actionBarStyle">@style/MyRedactionBar</item>
+
+        <!--support library compatibility -->
+        <item name="actionBarStyle">@style/MyRedactionBar</item>
+    </style>
+
+    <style name="MyRedactionBar" parent="Widget.AppCompat.Light.ActionMode.Inverse">
+        <item name="android:background">@color/red_my_actionbar_background</item>
+        <!--support library compatibility -->
+        <item name="background">@color/red_my_actionbar_background</item>
+    </style>
+
+    <!-- gray theme. -->
+    <style name="GrayTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="myLoadTextColor">@color/whitesmoke</item>
+        <item name="myTextColor">@color/black</item>
+        <item name="myBackground">@color/white</item>
+        <item name="mylistdivider">@color/white</item>
+        <item name="myActionbarBackground">@color/gray_my_actionbar_background</item>
+        <item name="primaryBackground">@color/gray_primary</item>
+        <item name="primary_pressedBackground">@color/gray_primary_pressed</item>
+        <item name="rippleBackground">@color/gray_ripple</item>
+        <item name="android:actionBarStyle">@style/MyGrayactionBar</item>
+
+        <!--support library compatibility -->
+        <item name="actionBarStyle">@style/MyGrayactionBar</item>
+    </style>
+
+    <style name="MyGrayactionBar" parent="Widget.AppCompat.Light.ActionMode.Inverse">
+        <item name="android:background">@color/gray_my_actionbar_background</item>
+        <!--support library compatibility -->
+        <item name="background">@color/gray_my_actionbar_background</item>
+    </style>
+
+    <!-- dark theme. -->
     <style name="NightTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="myLoadTextColor">#424952</item>
         <item name="myTextColor">#424952</item>
@@ -34,12 +146,6 @@
 
         <!--support library compatibility -->
         <item name="actionBarStyle">@style/MyDarkactionBar</item>
-    </style>
-
-    <style name="MyactionBar" parent="Widget.AppCompat.Light.ActionMode.Inverse">
-        <item name="android:background">@color/my_actionbar_background</item>
-        <!--support library compatibility -->
-        <item name="background">@color/my_actionbar_background</item>
     </style>
 
     <style name="MyDarkactionBar" parent="Widget.AppCompat.Light.ActionMode.Inverse">
