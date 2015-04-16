@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.foree.rssreader.rssinfo.RssItemInfo;
 import com.foree.rssreader.ui.activity.SettingsActivity;
+import com.foree.rssreader.utils.ColorUtils;
 import com.foree.rssreader.utils.ImageDownLoader;
 import com.foree.rssreader.utils.LogUtils;
 import com.foree.rssreader.utils.NetworkUtils;
@@ -55,6 +56,7 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
     public static ListView listView;
     protected SystemBarTintManager mTintManager;
     public boolean isDarkTheme = false;
+    public int themeColor = 0;
 
     public List<RssItemInfo> getRssItemInfos() {
         return rssItemInfos;
@@ -88,18 +90,6 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
         }
         mTintManager = new SystemBarTintManager(this);
 
-        //设置状态栏沉浸模式
-        mTintManager.setStatusBarTintEnabled(true);
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        if (sp.getBoolean(SettingsActivity.KEY_DARK_THEME, false)) {
-            isDarkTheme = true;
-            mTintManager.setStatusBarTintResource(R.color.dark_my_actionbar_background);
-        } else {
-            isDarkTheme = false;
-            mTintManager.setStatusBarTintResource(R.color.my_actionbar_background);
-        }
-
-
     }
 
     //sdk大于19使用透明状态栏模式
@@ -127,13 +117,43 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
     }
 
     public void setContentView(int layoutResID) {
-        //根据配置文件设置相应的主题
+        //设置状态栏沉浸模式
+        mTintManager.setStatusBarTintEnabled(true);
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        if (sp.getBoolean(SettingsActivity.KEY_DARK_THEME, false))
+        if (sp.getBoolean(SettingsActivity.KEY_DARK_THEME, false)) {
+            isDarkTheme = true;
+            mTintManager.setStatusBarTintResource(R.color.dark_my_actionbar_background);
             setTheme(R.style.NightTheme);
-        else
-            setTheme(R.style.DayTheme);
-
+        } else {
+            isDarkTheme = false;
+            themeColor = sp.getInt(SettingsActivity.KEY_CHANGE_THEME, ColorUtils.AQUAMARINE);
+            switch (themeColor) {
+                case ColorUtils.AQUAMARINE:
+                    mTintManager.setStatusBarTintResource(R.color.aquamarine_my_actionbar_background);
+                    setTheme(R.style.DayTheme);
+                    break;
+                case ColorUtils.BLUE:
+                    mTintManager.setStatusBarTintResource(R.color.blue_my_actionbar_background);
+                    setTheme(R.style.BlueTheme);
+                    break;
+                case ColorUtils.GREEN:
+                    mTintManager.setStatusBarTintResource(R.color.green_my_actionbar_background);
+                    setTheme(R.style.GreenTheme);
+                    break;
+                case ColorUtils.ORANGE:
+                    mTintManager.setStatusBarTintResource(R.color.orange_my_actionbar_background);
+                    setTheme(R.style.OrangeTheme);
+                    break;
+                case ColorUtils.RED:
+                    mTintManager.setStatusBarTintResource(R.color.red_my_actionbar_background);
+                    setTheme(R.style.RedTheme);
+                    break;
+                case ColorUtils.GRAY:
+                    mTintManager.setStatusBarTintResource(R.color.gray_my_actionbar_background);
+                    setTheme(R.style.GrayTheme);
+                    break;
+            }
+        }
         super.setContentView(layoutResID);
     }
 

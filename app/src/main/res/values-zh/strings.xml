@@ -4,9 +4,9 @@
     <!-- application string -->
     <string name="app_name">读客</string>
     <string name="about">关于</string>
-    <string name="rss_title">rsstitle</string>
-    <string name="title_image">Title Image</string>
-    <string name="rss_time">rsstime</string>
+    <string name="rss_title">标题</string>
+    <string name="title_image">图像</string>
+    <string name="rss_time">时间</string>
 
     <!-- addFeed.java string -->
     <string name="addfeed">添加</string>
@@ -56,4 +56,6 @@
 
     <!-- load strings -->
     <string name="load_tv_app_name">读 客</string>
+    <string name="change_theme">切换主题</string>
+    <string name="pick_color">请选择一个主题</string>
 </resources>

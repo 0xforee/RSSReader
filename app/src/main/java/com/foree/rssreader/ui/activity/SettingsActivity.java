@@ -2,17 +2,13 @@ package com.foree.rssreader.ui.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.util.Log;
 
 import com.foree.rssreader.base.BaseActivity;
-import com.foree.rssreader.base.MyApplication;
-import com.foree.rssreader.utils.LogUtils;
+import com.foree.rssreader.ui.fragment.SettingsFragment;
 import com.rssreader.foree.rssreader.R;
 
 /**
@@ -32,6 +28,8 @@ public class SettingsActivity extends BaseActivity implements SharedPreferences.
     public static final String KEY_EDIT_ACCOUNT = "lp_editaccount";
     //key: log out
     public static final String KEY_LOGOUT = "md_logout";
+    //key: change theme
+    public static final String KEY_CHANGE_THEME = "pf_change_theme";
     //key: dark theme
     public static final String KEY_DARK_THEME = "lp_darktheme";
     //key: download only on wifi
@@ -93,20 +91,6 @@ public class SettingsActivity extends BaseActivity implements SharedPreferences.
             startActivity(intent);
             // overridePendingTransition(R.anim.stay, R.anim.alphaout);
             Log.i(TAG, "onSharedPreferenceChanged");
-        }
-    }
-
-    //settingFragment的内部类实现
-    public static class SettingsFragment extends PreferenceFragment {
-        private static final String TAG = "SettingsFragment";
-
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-
-            // add preference content from a xml file
-            addPreferencesFromResource(R.xml.preference_all);
-
         }
     }
 }

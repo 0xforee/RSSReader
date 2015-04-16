@@ -4,9 +4,9 @@
     <!-- application string -->
     <string name="app_name">Duker</string>
     <string name="about">About</string>
-    <string name="rss_title" translatable="false">rsstitle</string>
-    <string name="title_image" translatable="false">Title Image</string>
-    <string name="rss_time" translatable="false">rsstime</string>
+    <string name="rss_title">rsstitle</string>
+    <string name="title_image">Title Image</string>
+    <string name="rss_time">rsstime</string>
 
     <!-- addFeed.java string -->
     <string name="addfeed">AddFeed</string>
@@ -38,8 +38,9 @@
     <string name="accountname" translatable="false">beijing2008lm@gmail.com</string>
     <string name="logout">Log Out</string>
     <string name="general">General</string>
-    <string name="darktheme">Dark theme</string>
-    <string name="dark_description">You can toggle this at Night</string>
+    <string name="darktheme">Dark Theme</string>
+    <string name="change_theme">Change Theme</string>
+    <string name="pick_color">pick a color</string>
     <string name="offline">Offline Downloading</string>
     <string name="downloadonwifi">Download on WiFi</string>
     <string name="clean_des">Clean your cache</string>

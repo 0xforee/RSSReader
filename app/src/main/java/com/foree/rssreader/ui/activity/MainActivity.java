@@ -3,6 +3,7 @@ package com.foree.rssreader.ui.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -29,6 +30,7 @@ import com.foree.rssreader.base.MyApplication;
 import com.foree.rssreader.db.RssDao;
 import com.foree.rssreader.rssinfo.RssItemInfo;
 import com.foree.rssreader.ui.fragment.NavigationDrawerFragment;
+import com.foree.rssreader.utils.ColorUtils;
 import com.foree.rssreader.utils.LogUtils;
 import com.foree.rssreader.xmlparse.XmlParseHandler;
 import com.melnykov.fab.FloatingActionButton;
@@ -85,10 +87,14 @@ public class MainActivity extends BaseActivity
     protected void onResume() {
         super.onResume();
         //if darkTheme setting changed, reload activity
-        boolean sp = PreferenceManager.getDefaultSharedPreferences(this).getBoolean(SettingsActivity.KEY_DARK_THEME, false);
-        if (isDarkTheme != sp) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+
+        if (isDarkTheme != sp.getBoolean(SettingsActivity.KEY_DARK_THEME, false)) {
             reload();
             isDarkTheme = !isDarkTheme;
+        } else if (themeColor != sp.getInt(SettingsActivity.KEY_CHANGE_THEME, ColorUtils.AQUAMARINE)) {
+            reload();
+            themeColor = sp.getInt(SettingsActivity.KEY_CHANGE_THEME, ColorUtils.AQUAMARINE);
         }
     }
 

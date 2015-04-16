@@ -5,24 +5,27 @@
         android:layout="@layout/my_preference_category"
         android:title="@string/account">
         <ListPreference
-            android:layout="@layout/my_preference"
             android:enabled="false"
             android:key="lp_editaccount"
+            android:layout="@layout/my_preference"
             android:summary="@string/accountname"
             android:title="@string/editaccount" />
         <com.foree.rssreader.ui.preference.myDialogPreference
-            android:layout="@layout/my_preference"
             android:key="md_logout"
+            android:layout="@layout/my_preference"
             android:title="@string/logout" />
     </PreferenceCategory>
 
     <PreferenceCategory
         android:layout="@layout/my_preference_category"
         android:title="@string/general">
+        <Preference
+            android:key="pf_change_theme"
+            android:layout="@layout/my_preference"
+            android:title="@string/change_theme" />
         <CheckBoxPreference
             android:key="lp_darktheme"
             android:layout="@layout/my_preference"
-            android:summary="@string/dark_description"
             android:title="@string/darktheme"
             android:widgetLayout="@layout/my_preference_widget_checkbox" />
     </PreferenceCategory>
@@ -36,8 +39,8 @@
             android:title="@string/downloadonwifi"
             android:widgetLayout="@layout/my_preference_widget_checkbox" />
         <com.foree.rssreader.ui.preference.myDialogPreference
-            android:layout="@layout/my_preference"
             android:key="md_cleancache"
+            android:layout="@layout/my_preference"
             android:title="@string/cleancache" />
     </PreferenceCategory>
 
