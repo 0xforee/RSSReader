@@ -3,13 +3,13 @@
     <color name="item_title_color">#6611ff00</color>
     <color name="item_option_color">#000000</color>
     <color name="item_description_color">#66000000</color>
-    <color name="my_actionbar_background">#0088ff</color>
+    <color name="my_actionbar_background">#1CAF9A</color>
     <color name="dark_my_actionbar_background">#ff212121</color>
-    <color name="primary">#990088ff</color>
+    <color name="primary">#991CAF9A</color>
     <color name="dark_primary">#99000000</color>
-    <color name="primary_pressed">#0088ff</color>
+    <color name="primary_pressed">#1CAF9A</color>
     <color name="dark_primary_pressed">#000000</color>
-    <color name="ripple">#0088ff</color>
+    <color name="ripple">#1CAF9A</color>
     <color name="dark_ripple">#000000</color>
     <!--template-->
 
@@ -318,8 +318,6 @@
     <color name="listview_checked_color_holo_light">#33add6</color>
 
     <color name="progress_horizontal_progress">#0099CC</color>
-
-    <color name="ics_blue_semi">#6633b5e5</color>
 
     <color name="host_background">#ffe5e5e5</color>
 
