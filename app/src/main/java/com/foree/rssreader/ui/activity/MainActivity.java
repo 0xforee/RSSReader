@@ -404,9 +404,10 @@ public class MainActivity extends BaseActivity
                         }
                     }
                     if (isSettingAvailable) {
-                        if (e2.getX() - e1.getX() > 400)
+                        if (e2.getX() - e1.getX() > 400) {
                             LogUtils.d(TAG, "**********************");
-                        openSetting = true;
+                            openSetting = true;
+                        }
                     }
                     return false;
                 }
