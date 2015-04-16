@@ -10,7 +10,6 @@ import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -30,6 +29,7 @@ import com.foree.rssreader.base.MyApplication;
 import com.foree.rssreader.db.RssDao;
 import com.foree.rssreader.rssinfo.RssItemInfo;
 import com.foree.rssreader.ui.fragment.NavigationDrawerFragment;
+import com.foree.rssreader.utils.LogUtils;
 import com.foree.rssreader.xmlparse.XmlParseHandler;
 import com.melnykov.fab.FloatingActionButton;
 import com.melnykov.fab.ScrollDirectionListener;
@@ -77,7 +77,7 @@ public class MainActivity extends BaseActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 mDrawerLayout);
-        Log.v(TAG, "onCreate");
+        if (LogUtils.isCompilerLog) LogUtils.v(TAG, "onCreate");
 
     }
 
@@ -132,7 +132,7 @@ public class MainActivity extends BaseActivity
         fragmentManager.beginTransaction()
                 .replace(android.R.id.content, PlaceholderFragment.newInstance(position + 1))
                 .commit();
-        Log.v(TAG, "onNavigationDrawerItemSelected");
+        if (LogUtils.isCompilerLog) LogUtils.v(TAG, "onNavigationDrawerItemSelected");
     }
 
     //在section被选中的时候设置标题
@@ -301,12 +301,12 @@ public class MainActivity extends BaseActivity
             fb.attachToListView(listView, new ScrollDirectionListener() {
                 @Override
                 public void onScrollDown() {
-                    Log.v(TAG, "onScrollDown");
+                    if (LogUtils.isCompilerLog) LogUtils.v(TAG, "onScrollDown");
                 }
 
                 @Override
                 public void onScrollUp() {
-                    Log.v(TAG, "onScrollUp");
+                    if (LogUtils.isCompilerLog) LogUtils.v(TAG, "onScrollUp");
 
                 }
             });
@@ -322,7 +322,7 @@ public class MainActivity extends BaseActivity
             listView.setAdapter(mainActivity.getmRssAdapter());
             //设置滑动监听
             listView.setOnScrollListener(mainActivity);
-            Log.v(TAG, "onCreateView");
+            if (LogUtils.isCompilerLog) LogUtils.v(TAG, "onCreateView");
             //获取当前所选中的fragment,并解析对应的url
             int id = getArguments().getInt(ARG_SECTION_NUMBER);
             /**
@@ -384,10 +384,11 @@ public class MainActivity extends BaseActivity
 
                 @Override
                 public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-                    Log.v(TAG, "x = " + e2.getX() + " y = " + e2.getY());
+                    if (LogUtils.isCompilerLog)
+                        LogUtils.v(TAG, "x = " + e2.getX() + " y = " + e2.getY());
                     if (e2.getY() - e1.getY() > 400) {
                         isSearchAvailable = true;
-                        Log.v(TAG, "hhhhhhh");
+                        LogUtils.d(TAG, "hhhhhhh");
                     } else if (e2.getY() - e1.getY() < -400) {
                         isSearchAvailable = false;
                         isSettingAvailable = true;
@@ -398,13 +399,13 @@ public class MainActivity extends BaseActivity
                     if (isSearchAvailable) {
                         if (e2.getX() - e1.getX() > 400) {
                             //   if (distanceY > 20)
-                            Log.i(TAG, "&&&&&&&&&&&&&&&&&&&&&&&");
+                            LogUtils.d(TAG, "&&&&&&&&&&&&&&&&&&&&&&&");
                             openSearch = true;
                         }
                     }
                     if (isSettingAvailable) {
                         if (e2.getX() - e1.getX() > 400)
-                            Log.v(TAG, "**********************");
+                            LogUtils.d(TAG, "**********************");
                         openSetting = true;
                     }
                     return false;
@@ -426,7 +427,7 @@ public class MainActivity extends BaseActivity
                         return true;
                     }*/
 
-                    Log.v(TAG, openSearch + "");
+                    //Log.v(TAG, openSearch + "");
                     if (openSearch) {
                         Toast.makeText(mainActivity, "打开搜索", Toast.LENGTH_SHORT).show();
                         Intent searchIntent = new Intent(mainActivity, FeedListActivity.class);
@@ -470,7 +471,7 @@ public class MainActivity extends BaseActivity
                     getArguments().getInt(ARG_SECTION_NUMBER));
             //初始化mainactivity实例，用于与主界面通信
             mainActivity = (MainActivity) activity;
-            Log.v(TAG, "OnAttach");
+            if (LogUtils.isCompilerLog) LogUtils.v(TAG, "OnAttach");
 
         }
 
@@ -478,7 +479,7 @@ public class MainActivity extends BaseActivity
         @Override
         public void onStart() {
             super.onStart();
-            Log.v(TAG, "onStart");
+            if (LogUtils.isCompilerLog) LogUtils.v(TAG, "onStart");
 
         }
 
@@ -502,7 +503,7 @@ public class MainActivity extends BaseActivity
                 outState.putInt("SELECTION_KEY", Integer.valueOf(listView.getSelectedItemPosition()));
             }
 
-            Log.v(TAG, "onSavedInstanceState");
+            if (LogUtils.isCompilerLog) LogUtils.v(TAG, "onSavedInstanceState");
         }
 
         @Override
@@ -525,33 +526,33 @@ public class MainActivity extends BaseActivity
                 // todo: is above right? needed it to work
                 listView.setSelection(savedInstanceState.getInt("SELECTION_KEY"));
             }
-            Log.v(TAG, "onCreate");
+            if (LogUtils.isCompilerLog) LogUtils.v(TAG, "onCreate");
         }
 
         @Override
         public void onPause() {
             super.onPause();
-            Log.v(TAG, "onPause");
+            if (LogUtils.isCompilerLog) LogUtils.v(TAG, "onPause");
         }
 
         @Override
         public void onStop() {
             super.onStop();
-            Log.v(TAG, "onStop");
+            if (LogUtils.isCompilerLog) LogUtils.v(TAG, "onStop");
 
         }
 
         @Override
         public void onDestroy() {
             super.onDestroy();
-            Log.v(TAG, "onDestroy");
+            if (LogUtils.isCompilerLog) LogUtils.v(TAG, "onDestroy");
 
         }
 
         @Override
         public void onDetach() {
             super.onDetach();
-            Log.v(TAG, "onDetach");
+            if (LogUtils.isCompilerLog) LogUtils.v(TAG, "onDetach");
             mainActivity.resetUI();
             mainActivity.unregisterMyTouchListener(touchListener);
 
