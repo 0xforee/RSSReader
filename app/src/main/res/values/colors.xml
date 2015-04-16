@@ -1,16 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- item color -->
     <color name="item_title_color">#6611ff00</color>
-    <color name="item_option_color">#000000</color>
+    <color name="item_option_color">@color/black</color>
     <color name="item_description_color">#66000000</color>
-    <color name="my_actionbar_background">#1CAF9A</color>
+
+    <!-- aquamarine theme -->
+    <color name="aquamarine_theme">#1CAF9A</color>
+    <color name="aquamarine_my_actionbar_background">@color/aquamarine_theme</color>
+    <color name="aquamarine_primary">#991CAF9A</color>
+    <color name="aquamarine_primary_pressed">@color/aquamarine_theme</color>
+    <color name="aquamarine_ripple">@color/aquamarine_theme</color>
+
+    <!-- blue theme -->
+    <color name="blue_theme">#2A6FA8</color>
+    <color name="blue_my_actionbar_background">@color/blue_theme</color>
+    <color name="blue_primary">#992A6FA8</color>
+    <color name="blue_primary_pressed">@color/blue_theme</color>
+    <color name="blue_ripple">@color/blue_theme</color>
+
+    <!-- green theme -->
+    <color name="green_theme">#75CAE3</color>
+    <color name="green_my_actionbar_background">@color/green_theme</color>
+    <color name="green_primary">#9975CAE3</color>
+    <color name="green_primary_pressed">@color/green_theme</color>
+    <color name="green_ripple">@color/green_theme</color>
+
+    <!-- orange theme -->
+    <color name="orange_theme">#F0AD4E</color>
+    <color name="orange_my_actionbar_background">@color/orange_theme</color>
+    <color name="orange_primary">#99F0AD4E</color>
+    <color name="orange_primary_pressed">@color/orange_theme</color>
+    <color name="orange_ripple">@color/orange_theme</color>
+
+    <!-- red theme -->
+    <color name="red_theme">#D9534F</color>
+    <color name="red_my_actionbar_background">@color/red_theme</color>
+    <color name="red_primary">#99D9534F</color>
+    <color name="red_primary_pressed">@color/red_theme</color>
+    <color name="red_ripple">@color/red_theme</color>
+
+    <!-- gray theme -->
+    <color name="gray_theme">#929292</color>
+    <color name="gray_my_actionbar_background">@color/gray_theme</color>
+    <color name="gray_primary">#99929292</color>
+    <color name="gray_primary_pressed">@color/gray_theme</color>
+    <color name="gray_ripple">@color/gray_theme</color>
+
+    <!-- dark theme -->
     <color name="dark_my_actionbar_background">#ff212121</color>
-    <color name="primary">#991CAF9A</color>
     <color name="dark_primary">#99000000</color>
-    <color name="primary_pressed">#1CAF9A</color>
-    <color name="dark_primary_pressed">#000000</color>
-    <color name="ripple">#1CAF9A</color>
-    <color name="dark_ripple">#000000</color>
+    <color name="dark_primary_pressed">@color/black</color>
+    <color name="dark_ripple">@color/black</color>
     <!--template-->
 
     <color name="transparent">#00000000</color>
@@ -238,7 +279,7 @@
     <!--暗灰色 -->
     <color name="dimgrey">#696969</color>
     <!--暗灰色 -->
-    <color name="mediumaquamarine">#66CDAA</color>
+    <color name="mediumaquamarine">#FF66CDAA</color>
     <!--中绿色 -->
     <color name="cornflowerblue">#6495ED</color>
     <!--菊兰色 -->
@@ -254,7 +295,7 @@
     <!--暗灰蓝色 -->
     <color name="steelblue">#4682B4</color>
     <!--钢兰色 -->
-    <color name="royalblue">#4169E1</color>
+    <color name="royalblue">#FF4169E1</color>
     <!--皇家蓝 -->
     <color name="turquoise">#40E0D0</color>
     <!--青绿色 -->
@@ -272,7 +313,7 @@
     <!--森林绿 -->
     <color name="lightseagreen">#20B2AA</color>
     <!--亮海蓝色 -->
-    <color name="dodgerblue">#1E90FF</color>
+    <color name="dodgerblue">#FF1E90FF</color>
     <!--闪兰色 -->
     <color name="midnightblue">#191970</color>
     <!--中灰兰色 -->
