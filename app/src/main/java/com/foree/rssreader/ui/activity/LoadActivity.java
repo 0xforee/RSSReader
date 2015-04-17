@@ -25,7 +25,7 @@ public class LoadActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
         //设置主题颜色
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         if (sp.getBoolean(SettingsActivity.KEY_DARK_THEME, false)) {
@@ -52,6 +52,7 @@ public class LoadActivity extends Activity {
                     break;
             }
 
+            super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_load);
 
             //获取窗口,设置全屏
