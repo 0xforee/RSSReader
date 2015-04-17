@@ -10,7 +10,6 @@
          space available using match_parent in both dimensions. -->
     <LinearLayout
         android:id="@+id/container"
-        android:background="?attr/myBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" />
