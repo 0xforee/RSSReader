@@ -2,18 +2,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/myBackground"
     android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/rl_image"
         android:layout_width="match_parent"
         android:layout_height="@dimen/navigation_image_width"
-        android:background="@drawable/back">
+        android:background="?attr/myActionbarBackground">
 
         <ImageButton
             android:id="@+id/ib_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="70dip"
+            android:layout_height="70dip"
             android:layout_marginLeft="40dp"
             android:contentDescription="@string/account"
             android:background="@drawable/account"
@@ -27,7 +28,7 @@
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="beijing.2008.lm@163.com"
+            android:text="@string/account_name"
             android:layout_below="@+id/ib_image"
             android:layout_marginTop="8dp"
             android:layout_alignLeft="@+id/ib_image"
@@ -41,7 +42,9 @@
         android:layout_height="match_parent"
         android:background="?attr/myBackground"
         android:choiceMode="singleChoice"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="0dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:divider="@color/gray"
+        android:dividerHeight="0.00001dp"
         tools:context=".NavigationDrawerFragment" />
 </LinearLayout>

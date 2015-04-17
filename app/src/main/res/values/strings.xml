@@ -66,4 +66,7 @@
     <string name="load_tv_app_name">DUKER</string>
     <string name="load_speak1" translatable="false">The only way of finding the limits of the</string>
 
+    <!-- drawer string -->
+    <string name="account_name">昨晚多云没下雨</string>
+
 </resources>
