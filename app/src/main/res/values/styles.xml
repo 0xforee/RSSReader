@@ -1,12 +1,28 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="DayTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="BaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="myLoadTextColor">@color/whitesmoke</item>
         <item name="myTextColor">@color/black</item>
         <item name="myBackground">@color/white</item>
         <item name="mylistdivider">@color/white</item>
-        <item name="myActionbarBackground">@color/aquamarine_my_actionbar_background</item>
+        <!-- menu textColor -->
+        <item name="android:textColor">@color/black</item>
+        <!-- menu overflow view style -->
+        <item name="android:dropDownListViewStyle">@style/PopupMenuListView</item>
+
+        <!--support library compatibility -->
+        <item name="dropDownListViewStyle">@style/PopupMenuListView</item>
+        <item name="actionBarDivider">@null</item>
+    </style>
+
+    <!-- overFlowMenu background -->
+    <style name="PopupMenuListView" parent="@style/Widget.AppCompat.Light.ListView.DropDown">
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="DayTheme" parent="@style/BaseTheme">
+    <item name="myActionbarBackground">@color/aquamarine_my_actionbar_background</item>
         <item name="primaryBackground">@color/aquamarine_primary</item>
         <item name="primary_pressedBackground">@color/aquamarine_primary_pressed</item>
         <item name="rippleBackground">@color/aquamarine_ripple</item>
@@ -23,12 +39,8 @@
     </style>
 
     <!-- blue theme. -->
-    <style name="BlueTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="myLoadTextColor">@color/whitesmoke</item>
-        <item name="myTextColor">@color/black</item>
-        <item name="myBackground">@color/white</item>
-        <item name="mylistdivider">@color/white</item>
-        <item name="myActionbarBackground">@color/blue_my_actionbar_background</item>
+    <style name="BlueTheme" parent="@style/BaseTheme">
+    <item name="myActionbarBackground">@color/blue_my_actionbar_background</item>
         <item name="primaryBackground">@color/blue_primary</item>
         <item name="primary_pressedBackground">@color/blue_primary_pressed</item>
         <item name="rippleBackground">@color/blue_ripple</item>
@@ -45,12 +57,8 @@
     </style>
 
     <!-- green theme. -->
-    <style name="GreenTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="myLoadTextColor">@color/whitesmoke</item>
-        <item name="myTextColor">@color/black</item>
-        <item name="myBackground">@color/white</item>
-        <item name="mylistdivider">@color/white</item>
-        <item name="myActionbarBackground">@color/green_my_actionbar_background</item>
+    <style name="GreenTheme" parent="@style/BaseTheme">
+    <item name="myActionbarBackground">@color/green_my_actionbar_background</item>
         <item name="primaryBackground">@color/green_primary</item>
         <item name="primary_pressedBackground">@color/green_primary_pressed</item>
         <item name="rippleBackground">@color/green_ripple</item>
@@ -67,12 +75,8 @@
     </style>
 
     <!-- orange theme. -->
-    <style name="OrangeTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="myLoadTextColor">@color/whitesmoke</item>
-        <item name="myTextColor">@color/black</item>
-        <item name="myBackground">@color/white</item>
-        <item name="mylistdivider">@color/white</item>
-        <item name="myActionbarBackground">@color/orange_my_actionbar_background</item>
+    <style name="OrangeTheme" parent="@style/BaseTheme">
+    <item name="myActionbarBackground">@color/orange_my_actionbar_background</item>
         <item name="primaryBackground">@color/orange_primary</item>
         <item name="primary_pressedBackground">@color/orange_primary_pressed</item>
         <item name="rippleBackground">@color/orange_ripple</item>
@@ -89,12 +93,8 @@
     </style>
 
     <!-- red theme. -->
-    <style name="RedTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="myLoadTextColor">@color/whitesmoke</item>
-        <item name="myTextColor">@color/black</item>
-        <item name="myBackground">@color/white</item>
-        <item name="mylistdivider">@color/white</item>
-        <item name="myActionbarBackground">@color/red_my_actionbar_background</item>
+    <style name="RedTheme" parent="@style/BaseTheme">
+    <item name="myActionbarBackground">@color/red_my_actionbar_background</item>
         <item name="primaryBackground">@color/red_primary</item>
         <item name="primary_pressedBackground">@color/red_primary_pressed</item>
         <item name="rippleBackground">@color/red_ripple</item>
@@ -111,12 +111,8 @@
     </style>
 
     <!-- gray theme. -->
-    <style name="GrayTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="myLoadTextColor">@color/whitesmoke</item>
-        <item name="myTextColor">@color/black</item>
-        <item name="myBackground">@color/white</item>
-        <item name="mylistdivider">@color/white</item>
-        <item name="myActionbarBackground">@color/gray_my_actionbar_background</item>
+    <style name="GrayTheme" parent="@style/BaseTheme">
+    <item name="myActionbarBackground">@color/gray_my_actionbar_background</item>
         <item name="primaryBackground">@color/gray_primary</item>
         <item name="primary_pressedBackground">@color/gray_primary_pressed</item>
         <item name="rippleBackground">@color/gray_ripple</item>
@@ -133,8 +129,8 @@
     </style>
 
     <!-- dark theme. -->
-    <style name="NightTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="myLoadTextColor">#424952</item>
+    <style name="NightTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <item name="myLoadTextColor">#424952</item>
         <item name="myTextColor">#424952</item>
         <item name="myBackground">#080c10</item>
         <item name="mylistdivider">#080c10</item>

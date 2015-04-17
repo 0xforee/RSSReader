@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- listView color -->
+    <color name="list_view_divide">#55808080</color>
     <!-- item color -->
     <color name="item_title_color">#6611ff00</color>
     <color name="item_option_color">@color/black</color>
@@ -351,8 +353,6 @@
     <!--黑色 -->
     <color name="dark_gray">#1E2129</color>
     <color name="light_orange">#FF7A0F</color>
-    <color name="divide_line">#FFC5CCD1</color>
-    <color name="listview_divide">#FFC5CCD1</color>
     <color name="dark_blue">#7874b8</color>
 
     <color name="listview_checked_color_holo_dark">#002E3E</color>
