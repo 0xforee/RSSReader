@@ -2,14 +2,12 @@
 /local.properties
 .DS_Store
 /build
-build.gradle
 gradle.properties
 gradlew
 gradlew.bat
 import-summary.txt
 RSSReader.iml
 Rssreader.iml
-settings.gradle
 /.idea
 /gradle
 drawlayoutexample
