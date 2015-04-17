@@ -6,6 +6,7 @@ import android.preference.PreferenceManager;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.widget.Toast;
 
 import com.foree.rssreader.ui.activity.SettingsActivity;
 import com.foree.rssreader.utils.ColorUtils;
@@ -25,7 +26,7 @@ public class SettingsFragment extends PreferenceFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         //get theme
         int colorPicked = sp.getInt(SettingsActivity.KEY_CHANGE_THEME, ColorUtils.AQUAMARINE);
@@ -87,6 +88,11 @@ public class SettingsFragment extends PreferenceFragment {
         findPreference(SettingsActivity.KEY_CHANGE_THEME).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
+                //when darkTheme is open, can't change theme
+                if (sp.getBoolean(SettingsActivity.KEY_DARK_THEME, false)) {
+                    preference.setEnabled(false);
+                    Toast.makeText(getActivity(), "请关闭夜间模式", Toast.LENGTH_SHORT).show();
+                } else
                 colorPickerDialog.show(getActivity().getFragmentManager(), "colorPick");
                 return true;
             }

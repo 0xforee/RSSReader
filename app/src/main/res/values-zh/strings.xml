@@ -58,4 +58,6 @@
     <string name="load_tv_app_name">读 客</string>
     <string name="change_theme">切换主题</string>
     <string name="pick_color">请选择一个主题</string>
+    <string name="account_name">昨晚多云没下雨</string>
+    <string name="change_theme_disabled">请关闭夜间模式</string>
 </resources>

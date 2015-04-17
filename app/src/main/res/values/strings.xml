@@ -39,6 +39,7 @@
     <string name="logout">Log Out</string>
     <string name="general">General</string>
     <string name="darktheme">Dark Theme</string>
+    <string name="change_theme_disabled">Please Turn Off Dark Theme!</string>
     <string name="change_theme">Change Theme</string>
     <string name="pick_color">pick a color</string>
     <string name="offline">Offline Downloading</string>
@@ -48,7 +49,7 @@
 
     <!-- settings-about string -->
     <string name="contact_me">Contact me</string>
-    <string name="email" translatable="false">beijing.2008.lm@163.com</string>
+    <string name="email">beijing.2008.lm@163.com</string>
     <string name="storage">Storage</string>
     <string name="dir_application">Application Directory</string>
     <string name="dir_cache">Application Cache Directory</string>
