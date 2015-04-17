@@ -10,6 +10,14 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/colorpickerlibrary" />
+            <option value="$PROJECT_DIR$/drawlayoutexample" />
+            <option value="$PROJECT_DIR$/fullscreenexample" />
+            <option value="$PROJECT_DIR$/loginexample" />
+            <option value="$PROJECT_DIR$/settingexample" />
+            <option value="$PROJECT_DIR$/tabbedexample" />
+            <option value="$PROJECT_DIR$/tabedexample2" />
+            <option value="$PROJECT_DIR$/tabedexample3" />
           </set>
         </option>
       </GradleProjectSettings>

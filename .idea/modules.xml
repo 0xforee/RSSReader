@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/RSSReader.iml" filepath="$PROJECT_DIR$/RSSReader.iml" />
       <module fileurl="file://$PROJECT_DIR$/Rssreader.iml" filepath="$PROJECT_DIR$/Rssreader.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/colorpickerlibrary/colorpickerlibrary.iml" filepath="$PROJECT_DIR$/colorpickerlibrary/colorpickerlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/drawlayoutexample/drawlayoutexample.iml" filepath="$PROJECT_DIR$/drawlayoutexample/drawlayoutexample.iml" />
       <module fileurl="file://$PROJECT_DIR$/fullscreenexample/fullscreenexample.iml" filepath="$PROJECT_DIR$/fullscreenexample/fullscreenexample.iml" />
       <module fileurl="file://$PROJECT_DIR$/loginexample/loginexample.iml" filepath="$PROJECT_DIR$/loginexample/loginexample.iml" />

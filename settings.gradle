@@ -1,1 +1,1 @@
-include ':app', ':drawlayoutexample', ':fullscreenexample', 'loginexample', 'settingexample', 'tabedexample2', 'tabedexample3', 'tabbedexample'
+include ':app', ':drawlayoutexample', ':fullscreenexample', 'loginexample', 'settingexample', 'tabedexample2', 'tabedexample3', 'tabbedexample', 'colorpickerlibrary'
