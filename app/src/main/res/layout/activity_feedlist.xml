@@ -3,6 +3,7 @@
     android:id="@+id/el_feedlist"
     android:layout_width="match_parent"
     android:background="?attr/myBackground"
+    android:childDivider="?attr/myListViewDivider"
     android:layout_height="match_parent">
 
 </ExpandableListView>

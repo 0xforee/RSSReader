@@ -4,7 +4,7 @@
         <item name="myLoadTextColor">@color/whitesmoke</item>
         <item name="myTextColor">@color/black</item>
         <item name="myBackground">@color/white</item>
-        <item name="mylistdivider">@color/white</item>
+        <item name="myListViewDivider">@color/list_view_divider</item>
         <!-- menu textColor -->
         <item name="android:textColor">@color/black</item>
         <!-- menu overflow view style -->
@@ -133,7 +133,7 @@
     <item name="myLoadTextColor">#424952</item>
         <item name="myTextColor">#424952</item>
         <item name="myBackground">#080c10</item>
-        <item name="mylistdivider">#080c10</item>
+        <item name="myListViewDivider">@color/dark_list_view_divider</item>
         <item name="myActionbarBackground">@color/dark_my_actionbar_background</item>
         <item name="primaryBackground">@color/dark_primary</item>
         <item name="primary_pressedBackground">@color/dark_primary_pressed</item>

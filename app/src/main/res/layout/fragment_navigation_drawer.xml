@@ -44,7 +44,7 @@
         android:choiceMode="singleChoice"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:divider="@color/list_view_divide"
+        android:divider="@color/list_view_divider"
         android:dividerHeight="0.00001dp"
         tools:context=".NavigationDrawerFragment" />
 </LinearLayout>

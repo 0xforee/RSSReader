@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- listView color -->
-    <color name="list_view_divide">#55808080</color>
+    <color name="list_view_divider">#55808080</color>
     <!-- item color -->
     <color name="item_title_color">#6611ff00</color>
     <color name="item_option_color">@color/black</color>
@@ -54,6 +54,7 @@
     <color name="dark_primary">#99000000</color>
     <color name="dark_primary_pressed">@color/black</color>
     <color name="dark_ripple">@color/black</color>
+    <color name="dark_list_view_divider">#ff454545</color>
     <!--template-->
 
     <color name="transparent">#00000000</color>
