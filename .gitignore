@@ -1,3 +1,4 @@
+*.iml
 .gradle
 /local.properties
 .DS_Store
@@ -8,7 +9,9 @@ gradlew.bat
 import-summary.txt
 RSSReader.iml
 Rssreader.iml
-/.idea
+.idea/
+.idea/workspace.xml
+.idea/libraries
 /gradle
 drawlayoutexample
 fullscreenexample
@@ -17,3 +20,4 @@ fullscreenexample
 /tabbedexample
 /tabedexample2
 /tabedexample3
+colorpickerlibrary/build
