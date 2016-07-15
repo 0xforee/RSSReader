@@ -10,7 +10,7 @@
             android:layout="@layout/my_preference"
             android:summary="@string/accountname"
             android:title="@string/editaccount" />
-        <com.foree.rssreader.ui.preference.myDialogPreference
+        <com.foree.duker.ui.preference.myDialogPreference
             android:key="md_logout"
             android:layout="@layout/my_preference"
             android:title="@string/logout" />
@@ -38,7 +38,7 @@
             android:layout="@layout/my_preference"
             android:title="@string/downloadonwifi"
             android:widgetLayout="@layout/my_preference_widget_checkbox" />
-        <com.foree.rssreader.ui.preference.myDialogPreference
+        <com.foree.duker.ui.preference.myDialogPreference
             android:key="md_cleancache"
             android:layout="@layout/my_preference"
             android:title="@string/cleancache" />
