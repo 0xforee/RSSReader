@@ -5,7 +5,13 @@ package com.foree.rssreader.api;
  */
 public class ApiFactory extends AbsApiFactory{
     @Override
-    public <T extends AbsApiHelper> T createApiHelper(Class<T> apiHelper) {
-        return null;
+    public <T extends AbsApiHelper> T createApiHelper(Class<T> clz) {
+        AbsApiHelper apiHelper = null;
+        try {
+            apiHelper = (AbsApiHelper)Class.forName(clz.getName()).newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (T) apiHelper;
     }
 }
