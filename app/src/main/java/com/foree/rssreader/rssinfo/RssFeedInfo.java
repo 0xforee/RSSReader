@@ -11,19 +11,24 @@ import java.util.Map;
  */
 public class RssFeedInfo {
     private static final String TAG = "RssFeedInfo";
-    //订阅号的id(唯一指定)
-    private int id = 0;
+
+    private String feedId;
     //订阅号的名称
-    private String title = null;
+    private String name = null;
     //订阅号link字段中的值
     private String link = null;
-    //解析订阅号的rss链接
+    //订阅号的rss链接
     private String url = null;
     //订阅号的发布日期
-    private String pubdate = "";
+    //private String pubDate = "";
     //订阅号的描述
-    private String description = "";
+    //private String description = "";
+    private List<String> categoryIds;
 
+
+    //订阅号的id(唯一指定)
+    private int id = 0;
+    private String title;
     public RssFeedInfo() {
     }
 
@@ -84,7 +89,7 @@ public class RssFeedInfo {
         this.link = link;
     }
 
-    public String pubDate() {
+    /*public String pubDate() {
         return pubdate;
     }
 
@@ -106,6 +111,6 @@ public class RssFeedInfo {
 
     public void setUrl(String url) {
         this.url = url;
-    }
+    }*/
 }
 

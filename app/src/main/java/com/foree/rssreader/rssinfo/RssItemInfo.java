@@ -7,11 +7,22 @@ import android.graphics.Bitmap;
  * 每个Item自己的信息集合
  */
 public class RssItemInfo {
+    // Item 标题
+    private String title;
+    // Item 概览
+    private String summary;
+    // Item 发布时间
+    private String pubDate;
+    // Item ID
+    private String entryId;
+    // Itme 链接
+    private String url;
+
     private String feedTitle;
     private String feedDescription;
     private String feedLink;
     private String feedPubdate;
-    private String title;
+    //private String title;
     private String link;
     private String pubdate;
     private String description;
