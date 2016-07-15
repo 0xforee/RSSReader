@@ -2,8 +2,8 @@ package com.rssreader.foree.rssreader;
 
 import android.test.AndroidTestCase;
 
-import com.foree.duker.db.RssDao;
-import com.foree.duker.xmlparse.OpmlParse;
+import org.foree.duker.db.RssDao;
+import org.foree.duker.xmlparse.OpmlParse;
 
 import java.io.File;
 
