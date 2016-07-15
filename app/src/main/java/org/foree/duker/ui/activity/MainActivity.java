@@ -25,6 +25,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.foree.duker.api.AbsApiFactory;
+import org.foree.duker.api.AbsApiHelper;
+import org.foree.duker.api.ApiFactory;
+import org.foree.duker.api.FeedlyApiHelper;
 import org.foree.duker.base.BaseActivity;
 import org.foree.duker.base.MyApplication;
 import org.foree.duker.db.RssDao;
@@ -55,6 +59,7 @@ public class MainActivity extends BaseActivity
      */
     private CharSequence mTitle;
     private DrawerLayout mDrawerLayout;
+    private AbsApiHelper mApiHelper;
     MyApplication myApplication;
 
     @Override
@@ -80,6 +85,11 @@ public class MainActivity extends BaseActivity
                 R.id.navigation_drawer,
                 mDrawerLayout);
         if (LogUtils.isCompilerLog) LogUtils.v(TAG, "onCreate");
+
+        AbsApiFactory apiFactory = new ApiFactory();
+        mApiHelper = apiFactory.createApiHelper(FeedlyApiHelper.class);
+
+        mApiHelper.getCategoriesList("", null);
 
     }
 
