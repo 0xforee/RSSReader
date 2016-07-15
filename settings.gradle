@@ -1,1 +1,3 @@
 include ':app', ':drawlayoutexample', ':fullscreenexample', 'loginexample', 'settingexample', 'tabedexample2', 'tabedexample3', 'tabbedexample', 'colorpickerlibrary'
+include ':libraries:SlidingMenu'
+include ':libraries:Volley'
