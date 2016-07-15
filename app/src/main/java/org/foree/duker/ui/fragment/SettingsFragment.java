@@ -12,7 +12,7 @@ import org.foree.duker.ui.activity.SettingsActivity;
 import org.foree.duker.utils.ColorUtils;
 import com.fourmob.colorpicker.ColorPickerDialog;
 import com.fourmob.colorpicker.ColorPickerSwatch;
-import com.rssreader.foree.rssreader.R;
+import org.foree.duker.R;
 
 /**
  * Created by foree on 4/16/15.

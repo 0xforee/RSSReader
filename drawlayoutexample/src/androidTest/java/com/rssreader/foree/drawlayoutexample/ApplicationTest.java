@@ -1,4 +1,4 @@
-package com.rssreader.foree.drawlayoutexample;
+package com.foree.duker.drawlayoutexample;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

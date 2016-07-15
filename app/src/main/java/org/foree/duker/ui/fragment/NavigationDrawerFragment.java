@@ -26,7 +26,7 @@ import android.widget.ListView;
 import org.foree.duker.db.RssDao;
 import org.foree.duker.ui.activity.SettingsActivity;
 import org.foree.duker.utils.LogUtils;
-import com.rssreader.foree.rssreader.R;
+import org.foree.duker.R;
 
 import java.util.ArrayList;
 import java.util.List;

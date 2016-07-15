@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import org.foree.duker.base.MyApplication;
 import org.foree.duker.utils.ColorUtils;
-import com.rssreader.foree.rssreader.R;
+import org.foree.duker.R;
 
 /**
  * Created by foree on 3/5/15.

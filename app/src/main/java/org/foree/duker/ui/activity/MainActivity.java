@@ -35,7 +35,7 @@ import org.foree.duker.utils.LogUtils;
 import org.foree.duker.xmlparse.XmlParseHandler;
 import com.melnykov.fab.FloatingActionButton;
 import com.melnykov.fab.ScrollDirectionListener;
-import com.rssreader.foree.rssreader.R;
+import org.foree.duker.R;
 
 import java.util.ArrayList;
 import java.util.List;

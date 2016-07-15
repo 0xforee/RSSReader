@@ -12,7 +12,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import org.foree.duker.base.BaseActivity;
-import com.rssreader.foree.rssreader.R;
+import org.foree.duker.R;
 
 /**
  * Created by foree on 3/5/15.

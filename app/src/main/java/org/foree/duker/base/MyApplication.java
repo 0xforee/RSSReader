@@ -16,7 +16,7 @@ import org.foree.duker.ui.activity.SettingsActivity;
 import org.foree.duker.utils.FileUtils;
 import org.foree.duker.utils.LogUtils;
 import org.foree.duker.utils.NetworkUtils;
-import com.rssreader.foree.rssreader.R;
+import org.foree.duker.R;
 
 import java.io.File;
 import java.io.IOException;

@@ -29,7 +29,7 @@ import org.foree.duker.utils.ImageDownLoader;
 import org.foree.duker.utils.LogUtils;
 import org.foree.duker.utils.NetworkUtils;
 import org.foree.duker.utils.WindowUtils;
-import com.rssreader.foree.rssreader.R;
+import org.foree.duker.R;
 import org.foree.duker.xmlparse.XmlParseHandler;
 
 import java.io.InputStream;

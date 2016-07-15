@@ -5,7 +5,7 @@ import android.support.v7.app.ActionBar;
 import android.webkit.WebView;
 
 import org.foree.duker.base.BaseActivity;
-import com.rssreader.foree.rssreader.R;
+import org.foree.duker.R;
 
 /**
  * Created by foree on 4/15/15.

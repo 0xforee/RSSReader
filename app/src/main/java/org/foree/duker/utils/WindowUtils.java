@@ -3,7 +3,7 @@ package org.foree.duker.utils;
 import android.app.Activity;
 import android.content.res.TypedArray;
 
-import com.rssreader.foree.rssreader.R;
+import org.foree.duker.R;
 
 /**
  * Created by foree on 4/13/15.

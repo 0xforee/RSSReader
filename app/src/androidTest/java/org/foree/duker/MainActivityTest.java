@@ -1,4 +1,4 @@
-package com.rssreader.foree.rssreader;
+package org.foree.duker;
 
 import android.test.AndroidTestCase;
 

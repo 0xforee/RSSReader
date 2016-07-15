@@ -15,7 +15,7 @@ import android.widget.SimpleExpandableListAdapter;
 
 import org.foree.duker.base.BaseActivity;
 import org.foree.duker.db.RssDao;
-import com.rssreader.foree.rssreader.R;
+import org.foree.duker.R;
 
 import java.util.List;
 import java.util.Map;

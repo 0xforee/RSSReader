@@ -17,7 +17,7 @@ import org.foree.duker.db.RssDao;
 import org.foree.duker.rssinfo.RssFeedInfo;
 import org.foree.duker.ui.fragment.NavigationDrawerFragment;
 import org.foree.duker.xmlparse.XmlParseHandler;
-import com.rssreader.foree.rssreader.R;
+import org.foree.duker.R;
 
 /**
  * Created by foree on 3/18/15.

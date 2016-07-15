@@ -16,7 +16,7 @@ import org.foree.duker.base.MyApplication;
 import org.foree.duker.rssinfo.RssFeedInfo;
 import org.foree.duker.ui.activity.DescriptionActivity;
 import org.foree.duker.ui.activity.MainActivity;
-import com.rssreader.foree.rssreader.R;
+import org.foree.duker.R;
 import org.foree.duker.utils.CacheUtils;
 import org.foree.duker.utils.NetworkUtils;
 

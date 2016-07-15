@@ -9,7 +9,7 @@ import android.util.Log;
 
 import org.foree.duker.base.BaseActivity;
 import org.foree.duker.ui.fragment.SettingsFragment;
-import com.rssreader.foree.rssreader.R;
+import org.foree.duker.R;
 
 /**
  * Created by foree on 3/11/15.

@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.rssreader.foree.rssreader"
+        applicationId "org.foree.duker"
         minSdkVersion 15
         targetSdkVersion 21
         versionCode 18
