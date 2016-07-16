@@ -46,6 +46,9 @@ public class FeedlyApiHelper extends AbsApiHelper {
 
         String url = API_HOST_URL + API_CATEGORIES_URL;
 
+        final Map<String,String> headers = new HashMap<>();
+        headers.put("Authorization","OAuth " + token1);
+
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -59,16 +62,7 @@ public class FeedlyApiHelper extends AbsApiHelper {
         }){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String,String> params =  super.getHeaders();
-                if(params==null)params = new HashMap<>();
-                params.put("Authorization","OAuth " + token1);
-                //..add other headers
-                return params;
-            }
-            @Override
-            protected Response<String> parseNetworkResponse(NetworkResponse response) {
-
-                return super.parseNetworkResponse(response);
+                return headers;
             }
         };
 
