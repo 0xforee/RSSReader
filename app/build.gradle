@@ -26,4 +26,5 @@ dependencies {
     compile project(':libraries:colorpickerlibrary')
     compile project(':libraries:SlidingMenu')
     compile project(path: ':libraries:Volley')
+    compile 'com.zhy:changeskin:4.0.2'
 }
