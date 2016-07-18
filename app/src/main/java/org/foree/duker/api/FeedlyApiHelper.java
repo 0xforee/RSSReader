@@ -42,7 +42,7 @@ public class FeedlyApiHelper extends AbsApiHelper {
         NetWorkApiHelper.newInstance().getRequest(url, headers, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.i(TAG, response);
+                Log.i(TAG,"onResponse" + response);
                 if (netCallback != null){
                     netCallback.onSuccess(parseCategories(response));
                 }
@@ -50,7 +50,11 @@ public class FeedlyApiHelper extends AbsApiHelper {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, error.getMessage());
+                Log.e(TAG,"onErrorResponse" + error.getMessage());
+
+                if (netCallback != null){
+                    netCallback.onFail(error.getMessage());
+                }
             }
         });
     }
