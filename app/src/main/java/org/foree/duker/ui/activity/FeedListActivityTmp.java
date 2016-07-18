@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
 
-import org.foree.duker.base.BaseActivity;
+import org.foree.duker.base.BaseActivityTmp;
 import org.foree.duker.db.RssDao;
 import org.foree.duker.R;
 
@@ -24,7 +24,7 @@ import java.util.Map;
  * Created by foree on 3/25/15.
  * 可添加的Feed信息的列表显示
  */
-public class FeedListActivity extends BaseActivity {
+public class FeedListActivityTmp extends BaseActivityTmp {
     private static final String TAG = "RssFeedList";
 
     @Override
@@ -67,7 +67,7 @@ public class FeedListActivity extends BaseActivity {
                 //从child里找到对应的url
                 String FeedUrl = child.get(groupPosition).get(childPosition).get("url");
                 //加入Intent
-                Intent addFeedIntent = new Intent(FeedListActivity.this, AddFeedActivity.class);
+                Intent addFeedIntent = new Intent(FeedListActivityTmp.this, AddFeedActivityTmp.class);
                 //放入数据,并启动activity
                 Bundle bundle = new Bundle();
                 bundle.putString("url", FeedUrl);
@@ -105,7 +105,7 @@ public class FeedListActivity extends BaseActivity {
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
                 builder1.setTitle("请输入一个合法的Rss链接");
                 builder1.setView(view);
-                final Intent intent1 = new Intent(this, AddFeedActivity.class);
+                final Intent intent1 = new Intent(this, AddFeedActivityTmp.class);
                 builder1.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

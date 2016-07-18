@@ -24,7 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import org.foree.duker.db.RssDao;
-import org.foree.duker.ui.activity.SettingsActivity;
+import org.foree.duker.ui.activity.SettingsActivityTmp;
 import org.foree.duker.utils.LogUtils;
 import org.foree.duker.R;
 
@@ -76,7 +76,7 @@ public class NavigationDrawerFragment extends Fragment {
 
         //防止用户不知道drawer，在第一次打开应用时，打开drawer
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        mUserLearnedDrawer = sp.getBoolean(SettingsActivity.KEY_PREF_USER_LEARNED_DRAWER, false);
+        mUserLearnedDrawer = sp.getBoolean(SettingsActivityTmp.KEY_PREF_USER_LEARNED_DRAWER, false);
 
         if (savedInstanceState != null) {
             mCurrentSelectedPosition = savedInstanceState.getInt(STATE_SELECTED_POSITION);
@@ -180,7 +180,7 @@ public class NavigationDrawerFragment extends Fragment {
                     mUserLearnedDrawer = true;
                     SharedPreferences sp = PreferenceManager
                             .getDefaultSharedPreferences(getActivity());
-                    sp.edit().putBoolean(SettingsActivity.KEY_PREF_USER_LEARNED_DRAWER, true).apply();
+                    sp.edit().putBoolean(SettingsActivityTmp.KEY_PREF_USER_LEARNED_DRAWER, true).apply();
                 }
 
                 getActivity().supportInvalidateOptionsMenu(); // calls onPrepareOptionsMenu()

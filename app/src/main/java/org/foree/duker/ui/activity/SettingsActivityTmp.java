@@ -7,7 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.util.Log;
 
-import org.foree.duker.base.BaseActivity;
+import org.foree.duker.base.BaseActivityTmp;
 import org.foree.duker.ui.fragment.SettingsFragment;
 import org.foree.duker.R;
 
@@ -15,7 +15,7 @@ import org.foree.duker.R;
  * Created by foree on 3/11/15.
  * settings activity
  */
-public class SettingsActivity extends BaseActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class SettingsActivityTmp extends BaseActivityTmp implements SharedPreferences.OnSharedPreferenceChangeListener {
     public static final String TAG = "SettingsActivity";
 
     //email address
@@ -81,8 +81,8 @@ public class SettingsActivity extends BaseActivity implements SharedPreferences.
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 
-        if (key.equals(SettingsActivity.KEY_DARK_THEME)) {
-            Intent intent = new Intent(SettingsActivity.this, SettingsActivity.class);
+        if (key.equals(SettingsActivityTmp.KEY_DARK_THEME)) {
+            Intent intent = new Intent(SettingsActivityTmp.this, SettingsActivityTmp.class);
 
             finish();
             overridePendingTransition(0, 0);

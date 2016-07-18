@@ -29,7 +29,7 @@ import org.foree.duker.api.AbsApiFactory;
 import org.foree.duker.api.AbsApiHelper;
 import org.foree.duker.api.ApiFactory;
 import org.foree.duker.api.FeedlyApiHelper;
-import org.foree.duker.base.BaseActivity;
+import org.foree.duker.base.BaseActivityTmp;
 import org.foree.duker.base.MyApplication;
 import org.foree.duker.db.RssDao;
 import org.foree.duker.rssinfo.RssItemInfo;
@@ -44,7 +44,7 @@ import org.foree.duker.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseActivity
+public class MainActivityTmp extends BaseActivityTmp
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, XmlParseHandler.ParseHandlerCallbacks {
     private static final String TAG = "MainActivity";
     /**
@@ -99,12 +99,12 @@ public class MainActivity extends BaseActivity
         //if darkTheme setting changed, reload activity
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
 
-        if (isDarkTheme != sp.getBoolean(SettingsActivity.KEY_DARK_THEME, false)) {
+        if (isDarkTheme != sp.getBoolean(SettingsActivityTmp.KEY_DARK_THEME, false)) {
             reload();
             isDarkTheme = !isDarkTheme;
-        } else if (themeColor != sp.getInt(SettingsActivity.KEY_CHANGE_THEME, ColorUtils.AQUAMARINE)) {
+        } else if (themeColor != sp.getInt(SettingsActivityTmp.KEY_CHANGE_THEME, ColorUtils.AQUAMARINE)) {
             reload();
-            themeColor = sp.getInt(SettingsActivity.KEY_CHANGE_THEME, ColorUtils.AQUAMARINE);
+            themeColor = sp.getInt(SettingsActivityTmp.KEY_CHANGE_THEME, ColorUtils.AQUAMARINE);
         }
     }
 
@@ -187,8 +187,8 @@ public class MainActivity extends BaseActivity
 
         switch (id) {
             case R.id.action_settings:
-                final Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-                MainActivity.this.startActivity(intent);
+                final Intent intent = new Intent(MainActivityTmp.this, SettingsActivityTmp.class);
+                MainActivityTmp.this.startActivity(intent);
                 break;
             case R.id.action_about:
                 String message = "新特性：" + "\n"
@@ -196,7 +196,7 @@ public class MainActivity extends BaseActivity
                         + "2.美化图标" + "\n"
                         + "3.优化字体调节算法" + "\n"
                         + "4.增加清除缓存功能";
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivityTmp.this);
                 builder.setTitle(MyApplication.myVersionName);
                 builder.setMessage(message);
                 builder.setNeutralButton("返回", null);
@@ -253,7 +253,7 @@ public class MainActivity extends BaseActivity
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
         private View rootView;
-        private MainActivity mainActivity;
+        private MainActivityTmp mainActivity;
         ProgressBar mProgressBar;
         TextView mTextView;
         private String URLString;
@@ -329,7 +329,7 @@ public class MainActivity extends BaseActivity
             fb.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent2 = new Intent(mainActivity, FeedListActivity.class);
+                    Intent intent2 = new Intent(mainActivity, FeedListActivityTmp.class);
                     startActivity(intent2);
                 }
             });
@@ -363,7 +363,7 @@ public class MainActivity extends BaseActivity
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent mintent = new Intent(mainActivity, DescriptionActivity.class);
+                        Intent mintent = new Intent(mainActivity, DescriptionActivityTmp.class);
 
                         //绑定数据
                         Bundle bundle = new Bundle();
@@ -447,13 +447,13 @@ public class MainActivity extends BaseActivity
                     //Log.v(TAG, openSearch + "");
                     if (openSearch) {
                         Toast.makeText(mainActivity, "打开搜索", Toast.LENGTH_SHORT).show();
-                        Intent searchIntent = new Intent(mainActivity, FeedListActivity.class);
+                        Intent searchIntent = new Intent(mainActivity, FeedListActivityTmp.class);
                         startActivity(searchIntent);
                         openSearch = false;
                     }
                     if (openSetting) {
                         Toast.makeText(mainActivity, "打开设置", Toast.LENGTH_SHORT).show();
-                        Intent searchIntent = new Intent(mainActivity, SettingsActivity.class);
+                        Intent searchIntent = new Intent(mainActivity, SettingsActivityTmp.class);
                         startActivity(searchIntent);
                         openSetting = false;
                     }
@@ -484,10 +484,10 @@ public class MainActivity extends BaseActivity
         @Override
         public void onAttach(Activity activity) {
             super.onAttach(activity);
-            ((MainActivity) activity).onSectionAttached(
+            ((MainActivityTmp) activity).onSectionAttached(
                     getArguments().getInt(ARG_SECTION_NUMBER));
             //初始化mainactivity实例，用于与主界面通信
-            mainActivity = (MainActivity) activity;
+            mainActivity = (MainActivityTmp) activity;
             if (LogUtils.isCompilerLog) LogUtils.v(TAG, "OnAttach");
 
         }

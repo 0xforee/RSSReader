@@ -29,10 +29,10 @@ public class LoadActivity extends Activity {
 
         //设置主题颜色
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        if (sp.getBoolean(SettingsActivity.KEY_DARK_THEME, false)) {
+        if (sp.getBoolean(SettingsActivityTmp.KEY_DARK_THEME, false)) {
             setTheme(R.style.NightTheme);
         } else {
-            switch (sp.getInt(SettingsActivity.KEY_CHANGE_THEME, ColorUtils.AQUAMARINE)) {
+            switch (sp.getInt(SettingsActivityTmp.KEY_CHANGE_THEME, ColorUtils.AQUAMARINE)) {
                 case ColorUtils.AQUAMARINE:
                     setTheme(R.style.DayTheme);
                     break;
@@ -93,7 +93,7 @@ public class LoadActivity extends Activity {
                 try {
                     synchronized (this) {
                         wait(2000);
-                        startActivity(new Intent(LoadActivity.this, MainActivity.class));
+                        startActivity(new Intent(LoadActivity.this, MainActivityTmp.class));
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();

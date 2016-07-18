@@ -12,7 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.foree.duker.base.BaseActivity;
+import org.foree.duker.base.BaseActivityTmp;
 import org.foree.duker.db.RssDao;
 import org.foree.duker.rssinfo.RssFeedInfo;
 import org.foree.duker.ui.fragment.NavigationDrawerFragment;
@@ -23,7 +23,7 @@ import org.foree.duker.R;
  * Created by foree on 3/18/15.
  * 添加RssFeed时预览窗口
  */
-public class AddFeedActivity extends BaseActivity implements XmlParseHandler.ParseHandlerCallbacks {
+public class AddFeedActivityTmp extends BaseActivityTmp implements XmlParseHandler.ParseHandlerCallbacks {
     private static final String TAG = "RssAddFeed";
     private RssFeedInfo mrssFeedInfo;
     TextView tv_title, tv_description;
@@ -70,7 +70,7 @@ public class AddFeedActivity extends BaseActivity implements XmlParseHandler.Par
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent mintent = new Intent(AddFeedActivity.this, DescriptionActivity.class);
+                Intent mintent = new Intent(AddFeedActivityTmp.this, DescriptionActivityTmp.class);
 
                 //绑定数据
                 Bundle bundle = new Bundle();
@@ -80,7 +80,7 @@ public class AddFeedActivity extends BaseActivity implements XmlParseHandler.Par
                 bundle.putString("pubdate", getRssItemInfos().get(position).getpubDate());
 
                 mintent.putExtra("com.rssinfo.foree.rssreader", bundle);
-                AddFeedActivity.this.startActivity(mintent);
+                AddFeedActivityTmp.this.startActivity(mintent);
             }
         });
         //点击添加到数据库
@@ -91,17 +91,17 @@ public class AddFeedActivity extends BaseActivity implements XmlParseHandler.Par
                 //取得要作为缓存文件的链接存入数据库中
                 FeedLink = getRssItemInfos().get(0).getFeedLink();
                 //将链接和名称加入到数据库中,如果有重复,则提示重复并退出
-                RssDao rssDao = new RssDao(AddFeedActivity.this);
+                RssDao rssDao = new RssDao(AddFeedActivityTmp.this);
                 if (rssDao.add(FeedName, url, FeedLink) != -1) {
                     NavigationDrawerFragment.FeedInfos.add(FeedName);
                     NavigationDrawerFragment.adapter.notifyDataSetChanged();
                     //如果用户点击添加,那么保存缓存文件
                     // CacheUtils.writeCacheList(mrssFeedInfo);
 
-                    Toast.makeText(AddFeedActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddFeedActivityTmp.this, "添加成功", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
-                    Toast.makeText(AddFeedActivity.this, "此订阅号已添加过啦", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddFeedActivityTmp.this, "此订阅号已添加过啦", Toast.LENGTH_SHORT).show();
                 }
             }
         });

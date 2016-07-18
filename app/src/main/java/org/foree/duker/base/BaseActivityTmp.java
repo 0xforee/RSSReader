@@ -23,7 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.foree.duker.rssinfo.RssItemInfo;
-import org.foree.duker.ui.activity.SettingsActivity;
+import org.foree.duker.ui.activity.SettingsActivityTmp;
 import org.foree.duker.utils.ColorUtils;
 import org.foree.duker.utils.ImageDownLoader;
 import org.foree.duker.utils.LogUtils;
@@ -45,7 +45,7 @@ import javax.xml.parsers.SAXParserFactory;
  * Created by foree on 15-3-10.
  * 所有activity的基类，用于实现一些所有activity共有的方法，比如设置主题
  */
-public class BaseActivity extends ActionBarActivity implements ListView.OnScrollListener {
+public class BaseActivityTmp extends ActionBarActivity implements ListView.OnScrollListener {
     private static final String TAG = "BaseActivity";
     private Handler mHandler;
     private RssAdapter mRssAdapter;
@@ -120,8 +120,8 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
         //设置状态栏沉浸模式
         mTintManager.setStatusBarTintEnabled(true);
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        themeColor = sp.getInt(SettingsActivity.KEY_CHANGE_THEME, ColorUtils.AQUAMARINE);
-        if (sp.getBoolean(SettingsActivity.KEY_DARK_THEME, false)) {
+        themeColor = sp.getInt(SettingsActivityTmp.KEY_CHANGE_THEME, ColorUtils.AQUAMARINE);
+        if (sp.getBoolean(SettingsActivityTmp.KEY_DARK_THEME, false)) {
             isDarkTheme = true;
             mTintManager.setStatusBarTintResource(R.color.dark_my_actionbar_background);
             setTheme(R.style.NightTheme);
@@ -301,9 +301,9 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
      */
     public static class RssParse extends Thread {
         private String mUrl;
-        private BaseActivity mActivity;
+        private BaseActivityTmp mActivity;
 
-        public RssParse(BaseActivity activity, String urlName) {
+        public RssParse(BaseActivityTmp activity, String urlName) {
             this.mActivity = activity;
             mUrl = urlName;
         }
@@ -345,7 +345,7 @@ public class BaseActivity extends ActionBarActivity implements ListView.OnScroll
     public void doRss(String urlName) {
         //根据是否只在wifi下下载来决定是否开始解析
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        if ((sp.getBoolean(SettingsActivity.KEY_DOWNLOAD_ON_WIFI, false)) && MyApplication.mNetworkState == NetworkUtils.NETWORK_MOBILE) {
+        if ((sp.getBoolean(SettingsActivityTmp.KEY_DOWNLOAD_ON_WIFI, false)) && MyApplication.mNetworkState == NetworkUtils.NETWORK_MOBILE) {
             Toast.makeText(this, R.string.error10000, Toast.LENGTH_LONG).show();
 
         } else if (MyApplication.mNetworkState == NetworkUtils.NETWORK_NONE) {

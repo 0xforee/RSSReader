@@ -14,8 +14,8 @@ import android.widget.TextView;
 
 import org.foree.duker.base.MyApplication;
 import org.foree.duker.rssinfo.RssFeedInfo;
-import org.foree.duker.ui.activity.DescriptionActivity;
-import org.foree.duker.ui.activity.MainActivity;
+import org.foree.duker.ui.activity.DescriptionActivityTmp;
+import org.foree.duker.ui.activity.MainActivityTmp;
 import org.foree.duker.R;
 import org.foree.duker.utils.CacheUtils;
 import org.foree.duker.utils.NetworkUtils;
@@ -34,19 +34,19 @@ import javax.xml.parsers.SAXParserFactory;
  * Created by foree on 3/4/15.
  * 异步线程，用来处理连接网络等耗时的操作
  */
-public class ParseTask extends AsyncTask<MainActivity.PlaceholderFragment, Integer, RssFeedInfo> {
+public class ParseTask extends AsyncTask<MainActivityTmp.PlaceholderFragment, Integer, RssFeedInfo> {
     XmlParseHandler xmlParseHandler;
     ListView listView;
     ProgressBar mProgressBar;
     TextView mTextView;
     RssFeedInfo mRssFeedInfo;
-    MainActivity.PlaceholderFragment placeholderFragment;
+    MainActivityTmp.PlaceholderFragment placeholderFragment;
 
     //Activity继承的就是上下文，因此mcontext可以通过初始化activity来实现
-    private MainActivity mainActivity;
+    private MainActivityTmp mainActivity;
     private Context mcontext;
 
-    public ParseTask(MainActivity mainActivity) {
+    public ParseTask(MainActivityTmp mainActivity) {
         this.mainActivity = mainActivity;
         this.mcontext = mainActivity;
     }
@@ -54,7 +54,7 @@ public class ParseTask extends AsyncTask<MainActivity.PlaceholderFragment, Integ
     private final String TAG = "ParseTask";
 
     @Override
-    protected RssFeedInfo doInBackground(MainActivity.PlaceholderFragment... position) {
+    protected RssFeedInfo doInBackground(MainActivityTmp.PlaceholderFragment... position) {
 
         //  mcontext = contexts[0];
         placeholderFragment = position[0];
@@ -146,7 +146,7 @@ public class ParseTask extends AsyncTask<MainActivity.PlaceholderFragment, Integ
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent mintent = new Intent(mcontext, DescriptionActivity.class);
+                Intent mintent = new Intent(mcontext, DescriptionActivityTmp.class);
 
                 //绑定数据
                 Bundle bundle = new Bundle();

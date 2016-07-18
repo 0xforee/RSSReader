@@ -12,7 +12,7 @@ import android.preference.PreferenceManager;
 import org.foree.duker.db.RssDao;
 import org.foree.duker.rssinfo.RssFeedInfo;
 import org.foree.duker.ui.fragment.NavigationDrawerFragment;
-import org.foree.duker.ui.activity.SettingsActivity;
+import org.foree.duker.ui.activity.SettingsActivityTmp;
 import org.foree.duker.utils.FileUtils;
 import org.foree.duker.utils.LogUtils;
 import org.foree.duker.utils.NetworkUtils;
@@ -141,7 +141,7 @@ public class MyApplication extends Application {
          */
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(mContext);
-        mFirstRun = sp.getBoolean(SettingsActivity.KEY_FIRST_RUN, true);
+        mFirstRun = sp.getBoolean(SettingsActivityTmp.KEY_FIRST_RUN, true);
         if (mFirstRun) {
             //copy opml file and parse it
             for (int i = 111111; i < 111116; i++) {
@@ -158,7 +158,7 @@ public class MyApplication extends Application {
                     e.printStackTrace();
                 }
             }
-            sp.edit().putBoolean(SettingsActivity.KEY_FIRST_RUN, false).apply();
+            sp.edit().putBoolean(SettingsActivityTmp.KEY_FIRST_RUN, false).apply();
         }
 
         //获取当前应用程序的版本号和版本名称

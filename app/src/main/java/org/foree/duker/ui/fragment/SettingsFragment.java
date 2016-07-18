@@ -8,7 +8,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.widget.Toast;
 
-import org.foree.duker.ui.activity.SettingsActivity;
+import org.foree.duker.ui.activity.SettingsActivityTmp;
 import org.foree.duker.utils.ColorUtils;
 import com.fourmob.colorpicker.ColorPickerDialog;
 import com.fourmob.colorpicker.ColorPickerSwatch;
@@ -29,7 +29,7 @@ public class SettingsFragment extends PreferenceFragment {
         final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         //get theme
-        int colorPicked = sp.getInt(SettingsActivity.KEY_CHANGE_THEME, ColorUtils.AQUAMARINE);
+        int colorPicked = sp.getInt(SettingsActivityTmp.KEY_CHANGE_THEME, ColorUtils.AQUAMARINE);
 
         //save theme
         final SharedPreferences.Editor editor = sp.edit();
@@ -51,26 +51,26 @@ public class SettingsFragment extends PreferenceFragment {
             public void onColorSelected(int color) {
                 switch (color) {
                     case ColorUtils.AQUAMARINE:
-                        editor.putInt(SettingsActivity.KEY_CHANGE_THEME, ColorUtils.AQUAMARINE);
+                        editor.putInt(SettingsActivityTmp.KEY_CHANGE_THEME, ColorUtils.AQUAMARINE);
                         break;
                     case ColorUtils.BLUE:
-                        editor.putInt(SettingsActivity.KEY_CHANGE_THEME, ColorUtils.BLUE);
+                        editor.putInt(SettingsActivityTmp.KEY_CHANGE_THEME, ColorUtils.BLUE);
                         break;
                     case ColorUtils.GREEN:
-                        editor.putInt(SettingsActivity.KEY_CHANGE_THEME, ColorUtils.GREEN);
+                        editor.putInt(SettingsActivityTmp.KEY_CHANGE_THEME, ColorUtils.GREEN);
                         break;
                     case ColorUtils.ORANGE:
-                        editor.putInt(SettingsActivity.KEY_CHANGE_THEME, ColorUtils.ORANGE);
+                        editor.putInt(SettingsActivityTmp.KEY_CHANGE_THEME, ColorUtils.ORANGE);
                         break;
                     case ColorUtils.RED:
-                        editor.putInt(SettingsActivity.KEY_CHANGE_THEME, ColorUtils.RED);
+                        editor.putInt(SettingsActivityTmp.KEY_CHANGE_THEME, ColorUtils.RED);
                         break;
                     case ColorUtils.GRAY:
-                        editor.putInt(SettingsActivity.KEY_CHANGE_THEME, ColorUtils.GRAY);
+                        editor.putInt(SettingsActivityTmp.KEY_CHANGE_THEME, ColorUtils.GRAY);
                         break;
                 }
                 //reload activity
-                Intent intent = new Intent(getActivity(), SettingsActivity.class);
+                Intent intent = new Intent(getActivity(), SettingsActivityTmp.class);
 
                 getActivity().finish();
                 getActivity().overridePendingTransition(0, 0);
@@ -85,11 +85,11 @@ public class SettingsFragment extends PreferenceFragment {
         // add preference content from a xml file
         addPreferencesFromResource(R.xml.preference_all);
 
-        findPreference(SettingsActivity.KEY_CHANGE_THEME).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+        findPreference(SettingsActivityTmp.KEY_CHANGE_THEME).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 //when darkTheme is open, can't change theme
-                if (sp.getBoolean(SettingsActivity.KEY_DARK_THEME, false)) {
+                if (sp.getBoolean(SettingsActivityTmp.KEY_DARK_THEME, false)) {
                     preference.setEnabled(false);
                     Toast.makeText(getActivity(), "请关闭夜间模式", Toast.LENGTH_SHORT).show();
                 } else

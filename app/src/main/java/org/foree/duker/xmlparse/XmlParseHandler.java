@@ -1,6 +1,6 @@
 package org.foree.duker.xmlparse;
 
-import org.foree.duker.base.BaseActivity;
+import org.foree.duker.base.BaseActivityTmp;
 import org.foree.duker.rssinfo.RssItemInfo;
 import org.foree.duker.utils.LogUtils;
 import org.foree.duker.utils.StringUtils;
@@ -18,7 +18,7 @@ public class XmlParseHandler extends DefaultHandler {
     private static final String TAG = "XmlParseHandler";
     // private RssFeedInfo rssFeedInfo;
     private ParseHandlerCallbacks mCallbacks;
-    BaseActivity mActivity;
+    BaseActivityTmp mActivity;
     //private RssItemInfo mRssItemInfo;
     //Bitmap bitmap;
     //多次调用characters时的多次解析的数据总和
@@ -36,7 +36,7 @@ public class XmlParseHandler extends DefaultHandler {
     String mImageUrl;
     boolean isNotify = false;
 
-    public XmlParseHandler(BaseActivity activity) {
+    public XmlParseHandler(BaseActivityTmp activity) {
         this.mActivity = activity;
         // rssFeedInfo = new RssFeedInfo();
         mBuff = new StringBuilder();
@@ -131,7 +131,7 @@ public class XmlParseHandler extends DefaultHandler {
      * Runnable接口,用于post传递给主线程使用
      */
     public class RssAdder implements Runnable {
-        private BaseActivity.RssAdapter mRssAdapter;
+        private BaseActivityTmp.RssAdapter mRssAdapter;
         private RssItemInfo mRssItemInfo;
 
         //获取与类相关的Adapter

@@ -4,14 +4,14 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.webkit.WebView;
 
-import org.foree.duker.base.BaseActivity;
+import org.foree.duker.base.BaseActivityTmp;
 import org.foree.duker.R;
 
 /**
  * Created by foree on 4/15/15.
  * using webView show public license
  */
-public class LicenseActivity extends BaseActivity {
+public class LicenseActivityTmp extends BaseActivityTmp {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

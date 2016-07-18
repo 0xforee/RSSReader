@@ -7,7 +7,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 
 import org.foree.duker.base.MyApplication;
-import org.foree.duker.ui.activity.SettingsActivity;
+import org.foree.duker.ui.activity.SettingsActivityTmp;
 import org.foree.duker.utils.LogUtils;
 import org.foree.duker.R;
 
@@ -24,14 +24,14 @@ public class AboutFragment extends PreferenceFragment {
 
         addPreferencesFromResource(R.xml.preference_about);
         //set VersionName
-        findPreference(SettingsActivity.KEY_VERSION_NAME).setTitle(MyApplication.myVersionName);
+        findPreference(SettingsActivityTmp.KEY_VERSION_NAME).setTitle(MyApplication.myVersionName);
 
         //send email to developer
-        findPreference(SettingsActivity.KEY_CONTACT_ME).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+        findPreference(SettingsActivityTmp.KEY_CONTACT_ME).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 if (LogUtils.isCompilerLog) LogUtils.v(TAG, "send");
-                Uri emailUri = Uri.parse("mailto:" + SettingsActivity.MY_EMAIL);
+                Uri emailUri = Uri.parse("mailto:" + SettingsActivityTmp.MY_EMAIL);
                 Intent sendEmail = new Intent(Intent.ACTION_SENDTO, emailUri);
                 sendEmail.putExtra(Intent.EXTRA_SUBJECT, "@反馈:");
                 //  sendEmail.putExtra(Intent.EXTRA_TEXT, "这是内容");
@@ -41,10 +41,10 @@ public class AboutFragment extends PreferenceFragment {
         });
 
         //set application Data dir info
-        findPreference(SettingsActivity.KEY_APPLICATION_DIR).setSummary(MyApplication.mySdcardDataDir);
+        findPreference(SettingsActivityTmp.KEY_APPLICATION_DIR).setSummary(MyApplication.mySdcardDataDir);
 
         //set application Cache dir info
-        findPreference(SettingsActivity.KEY_APPLICATION_CACHE_DIR).setSummary(MyApplication.mySdcardCacheDir);
+        findPreference(SettingsActivityTmp.KEY_APPLICATION_CACHE_DIR).setSummary(MyApplication.mySdcardCacheDir);
 
     }
 }

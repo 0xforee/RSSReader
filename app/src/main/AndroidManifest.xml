@@ -22,24 +22,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="org.foree.duker.ui.activity.MainActivity"
+            android:name=".ui.activity.MainActivityTmp"
             android:label="@string/app_name" />
         <activity
-            android:name="org.foree.duker.ui.activity.DescriptionActivity"
+            android:name=".ui.activity.DescriptionActivityTmp"
             android:label="@string/app_name" />
         <activity
-            android:name="org.foree.duker.ui.activity.SettingsActivity"
+            android:name=".ui.activity.SettingsActivityTmp"
             android:label="@string/app_name">
         <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.foree.duker.ui.activity.MainActivity" />
+                android:value=".ui.activity.MainActivityTmp" />
         </activity>
         <activity
-            android:name="org.foree.duker.ui.activity.AboutActivity"
+            android:name=".ui.activity.AboutActivityTmp"
             android:label="@string/app_name">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.foree.duker.ui.activity.SettingsActivity" />
+                android:value=".ui.activity.SettingsActivityTmp" />
             <intent-filter>
                 <action android:name=".AboutActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -47,25 +47,25 @@
 
         </activity>
         <activity
-            android:name="org.foree.duker.ui.activity.LicenseActivity"
+            android:name=".ui.activity.LicenseActivityTmp"
             android:label="@string/app_name">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.foree.duker.ui.activity.AboutActivity" />
+                android:value=".ui.activity.AboutActivityTmp" />
             <intent-filter>
                 <action android:name=".LisenceActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name="org.foree.duker.ui.activity.AddFeedActivity"
+            android:name=".ui.activity.AddFeedActivityTmp"
             android:label="@string/app_name">
             <!--左上角添加返回导航键 -->
             <!--<meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.foree.rssreader.ui.activity.MainActivity" />-->
         </activity>
-        <activity android:name="org.foree.duker.ui.activity.FeedListActivity" />
+        <activity android:name=".ui.activity.FeedListActivityTmp" />
     </application>
 
 </manifest>
