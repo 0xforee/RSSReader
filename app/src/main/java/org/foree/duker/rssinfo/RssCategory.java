@@ -5,6 +5,18 @@ package org.foree.duker.rssinfo;
  */
 public class RssCategory {
     private String categoryId;
-    private String lable;
+    private String label;
     private String description;
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public void setLable(String label) {
+        this.label = label;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
