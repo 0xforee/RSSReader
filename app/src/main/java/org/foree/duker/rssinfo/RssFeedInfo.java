@@ -104,6 +104,31 @@ public class RssFeedInfo {
     public void setDescription(String description) {
         this.description = description;
     }
+*/
+
+    public String getFeedId() {
+        return feedId;
+    }
+
+    public void setFeedId(String feedId) {
+        this.feedId = feedId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<String> getCategoryIds() {
+        return categoryIds;
+    }
+
+    public void setCategoryIds(List<String> categoryIds) {
+        this.categoryIds = categoryIds;
+    }
 
     public String getUrl() {
         return url;
@@ -111,6 +136,6 @@ public class RssFeedInfo {
 
     public void setUrl(String url) {
         this.url = url;
-    }*/
+    }
 }
 

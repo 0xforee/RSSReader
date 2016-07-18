@@ -89,7 +89,7 @@ public class MainActivity extends BaseActivity
         AbsApiFactory apiFactory = new ApiFactory();
         mApiHelper = apiFactory.createApiHelper(FeedlyApiHelper.class);
 
-        mApiHelper.getCategoriesList("", null);
+        mApiHelper.getSubscriptions("", null);
 
     }
 
