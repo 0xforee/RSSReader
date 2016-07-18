@@ -89,7 +89,7 @@ public class MainActivity extends BaseActivity
         AbsApiFactory apiFactory = new ApiFactory();
         mApiHelper = apiFactory.createApiHelper(FeedlyApiHelper.class);
 
-        mApiHelper.getSubscriptions("", null);
+        mApiHelper.getStream("","feed/http://www.zhihu.com/rss", null);
 
     }
 

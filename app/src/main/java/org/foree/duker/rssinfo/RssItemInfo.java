@@ -2,6 +2,8 @@ package org.foree.duker.rssinfo;
 
 import android.graphics.Bitmap;
 
+import java.util.Date;
+
 /**
  * Created by foree on 3/3/15.
  * 每个Item自己的信息集合
@@ -12,7 +14,7 @@ public class RssItemInfo {
     // Item 概览
     private String summary;
     // Item 发布时间
-    private String pubDate;
+    private Date pubDate;
     // Item ID
     private String entryId;
     // Itme 链接
@@ -134,5 +136,21 @@ public class RssItemInfo {
 
     public void setFeedPubdate(String feedPubdate) {
         this.feedPubdate = feedPubdate;
+    }
+
+    public void setPubDate(Date pubDate) {
+        this.pubDate = pubDate;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public void setEntryId(String entryId) {
+        this.entryId = entryId;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

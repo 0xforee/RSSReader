@@ -14,6 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,8 +29,8 @@ public class FeedlyApiHelper extends AbsApiHelper {
     private static final String API_TOKEN_TEST = "A3wMXqyNgMOZwCqIoBC5OZoKdSyKemk1IYWp12rk86Kb7KIBHlUBER2Pe2PWaro4Ur_0Rq1h8MiqQBFE_uly7A6GNbjtT5wWbIF5rf6haQetytQcjZj6_FSDSTrkmF3y5CclNtH3q_6UlK1kPPY0i4_CXXIkhIrT7aTJRUTry3b-HGvq_rwWK7JFewguG4PvV7EMozQuosYKOcMrcd3cGwmYsToq8hc:feedlydev";
     private static final String API_CATEGORIES_URL = "/v3/categories";
     private static final String API_SUBSCRIPTIONS_URL = "/v3/subscriptions";
-    private static final String API_STREAM_IDS_URL = " /v3/streams/ids?streamId=:streamId";
-    private static final String API_STREAM_CONTENTS_URL = "GET /v3/streams/contents?streamId=:streamId";
+    private static final String API_STREAM_IDS_URL = "/v3/streams/ids?streamId=:streamId";
+    private static final String API_STREAM_CONTENTS_URL = "/v3/streams/contents?streamId=:streamId";
 
     @Override
     public void getCategoriesList(String token, final NetCallback<RssCategory> netCallback) {
@@ -88,8 +89,31 @@ public class FeedlyApiHelper extends AbsApiHelper {
     }
 
     @Override
-    public void getStream(String token, NetCallback<RssItemInfo> netCallback) {
+    public void getStream(String token, String streamId, final NetCallback<RssItemInfo> netCallback) {
+        token = API_TOKEN_TEST;
 
+        String url = API_HOST_URL + API_STREAM_CONTENTS_URL.replace(":streamId", streamId);
+
+        final Map<String,String> headers = new HashMap<>();
+        headers.put("Authorization","OAuth " + token);
+        NetWorkApiHelper.newInstance().getRequest(url, headers, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG,"onResponse " + response);
+                if (netCallback != null){
+                    netCallback.onSuccess(parseStream(response));
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG,"onErrorResponse " + error.getMessage());
+
+                if (netCallback != null){
+                    netCallback.onFail(error.getMessage());
+                }
+            }
+        });
     }
 
     private List<RssCategory> parseCategories(String data){
@@ -136,5 +160,28 @@ public class FeedlyApiHelper extends AbsApiHelper {
         }
 
         return rssFeedInfos;
+    }
+
+    private List<RssItemInfo> parseStream(String data){
+        List<RssItemInfo> rssItemInfos = new ArrayList<>();
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            JSONArray jsonArray = jsonObject.getJSONArray("items");
+            for(int item_i=0; item_i<jsonArray.length(); item_i++){
+                JSONObject itemObject = jsonArray.getJSONObject(item_i);
+                RssItemInfo rssItemInfo = new RssItemInfo();
+
+                rssItemInfo.setPubDate(new Date(itemObject.getLong("published")));
+                rssItemInfo.setUrl(itemObject.getJSONArray("alternate").getJSONObject(0).getString("href"));
+                rssItemInfo.setEntryId(itemObject.getString("id"));
+                rssItemInfo.setTitle(itemObject.getString("title"));
+
+                rssItemInfos.add(rssItemInfo);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return rssItemInfos;
     }
 }

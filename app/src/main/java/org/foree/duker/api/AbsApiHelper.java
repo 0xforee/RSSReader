@@ -12,5 +12,5 @@ import org.foree.duker.rssinfo.RssItemInfo;
 public abstract class AbsApiHelper {
     public abstract void getCategoriesList(String token, NetCallback<RssCategory> netCallback);
     public abstract void getSubscriptions(String token, NetCallback<RssFeedInfo> netCallback);
-    public abstract void getStream(String token, NetCallback<RssItemInfo> netCallback);
+    public abstract void getStream(String token, String streamId, NetCallback<RssItemInfo> netCallback);
 }
