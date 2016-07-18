@@ -25,6 +25,7 @@ import java.util.Map;
 
 /**
  * Created by foree on 16-7-15.
+ * Feedly相关的接口显示
  */
 public class FeedlyApiHelper extends AbsApiHelper {
     private static final String TAG = FeedlyApiHelper.class.getSimpleName();
@@ -36,20 +37,15 @@ public class FeedlyApiHelper extends AbsApiHelper {
     private static final String API_STREAM_IDS_URL = " /v3/streams/ids?streamId=:streamId";
     private static final String API_STREAM_CONTENTS_URL = "GET /v3/streams/contents?streamId=:streamId";
 
-    private static class NetHolder {
-        private static final Context mContext = BaseApplication.getInstance().getApplicationContext();
-    }
     @Override
     public void getCategoriesList(String token, NetCallback<RssCategory> netCallback) {
-        final String token1 = API_TOKEN_TEST;
-        RequestQueue queue = Volley.newRequestQueue(NetHolder.mContext);
+        token = API_TOKEN_TEST;
 
         String url = API_HOST_URL + API_CATEGORIES_URL;
 
         final Map<String,String> headers = new HashMap<>();
-        headers.put("Authorization","OAuth " + token1);
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+        headers.put("Authorization","OAuth " + token);
+        NetWorkApiHelper.newInstance().getRequest(url, headers, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.i(TAG, response);
@@ -59,15 +55,7 @@ public class FeedlyApiHelper extends AbsApiHelper {
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, error.getMessage());
             }
-        }){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                return headers;
-            }
-        };
-
-
-        queue.add(stringRequest);
+        });
     }
 
     @Override
